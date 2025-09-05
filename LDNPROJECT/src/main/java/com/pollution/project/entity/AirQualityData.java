@@ -6,17 +6,17 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class AirQualityData {
-    private double pm25;
-    private double pm10;
-    private double no2;
-    private double so2;
-    private double o3;
-    private double co;
+    private Double pm25;
+    private Double pm10;
+    private Double no2;
+    private Double so2;
+    private Double o3;
+    private Double co;
     private LocalDateTime timestamp;
 
     // Constructors, getters, and setters
     public AirQualityData() {}
-    public AirQualityData(double pm25, double pm10, double no2, double so2, double o3, double co, LocalDateTime timestamp) {
+    public AirQualityData(Double pm25, Double pm10, Double no2, Double so2, Double o3, Double co, LocalDateTime timestamp) {
         this.pm25 = pm25;
         this.pm10 = pm10;
         this.no2 = no2;
@@ -26,51 +26,51 @@ public class AirQualityData {
         this.timestamp = timestamp;
     }
 
-    public double getPm25() {
+    public Double getPm25() {
         return pm25;
     }
 
-    public void setPm25(double pm25) {
+    public void setPm25(Double pm25) {
         this.pm25 = pm25;
     }
 
-    public double getPm10() {
+    public Double getPm10() {
         return pm10;
     }
 
-    public void setPm10(double pm10) {
+    public void setPm10(Double pm10) {
         this.pm10 = pm10;
     }
 
-    public double getNo2() {
+    public Double getNo2() {
         return no2;
     }
 
-    public void setNo2(double no2) {
+    public void setNo2(Double no2) {
         this.no2 = no2;
     }
 
-    public double getSo2() {
+    public Double getSo2() {
         return so2;
     }
 
-    public void setSo2(double so2) {
+    public void setSo2(Double so2) {
         this.so2 = so2;
     }
 
-    public double getO3() {
+    public Double getO3() {
         return o3;
     }
 
-    public void setO3(double o3) {
+    public void setO3(Double o3) {
         this.o3 = o3;
     }
 
-    public double getCo() {
+    public Double getCo() {
         return co;
     }
 
-    public void setCo(double co) {
+    public void setCo(Double co) {
         this.co = co;
     }
 

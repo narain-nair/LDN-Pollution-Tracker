@@ -18,10 +18,10 @@ public class Location {
     private String name;
 
     @Column(nullable = false)
-    private double latitude;
+    private Double latitude;
 
     @Column(nullable = false)
-    private double longitude;
+    private Double longitude;
 
     @Embedded
     private AirQualityData airQualityData;
@@ -30,13 +30,13 @@ public class Location {
 
     public Location() {}
 
-    public Location(String name, double latitude, double longitude) {
+    public Location(String name, Double latitude, Double longitude) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public Location(String name, double latitude, double longitude, AirQualityData airQualityData) {
+    public Location(String name, Double latitude, Double longitude, AirQualityData airQualityData) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -59,19 +59,19 @@ public class Location {
         this.name = name;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
