@@ -1,6 +1,7 @@
 package com.pollution.project.entity;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -8,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
@@ -28,6 +31,11 @@ public class Location {
     private Double longitude;
 
     @ManyToMany
+    @JoinTable(
+        name = "user_favorite_locations",
+        joinColumns = @JoinColumn(name = "location_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )   
     private Set<User> users = new HashSet<>();
 
     @Embedded
@@ -110,6 +118,11 @@ public class Location {
     }
 
     public void addUser(User user) {
+
+        if (hasUser(user)) {
+            return;
+        }
+
         this.users.add(user);
         user.getLocations().add(this);
     }
@@ -133,6 +146,18 @@ public class Location {
 
     public boolean hasUser(User user) {
         return this.users.contains(user);
+    }
+
+    public String getUserNames() {
+        return users.stream()
+                    .map(User::getUsername)
+                    .collect(Collectors.joining(", "));
+    }
+
+    public String getUserEmails() {
+        return users.stream()
+                    .map(User::getEmail)
+                    .collect(Collectors.joining(", "));
     }
 
     public int getUserCount() {

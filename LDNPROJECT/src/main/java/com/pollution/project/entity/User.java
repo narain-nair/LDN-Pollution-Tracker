@@ -131,4 +131,13 @@ public class User {
     public boolean containsLocation(Location location) {
         return this.locations.contains(location);
     }
+
+    public void addLocation(Location location) {
+        if (containsLocation(location)) {
+            return;
+        }
+
+        this.locations.add(location);
+        location.getUsers().add(this);
+    }
 }
