@@ -1,10 +1,14 @@
 package com.pollution.project.entity;
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +26,9 @@ public class Location {
 
     @Column(nullable = false)
     private Double longitude;
+
+    @ManyToMany
+    private Set<User> users = new HashSet<>();
 
     @Embedded
     private AirQualityData airQualityData;
@@ -92,5 +99,80 @@ public class Location {
                 ", longitude=" + longitude +
                 ", airQualityData=" + airQualityData +
                 '}';
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public void addUser(User user) {
+        this.users.add(user);
+        user.getLocations().add(this);
+    }
+
+    public boolean removeUser(User user) {
+        boolean res = this.users.remove(user);
+        if (res) {
+            user.getLocations().remove(this);
+        }
+
+        return res;
+    }  
+
+    public boolean editUser(User oldUser, User newUser) {
+        if (removeUser(oldUser)) {
+            addUser(newUser);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasUser(User user) {
+        return this.users.contains(user);
+    }
+
+    public int getUserCount() {
+        return this.users.size();
+    }  
+
+    public boolean isValid() {
+        return this.name != null && !this.name.isEmpty()
+                && this.latitude != null && this.latitude >= -90 && this.latitude <= 90
+                && this.longitude != null && this.longitude >= -180 && this.longitude <= 180;
+    }
+
+    public boolean hasAirQualityData() {
+        return this.airQualityData != null;
+    }
+
+    public void updateAirQualityData(AirQualityData newData) {
+        this.airQualityData = newData;
+    }
+
+    public boolean isEmpty() {
+        return (this.name == null || this.name.isEmpty())
+                || this.latitude == null
+                || this.longitude == null;
+    }
+
+    @Override 
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Location location = (Location) obj;
+
+        if (!name.equals(location.name)) return false;
+        if (!latitude.equals(location.latitude)) return false;
+        return longitude.equals(location.longitude);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 + (id != null ? id.hashCode() : 0);
     }
 }
