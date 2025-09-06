@@ -175,7 +175,9 @@ public class Location {
     }
 
     public void updateAirQualityData(AirQualityData newData) {
-        this.airQualityData = newData;
+        if (this.airQualityData == null || newData.getTimestamp().isAfter(this.airQualityData.getTimestamp())) {
+            this.airQualityData = newData;
+        }
     }
 
     public boolean isEmpty() {
