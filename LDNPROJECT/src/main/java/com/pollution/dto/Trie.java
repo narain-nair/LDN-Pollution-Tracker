@@ -23,7 +23,7 @@ public class Trie {
             if (current == null) {
                 return null;
             }
-        }
+        } 
         return current.isEndOfWord ? current.siteCode : null;
     }
 
