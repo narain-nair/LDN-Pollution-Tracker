@@ -26,7 +26,6 @@ public class SiteCodeResolver {
                 }
             } catch (NumberFormatException e) {
                 // Skip invalid coordinates
-                continue;
             }
         }
 
