@@ -12,6 +12,9 @@ public class MonitoringSite {
     @JsonProperty("@Longitude")
     private String longitude;
 
+    @JsonProperty("SiteName")
+    private String siteName;
+
     @SuppressWarnings("unused")
     private void setSiteCode(String siteCode) {
         this.siteCode = siteCode;
@@ -37,5 +40,14 @@ public class MonitoringSite {
 
     public String getLongitude() {
         return longitude;
+    }
+
+    @SuppressWarnings("unused")
+    private void setSiteName(String siteName) {
+        this.siteName = siteName;
+    }
+
+    public String getSiteName() {
+        return siteName;
     }
 }
