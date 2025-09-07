@@ -1,19 +1,18 @@
 package com.pollution.project.service;
 
-import com.pollution.project.entity.AirQualityData;
-import com.pollution.project.entity.Location;
-import com.pollution.project.dto.WideDataPoint;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import org.springframework.web.client.RestTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.pollution.dto.MonitoringSite;
 import com.pollution.dto.Trie;
+import com.pollution.dto.WideDP;
+import com.pollution.project.entity.AirQualityData;
+import com.pollution.project.entity.Location;
 
 @Service    
 public class SiteCodeResolver {
@@ -75,14 +74,13 @@ public class SiteCodeResolver {
     }
 
     public void assignSiteCode(Location location) {
-        String siteCode = lookupSiteCode(location.getSiteName());
+        String siteCode = lookupSiteCode(location.getName());
         if (siteCode == null) {
             siteCode = calculateSiteCode(location.getLatitude(), location.getLongitude());
         }
         location.setSiteCode(siteCode);
     }
 
-    // Fetch and populate air quality data
     public void populateLocationData(Location location) {
         assignSiteCode(location);
         if (location.getSiteCode() == null) return;
@@ -92,9 +90,9 @@ public class SiteCodeResolver {
                      + location.getSiteCode()
                      + "/StartDate=" + today + "/EndDate=" + today + "/Json";
 
-        WideDataPoint[] readings = restTemplate.getForObject(url, WideDataPoint[].class);
+        WideDP[] readings = restTemplate.getForObject(url, WideDP[].class);
         if (readings != null && readings.length > 0) {
-            WideDataPoint latest = readings[readings.length - 1];
+            WideDP latest = readings[readings.length - 1];
             AirQualityData airData = new AirQualityData(
                 latest.getPm25(),
                 latest.getPm10(),
