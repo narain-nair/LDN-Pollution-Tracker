@@ -2,6 +2,7 @@ package com.pollution.project.service;
 
 import com.pollution.project.entity.AirQualityData;
 import com.pollution.project.entity.Location;
+import com.pollution.project.dto.WideDataPoint;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
