@@ -1,17 +1,25 @@
 package com.pollution.project.service;
 
+import com.pollution.project.entity.AirQualityData;
+import com.pollution.project.entity.Location;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.web.client.RestTemplate;
+import org.springframework.stereotype.Service;
 
 import com.pollution.dto.MonitoringSite;
 import com.pollution.dto.Trie;
 
+@Service    
 public class SiteCodeResolver {
     private final RestTemplate restTemplate = new RestTemplate();
     private final String apiUrl = "https://api.erg.ic.ac.uk/AirQuality/Information/MonitoringSites/GroupName=London/Json";
 
-    public String calculateSiteCode(double lat, double lng, String siteName) {
+    public String calculateSiteCode(double lat, double lng) {
         MonitoringSite[] sites = restTemplate.getForObject(apiUrl, MonitoringSite[].class);
         if (sites == null || sites.length == 0) return null;
 
@@ -63,5 +71,39 @@ public class SiteCodeResolver {
         }
         
         return null;
+    }
+
+    public void assignSiteCode(Location location) {
+        String siteCode = lookupSiteCode(location.getSiteName());
+        if (siteCode == null) {
+            siteCode = calculateSiteCode(location.getLatitude(), location.getLongitude());
+        }
+        location.setSiteCode(siteCode);
+    }
+
+    // Fetch and populate air quality data
+    public void populateLocationData(Location location) {
+        assignSiteCode(location);
+        if (location.getSiteCode() == null) return;
+
+        String today = LocalDate.now().toString();
+        String url = "https://api.erg.ic.ac.uk/AirQuality/Data/Wide/Site/SiteCode="
+                     + location.getSiteCode()
+                     + "/StartDate=" + today + "/EndDate=" + today + "/Json";
+
+        WideDataPoint[] readings = restTemplate.getForObject(url, WideDataPoint[].class);
+        if (readings != null && readings.length > 0) {
+            WideDataPoint latest = readings[readings.length - 1];
+            AirQualityData airData = new AirQualityData(
+                latest.getPm25(),
+                latest.getPm10(),
+                latest.getNo2(),
+                latest.getSo2(),
+                latest.getO3(),
+                latest.getCo(),
+                LocalDateTime.parse(latest.getTimestamp(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+            );
+            location.setAirQualityData(airData);
+        }
     }
 }
