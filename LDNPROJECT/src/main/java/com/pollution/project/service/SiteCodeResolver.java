@@ -1,16 +1,18 @@
 package com.pollution.project.service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.pollution.dto.HourlyIndexResponse;
+import com.pollution.dto.HourlyIndexResponse.Site;
+import com.pollution.dto.HourlyIndexResponse.Species;
 import com.pollution.dto.MonitoringSite;
 import com.pollution.dto.Trie;
-import com.pollution.dto.WideDP;
 import com.pollution.project.entity.AirQualityData;
 import com.pollution.project.entity.Location;
 
@@ -81,28 +83,62 @@ public class SiteCodeResolver {
         location.setSiteCode(siteCode);
     }
 
+    private Double getIndex(List<Species> speciesList, String speciesName) {
+        for (Species species : speciesList) {
+            if (species.getCode().equalsIgnoreCase(speciesName)) {
+                try {
+                    return Double.valueOf(species.getIndex());
+                } catch (NumberFormatException e) {
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+
     public void populateLocationData(Location location, String userInput) {
         assignSiteCode(location, userInput);
         if (location.getSiteCode() == null) return;
 
-        String today = LocalDate.now().toString();
-        String url = "https://api.erg.ic.ac.uk/AirQuality/Daily/MonitoringIndex/Latest/SiteCode="
+        String url = "https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode="
                     + location.getSiteCode()
                     + "/Json";
 
-        WideDP[] readings = restTemplate.getForObject(url, WideDP[].class);
-        if (readings != null && readings.length > 0) {
-            WideDP latest = readings[readings.length - 1];
-            AirQualityData airData = new AirQualityData(
-                latest.getPm25(),
-                latest.getPm10(),
-                latest.getNo2(),
-                latest.getSo2(),
-                latest.getO3(),
-                latest.getCo(),
-                LocalDateTime.parse(latest.getTimestamp(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
-            );
-            location.setAirQualityData(airData);
+        try {
+            HourlyIndexResponse response = restTemplate.getForObject(url, HourlyIndexResponse.class);
+    
+            if (response != null
+                && response.getHourlyAirQualityIndex() != null 
+                && response.getHourlyAirQualityIndex().getLocalAuthority() != null 
+                && response.getHourlyAirQualityIndex().getLocalAuthority().getSite() != null) {
+                Site site = response.getHourlyAirQualityIndex()
+                                    .getLocalAuthority()
+                                    .getSite();
+    
+                List<Species> speciesList = site.getSpecies();
+                LocalDateTime bulletinTime = LocalDateTime.parse(
+                    site.getBulletinDate(),
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                );
+    
+                AirQualityData airData = new AirQualityData(
+                    getIndex(speciesList, "PM25"),
+                    getIndex(speciesList, "PM10"),
+                    getIndex(speciesList, "NO2"),
+                    getIndex(speciesList, "SO2"),
+                    getIndex(speciesList, "O3"),
+                    getIndex(speciesList, "CO"),
+                    bulletinTime
+                );
+    
+                location.setAirQualityData(airData);
+            } else {
+                location.setAirQualityData(null);
+                System.out.println("No air quality data returned for site code: " + location.getSiteCode());
+            }
+        } catch (RestClientException e) {
+            location.setAirQualityData(null);
+            System.err.println("Error fetching air quality data: " + e.getMessage());
         }
     }
 }
