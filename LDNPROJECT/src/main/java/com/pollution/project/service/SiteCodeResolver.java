@@ -73,23 +73,22 @@ public class SiteCodeResolver {
         return null;
     }
 
-    // Need to go back and edit this
-    public void assignSiteCode(Location location) {
-        String siteCode = lookupSiteCode(location.getName()); // This won't work
+    public void assignSiteCode(Location location, String userInput) {
+        String siteCode = lookupSiteCode(userInput);
         if (siteCode == null) {
             siteCode = calculateSiteCode(location.getLatitude(), location.getLongitude());
         }
         location.setSiteCode(siteCode);
     }
 
-    public void populateLocationData(Location location) {
-        assignSiteCode(location);
+    public void populateLocationData(Location location, String userInput) {
+        assignSiteCode(location, userInput);
         if (location.getSiteCode() == null) return;
 
         String today = LocalDate.now().toString();
-        String url = "https://api.erg.ic.ac.uk/AirQuality/Data/Wide/Site/SiteCode="
-                     + location.getSiteCode()
-                     + "/StartDate=" + today + "/EndDate=" + today + "/Json";
+        String url = "https://api.erg.ic.ac.uk/AirQuality/Daily/MonitoringIndex/Latest/SiteCode="
+                    + location.getSiteCode()
+                    + "/Json";
 
         WideDP[] readings = restTemplate.getForObject(url, WideDP[].class);
         if (readings != null && readings.length > 0) {
