@@ -73,8 +73,9 @@ public class SiteCodeResolver {
         return null;
     }
 
+    // Need to go back and edit this
     public void assignSiteCode(Location location) {
-        String siteCode = lookupSiteCode(location.getName());
+        String siteCode = lookupSiteCode(location.getName()); // This won't work
         if (siteCode == null) {
             siteCode = calculateSiteCode(location.getLatitude(), location.getLongitude());
         }
