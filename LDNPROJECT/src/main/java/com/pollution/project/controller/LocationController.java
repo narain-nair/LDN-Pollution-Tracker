@@ -2,9 +2,11 @@ package com.pollution.project.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +37,7 @@ public class LocationController{
 
         var location = locationOpt.get();
         siteCodeResolver.populateLocationData(location, location.getName());
-        return ResponseEntity.ok(location);
+        return ResponseEntity.ok("Location data found: " + location);
     }
 
     @GetMapping
@@ -47,7 +49,7 @@ public class LocationController{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No data found for the given coordinates");
         }
 
-        return ResponseEntity.ok(tempLoc);
+        return ResponseEntity.ok("Site found: " + tempLoc.getSiteCode() + ", Air Quality: " + tempLoc.getAirQualityData());
     }
 
     @PostMapping
@@ -66,6 +68,30 @@ public class LocationController{
         }
 
         locationRepository.save(location);
-        return ResponseEntity.status(HttpStatus.CREATED).body(location);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Location created successfully: " + location);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> refreshLocation(@PathVariable Long id) {
+        var locationOpt = locationRepository.findById(id);
+        if (locationOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Location not found");
+        }
+
+        var location = locationOpt.get();
+        siteCodeResolver.populateLocationData(location, null);
+
+        locationRepository.save(location);
+        return ResponseEntity.ok("Location updated successfully: " + location);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteLocation(@PathVariable Long id) {
+        if (!locationRepository.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Location not found");
+        }
+
+        locationRepository.deleteById(id);
+        return ResponseEntity.ok("Location deleted successfully.");
     }
 }
