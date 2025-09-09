@@ -16,14 +16,20 @@ import com.pollution.dto.HourlyIndexResponse.Species;
 import com.pollution.dto.MonitoringSite;
 import com.pollution.dto.Trie;
 import com.pollution.project.entity.AirQualityData;
+import com.pollution.project.entity.AirQualitySnapshot;
 import com.pollution.project.entity.Location; 
-
+import com.pollution.project.repository.AirQualitySnapshotRepository;
 
 @Service    
 public class SiteCodeResolver {
     private final RestTemplate restTemplate = new RestTemplate();
     private final String apiUrl = "https://api.erg.ic.ac.uk/AirQuality/Information/MonitoringSites/GroupName=London/Json";
     private static final Logger logger = LoggerFactory.getLogger(SiteCodeResolver.class);
+    private final AirQualitySnapshotRepository snapshotRepository;
+
+    public SiteCodeResolver(AirQualitySnapshotRepository snapshotRepository) {
+        this.snapshotRepository = snapshotRepository;
+    }
 
     public String calculateSiteCode(double lat, double lng) {
         MonitoringSite[] sites = restTemplate.getForObject(apiUrl, MonitoringSite[].class);
@@ -146,6 +152,23 @@ public class SiteCodeResolver {
         } catch (RestClientException e) {
             location.setAirQualityData(null);
             logger.error("Error fetching air quality data for site code {} ", location.getSiteCode(), e);
+        }
+    }
+
+    public void refreshLocationData(Location location) {
+        populateLocationData(location, location.getName());
+
+        if (location.getAirQualityData() != null) {
+            AirQualitySnapshot ss = new AirQualitySnapshot();
+            ss.setLocation(location);
+            ss.setTimestamp(LocalDateTime.now());
+            ss.setPm25(location.getAirQualityData().getPm25());
+            ss.setPm10(location.getAirQualityData().getPm10());
+            ss.setNo2(location.getAirQualityData().getNo2());
+            ss.setSo2(location.getAirQualityData().getSo2());
+            ss.setO3(location.getAirQualityData().getO3());
+            ss.setCo(location.getAirQualityData().getCo());
+            snapshotRepository.save(ss);
         }
     }
 }

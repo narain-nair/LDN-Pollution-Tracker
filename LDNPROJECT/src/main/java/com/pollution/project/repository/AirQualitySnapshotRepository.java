@@ -8,6 +8,5 @@ import com.pollution.project.entity.AirQualitySnapshot;
 
 public interface AirQualitySnapshotRepository extends JpaRepository<AirQualitySnapshot, Long> {
     List<AirQualitySnapshot> findByLocationId(Long locationId);
-
     List<AirQualitySnapshot> findByLocationIdOrderByTimestampDesc(Long locationId);
 }
