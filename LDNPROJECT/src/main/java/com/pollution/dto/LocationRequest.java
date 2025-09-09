@@ -6,12 +6,12 @@ import jakarta.validation.constraints.Size;
 
 public class LocationRequest {
 
-    @DecimalMin(value = "-90.0", message = "Latitude must be between -90 and 90")
-    @DecimalMax(value = "90.0", message = "Latitude must be between -90 and 90")   
+    @DecimalMin(value = "51.28", message = "Latitude must be >= 51.28 for London")
+    @DecimalMax(value = "51.70", message = "Latitude must be <= 51.70 for London")
     private double lat;
 
-    @DecimalMin(value = "-180.0", message = "Longitude must be between -180 and 180")
-    @DecimalMax(value = "180.0", message = "Longitude must be between -180 and 180")
+    @DecimalMin(value = "-0.50", message = "Longitude must be >= -0.50 for London")
+    @DecimalMax(value = "0.33", message = "Longitude must be <= 0.33 for London")
     private double lng;
 
     @Size(max = 100, message = "Site name must not exceed 100 characters")
