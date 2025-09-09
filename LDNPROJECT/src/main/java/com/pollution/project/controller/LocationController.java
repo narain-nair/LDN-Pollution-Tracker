@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pollution.dto.LocationRequest;
+import com.pollution.project.entity.AirQualitySnapshot;
 import com.pollution.project.entity.Location;
+import com.pollution.project.repository.AirQualitySnapshotRepository;
 import com.pollution.project.repository.LocationRepository;
 import com.pollution.project.service.SiteCodeResolver;
 
@@ -29,11 +31,13 @@ import jakarta.validation.Valid;
 public class LocationController{
     private final SiteCodeResolver siteCodeResolver;
     private final LocationRepository locationRepository;
+    private final AirQualitySnapshotRepository snapshotRepository;
     private static final Logger logger = LoggerFactory.getLogger(LocationController.class);
 
-    public LocationController (SiteCodeResolver siteCodeResolver, LocationRepository locationRepository) {
+    public LocationController (SiteCodeResolver siteCodeResolver, LocationRepository locationRepository, AirQualitySnapshotRepository snapshotRepository) {
         this.siteCodeResolver = siteCodeResolver;
         this.locationRepository = locationRepository;
+        this.snapshotRepository = snapshotRepository;
     }
 
     @GetMapping("/{id}")
@@ -130,5 +134,34 @@ public class LocationController{
 
         locationRepository.deleteById(id);
         return ResponseEntity.ok("Location deleted successfully.");
+    }
+
+    @GetMapping("/{id}/stats")
+    public ResponseEntity<?> getLocationStats(@PathVariable Long id) {
+        var locationOpt = locationRepository.findById(id);
+        if (locationOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Location not found");
+        }
+
+        var snapshots = snapshotRepository.findByLocationId(id);
+        
+        Double avgPm25 = snapshots.stream().mapToDouble(AirQualitySnapshot::getPm25).average().orElse(0.0);
+        Double avgPm10 = snapshots.stream().mapToDouble(AirQualitySnapshot::getPm10).average().orElse(0.0);
+        Double avgNo2 = snapshots.stream().mapToDouble(AirQualitySnapshot::getNo2).average().orElse(0.0);
+        Double avgSo2 = snapshots.stream().mapToDouble(AirQualitySnapshot::getSo2).average().orElse(0.0);
+        Double avgO3 = snapshots.stream().mapToDouble(AirQualitySnapshot::getO3).average().orElse(0.0);
+        Double avgCo = snapshots.stream().mapToDouble(AirQualitySnapshot::getCo).average().orElse(0.0);
+
+        Map<String,Object> response = Map.of(
+            "locationId", id,
+            "averagePm25", avgPm25,
+            "averagePm10", avgPm10,
+            "averageNo2", avgNo2,
+            "averageSo2", avgSo2,
+            "averageO3", avgO3,
+            "averageCo", avgCo
+        );
+
+        return ResponseEntity.ok(response);
     }
 }
