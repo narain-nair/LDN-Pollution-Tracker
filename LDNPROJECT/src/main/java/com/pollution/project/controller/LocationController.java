@@ -23,19 +23,21 @@ public class LocationController{
         this.locationRepository = locationRepository;
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getLocationData(@PathVariable Long id) {
-        var location = locationRepository.findById(id);
-        if (location.isEmpty()) {
+        var locationOpt = locationRepository.findById(id);
+        if (locationOpt.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Location not found");
         }
-        return ResponseEntity.ok(location.get());
+
+        var location = locationOpt.get();
+        siteCodeResolver.populateLocationData(location, location.getName());
+        return ResponseEntity.ok(location);
     }
 
     @GetMapping
     public ResponseEntity<?> getSiteByCoords(@RequestParam double lat, @RequestParam double lng) {
-        String name = "name";
-        Location tempLoc = new Location(name, lat, lng);
+        Location tempLoc = new Location("temp", lat, lng);
         siteCodeResolver.populateLocationData(tempLoc, null);
 
         if (tempLoc.getAirQualityData() == null) {
