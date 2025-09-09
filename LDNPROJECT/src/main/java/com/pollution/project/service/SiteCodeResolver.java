@@ -8,6 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -167,7 +170,7 @@ public class SiteCodeResolver {
                     getIndex(speciesList, "SO2"),
                     getIndex(speciesList, "O3"),
                     getIndex(speciesList, "CO"),
-                    bulletinTime
+                    bulletinTime 
                 );
     
                 location.setAirQualityData(airData);
@@ -178,9 +181,14 @@ public class SiteCodeResolver {
                 location.setAirQualityData(null);
                 logger.warn("No air quality data returned for site code {}", location.getSiteCode());
             }
+        } catch (HttpClientErrorException e) {
+            logger.error("Client error ({}): {} for URL {}", e.getStatusCode(), e.getMessage(), url);
+        } catch (HttpServerErrorException e) {
+            logger.error("Server error ({}): {} for URL {}", e.getStatusCode(), e.getMessage(), url);
+        } catch (ResourceAccessException e) {
+            logger.error("Network error: {} for URL {}", e.getMessage(), url);
         } catch (RestClientException e) {
-            location.setAirQualityData(null);
-            logger.error("Error fetching air quality data for site code {} ", location.getSiteCode(), e);
+            logger.error("Unexpected RestTemplate error: {} for URL {}", e.getMessage(), url);
         }
     }
 
