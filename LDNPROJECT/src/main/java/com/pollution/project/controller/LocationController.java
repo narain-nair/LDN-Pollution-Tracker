@@ -43,6 +43,14 @@ public class LocationController{
         var location = locationOpt.get();
         siteCodeResolver.populateLocationData(location, location.getName());
 
+        if (location.getAirQualityData() == null) {
+            Map<String, Object> faultyRes = new HashMap<>();
+            faultyRes.put("error", "No air quality data found for this location");
+            faultyRes.put("siteCode", location.getSiteCode());
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(faultyRes);
+        }
+
         Map<String, Object> response = new HashMap<>();
         response.put("location", location);
         response.put("airQualityData", location.getAirQualityData());
