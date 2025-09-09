@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -14,12 +16,13 @@ import com.pollution.dto.HourlyIndexResponse.Species;
 import com.pollution.dto.MonitoringSite;
 import com.pollution.dto.Trie;
 import com.pollution.project.entity.AirQualityData;
-import com.pollution.project.entity.Location;
+import com.pollution.project.entity.Location; 
 
 @Service    
 public class SiteCodeResolver {
     private final RestTemplate restTemplate = new RestTemplate();
     private final String apiUrl = "https://api.erg.ic.ac.uk/AirQuality/Information/MonitoringSites/GroupName=London/Json";
+    private static final Logger logger = LoggerFactory.getLogger(SiteCodeResolver.class);
 
     public String calculateSiteCode(double lat, double lng) {
         MonitoringSite[] sites = restTemplate.getForObject(apiUrl, MonitoringSite[].class);
@@ -134,14 +137,14 @@ public class SiteCodeResolver {
                 location.setAirQualityData(airData);
                 location.setName(site.getSiteName());
                 location.setSiteCode(site.getSiteCode());
-                System.out.println("Fetched air quality data for site code: " + location.getSiteCode() + ", name: " + site.getSiteName());
+                logger.info("Populated air quality data for site code {}", location.getSiteCode());
             } else {
                 location.setAirQualityData(null);
-                System.out.println("No air quality data returned for site code: " + location.getSiteCode());
+                logger.warn("No air quality data returned for site code {}", location.getSiteCode());
             }
         } catch (RestClientException e) {
             location.setAirQualityData(null);
-            System.err.println("Error fetching air quality data: " + e.getMessage());
+            logger.error("Error fetching air quality data for site code {} ", location.getSiteCode(), e);
         }
     }
 }

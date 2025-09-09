@@ -3,6 +3,8 @@ package com.pollution.project.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,6 +29,7 @@ import jakarta.validation.Valid;
 public class LocationController{
     private final SiteCodeResolver siteCodeResolver;
     private final LocationRepository locationRepository;
+    private static final Logger logger = LoggerFactory.getLogger(LocationController.class);
 
     public LocationController (SiteCodeResolver siteCodeResolver, LocationRepository locationRepository) {
         this.siteCodeResolver = siteCodeResolver;
@@ -35,6 +38,8 @@ public class LocationController{
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getLocationData(@PathVariable Long id) {
+        logger.info("GET /locations/{} called", id);
+
         var locationOpt = locationRepository.findById(id);
         if (locationOpt.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Location not found");
@@ -77,6 +82,7 @@ public class LocationController{
 
     @PostMapping
     public ResponseEntity<?> addLocation(@Valid @RequestBody LocationRequest request) {
+        logger.info("POST /locations called with lat={} lng={} siteName={}", request.getLat(), request.getLng(), request.getSiteName());
         Location location = new Location(request.getSiteName(), request.getLat(), request.getLng());
 
         siteCodeResolver.populateLocationData(location, request.getSiteName());
@@ -95,6 +101,8 @@ public class LocationController{
 
     @PutMapping("/{id}")
     public ResponseEntity<?> refreshLocation(@PathVariable Long id) {
+        logger.info("PUT /locations/{} called for refresh", id);
+
         var locationOpt = locationRepository.findById(id);
         if (locationOpt.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Location not found");
@@ -114,6 +122,8 @@ public class LocationController{
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteLocation(@PathVariable Long id) {
+        logger.info("DELETE /locations/{} called", id);
+        
         if (!locationRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Location not found");
         }

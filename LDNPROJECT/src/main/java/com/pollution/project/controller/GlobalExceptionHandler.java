@@ -3,6 +3,8 @@ package com.pollution.project.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,9 +13,12 @@ import org.springframework.web.client.RestClientException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    @SuppressWarnings("unused")
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleAllExceptions(Exception ex) {
-        System.err.println("Unhandled exception: " + ex);
+        logger.error("Unhandled exception", ex);
 
         Map<String, Object> response = new HashMap<>();
 
@@ -25,7 +30,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RestClientException.class)
     public ResponseEntity<?> handleRestClientException(RestClientException ex) {
-        System.err.println("RestClientException: " + ex);
+        logger.error("External API error", ex);
 
         Map<String, Object> response = new HashMap<>();
         response.put("error", "External API error.");
