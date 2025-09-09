@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -23,6 +24,7 @@ import com.pollution.project.repository.AirQualitySnapshotRepository;
 @Service    
 public class SiteCodeResolver {
     private final RestTemplate restTemplate = new RestTemplate();
+    private final Object lock = new Object();
     private final String apiUrl = "https://api.erg.ic.ac.uk/AirQuality/Information/MonitoringSites/GroupName=London/Json";
     private static final Logger logger = LoggerFactory.getLogger(SiteCodeResolver.class);
     private final AirQualitySnapshotRepository snapshotRepository;
@@ -44,6 +46,25 @@ public class SiteCodeResolver {
             }
         }
         return siteTrie;
+    }
+
+    @Scheduled(cron = "0 0 0 * * ?", zone = "GMT") // Every day at midnight
+    public void refreshSiteTrie() {
+        try {
+            MonitoringSite[] sites = restTemplate.getForObject(apiUrl, MonitoringSite[].class);
+            if (sites != null) {
+                Trie newTrie = new Trie();
+                for (MonitoringSite site : sites) {
+                    newTrie.insert(site.getSiteName(), site.getSiteCode());
+                }
+                synchronized (lock) {
+                    this.siteTrie = newTrie;
+                }
+                logger.info("Site trie refreshed successfully, with {} sites.", sites.length);
+            }
+        } catch (RestClientException e) {
+            logger.error("Error refreshing site trie: {}", e);
+        }
     }
 
     public String calculateSiteCode(double lat, double lng) {
