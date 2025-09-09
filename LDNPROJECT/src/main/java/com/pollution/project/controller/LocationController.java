@@ -42,7 +42,13 @@ public class LocationController{
 
         var location = locationOpt.get();
         siteCodeResolver.populateLocationData(location, location.getName());
-        return ResponseEntity.ok(location);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("location", location);
+        response.put("airQualityData", location.getAirQualityData());
+        response.put("message", "Location data retrieved successfully.");
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping
@@ -71,7 +77,12 @@ public class LocationController{
         }
 
         locationRepository.save(location);
-        return ResponseEntity.status(HttpStatus.CREATED).body(location);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Location added successfully.");
+        response.put("location", location);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{id}")
@@ -85,7 +96,12 @@ public class LocationController{
         siteCodeResolver.populateLocationData(location, null);
 
         locationRepository.save(location);
-        return ResponseEntity.ok(location);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Location data refreshed successfully.");
+        response.put("location", location);
+        
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
