@@ -26,9 +26,24 @@ public class SiteCodeResolver {
     private final String apiUrl = "https://api.erg.ic.ac.uk/AirQuality/Information/MonitoringSites/GroupName=London/Json";
     private static final Logger logger = LoggerFactory.getLogger(SiteCodeResolver.class);
     private final AirQualitySnapshotRepository snapshotRepository;
+    private Trie siteTrie;
 
     public SiteCodeResolver(AirQualitySnapshotRepository snapshotRepository) {
         this.snapshotRepository = snapshotRepository;
+    }
+
+    // !! Thread-safe lazy initialization of the Trie to prevent multiple tries being created.
+    private synchronized Trie getSiteTrie() {
+        if (siteTrie == null) {
+            siteTrie = new Trie();
+            MonitoringSite[] sites = restTemplate.getForObject(apiUrl, MonitoringSite[].class);
+            if (sites != null) {
+                for (MonitoringSite site : sites) {
+                    siteTrie.insert(site.getSiteName(), site.getSiteCode());
+                }
+            }
+        }
+        return siteTrie;
     }
 
     public String calculateSiteCode(double lat, double lng) {
@@ -57,22 +72,15 @@ public class SiteCodeResolver {
 
     public String lookupSiteCode(String siteName) {
         if (siteName == null || siteName.isEmpty()) return null;
-        MonitoringSite[] sites = restTemplate.getForObject(apiUrl, MonitoringSite[].class);
 
-        if (sites == null || sites.length == 0) return null;
-
-        Trie trie = new Trie();
-        for (MonitoringSite site : sites) {
-            trie.insert(site.getSiteName(), site.getSiteCode());
-        }
-
+        Trie trie = getSiteTrie();
+        
         String exactMatch = trie.searchExact(siteName);
         if (exactMatch != null) {
             return exactMatch;
         }
         
         List<String> potential = trie.getSuggestions(siteName);
-
         if (!potential.isEmpty()) {
             String firstSuggestion = potential.get(0);  // e.g., "bexley west (BQ8)"
             int start = firstSuggestion.indexOf('(');
