@@ -132,6 +132,9 @@ public class SiteCodeResolver {
                 );
     
                 location.setAirQualityData(airData);
+                location.setName(site.getSiteName());
+                location.setSiteCode(site.getSiteCode());
+                System.out.println("Fetched air quality data for site code: " + location.getSiteCode() + ", name: " + site.getSiteName());
             } else {
                 location.setAirQualityData(null);
                 System.out.println("No air quality data returned for site code: " + location.getSiteCode());
