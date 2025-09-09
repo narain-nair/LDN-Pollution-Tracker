@@ -1,5 +1,8 @@
 package com.pollution.project.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,7 +40,7 @@ public class LocationController{
 
         var location = locationOpt.get();
         siteCodeResolver.populateLocationData(location, location.getName());
-        return ResponseEntity.ok("Location data found: " + location);
+        return ResponseEntity.ok(location);
     }
 
     @GetMapping
@@ -49,7 +52,11 @@ public class LocationController{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No data found for the given coordinates");
         }
 
-        return ResponseEntity.ok("Site found: " + tempLoc.getSiteCode() + ", Air Quality: " + tempLoc.getAirQualityData());
+        Map<String, Object> response = new HashMap<>();
+        response.put("siteCode", tempLoc.getSiteCode());
+        response.put("airQualityData", tempLoc.getAirQualityData());
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
@@ -61,14 +68,12 @@ public class LocationController{
         Location location = new Location(request.getSiteName(), request.getLat(), request.getLng());
 
         siteCodeResolver.populateLocationData(location, request.getSiteName());
-        String siteCode = siteCodeResolver.calculateSiteCode(request.getLat(), request.getLng());
-
         if (location.getSiteCode() == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Could not determine site code for the given location");
         }
 
         locationRepository.save(location);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Location created successfully: " + location);
+        return ResponseEntity.status(HttpStatus.CREATED).body(location);
     }
 
     @PutMapping("/{id}")
@@ -82,7 +87,7 @@ public class LocationController{
         siteCodeResolver.populateLocationData(location, null);
 
         locationRepository.save(location);
-        return ResponseEntity.ok("Location updated successfully: " + location);
+        return ResponseEntity.ok(location);
     }
 
     @DeleteMapping("/{id}")
