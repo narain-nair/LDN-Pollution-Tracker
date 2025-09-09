@@ -4,10 +4,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pollution.dto.LocationRequest;
 import com.pollution.project.entity.Location;
 import com.pollution.project.repository.LocationRepository;
 import com.pollution.project.service.SiteCodeResolver;
@@ -45,5 +48,24 @@ public class LocationController{
         }
 
         return ResponseEntity.ok(tempLoc);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> addLocation(@RequestBody LocationRequest request) {
+        if (request.getLat() < -90 || request.getLat() > 90 || request.getLng() < -180 || request.getLng() > 180) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid latitude or longitude");
+        }
+
+        Location location = new Location(request.getSiteName(), request.getLat(), request.getLng());
+
+        siteCodeResolver.populateLocationData(location, request.getSiteName());
+        String siteCode = siteCodeResolver.calculateSiteCode(request.getLat(), request.getLng());
+
+        if (location.getSiteCode() == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Could not determine site code for the given location");
+        }
+
+        locationRepository.save(location);
+        return ResponseEntity.status(HttpStatus.CREATED).body(location);
     }
 }
