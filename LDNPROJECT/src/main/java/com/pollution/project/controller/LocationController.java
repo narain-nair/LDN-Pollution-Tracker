@@ -20,6 +20,8 @@ import com.pollution.project.entity.Location;
 import com.pollution.project.repository.LocationRepository;
 import com.pollution.project.service.SiteCodeResolver;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/locations")
 public class LocationController{
@@ -60,11 +62,7 @@ public class LocationController{
     }
 
     @PostMapping
-    public ResponseEntity<?> addLocation(@RequestBody LocationRequest request) {
-        if (request.getLat() < -90 || request.getLat() > 90 || request.getLng() < -180 || request.getLng() > 180) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid latitude or longitude");
-        }
-
+    public ResponseEntity<?> addLocation(@Valid @RequestBody LocationRequest request) {
         Location location = new Location(request.getSiteName(), request.getLat(), request.getLng());
 
         siteCodeResolver.populateLocationData(location, request.getSiteName());
