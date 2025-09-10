@@ -47,6 +47,11 @@ public class Location {
 
     public Location() {}
 
+    public Location(Double latitude, Double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public Location(String name, Double latitude, Double longitude) {
         this.name = name;
         this.latitude = latitude;

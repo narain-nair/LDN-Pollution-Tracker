@@ -22,7 +22,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.pollution.dto.MonitoringSite;
-import com.pollution.dto.Trie;  
+import com.pollution.dto.Trie;
 import com.pollution.project.repository.AirQualitySnapshotRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -305,5 +305,6 @@ class SiteCodeResolverTest {
         // Assert
         assertNull(nearestCode);
     }
+
 
 }
