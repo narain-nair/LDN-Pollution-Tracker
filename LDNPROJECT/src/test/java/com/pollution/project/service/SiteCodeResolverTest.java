@@ -380,4 +380,45 @@ class SiteCodeResolverTest {
         assertEquals("DUMMY1", location.getSiteCode());
         assertEquals("Dummy Location", location.getName());
     }
+
+    @Test
+    void testPopulateLocationData_ReturnNull() {
+        Location location = new Location("Dummy Location", 51.000, 0.000);
+        location.setSiteCode(null);
+        doNothing().when(siteCodeResolver).assignSiteCode(location, "X");
+
+        when(restTemplate.getForObject(anyString(), eq(HourlyIndexResponse.class))).thenReturn(null);
+
+        siteCodeResolver.populateLocationData(location, "X");
+        assertNull(location.getAirQualityData());
+    }
+
+    @Test
+    void testPopulateLocationData_InvalidIndex() {
+        Location location = new Location("Dummy Location", 51.000, 0.000);
+
+        // Species with invalid index
+        HourlyIndexResponse.Species pm25 = new HourlyIndexResponse.Species("PM25", "PM25", "N/A", "Moderate", "Automated");
+
+        HourlyIndexResponse.Site site = new HourlyIndexResponse.Site("51.000", "0.000", "DUMMY1", "Dummy Location", "2025-09-10 12:00:00",List.of(pm25));
+
+        HourlyIndexResponse.LocalAuthority la = new HourlyIndexResponse.LocalAuthority("Dummy Authority", "99", "51.000", "0.000", site);
+
+        HourlyIndexResponse.HourlyAirQualityIndex hqi = new HourlyIndexResponse.HourlyAirQualityIndex("60", la);
+
+        HourlyIndexResponse response = new HourlyIndexResponse(hqi);
+
+        when(restTemplate.getForObject(anyString(), eq(HourlyIndexResponse.class))).thenReturn(response);
+
+        doNothing().when(siteCodeResolver).assignSiteCode(location, "Dummy Location");
+
+        // Act
+        siteCodeResolver.populateLocationData(location, "Dummy Location");
+
+        // Assert
+        assertNotNull(location.getAirQualityData());
+        assertNull(location.getAirQualityData().getPm25()); // invalid index handled
+        assertEquals("DUMMY1", location.getSiteCode());
+        assertEquals("Dummy Location", location.getName());
+    }
 }
