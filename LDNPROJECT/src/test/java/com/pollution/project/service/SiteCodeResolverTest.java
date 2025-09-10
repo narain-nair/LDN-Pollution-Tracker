@@ -89,4 +89,23 @@ class SiteCodeResolverTest {
 
         assertNull(siteCodeResolver.lookupSiteCode("Test"));
     }
+
+    @Test
+    void testLookupSiteCode_CaseInsensitive() {
+        Trie trie = new Trie();
+        trie.insert("Newham - Hoola Tower", "TL5");
+        siteCodeResolver.setSiteTrie(trie);
+
+        assertEquals("TL5", siteCodeResolver.lookupSiteCode("newham - hoola tower"));
+        assertEquals("TL5", siteCodeResolver.lookupSiteCode("NEWHAM - HOOLA TOWER"));
+    }
+
+    @Test
+    void testLookupSiteCode_TrimInput() {
+        Trie trie = new Trie();
+        trie.insert("Newham - Hoola Tower", "TL5");
+        siteCodeResolver.setSiteTrie(trie);
+
+        assertEquals("TL5", siteCodeResolver.lookupSiteCode("  Newham - Hoola Tower  "));
+    }
 }
