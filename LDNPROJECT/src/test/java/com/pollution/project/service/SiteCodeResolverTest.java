@@ -186,4 +186,32 @@ class SiteCodeResolverTest {
 
         verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
     }
+
+    @Test
+    void testRefreshSiteTrie_SuccessfulUpdate() {
+        // Arrange
+        MonitoringSite siteA = new MonitoringSite();
+        siteA.setSiteName("New Site A");
+        siteA.setSiteCode("NA1");
+
+        MonitoringSite siteB = new MonitoringSite();
+        siteB.setSiteName("New Site B");
+        siteB.setSiteCode("NB2");
+
+        MonitoringSite[] newSites = {siteA, siteB};
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class)))
+                .thenReturn(newSites);
+
+        // Act
+        siteCodeResolver.refreshSiteTrie();
+
+        // Assert
+        Trie trie = siteCodeResolver.getSiteTrie();
+        assertEquals("NA1", trie.searchExact("New Site A"));
+        assertEquals("NB2", trie.searchExact("New Site B"));
+
+        // API should have been called once
+        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
+    }
+
 }

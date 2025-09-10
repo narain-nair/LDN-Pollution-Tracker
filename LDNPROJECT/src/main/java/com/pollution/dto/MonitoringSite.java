@@ -17,6 +17,11 @@ public class MonitoringSite {
 
     public MonitoringSite() {}
 
+    public MonitoringSite(String siteName, String siteCode) {
+        this.siteName = siteName;
+        this.siteCode = siteCode;
+    }
+
     public MonitoringSite(String siteCode, String latitude, String longitude, String siteName) {
         this.siteCode = siteCode;
         this.latitude = latitude;
