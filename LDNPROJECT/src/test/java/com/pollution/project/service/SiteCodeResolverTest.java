@@ -117,4 +117,13 @@ class SiteCodeResolverTest {
 
         assertEquals("TD0", siteCodeResolver.lookupSiteCode("- National Physical Laboratory, Teddington"));
     }
+
+    @Test
+    void testLookupSiteCode_SubstringNotPrefix() {
+        Trie trie = new Trie();
+        trie.insert("Bexley West", "BQ8");
+        siteCodeResolver.setSiteTrie(trie);
+
+        assertNull(siteCodeResolver.lookupSiteCode("West"));
+    }
 }
