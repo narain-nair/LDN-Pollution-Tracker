@@ -1,5 +1,7 @@
 package com.pollution.project.service;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -13,6 +15,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -342,20 +345,39 @@ class SiteCodeResolverTest {
 
     @Test
     void testPopulateLocationData_ValidResponse() {
-        Location location = new Location(51.5, 0.1);
-        location.setSiteCode("S1");
+        // Dummy location (latitude/longitude arbitrary)
+        Location location = new Location("Dummy Location", 51.000, 0.000);
 
-        // Mock assignSiteCode → skip fallback logic
-        doNothing().when(siteCodeResolver).assignSiteCode(location, "Site One");
+        // Build species list
+        HourlyIndexResponse.Species pm25 = new HourlyIndexResponse.Species("PM25", "PM25", "5", "Moderate", "Automated");
+        HourlyIndexResponse.Species no2 = new HourlyIndexResponse.Species("NO2", "NO2", "3", "Low", "Automated");
 
-        HourlyIndexResponse mockResponse = buildMockResponse(); // helper builds with species + site
-        when(restTemplate.getForObject(anyString(), eq(HourlyIndexResponse.class)))
-            .thenReturn(mockResponse);
+        // Build Site
+        HourlyIndexResponse.Site site = new HourlyIndexResponse.Site("51.000", "0.000", "DUMMY1", "Dummy Location", "2025-09-10 12:00:00", List.of(pm25, no2));
 
-        siteCodeResolver.populateLocationData(location, "Site One");
+        // Build LocalAuthority
+        HourlyIndexResponse.LocalAuthority la = new HourlyIndexResponse.LocalAuthority("Dummy Authority", "99", "51.000", "0.000", site);
 
+        // Build HourlyAirQualityIndex
+        HourlyIndexResponse.HourlyAirQualityIndex hqi = new HourlyIndexResponse.HourlyAirQualityIndex("60", la);
+
+        // Build Response
+        HourlyIndexResponse response = new HourlyIndexResponse(hqi);
+
+        // Mock API call
+        when(restTemplate.getForObject(anyString(), eq(HourlyIndexResponse.class))).thenReturn(response);
+
+        // Mock assignSiteCode (skip actual lookup logic)
+        doNothing().when(siteCodeResolver).assignSiteCode(location, "Dummy Location");
+
+        // Act
+        siteCodeResolver.populateLocationData(location, "Dummy Location");
+
+        // Assert
         assertNotNull(location.getAirQualityData());
-        assertEquals("S1", location.getSiteCode());
-        assertEquals("Site One", location.getName());
+        assertEquals(5.0, location.getAirQualityData().getPm25());
+        assertEquals(3.0, location.getAirQualityData().getNo2());
+        assertEquals("DUMMY1", location.getSiteCode());
+        assertEquals("Dummy Location", location.getName());
     }
 }

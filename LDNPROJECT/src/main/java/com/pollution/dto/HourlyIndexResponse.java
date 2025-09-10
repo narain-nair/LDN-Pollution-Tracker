@@ -8,6 +8,11 @@ public class HourlyIndexResponse {
     @JsonProperty("HourlyAirQualityIndex")
     private HourlyAirQualityIndex hourlyAirQualityIndex;
     
+    public HourlyIndexResponse() {}
+
+    public HourlyIndexResponse(HourlyAirQualityIndex hourlyAirQualityIndex) {
+        this.hourlyAirQualityIndex = hourlyAirQualityIndex;
+    }
 
     public HourlyAirQualityIndex getHourlyAirQualityIndex() {
         return hourlyAirQualityIndex;
