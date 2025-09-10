@@ -108,4 +108,13 @@ class SiteCodeResolverTest {
 
         assertEquals("TL5", siteCodeResolver.lookupSiteCode("  Newham - Hoola Tower  "));
     }
+
+    @Test
+    void testLookupSiteCode_SpecialCharacters() {
+        Trie trie = new Trie();
+        trie.insert("- National Physical Laboratory, Teddington", "TD0");
+        siteCodeResolver.setSiteTrie(trie);
+
+        assertEquals("TD0", siteCodeResolver.lookupSiteCode("- National Physical Laboratory, Teddington"));
+    }
 }
