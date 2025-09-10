@@ -21,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.pollution.dto.HourlyIndexResponse;
 import com.pollution.dto.MonitoringSite;
 import com.pollution.dto.Trie;
 import com.pollution.project.entity.Location;
@@ -337,5 +338,24 @@ class SiteCodeResolverTest {
         siteCodeResolver.assignSiteCode(location, "Unknown Site");
 
         assertNull(location.getSiteCode());
+    }
+
+    @Test
+    void testPopulateLocationData_ValidResponse() {
+        Location location = new Location(51.5, 0.1);
+        location.setSiteCode("S1");
+
+        // Mock assignSiteCode → skip fallback logic
+        doNothing().when(siteCodeResolver).assignSiteCode(location, "Site One");
+
+        HourlyIndexResponse mockResponse = buildMockResponse(); // helper builds with species + site
+        when(restTemplate.getForObject(anyString(), eq(HourlyIndexResponse.class)))
+            .thenReturn(mockResponse);
+
+        siteCodeResolver.populateLocationData(location, "Site One");
+
+        assertNotNull(location.getAirQualityData());
+        assertEquals("S1", location.getSiteCode());
+        assertEquals("Site One", location.getName());
     }
 }

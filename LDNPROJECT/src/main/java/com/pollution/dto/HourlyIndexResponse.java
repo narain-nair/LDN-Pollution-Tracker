@@ -24,6 +24,13 @@ public class HourlyIndexResponse {
         @JsonProperty("LocalAuthority")
         private LocalAuthority localAuthority;
 
+        public HourlyAirQualityIndex() {}
+
+        public HourlyAirQualityIndex(String timeToLive, LocalAuthority localAuthority) {
+            this.timeToLive = timeToLive;
+            this.localAuthority = localAuthority;
+        }
+
         // getters/setters
         public String getTimeToLive() {
             return timeToLive;
@@ -57,8 +64,18 @@ public class HourlyIndexResponse {
 
         @JsonProperty("Site")
         private Site site;
-        // getters/setters
 
+        public LocalAuthority() {}
+
+        public LocalAuthority(String name, String code, String centreLatitude, String centreLongitude, Site site) {
+            this.name = name;
+            this.code = code;
+            this.centreLatitude = centreLatitude;
+            this.centreLongitude = centreLongitude;
+            this.site = site;
+        }
+
+        // getters/setters
         public String getName() {
             return name;
         }
@@ -119,8 +136,19 @@ public class HourlyIndexResponse {
 
         @JsonProperty("species")
         private List<Species> species;
-        // getters/setters
 
+        public Site() {}
+
+        public Site(String latitude, String longitude, String siteCode, String siteName, String bulletinDate, List<Species> species) {
+            this.latitude = latitude;
+            this.longitude = longitude;
+            this.siteCode = siteCode;
+            this.siteName = siteName;
+            this.bulletinDate = bulletinDate;
+            this.species = species;
+        }
+
+        // getters/setters
         public String getLatitude() {
             return latitude;
         }
@@ -185,8 +213,18 @@ public class HourlyIndexResponse {
 
         @JsonProperty("@IndexSource")
         private String source;
-        // getters/setters
 
+        public Species() {}
+
+        public Species(String name, String code, String index, String band, String source) {
+            this.name = name;
+            this.code = code;
+            this.index = index;
+            this.band = band;
+            this.source = source;
+        }
+
+        // getters/setters
         public String getName() {
             return name;
         }
