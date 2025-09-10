@@ -450,4 +450,30 @@ class SiteCodeResolverTest {
 
         verify(snapshotRepository, never()).save(any());
     }
+
+    @Test
+    void testGetIndex_ValidSpecies() {
+        HourlyIndexResponse.Species pm25 = new HourlyIndexResponse.Species("PM25", "PM25", "5", "Moderate", "Automated");
+        HourlyIndexResponse.Species no2 = new HourlyIndexResponse.Species("NO2", "NO2", "3", "Low", "Automated");
+        List<HourlyIndexResponse.Species> speciesList = List.of(pm25, no2);
+
+        assertEquals(5.0, siteCodeResolver.getIndex(speciesList, "PM25"));
+        assertEquals(3.0, siteCodeResolver.getIndex(speciesList, "NO2"));
+    }
+
+    @Test
+    void testGetIndex_SpeciesNotFound() {
+        HourlyIndexResponse.Species pm25 = new HourlyIndexResponse.Species("PM25", "PM25", "5", "Moderate", "Automated");
+        List<HourlyIndexResponse.Species> speciesList = List.of(pm25);
+
+        assertNull(siteCodeResolver.getIndex(speciesList, "NO2"));
+    }
+
+    @Test
+    void testGetIndex_InvalidIndexValue() {
+        HourlyIndexResponse.Species pm25 = new HourlyIndexResponse.Species("PM25", "PM25", "N/A", "Moderate", "Automated");
+        List<HourlyIndexResponse.Species> speciesList = List.of(pm25);
+
+        assertNull(siteCodeResolver.getIndex(speciesList, "PM25"));
+    }
 }

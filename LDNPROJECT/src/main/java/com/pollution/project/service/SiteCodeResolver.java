@@ -130,7 +130,7 @@ public class SiteCodeResolver {
         location.setSiteCode(siteCode);
     }
 
-    private Double getIndex(List<Species> speciesList, String speciesName) {
+    Double getIndex(List<Species> speciesList, String speciesName) {
         for (Species species : speciesList) {
             if (species.getCode().equalsIgnoreCase(speciesName)) {
                 try {
