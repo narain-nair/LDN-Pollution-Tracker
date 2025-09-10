@@ -51,6 +51,12 @@ public class SiteCodeResolver {
         return siteTrie;
     }
 
+    public void setSiteTrie(Trie trie) {
+        synchronized (lock) {
+            this.siteTrie = trie;
+        }
+    }
+
     @Scheduled(cron = "0 0 0 * * ?", zone = "GMT") // Every day at midnight
     public void refreshSiteTrie() {
         try {
