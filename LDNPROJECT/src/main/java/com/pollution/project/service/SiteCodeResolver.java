@@ -38,7 +38,7 @@ public class SiteCodeResolver {
     }
 
     // !! Thread-safe lazy initialization of the Trie to prevent multiple tries being created.
-    private synchronized Trie getSiteTrie() {
+    public synchronized Trie getSiteTrie() {
         if (siteTrie == null) {
             siteTrie = new Trie();
             MonitoringSite[] sites = restTemplate.getForObject(apiUrl, MonitoringSite[].class);

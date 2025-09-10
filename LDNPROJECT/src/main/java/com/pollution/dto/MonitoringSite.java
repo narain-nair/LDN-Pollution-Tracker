@@ -16,7 +16,7 @@ public class MonitoringSite {
     private String siteName;
 
     @SuppressWarnings("unused")
-    private void setSiteCode(String siteCode) {
+    public void setSiteCode(String siteCode) {
         this.siteCode = siteCode;
     }
 
@@ -43,7 +43,7 @@ public class MonitoringSite {
     }
 
     @SuppressWarnings("unused")
-    private void setSiteName(String siteName) {
+    public void setSiteName(String siteName) {
         this.siteName = siteName;
     }
 

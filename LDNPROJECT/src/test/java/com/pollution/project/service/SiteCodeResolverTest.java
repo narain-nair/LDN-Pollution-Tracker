@@ -1,29 +1,55 @@
 package com.pollution.project.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.client.RestTemplate;
 
+import com.pollution.dto.MonitoringSite;
 import com.pollution.dto.Trie;  
+import com.pollution.project.repository.AirQualitySnapshotRepository;
 
 @ExtendWith(MockitoExtension.class)
 class SiteCodeResolverTest {
 
+    @Mock
+    private AirQualitySnapshotRepository snapshotRepository;
+
+    @Mock
+    private RestTemplate restTemplate;
+
     @InjectMocks
     private SiteCodeResolver siteCodeResolver;
+
+    private MonitoringSite site1;
+    private MonitoringSite site2;
 
     @BeforeEach
     void setup() {
         openMocks(this);
         Trie trie = new Trie();
         trie.insert("Newham - Hoola Tower", "TL5");
-        siteCodeResolver.setSiteTrie(trie); 
-        
+        siteCodeResolver.setSiteTrie(trie);
+
+        site1 = new MonitoringSite();
+        site1.setSiteName("Site One");
+        site1.setSiteCode("S1");
+
+        site2 = new MonitoringSite();
+        site2.setSiteName("Site Two");
+        site2.setSiteCode("S2");
     }
 
     @Test
@@ -125,5 +151,25 @@ class SiteCodeResolverTest {
         siteCodeResolver.setSiteTrie(trie);
 
         assertNull(siteCodeResolver.lookupSiteCode("West"));
+    }
+
+    @Test
+    void getSiteTrie_ShouldReturnNonNullTrie() {
+        Trie trie = siteCodeResolver.getSiteTrie();
+        assertEquals(1, trie.getSuggestions("Newham").size());
+    }
+
+    @Test
+    void testGetSiteTrie_FirstCallPopulatesTrie() {
+        MonitoringSite[] sites = {site1, site2};
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(sites);
+
+        Trie trie = siteCodeResolver.getSiteTrie();
+
+        assertNotNull(trie);
+        assertEquals("S1", trie.searchExact("Site One"));
+        assertEquals("S2", trie.searchExact("Site Two"));
+
+        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
     }
 }
