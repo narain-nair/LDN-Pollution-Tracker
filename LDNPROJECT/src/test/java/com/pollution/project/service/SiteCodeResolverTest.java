@@ -69,4 +69,15 @@ class SiteCodeResolverTest {
     void testLookupSiteCode_NotFound() {
         assertNull(siteCodeResolver.lookupSiteCode("Unknown Site"));
     }
+
+    @Test
+    void testLookupSiteCode_MultipleSuggestions() {
+        Trie trie = new Trie();
+        trie.insert("Barking and Dagenham - North Street", "BG3");
+        trie.insert("Barking and Dagenham - Rush Green", "BG1");
+        siteCodeResolver.setSiteTrie(trie);
+
+        String actualSiteCode = siteCodeResolver.lookupSiteCode("Barking and Dagenham");
+        assertEquals("BG3", actualSiteCode);
+    }
 }
