@@ -80,4 +80,13 @@ class SiteCodeResolverTest {
         String actualSiteCode = siteCodeResolver.lookupSiteCode("Barking and Dagenham");
         assertEquals("BG3", actualSiteCode);
     }
+
+    @Test
+    void testLookupSiteCode_SuggestionWithoutSiteCode() {
+        Trie trie = new Trie();
+        trie.insert("Test Site", null);
+        siteCodeResolver.setSiteTrie(trie);
+
+        assertNull(siteCodeResolver.lookupSiteCode("Test"));
+    }
 }
