@@ -249,4 +249,18 @@ class SiteCodeResolverTest {
         assertNull(refreshedTrie.searchExact("Old Site")); // Old site should be gone
     }
 
+    @Test
+    void testCalculateSiteCode_NearestSiteReturned() {
+        // Arrange
+        MonitoringSite siteA = new MonitoringSite("A", "51.500", "0.100");
+        MonitoringSite siteB = new MonitoringSite("B", "52.000", "0.200");
+
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(new MonitoringSite[]{siteA, siteB});
+
+        // Act
+        String nearestCode = siteCodeResolver.calculateSiteCode(51.505, 0.101); // closer to site A
+
+        // Assert
+        assertEquals("A", nearestCode);
+    }
 }
