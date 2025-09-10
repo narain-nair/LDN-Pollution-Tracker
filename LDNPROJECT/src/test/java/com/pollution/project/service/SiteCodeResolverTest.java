@@ -263,4 +263,22 @@ class SiteCodeResolverTest {
         // Assert
         assertEquals("A", nearestCode);
     }
+
+
+    @Test
+    void testCalculateSiteCode_InvalidCoordinatesSkipped() {
+        // Arrange
+        MonitoringSite siteA = new MonitoringSite("A", "not-a-number", "0.100");
+        MonitoringSite siteB = new MonitoringSite("B", "51.500", "0.100");
+
+        MonitoringSite[] sites = {siteA, siteB};
+
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(sites);
+
+        // Act
+        String nearestCode = siteCodeResolver.calculateSiteCode(51.505, 0.101);
+
+        // Assert
+        assertEquals("B", nearestCode); // site A skipped
+    }
 }
