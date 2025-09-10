@@ -66,9 +66,8 @@ public class SiteCodeResolver {
                 for (MonitoringSite site : sites) {
                     newTrie.insert(site.getSiteName(), site.getSiteCode());
                 }
-                synchronized (lock) {
-                    this.siteTrie = newTrie;
-                }
+                
+                setSiteTrie(newTrie);
                 logger.info("Site trie refreshed successfully, with {} sites.", sites.length);
             }
         } catch (RestClientException e) {
