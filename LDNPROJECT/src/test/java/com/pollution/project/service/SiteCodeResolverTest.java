@@ -49,7 +49,7 @@ class SiteCodeResolverTest {
 
     private MonitoringSite site1;
     private MonitoringSite site2;
-
+    
     @BeforeEach
     void setup() {
         openMocks(this);
