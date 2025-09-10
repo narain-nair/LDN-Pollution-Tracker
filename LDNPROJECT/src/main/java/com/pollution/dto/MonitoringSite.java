@@ -15,6 +15,15 @@ public class MonitoringSite {
     @JsonProperty("SiteName")
     private String siteName;
 
+    public MonitoringSite() {}
+
+    public MonitoringSite(String siteCode, String latitude, String longitude, String siteName) {
+        this.siteCode = siteCode;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.siteName = siteName;
+    }
+
     @SuppressWarnings("unused")
     public void setSiteCode(String siteCode) {
         this.siteCode = siteCode;

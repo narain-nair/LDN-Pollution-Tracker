@@ -3,6 +3,7 @@ package com.pollution.project.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -169,6 +170,19 @@ class SiteCodeResolverTest {
         assertNotNull(trie);
         assertEquals("S1", trie.searchExact("Site One"));
         assertEquals("S2", trie.searchExact("Site Two"));
+
+        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
+    }
+
+    @Test
+    void testGetSiteTrie_SubsequentCallsReturnSameInstance() {
+        MonitoringSite[] sites = {site1};
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(sites);
+
+        Trie firstCall = siteCodeResolver.getSiteTrie();
+        Trie secondCall = siteCodeResolver.getSiteTrie();
+
+        assertSame(firstCall, secondCall);
 
         verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
     }
