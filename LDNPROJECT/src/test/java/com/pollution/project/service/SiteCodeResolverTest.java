@@ -1,9 +1,11 @@
 package com.pollution.project.service;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +18,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.pollution.dto.MonitoringSite;
@@ -190,28 +193,60 @@ class SiteCodeResolverTest {
     @Test
     void testRefreshSiteTrie_SuccessfulUpdate() {
         // Arrange
-        MonitoringSite siteA = new MonitoringSite();
-        siteA.setSiteName("New Site A");
-        siteA.setSiteCode("NA1");
-
-        MonitoringSite siteB = new MonitoringSite();
-        siteB.setSiteName("New Site B");
-        siteB.setSiteCode("NB2");
+        MonitoringSite siteA = new MonitoringSite("Site A", "SA1");
+        MonitoringSite siteB = new MonitoringSite("Site B", "SB2");
 
         MonitoringSite[] newSites = {siteA, siteB};
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class)))
-                .thenReturn(newSites);
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(newSites);
 
         // Act
         siteCodeResolver.refreshSiteTrie();
 
         // Assert
         Trie trie = siteCodeResolver.getSiteTrie();
-        assertEquals("NA1", trie.searchExact("New Site A"));
-        assertEquals("NB2", trie.searchExact("New Site B"));
+        assertEquals("SA1", trie.searchExact("Site A"));
+        assertEquals("SB2", trie.searchExact("Site B"));
 
         // API should have been called once
         verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
+    }
+
+    @Test
+    void testRefreshSiteTrie_ApiThrowsException() {
+        // Arrange
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenThrow(new RestClientException("API down"));
+
+        // Act → should NOT throw
+        assertDoesNotThrow(() -> siteCodeResolver.refreshSiteTrie());
+
+        // Assert → trie should remain null (or unchanged if previously set)
+        Trie trie = siteCodeResolver.getSiteTrie();
+        assertTrue(trie.getSuggestions("Anything").isEmpty());
+
+        // Verify API call attempted once
+        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
+    }
+
+    @Test
+    void testRefreshSiteTrie_ReplacesOldTrie() {
+        // Arrange: initial trie with old data
+        Trie initialTrie = new Trie();
+        initialTrie.insert("Old Site", "OLD1");
+        siteCodeResolver.setSiteTrie(initialTrie);
+
+        // Mock API with new data
+        MonitoringSite siteC = new MonitoringSite("Fresh Site", "FS1");
+        MonitoringSite[] refreshedSites = {siteC};
+
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(refreshedSites);
+
+        // Act
+        siteCodeResolver.refreshSiteTrie();
+
+        // Assert
+        Trie refreshedTrie = siteCodeResolver.getSiteTrie();
+        assertEquals("FS1", refreshedTrie.searchExact("Fresh Site"));
+        assertNull(refreshedTrie.searchExact("Old Site")); // Old site should be gone
     }
 
 }
