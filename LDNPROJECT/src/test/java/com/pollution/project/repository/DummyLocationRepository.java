@@ -1,4 +1,9 @@
-package com.pollution.project.repository;
+package com.pollution.project.controller;
+
+import com.pollution.model.Location;
+import com.pollution.repository.LocationRepository;
+
+import java.util.*;
 
 class DummyLocationRepository implements LocationRepository {
     private Map<Long, Location> storage = new HashMap<>();
