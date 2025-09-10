@@ -22,6 +22,12 @@ public class MonitoringSite {
         this.siteCode = siteCode;
     }
 
+    public MonitoringSite(String siteCode, String latitude, String longitude) {
+        this.siteCode = siteCode;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public MonitoringSite(String siteCode, String latitude, String longitude, String siteName) {
         this.siteCode = siteCode;
         this.latitude = latitude;
