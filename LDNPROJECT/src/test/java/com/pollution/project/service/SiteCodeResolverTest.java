@@ -327,4 +327,15 @@ class SiteCodeResolverTest {
 
         assertEquals("S2", location.getSiteCode());
     }
+
+    @Test
+    void testAssignSiteCode_BothFail() {
+        Location location = new Location(51.5, 0.1);
+        when(siteCodeResolver.lookupSiteCode("Unknown Site")).thenReturn(null);
+        when(siteCodeResolver.calculateSiteCode(51.5, 0.1)).thenReturn(null);
+
+        siteCodeResolver.assignSiteCode(location, "Unknown Site");
+
+        assertNull(location.getSiteCode());
+    }
 }
