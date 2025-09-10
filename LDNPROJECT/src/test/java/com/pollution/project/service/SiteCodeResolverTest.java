@@ -52,8 +52,21 @@ class SiteCodeResolverTest {
     }
 
     @Test
+    void testLookupSiteCode_ExactMatch() {
+        Trie trie = new Trie();
+        trie.insert("Barking and Dagenham - North Street", "BG3");
+        assertEquals("BG3", siteCodeResolver.lookupSiteCode("Barking and Dagenham - North Street"));
+    }
+
+    @Test
     void testLookupSiteCode_SuggestionUsed() {
         Trie trie = new Trie();
-        trie.insert("Bexley - Belvedere West (BQ7)", "BQ7");
+        trie.insert("Bexley West", "BQ8");
+        assertEquals("BQ8", siteCodeResolver.lookupSiteCode("Bexley"));
+    }
+
+    @Test
+    void testLookupSiteCode_NotFound() {
+        assertNull(siteCodeResolver.lookupSiteCode("Unknown Site"));
     }
 }
