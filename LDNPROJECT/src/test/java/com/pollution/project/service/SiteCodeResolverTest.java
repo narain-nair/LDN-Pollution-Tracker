@@ -50,4 +50,10 @@ class SiteCodeResolverTest {
     void testLookupSiteCode_EmptyInput() {
         assertNull(siteCodeResolver.lookupSiteCode(""));
     }
+
+    @Test
+    void testLookupSiteCode_SuggestionUsed() {
+        Trie trie = new Trie();
+        trie.insert("Bexley - Belvedere West (BQ7)", "BQ7");
+    }
 }

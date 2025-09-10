@@ -112,11 +112,11 @@ public class SiteCodeResolver {
         
         List<String> potential = trie.getSuggestions(siteName);
         if (!potential.isEmpty()) {
-            String firstSuggestion = potential.get(0);  // e.g., "bexley west (BQ8)"
-            int start = firstSuggestion.indexOf('(');
-            int end = firstSuggestion.indexOf(')');
-            if (start != -1 && end != -1) {
-                return firstSuggestion.substring(start + 1, end);  // returns "BQ8"
+            String firstSuggestion = potential.get(0); // e.g., "bexley west (Site Code: BQ8)"
+            int colonIndex = firstSuggestion.indexOf(":");
+            int endIndex = firstSuggestion.indexOf(")", colonIndex);
+            if (colonIndex != -1 && endIndex != -1) {
+                return firstSuggestion.substring(colonIndex + 2, endIndex); // returns "BQ8"
             }
         }
         
