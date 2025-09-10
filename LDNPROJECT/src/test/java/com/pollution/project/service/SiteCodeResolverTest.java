@@ -1,5 +1,6 @@
 package com.pollution.project.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -11,11 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,6 +30,8 @@ import org.springframework.web.client.RestTemplate;
 import com.pollution.dto.HourlyIndexResponse;
 import com.pollution.dto.MonitoringSite;
 import com.pollution.dto.Trie;
+import com.pollution.project.entity.AirQualityData;
+import com.pollution.project.entity.AirQualitySnapshot;
 import com.pollution.project.entity.Location;
 import com.pollution.project.repository.AirQualitySnapshotRepository;
 
@@ -420,5 +425,29 @@ class SiteCodeResolverTest {
         assertNull(location.getAirQualityData().getPm25()); // invalid index handled
         assertEquals("DUMMY1", location.getSiteCode());
         assertEquals("Dummy Location", location.getName());
+    }
+
+    @Test
+    void testRefreshLocationData_SnapshotSaved() {
+        Location location = new Location(51.5, 0.1);
+        AirQualityData airData = new AirQualityData(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, LocalDateTime.now());
+        location.setAirQualityData(airData);
+
+        doNothing().when(siteCodeResolver).populateLocationData(eq(location), anyString());
+
+        siteCodeResolver.refreshLocationData(location);
+
+        verify(snapshotRepository, times(1)).save(any(AirQualitySnapshot.class));
+    }
+
+    @Test
+    void testRefreshLocationData_NoAirQualityData() {
+        Location location = new Location(51.5, 0.1);
+
+        doNothing().when(siteCodeResolver).populateLocationData(eq(location), anyString());
+
+        siteCodeResolver.refreshLocationData(location);
+
+        verify(snapshotRepository, never()).save(any());
     }
 }
