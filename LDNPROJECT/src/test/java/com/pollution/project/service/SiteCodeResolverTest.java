@@ -1,38 +1,53 @@
 package com.pollution.project.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.anyDouble;
-import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.openMocks;
-import static org.mockito.Mockito.verify;
-import org.mockito.Mock;
-import org.mockito.InjectMocks;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
-import java.util.Optional;
-
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import static org.mockito.MockitoAnnotations.openMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.pollution.dto.MonitoringSite;
-import com.pollution.dto.Trie;
+import com.pollution.dto.Trie;  
 
+@ExtendWith(MockitoExtension.class)
 class SiteCodeResolverTest {
-
-    @Mock
-    private RestTemplate restTemplate;
 
     @InjectMocks
     private SiteCodeResolver siteCodeResolver;
 
     @BeforeEach
-    void setUp() {
+    void setup() {
         openMocks(this);
         Trie trie = new Trie();
         trie.insert("Newham - Hoola Tower", "TL5");
         siteCodeResolver.setSiteTrie(trie); 
         
+    }
+
+    @Test
+    void testGetSiteCode_Found() {
+        String siteName = "Newham - Hoola Tower";
+        String expectedSiteCode = "TL5";
+        String actualSiteCode = siteCodeResolver.lookupSiteCode(siteName);
+        assertEquals(expectedSiteCode, actualSiteCode);
+    }
+
+    @Test
+    void testGetSiteCode_NotFound() {
+        String siteName = "Unknown Site";
+        String actualSiteCode = siteCodeResolver.lookupSiteCode(siteName);
+        assertNull(actualSiteCode);
+    }  
+
+    @Test
+    void testLookupSiteCode_NullInput() {
+        assertNull(siteCodeResolver.lookupSiteCode(null));
+    }
+
+    @Test
+    void testLookupSiteCode_EmptyInput() {
+        assertNull(siteCodeResolver.lookupSiteCode(""));
     }
 }
