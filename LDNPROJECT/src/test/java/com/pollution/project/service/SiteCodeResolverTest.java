@@ -23,6 +23,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.pollution.dto.MonitoringSite;
 import com.pollution.dto.Trie;
+import com.pollution.project.entity.Location;
 import com.pollution.project.repository.AirQualitySnapshotRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -306,5 +307,24 @@ class SiteCodeResolverTest {
         assertNull(nearestCode);
     }
 
+    @Test
+    void testAssignSiteCode_InputMatchesSite() {
+        Location location = new Location(51.5, 0.1);
+        when(siteCodeResolver.lookupSiteCode("Known Site")).thenReturn("S1");
 
+        siteCodeResolver.assignSiteCode(location, "Known Site");
+
+        assertEquals("S1", location.getSiteCode());
+    }
+
+    @Test
+    void testAssignSiteCode_FallbackToCalculate() {
+        Location location = new Location(51.5, 0.1);
+        when(siteCodeResolver.lookupSiteCode("Unknown Site")).thenReturn(null);
+        when(siteCodeResolver.calculateSiteCode(51.5, 0.1)).thenReturn("S2");
+
+        siteCodeResolver.assignSiteCode(location, "Unknown Site");
+
+        assertEquals("S2", location.getSiteCode());
+    }
 }
