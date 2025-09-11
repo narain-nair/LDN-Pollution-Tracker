@@ -2,6 +2,7 @@ package com.pollution.project.service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -122,19 +123,15 @@ public class SiteCodeResolver {
         
         List<String> potential = trie.getSuggestions(siteName);
         if (!potential.isEmpty()) {
-            String firstSuggestion = potential.get(0); 
-            int colonIndex = firstSuggestion.indexOf(":");
-            int endIndex = firstSuggestion.indexOf(")", colonIndex);
-
-            if (colonIndex != -1 && endIndex != -1) {
-                String code = firstSuggestion.substring(colonIndex + 2, endIndex);
-                if (code != null && !code.equals("null")) {  // <-- explicit null check
-                    return code;
-                } else {
-                    return null;
+            // Pick the "most specific" match (longest site name)
+            String bestMatch = potential.stream().max(Comparator.comparingInt(String::length)).orElse(null);
+            if (bestMatch != null) {
+                int colonIndex = bestMatch.indexOf(":");
+                int endIndex = bestMatch.indexOf(")", colonIndex);
+                if (colonIndex != -1 && endIndex != -1) {
+                    String code = bestMatch.substring(colonIndex + 2, endIndex);
+                    return "null".equals(code) ? null : code;
                 }
-            } else {
-                return null; 
             }
         }
 
