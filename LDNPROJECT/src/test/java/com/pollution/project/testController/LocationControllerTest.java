@@ -113,7 +113,7 @@ public class LocationControllerTest {
         controller.addLocation(loc);
 
         ResponseEntity<?> response = controller.getLocationStats(loc.getId());
-        assertEquals(200, response.getStatusCode().value());
+        assertEquals(404, response.getStatusCode().value());
         Map<String,Object> stats = (Map<String,Object>) response.getBody();
         assertEquals(0.0, stats.get("averagePm25"));
         assertEquals(0.0, stats.get("averagePm10"));

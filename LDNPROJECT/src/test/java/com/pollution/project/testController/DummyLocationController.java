@@ -73,6 +73,11 @@ public class DummyLocationController {
 
     public ResponseEntity<?> getLocationStats(Long id) {
         List<AirQualitySnapshot> snaps = snapshotStorage.getOrDefault(id, List.of());
+
+        if (snaps.isEmpty()) {
+            logger.warn("No snapshots found for location id {}", id);
+            return ResponseEntity.status(404).body("No snapshots found for this location");
+        }
     
         Map<String, Object> response = Map.of(
             "locationId", id,
