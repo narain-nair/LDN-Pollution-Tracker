@@ -26,7 +26,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">23</div>
+<div class="counter">16</div>
 <p>failures</p>
 </div>
 </td>
@@ -38,7 +38,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">2.793s</div>
+<div class="counter">0.629s</div>
 <p>duration</p>
 </div>
 </td>
@@ -48,7 +48,7 @@
 </td>
 <td>
 <div class="infoBox failures" id="successRate">
-<div class="percent">57%</div>
+<div class="percent">70%</div>
 <p>successful</p>
 </div>
 </td>
@@ -71,6 +71,10 @@
 <h2>Failed tests</h2>
 <ul class="linkList">
 <li>
+<a href="classes/com.pollution.project.PollutionProjectApplicationTests.html">PollutionProjectApplicationTests</a>.
+<a href="classes/com.pollution.project.PollutionProjectApplicationTests.html#contextLoads()">contextLoads()</a>
+</li>
+<li>
 <a href="classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
 <a href="classes/com.pollution.project.service.SiteCodeResolverTest.html#testAssignSiteCode_BothFail()">testAssignSiteCode_BothFail()</a>
 </li>
@@ -81,22 +85,6 @@
 <li>
 <a href="classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
 <a href="classes/com.pollution.project.service.SiteCodeResolverTest.html#testAssignSiteCode_InputMatchesSite()">testAssignSiteCode_InputMatchesSite()</a>
-</li>
-<li>
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html#testCalculateSiteCode_EmptySitesArray()">testCalculateSiteCode_EmptySitesArray()</a>
-</li>
-<li>
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html#testCalculateSiteCode_InvalidCoordinatesSkipped()">testCalculateSiteCode_InvalidCoordinatesSkipped()</a>
-</li>
-<li>
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html#testCalculateSiteCode_NearestSiteReturned()">testCalculateSiteCode_NearestSiteReturned()</a>
-</li>
-<li>
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html#testCalculateSiteCode_NoSitesReturned()">testCalculateSiteCode_NoSitesReturned()</a>
 </li>
 <li>
 <a href="classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
@@ -120,10 +108,6 @@
 </li>
 <li>
 <a href="classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html#testLookupSiteCode_SuggestionWithoutSiteCode()">testLookupSiteCode_SuggestionWithoutSiteCode()</a>
-</li>
-<li>
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
 <a href="classes/com.pollution.project.service.SiteCodeResolverTest.html#testPopulateLocationData_InvalidIndex()">testPopulateLocationData_InvalidIndex()</a>
 </li>
 <li>
@@ -141,18 +125,6 @@
 <li>
 <a href="classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
 <a href="classes/com.pollution.project.service.SiteCodeResolverTest.html#testRefreshLocationData_SnapshotSaved()">testRefreshLocationData_SnapshotSaved()</a>
-</li>
-<li>
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html#testRefreshSiteTrie_ApiThrowsException()">testRefreshSiteTrie_ApiThrowsException()</a>
-</li>
-<li>
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html#testRefreshSiteTrie_ReplacesOldTrie()">testRefreshSiteTrie_ReplacesOldTrie()</a>
-</li>
-<li>
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
-<a href="classes/com.pollution.project.service.SiteCodeResolverTest.html#testRefreshSiteTrie_SuccessfulUpdate()">testRefreshSiteTrie_SuccessfulUpdate()</a>
 </li>
 <li>
 <a href="classes/com.pollution.project.testController.LocationControllerTest.html">LocationControllerTest</a>.
@@ -179,24 +151,24 @@
 </thead>
 <tbody>
 <tr>
-<td class="success">
+<td class="failures">
 <a href="packages/com.pollution.project.html">com.pollution.project</a>
 </td>
 <td>1</td>
+<td>1</td>
 <td>0</td>
-<td>0</td>
-<td>0.004s</td>
-<td class="success">100%</td>
+<td>0.006s</td>
+<td class="failures">0%</td>
 </tr>
 <tr>
 <td class="failures">
 <a href="packages/com.pollution.project.service.html">com.pollution.project.service</a>
 </td>
 <td>34</td>
-<td>21</td>
+<td>13</td>
 <td>0</td>
-<td>2.767s</td>
-<td class="failures">38%</td>
+<td>0.611s</td>
+<td class="failures">61%</td>
 </tr>
 <tr>
 <td class="failures">
@@ -205,7 +177,7 @@
 <td>19</td>
 <td>2</td>
 <td>0</td>
-<td>0.022s</td>
+<td>0.012s</td>
 <td class="failures">89%</td>
 </tr>
 </tbody>
@@ -226,24 +198,24 @@
 </thead>
 <tbody>
 <tr>
-<td class="success">
+<td class="failures">
 <a href="classes/com.pollution.project.PollutionProjectApplicationTests.html">com.pollution.project.PollutionProjectApplicationTests</a>
 </td>
 <td>1</td>
+<td>1</td>
 <td>0</td>
-<td>0</td>
-<td>0.004s</td>
-<td class="success">100%</td>
+<td>0.006s</td>
+<td class="failures">0%</td>
 </tr>
 <tr>
 <td class="failures">
 <a href="classes/com.pollution.project.service.SiteCodeResolverTest.html">com.pollution.project.service.SiteCodeResolverTest</a>
 </td>
 <td>34</td>
-<td>21</td>
+<td>13</td>
 <td>0</td>
-<td>2.767s</td>
-<td class="failures">38%</td>
+<td>0.611s</td>
+<td class="failures">61%</td>
 </tr>
 <tr>
 <td class="failures">
@@ -252,7 +224,7 @@
 <td>19</td>
 <td>2</td>
 <td>0</td>
-<td>0.022s</td>
+<td>0.012s</td>
 <td class="failures">89%</td>
 </tr>
 </tbody>
@@ -266,7 +238,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 8.14.3</a> at 11 Sept 2025, 22:25:15</p>
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 11 Sept 2025, 23:10:54</p>
 </div>
 </div>
 </body>

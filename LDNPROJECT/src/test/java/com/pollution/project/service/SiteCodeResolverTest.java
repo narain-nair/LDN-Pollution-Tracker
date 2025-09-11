@@ -57,6 +57,8 @@ class SiteCodeResolverTest {
     @BeforeEach
     void setup() {
         openMocks(this);
+        siteCodeResolver = new SiteCodeResolver(restTemplate, snapshotRepository);
+
         Trie trie = new Trie();
         trie.insert("Newham - Hoola Tower", "TL5");
         siteCodeResolver.setSiteTrie(trie);
@@ -211,19 +213,21 @@ class SiteCodeResolverTest {
         MonitoringSite siteB = new MonitoringSite("Site B", "SB2");
         MonitoringSite[] newSites = {siteA, siteB};
     
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class)))
-            .thenReturn(newSites);
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(newSites);
     
         // Act
         siteCodeResolver.refreshSiteTrie();
     
         // Assert
         Trie trie = siteCodeResolver.getSiteTrie();
+
+        logger.info("Trie searchExact for 'Site A': {}", trie.searchExact("Site A"));
+        logger.info("Trie searchExact for 'Site B': {}", trie.searchExact("Site B"));
+        
         assertEquals("SA1", trie.searchExact("Site A"));
         assertEquals("SB2", trie.searchExact("Site B"));
     
-        verify(restTemplate, times(1))
-            .getForObject(anyString(), eq(MonitoringSite[].class));
+        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
     }
 
     @Test
