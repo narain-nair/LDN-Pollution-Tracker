@@ -102,7 +102,7 @@ class SiteCodeResolverTest {
         Trie trie = new Trie();
         trie.insert("Barking and Dagenham - North Street", "BG3");
         siteCodeResolver.setSiteTrie(trie);
-        
+
         assertEquals("BG3", siteCodeResolver.lookupSiteCode("Barking and Dagenham - North Street"));
     }
 
@@ -110,6 +110,11 @@ class SiteCodeResolverTest {
     void testLookupSiteCode_SuggestionUsed() {
         Trie trie = new Trie();
         trie.insert("Bexley West", "BQ8");
+        siteCodeResolver.setSiteTrie(trie);
+
+        logger.info("Inserted 'Bexley West' with code 'BQ8' into trie.");
+        
+
         assertEquals("BQ8", siteCodeResolver.lookupSiteCode("Bexley"));
     }
 
@@ -183,15 +188,20 @@ class SiteCodeResolverTest {
 
     @Test
     void testGetSiteTrie_FirstCallPopulatesTrie() {
+        // Arrange
         MonitoringSite[] sites = {site1, site2};
         when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(sites);
-
-        Trie trie = siteCodeResolver.getSiteTrie();
-
-        assertNotNull(trie);
-        assertEquals("S1", trie.searchExact("Site One"));
-        assertEquals("S2", trie.searchExact("Site Two"));
-
+    
+        // Act
+        siteCodeResolver.setSiteTrie(null); // Reset to force re-fetch
+        Trie retrievedTrie = siteCodeResolver.getSiteTrie();
+        logger.info("Retrieved Trie: {}", retrievedTrie);
+        logger.info("Result for 'Site One': {}", retrievedTrie.searchExact("Site One"));
+        logger.info("Result for 'Site Two': {}", retrievedTrie.searchExact("Site Two"));
+    
+        // Assert
+        assertEquals("S1", retrievedTrie.searchExact("Site One"));
+        assertEquals("S2", retrievedTrie.searchExact("Site Two"));
         verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
     }
 

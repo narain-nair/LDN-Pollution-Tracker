@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.pollution.project.service.SiteCodeResolverTest" tests="34" skipped="0" failures="11" errors="0" timestamp="2025-09-11T22:26:35.837Z" hostname="Narains-Laptop.local" time="0.582">
+<testsuite name="com.pollution.project.service.SiteCodeResolverTest" tests="34" skipped="0" failures="9" errors="0" timestamp="2025-09-11T22:48:05.866Z" hostname="Narains-Laptop.local" time="0.557">
   <properties/>
-  <testcase name="testGetIndex_SpeciesNotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.5"/>
+  <testcase name="testGetIndex_SpeciesNotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.471"/>
   <testcase name="testLookupSiteCode_TrimInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003"/>
-  <testcase name="testGetIndex_ValidSpecies()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
-  <testcase name="testRefreshSiteTrie_SuccessfulUpdate()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.019"/>
+  <testcase name="testGetIndex_ValidSpecies()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
+  <testcase name="testRefreshSiteTrie_SuccessfulUpdate()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.021"/>
   <testcase name="testGetIndex_InvalidIndexValue()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
   <testcase name="testLookupSiteCode_SubstringNotPrefix()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
   <testcase name="testAssignSiteCode_BothFail()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.006">
@@ -19,25 +19,25 @@ Also, this error might show up because:
    Mocking methods declared on non-public parent classes is not supported.
 2. inside when() you don't call method on mock but on some other object.
 
-	at app//com.pollution.project.service.SiteCodeResolverTest.testAssignSiteCode_BothFail(SiteCodeResolverTest.java:354)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testAssignSiteCode_BothFail(SiteCodeResolverTest.java:364)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testRefreshLocationData_SnapshotSaved()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
+  <testcase name="testRefreshLocationData_SnapshotSaved()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001">
     <failure message="org.mockito.exceptions.misusing.NotAMockException: &#10;Argument passed to when() is not a mock!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();" type="org.mockito.exceptions.misusing.NotAMockException">org.mockito.exceptions.misusing.NotAMockException: 
 Argument passed to when() is not a mock!
 Example of correct stubbing:
     doThrow(new RuntimeException()).when(mock).someMethod();
-	at app//com.pollution.project.service.SiteCodeResolverTest.testRefreshLocationData_SnapshotSaved(SiteCodeResolverTest.java:447)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testRefreshLocationData_SnapshotSaved(SiteCodeResolverTest.java:457)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testCalculateSiteCode_NoSitesReturned()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
-  <testcase name="testLookupSiteCode_SuggestionWithoutSiteCode()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
+  <testcase name="testCalculateSiteCode_NoSitesReturned()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
+  <testcase name="testLookupSiteCode_SuggestionWithoutSiteCode()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
   <testcase name="testGetSiteTrie_SubsequentCallsReturnSameInstance()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
     <failure message="Wanted but not invoked:&#10;restTemplate.getForObject(&#10;    &lt;any string&gt;,&#10;    class [Lcom.pollution.dto.MonitoringSite;&#10;);&#10;-&gt; at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401)&#10;Actually, there were zero interactions with this mock.&#10;" type="org.mockito.exceptions.verification.WantedButNotInvoked">Wanted but not invoked:
 restTemplate.getForObject(
@@ -48,7 +48,7 @@ restTemplate.getForObject(
 Actually, there were zero interactions with this mock.
 
 	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401)
-	at app//com.pollution.project.service.SiteCodeResolverTest.testGetSiteTrie_SubsequentCallsReturnSameInstance(SiteCodeResolverTest.java:208)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testGetSiteTrie_SubsequentCallsReturnSameInstance(SiteCodeResolverTest.java:218)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -66,23 +66,23 @@ Also, this error might show up because:
    Mocking methods declared on non-public parent classes is not supported.
 2. inside when() you don't call method on mock but on some other object.
 
-	at app//com.pollution.project.service.SiteCodeResolverTest.testAssignSiteCode_FallbackToCalculate(SiteCodeResolverTest.java:343)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testAssignSiteCode_FallbackToCalculate(SiteCodeResolverTest.java:353)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testCalculateSiteCode_EmptySitesArray()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
+  <testcase name="testCalculateSiteCode_EmptySitesArray()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
   <testcase name="testLookupSiteCode_NullInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
   <testcase name="testLookupSiteCode_ExactMatch()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
   <testcase name="testLookupSiteCode_MultipleSuggestions()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
   <testcase name="testCalculateSiteCode_InvalidCoordinatesSkipped()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
-  <testcase name="testRefreshLocationData_NoAirQualityData()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
+  <testcase name="testRefreshLocationData_NoAirQualityData()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001">
     <failure message="org.mockito.exceptions.misusing.NotAMockException: &#10;Argument passed to when() is not a mock!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();" type="org.mockito.exceptions.misusing.NotAMockException">org.mockito.exceptions.misusing.NotAMockException: 
 Argument passed to when() is not a mock!
 Example of correct stubbing:
     doThrow(new RuntimeException()).when(mock).someMethod();
-	at app//com.pollution.project.service.SiteCodeResolverTest.testRefreshLocationData_NoAirQualityData(SiteCodeResolverTest.java:458)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testRefreshLocationData_NoAirQualityData(SiteCodeResolverTest.java:468)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -90,30 +90,17 @@ Example of correct stubbing:
   </testcase>
   <testcase name="testLookupSiteCode_NotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
   <testcase name="testLookupSiteCode_CaseInsensitive()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testGetSiteTrie_FirstCallPopulatesTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;S1&gt; but was: &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;S1&gt; but was: &lt;null&gt;
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
-	at app//com.pollution.project.service.SiteCodeResolverTest.testGetSiteTrie_FirstCallPopulatesTrie(SiteCodeResolverTest.java:192)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</failure>
-  </testcase>
-  <testcase name="testRefreshSiteTrie_ReplacesOldTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
-  <testcase name="testRefreshSiteTrie_ApiThrowsException()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.004"/>
+  <testcase name="testGetSiteTrie_FirstCallPopulatesTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
+  <testcase name="testRefreshSiteTrie_ReplacesOldTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
+  <testcase name="testRefreshSiteTrie_ApiThrowsException()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.005"/>
   <testcase name="testGetSiteCode_Found()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testGetSiteCode_NotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.0"/>
-  <testcase name="testPopulateLocationData_InvalidIndex()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
+  <testcase name="testGetSiteCode_NotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
+  <testcase name="testPopulateLocationData_InvalidIndex()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
     <failure message="org.mockito.exceptions.misusing.NotAMockException: &#10;Argument passed to when() is not a mock!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();" type="org.mockito.exceptions.misusing.NotAMockException">org.mockito.exceptions.misusing.NotAMockException: 
 Argument passed to when() is not a mock!
 Example of correct stubbing:
     doThrow(new RuntimeException()).when(mock).someMethod();
-	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_InvalidIndex(SiteCodeResolverTest.java:429)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_InvalidIndex(SiteCodeResolverTest.java:439)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -125,7 +112,7 @@ Example of correct stubbing:
 Argument passed to when() is not a mock!
 Example of correct stubbing:
     doThrow(new RuntimeException()).when(mock).someMethod();
-	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_ValidResponse(SiteCodeResolverTest.java:387)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_ValidResponse(SiteCodeResolverTest.java:397)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -138,7 +125,7 @@ Example of correct stubbing:
 Argument passed to when() is not a mock!
 Example of correct stubbing:
     doThrow(new RuntimeException()).when(mock).someMethod();
-	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_ReturnNull(SiteCodeResolverTest.java:404)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_ReturnNull(SiteCodeResolverTest.java:414)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -156,41 +143,31 @@ Also, this error might show up because:
    Mocking methods declared on non-public parent classes is not supported.
 2. inside when() you don't call method on mock but on some other object.
 
-	at app//com.pollution.project.service.SiteCodeResolverTest.testAssignSiteCode_InputMatchesSite(SiteCodeResolverTest.java:333)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testAssignSiteCode_InputMatchesSite(SiteCodeResolverTest.java:343)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
   <testcase name="testLookupSiteCode_SpecialCharacters()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.0"/>
-  <testcase name="testLookupSiteCode_SuggestionUsed()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;BQ8&gt; but was: &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;BQ8&gt; but was: &lt;null&gt;
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
-	at app//com.pollution.project.service.SiteCodeResolverTest.testLookupSiteCode_SuggestionUsed(SiteCodeResolverTest.java:113)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</failure>
-  </testcase>
-  <system-out><![CDATA[2025-09-11T23:26:36.361+01:00  INFO 25135 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
-2025-09-11T23:26:36.362+01:00  INFO 25135 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site A': SA1
-2025-09-11T23:26:36.362+01:00  INFO 25135 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site B': SB2
-2025-09-11T23:26:36.400+01:00  INFO 25135 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
-2025-09-11T23:26:36.402+01:00 ERROR 25135 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error refreshing site trie: {}
+  <testcase name="testLookupSiteCode_SuggestionUsed()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
+  <system-out><![CDATA[2025-09-11T23:48:06.364+01:00  INFO 26404 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
+2025-09-11T23:48:06.365+01:00  INFO 26404 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site A': SA1
+2025-09-11T23:48:06.365+01:00  INFO 26404 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site B': SB2
+2025-09-11T23:48:06.402+01:00  INFO 26404 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Retrieved Trie: com.pollution.dto.Trie@4f45290f
+2025-09-11T23:48:06.403+01:00  INFO 26404 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site One': S1
+2025-09-11T23:48:06.403+01:00  INFO 26404 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site Two': S2
+2025-09-11T23:48:06.404+01:00  INFO 26404 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
+2025-09-11T23:48:06.406+01:00 ERROR 26404 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error refreshing site trie: {}
 
 org.springframework.web.client.RestClientException: API down
 	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401) ~[spring-web-6.1.13.jar:6.1.13]
 	at com.pollution.project.service.SiteCodeResolver.refreshSiteTrie(SiteCodeResolver.java:72) ~[main/:na]
-	at com.pollution.project.service.SiteCodeResolverTest.lambda$testRefreshSiteTrie_ApiThrowsException$0(SiteCodeResolverTest.java:241) ~[test/:na]
+	at com.pollution.project.service.SiteCodeResolverTest.lambda$testRefreshSiteTrie_ApiThrowsException$0(SiteCodeResolverTest.java:251) ~[test/:na]
 	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:49) ~[junit-jupiter-api-5.10.3.jar:5.10.3]
 	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:36) ~[junit-jupiter-api-5.10.3.jar:5.10.3]
 	at org.junit.jupiter.api.Assertions.assertDoesNotThrow(Assertions.java:3168) ~[junit-jupiter-api-5.10.3.jar:5.10.3]
-	at com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_ApiThrowsException(SiteCodeResolverTest.java:241) ~[test/:na]
+	at com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_ApiThrowsException(SiteCodeResolverTest.java:251) ~[test/:na]
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728) ~[junit-platform-commons-1.10.3.jar:1.10.3]
@@ -273,6 +250,7 @@ org.springframework.web.client.RestClientException: API down
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 
+2025-09-11T23:48:06.424+01:00  INFO 26404 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Inserted 'Bexley West' with code 'BQ8' into trie.
 ]]></system-out>
   <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/Users/narainusesamacbook/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.19/154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1/byte-buddy-agent-1.14.19.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
