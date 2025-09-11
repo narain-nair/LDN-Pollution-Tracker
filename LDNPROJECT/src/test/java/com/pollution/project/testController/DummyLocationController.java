@@ -92,8 +92,19 @@ public class DummyLocationController {
         if (loc == null) return ResponseEntity.status(404).body("Location not found");
     
         siteCodeResolver.populateLocationData(loc, null);
+    
+        if (loc.getAirQualityData() == null) {
+            return ResponseEntity.status(404).body(Map.of("error", "No air quality data found for this location"));
+        }
+    
         locationStorage.put(id, loc); // refresh in-memory
     
         return ResponseEntity.ok(Map.of("message", "Location data refreshed successfully.", "location", loc));
+    }
+
+    public void deleteAllLocations() {
+        locationStorage.clear();
+        snapshotStorage.clear();
+        counter = 1;
     }
 }
