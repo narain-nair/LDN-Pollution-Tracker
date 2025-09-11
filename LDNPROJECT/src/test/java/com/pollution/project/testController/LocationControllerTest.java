@@ -4,7 +4,6 @@ import com.pollution.project.entity.AirQualitySnapshot;
 import com.pollution.project.entity.Location;
 import com.pollution.project.testRepository.DummyLocationRepository;
 import com.pollution.project.testRepository.DummySiteCodeResolver;
-import com.pollution.project.testRepository.DummySnapshotRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,16 +16,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LocationControllerTest {
     private DummyLocationController controller;
     private DummyLocationRepository locationRepo;
-    private DummySnapshotRepository snapshotRepo;
     private DummySiteCodeResolver siteCodeResolver;
 
     @BeforeEach
     void setup() {
         locationRepo = new DummyLocationRepository();
-        snapshotRepo = new DummySnapshotRepository();
         siteCodeResolver = new DummySiteCodeResolver();
 
-        controller = new DummyLocationController(siteCodeResolver, locationRepo, snapshotRepo);
+        controller = new DummyLocationController(siteCodeResolver, locationRepo);
     }
 
     @Test

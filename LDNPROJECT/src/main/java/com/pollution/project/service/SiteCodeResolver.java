@@ -102,6 +102,9 @@ public class SiteCodeResolver {
     public String lookupSiteCode(String siteName) {
         if (siteName == null || siteName.isEmpty()) return null;
 
+        siteName = siteName.toLowerCase().trim();
+        if (siteName.isEmpty()) return null;
+        
         Trie trie = getSiteTrie();
         
         String exactMatch = trie.searchExact(siteName);

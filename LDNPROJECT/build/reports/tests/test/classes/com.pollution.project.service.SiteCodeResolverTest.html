@@ -29,7 +29,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">22</div>
+<div class="counter">21</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">3.465s</div>
+<div class="counter">2.546s</div>
 <p>duration</p>
 </div>
 </td>
@@ -51,7 +51,7 @@
 </td>
 <td>
 <div class="infoBox failures" id="successRate">
-<div class="percent">35%</div>
+<div class="percent">38%</div>
 <p>successful</p>
 </div>
 </td>
@@ -377,7 +377,7 @@ Actually, there were zero interactions with this mock.
 <a name="testLookupSiteCode_SuggestionWithoutSiteCode()"></a>
 <h3 class="failures">testLookupSiteCode_SuggestionWithoutSiteCode()</h3>
 <span class="code">
-<pre>org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: java.lang.String@773c2214&lt;null&gt;
+<pre>org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: java.lang.String@51cab489&lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
 	at app//org.junit.jupiter.api.AssertNull.failNotNull(AssertNull.java:50)
@@ -385,24 +385,6 @@ Actually, there were zero interactions with this mock.
 	at app//org.junit.jupiter.api.AssertNull.assertNull(AssertNull.java:30)
 	at app//org.junit.jupiter.api.Assertions.assertNull(Assertions.java:279)
 	at app//com.pollution.project.service.SiteCodeResolverTest.testLookupSiteCode_SuggestionWithoutSiteCode(SiteCodeResolverTest.java:130)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testLookupSiteCode_TrimInput()"></a>
-<h3 class="failures">testLookupSiteCode_TrimInput()</h3>
-<span class="code">
-<pre>org.opentest4j.AssertionFailedError: expected: &lt;TL5&gt; but was: &lt;null&gt;
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
-	at app//com.pollution.project.service.SiteCodeResolverTest.testLookupSiteCode_TrimInput(SiteCodeResolverTest.java:149)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -553,62 +535,62 @@ Actually, there were zero interactions with this mock.
 </thead>
 <tr>
 <td class="success">getSiteTrie_ShouldReturnNonNullTrie()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">testAssignSiteCode_BothFail()</td>
-<td class="failures">0.007s</td>
+<td class="failures">0.006s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testAssignSiteCode_FallbackToCalculate()</td>
-<td class="failures">0.004s</td>
+<td class="failures">0.003s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testAssignSiteCode_InputMatchesSite()</td>
-<td class="failures">0.002s</td>
+<td class="failures">0.004s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testCalculateSiteCode_EmptySitesArray()</td>
-<td class="failures">0.176s</td>
+<td class="failures">0.147s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testCalculateSiteCode_InvalidCoordinatesSkipped()</td>
-<td class="failures">0.202s</td>
+<td class="failures">0.176s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testCalculateSiteCode_NearestSiteReturned()</td>
-<td class="failures">0.202s</td>
+<td class="failures">0.178s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testCalculateSiteCode_NoSitesReturned()</td>
-<td class="failures">0.211s</td>
+<td class="failures">0.216s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="success">testGetIndex_InvalidIndexValue()</td>
-<td class="success">0.006s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetIndex_SpeciesNotFound()</td>
-<td class="success">0.904s</td>
+<td class="success">0.753s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetIndex_ValidSpecies()</td>
-<td class="success">0.009s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetSiteCode_Found()</td>
-<td class="success">0.002s</td>
+<td class="success">0.007s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -618,27 +600,27 @@ Actually, there were zero interactions with this mock.
 </tr>
 <tr>
 <td class="failures">testGetSiteTrie_FirstCallPopulatesTrie()</td>
-<td class="failures">0.003s</td>
+<td class="failures">0.004s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testGetSiteTrie_SubsequentCallsReturnSameInstance()</td>
-<td class="failures">0.005s</td>
+<td class="failures">0.008s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_CaseInsensitive()</td>
-<td class="success">0.001s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_EmptyInput()</td>
-<td class="success">0.005s</td>
+<td class="success">0.004s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">testLookupSiteCode_ExactMatch()</td>
-<td class="failures">0.002s</td>
+<td class="failures">0.003s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
@@ -648,38 +630,38 @@ Actually, there were zero interactions with this mock.
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_NotFound()</td>
-<td class="success">0.003s</td>
+<td class="success">0.004s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_NullInput()</td>
-<td class="success">0.003s</td>
+<td class="success">0.004s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SpecialCharacters()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SubstringNotPrefix()</td>
-<td class="success">0.003s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">testLookupSiteCode_SuggestionUsed()</td>
-<td class="failures">0.002s</td>
-<td class="failures">failed</td>
-</tr>
-<tr>
-<td class="failures">testLookupSiteCode_SuggestionWithoutSiteCode()</td>
 <td class="failures">0.003s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
-<td class="failures">testLookupSiteCode_TrimInput()</td>
-<td class="failures">0.015s</td>
+<td class="failures">testLookupSiteCode_SuggestionWithoutSiteCode()</td>
+<td class="failures">0.006s</td>
 <td class="failures">failed</td>
+</tr>
+<tr>
+<td class="success">testLookupSiteCode_TrimInput()</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">testPopulateLocationData_InvalidIndex()</td>
@@ -693,32 +675,32 @@ Actually, there were zero interactions with this mock.
 </tr>
 <tr>
 <td class="failures">testPopulateLocationData_ValidResponse()</td>
-<td class="failures">0.003s</td>
+<td class="failures">0.001s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testRefreshLocationData_NoAirQualityData()</td>
-<td class="failures">0.004s</td>
+<td class="failures">0.008s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testRefreshLocationData_SnapshotSaved()</td>
-<td class="failures">0.002s</td>
+<td class="failures">0.005s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testRefreshSiteTrie_ApiThrowsException()</td>
-<td class="failures">0.402s</td>
+<td class="failures">0.260s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testRefreshSiteTrie_ReplacesOldTrie()</td>
-<td class="failures">0.300s</td>
+<td class="failures">0.110s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testRefreshSiteTrie_SuccessfulUpdate()</td>
-<td class="failures">0.972s</td>
+<td class="failures">0.613s</td>
 <td class="failures">failed</td>
 </tr>
 </table>
@@ -726,7 +708,7 @@ Actually, there were zero interactions with this mock.
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>21:59:21.245 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
+<pre>22:12:29.655 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
 org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
 	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
@@ -833,7 +815,7 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot d
 	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1501)
 	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
 	... 88 common frames omitted
-21:59:22.196 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
+22:12:30.387 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
 org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
 	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
@@ -940,7 +922,7 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot d
 	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1501)
 	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
 	... 88 common frames omitted
-21:59:22.606 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
+22:12:30.636 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
 org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
 	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
@@ -1072,7 +1054,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 8.14.3</a> at 11 Sept 2025, 21:59:25</p>
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 11 Sept 2025, 22:12:32</p>
 </div>
 </div>
 </body>

@@ -16,15 +16,13 @@ public class DummyLocationController {
     private final Map<Long, Location> locationStorage = new HashMap<>();
     private final DummySiteCodeResolver siteCodeResolver;
     private final DummyLocationRepository locationRepository;
-    private final DummySnapshotRepository snapshotRepository;
     private final Map<Long, List<AirQualitySnapshot>> snapshotStorage = new HashMap<>();
     private long counter = 1;
     private static final Logger logger = LoggerFactory.getLogger(DummyLocationController.class);
 
-    public DummyLocationController(DummySiteCodeResolver siteCodeResolver, DummyLocationRepository locationRepository, DummySnapshotRepository snapshotRepository) {
+    public DummyLocationController(DummySiteCodeResolver siteCodeResolver, DummyLocationRepository locationRepository) {
         this.siteCodeResolver = siteCodeResolver;
         this.locationRepository = locationRepository;
-        this.snapshotRepository = snapshotRepository;
     }
 
     public ResponseEntity<?> addLocation(Location location) {

@@ -1,23 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.pollution.project.service.SiteCodeResolverTest" tests="34" skipped="0" failures="22" errors="0" timestamp="2025-09-11T20:59:19.349Z" hostname="Narains-Laptop.local" time="3.493">
+<testsuite name="com.pollution.project.service.SiteCodeResolverTest" tests="34" skipped="0" failures="21" errors="0" timestamp="2025-09-11T21:12:28.294Z" hostname="Narains-Laptop.local" time="2.572">
   <properties/>
-  <testcase name="testGetIndex_SpeciesNotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.904"/>
-  <testcase name="testLookupSiteCode_TrimInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.015">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;TL5&gt; but was: &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;TL5&gt; but was: &lt;null&gt;
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
-	at app//com.pollution.project.service.SiteCodeResolverTest.testLookupSiteCode_TrimInput(SiteCodeResolverTest.java:149)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</failure>
-  </testcase>
-  <testcase name="testGetIndex_ValidSpecies()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.009"/>
-  <testcase name="testRefreshSiteTrie_SuccessfulUpdate()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.972">
+  <testcase name="testGetIndex_SpeciesNotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.753"/>
+  <testcase name="testLookupSiteCode_TrimInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003"/>
+  <testcase name="testGetIndex_ValidSpecies()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
+  <testcase name="testRefreshSiteTrie_SuccessfulUpdate()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.613">
     <failure message="org.opentest4j.AssertionFailedError: expected: &lt;SA1&gt; but was: &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;SA1&gt; but was: &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -31,9 +18,9 @@
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testGetIndex_InvalidIndexValue()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.006"/>
-  <testcase name="testLookupSiteCode_SubstringNotPrefix()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003"/>
-  <testcase name="testAssignSiteCode_BothFail()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.007">
+  <testcase name="testGetIndex_InvalidIndexValue()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
+  <testcase name="testLookupSiteCode_SubstringNotPrefix()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
+  <testcase name="testAssignSiteCode_BothFail()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.006">
     <failure message="org.mockito.exceptions.misusing.MissingMethodInvocationException: &#10;when() requires an argument which has to be 'a method call on a mock'.&#10;For example:&#10;    when(mock.getArticles()).thenReturn(articles);&#10;&#10;Also, this error might show up because:&#10;1. you stub either of: final/private/native/equals()/hashCode() methods.&#10;   Those methods *cannot* be stubbed/verified.&#10;   Mocking methods declared on non-public parent classes is not supported.&#10;2. inside when() you don't call method on mock but on some other object.&#10;" type="org.mockito.exceptions.misusing.MissingMethodInvocationException">org.mockito.exceptions.misusing.MissingMethodInvocationException: 
 when() requires an argument which has to be 'a method call on a mock'.
 For example:
@@ -51,7 +38,7 @@ Also, this error might show up because:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testRefreshLocationData_SnapshotSaved()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
+  <testcase name="testRefreshLocationData_SnapshotSaved()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.005">
     <failure message="org.mockito.exceptions.misusing.NotAMockException: &#10;Argument passed to when() is not a mock!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();" type="org.mockito.exceptions.misusing.NotAMockException">org.mockito.exceptions.misusing.NotAMockException: 
 Argument passed to when() is not a mock!
 Example of correct stubbing:
@@ -62,7 +49,7 @@ Example of correct stubbing:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testCalculateSiteCode_NoSitesReturned()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.211">
+  <testcase name="testCalculateSiteCode_NoSitesReturned()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.216">
     <failure message="org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]" type="org.springframework.web.client.RestClientException">org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
 	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
 	at app//org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
@@ -93,8 +80,8 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot d
 	... 10 more
 </failure>
   </testcase>
-  <testcase name="testLookupSiteCode_SuggestionWithoutSiteCode()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: java.lang.String@773c2214&lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: java.lang.String@773c2214&lt;null&gt;
+  <testcase name="testLookupSiteCode_SuggestionWithoutSiteCode()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.006">
+    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: java.lang.String@51cab489&lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: java.lang.String@51cab489&lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
 	at app//org.junit.jupiter.api.AssertNull.failNotNull(AssertNull.java:50)
@@ -107,7 +94,7 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot d
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testGetSiteTrie_SubsequentCallsReturnSameInstance()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.005">
+  <testcase name="testGetSiteTrie_SubsequentCallsReturnSameInstance()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.008">
     <failure message="Wanted but not invoked:&#10;restTemplate.getForObject(&#10;    &lt;any string&gt;,&#10;    class [Lcom.pollution.dto.MonitoringSite;&#10;);&#10;-&gt; at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401)&#10;Actually, there were zero interactions with this mock.&#10;" type="org.mockito.exceptions.verification.WantedButNotInvoked">Wanted but not invoked:
 restTemplate.getForObject(
     &lt;any string&gt;,
@@ -123,7 +110,7 @@ Actually, there were zero interactions with this mock.
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testAssignSiteCode_FallbackToCalculate()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.004">
+  <testcase name="testAssignSiteCode_FallbackToCalculate()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
     <failure message="org.mockito.exceptions.misusing.MissingMethodInvocationException: &#10;when() requires an argument which has to be 'a method call on a mock'.&#10;For example:&#10;    when(mock.getArticles()).thenReturn(articles);&#10;&#10;Also, this error might show up because:&#10;1. you stub either of: final/private/native/equals()/hashCode() methods.&#10;   Those methods *cannot* be stubbed/verified.&#10;   Mocking methods declared on non-public parent classes is not supported.&#10;2. inside when() you don't call method on mock but on some other object.&#10;" type="org.mockito.exceptions.misusing.MissingMethodInvocationException">org.mockito.exceptions.misusing.MissingMethodInvocationException: 
 when() requires an argument which has to be 'a method call on a mock'.
 For example:
@@ -141,7 +128,7 @@ Also, this error might show up because:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testCalculateSiteCode_EmptySitesArray()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.176">
+  <testcase name="testCalculateSiteCode_EmptySitesArray()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.147">
     <failure message="org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]" type="org.springframework.web.client.RestClientException">org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
 	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
 	at app//org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
@@ -172,8 +159,8 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot d
 	... 10 more
 </failure>
   </testcase>
-  <testcase name="testLookupSiteCode_NullInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003"/>
-  <testcase name="testLookupSiteCode_ExactMatch()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
+  <testcase name="testLookupSiteCode_NullInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.004"/>
+  <testcase name="testLookupSiteCode_ExactMatch()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
     <failure message="org.opentest4j.AssertionFailedError: expected: &lt;BG3&gt; but was: &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;BG3&gt; but was: &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -201,7 +188,7 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot d
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testCalculateSiteCode_InvalidCoordinatesSkipped()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.202">
+  <testcase name="testCalculateSiteCode_InvalidCoordinatesSkipped()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.176">
     <failure message="org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]" type="org.springframework.web.client.RestClientException">org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
 	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
 	at app//org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
@@ -232,7 +219,7 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot d
 	... 10 more
 </failure>
   </testcase>
-  <testcase name="testRefreshLocationData_NoAirQualityData()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.004">
+  <testcase name="testRefreshLocationData_NoAirQualityData()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.008">
     <failure message="org.mockito.exceptions.misusing.NotAMockException: &#10;Argument passed to when() is not a mock!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();" type="org.mockito.exceptions.misusing.NotAMockException">org.mockito.exceptions.misusing.NotAMockException: 
 Argument passed to when() is not a mock!
 Example of correct stubbing:
@@ -243,9 +230,9 @@ Example of correct stubbing:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testLookupSiteCode_NotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003"/>
-  <testcase name="testLookupSiteCode_CaseInsensitive()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testGetSiteTrie_FirstCallPopulatesTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
+  <testcase name="testLookupSiteCode_NotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.004"/>
+  <testcase name="testLookupSiteCode_CaseInsensitive()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003"/>
+  <testcase name="testGetSiteTrie_FirstCallPopulatesTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.004">
     <failure message="org.opentest4j.AssertionFailedError: expected: &lt;S1&gt; but was: &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;S1&gt; but was: &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -259,7 +246,7 @@ Example of correct stubbing:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testRefreshSiteTrie_ReplacesOldTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.3">
+  <testcase name="testRefreshSiteTrie_ReplacesOldTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.11">
     <failure message="org.opentest4j.AssertionFailedError: expected: &lt;FS1&gt; but was: &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;FS1&gt; but was: &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -273,7 +260,7 @@ Example of correct stubbing:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testRefreshSiteTrie_ApiThrowsException()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.402">
+  <testcase name="testRefreshSiteTrie_ApiThrowsException()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.26">
     <failure message="Wanted but not invoked:&#10;restTemplate.getForObject(&#10;    &lt;any string&gt;,&#10;    class [Lcom.pollution.dto.MonitoringSite;&#10;);&#10;-&gt; at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401)&#10;Actually, there were zero interactions with this mock.&#10;" type="org.mockito.exceptions.verification.WantedButNotInvoked">Wanted but not invoked:
 restTemplate.getForObject(
     &lt;any string&gt;,
@@ -289,7 +276,7 @@ Actually, there were zero interactions with this mock.
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testGetSiteCode_Found()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
+  <testcase name="testGetSiteCode_Found()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.007"/>
   <testcase name="testGetSiteCode_NotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
   <testcase name="testPopulateLocationData_InvalidIndex()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
     <failure message="org.mockito.exceptions.misusing.NotAMockException: &#10;Argument passed to when() is not a mock!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();" type="org.mockito.exceptions.misusing.NotAMockException">org.mockito.exceptions.misusing.NotAMockException: 
@@ -302,8 +289,8 @@ Example of correct stubbing:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="getSiteTrie_ShouldReturnNonNullTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
-  <testcase name="testPopulateLocationData_ValidResponse()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
+  <testcase name="getSiteTrie_ShouldReturnNonNullTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
+  <testcase name="testPopulateLocationData_ValidResponse()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001">
     <failure message="org.mockito.exceptions.misusing.NotAMockException: &#10;Argument passed to when() is not a mock!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();" type="org.mockito.exceptions.misusing.NotAMockException">org.mockito.exceptions.misusing.NotAMockException: 
 Argument passed to when() is not a mock!
 Example of correct stubbing:
@@ -314,7 +301,7 @@ Example of correct stubbing:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testCalculateSiteCode_NearestSiteReturned()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.202">
+  <testcase name="testCalculateSiteCode_NearestSiteReturned()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.178">
     <failure message="org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]" type="org.springframework.web.client.RestClientException">org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
 	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
 	at app//org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
@@ -345,7 +332,7 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot d
 	... 10 more
 </failure>
   </testcase>
-  <testcase name="testLookupSiteCode_EmptyInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.005"/>
+  <testcase name="testLookupSiteCode_EmptyInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.004"/>
   <testcase name="testPopulateLocationData_ReturnNull()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
     <failure message="org.mockito.exceptions.misusing.NotAMockException: &#10;Argument passed to when() is not a mock!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();" type="org.mockito.exceptions.misusing.NotAMockException">org.mockito.exceptions.misusing.NotAMockException: 
 Argument passed to when() is not a mock!
@@ -357,7 +344,7 @@ Example of correct stubbing:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testAssignSiteCode_InputMatchesSite()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
+  <testcase name="testAssignSiteCode_InputMatchesSite()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.004">
     <failure message="org.mockito.exceptions.misusing.MissingMethodInvocationException: &#10;when() requires an argument which has to be 'a method call on a mock'.&#10;For example:&#10;    when(mock.getArticles()).thenReturn(articles);&#10;&#10;Also, this error might show up because:&#10;1. you stub either of: final/private/native/equals()/hashCode() methods.&#10;   Those methods *cannot* be stubbed/verified.&#10;   Mocking methods declared on non-public parent classes is not supported.&#10;2. inside when() you don't call method on mock but on some other object.&#10;" type="org.mockito.exceptions.misusing.MissingMethodInvocationException">org.mockito.exceptions.misusing.MissingMethodInvocationException: 
 when() requires an argument which has to be 'a method call on a mock'.
 For example:
@@ -375,8 +362,8 @@ Also, this error might show up because:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testLookupSiteCode_SpecialCharacters()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testLookupSiteCode_SuggestionUsed()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
+  <testcase name="testLookupSiteCode_SpecialCharacters()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
+  <testcase name="testLookupSiteCode_SuggestionUsed()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
     <failure message="org.opentest4j.AssertionFailedError: expected: &lt;BQ8&gt; but was: &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;BQ8&gt; but was: &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -390,7 +377,7 @@ Also, this error might show up because:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <system-out><![CDATA[21:59:21.245 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
+  <system-out><![CDATA[22:12:29.655 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
 org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
 	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
@@ -497,7 +484,7 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot d
 	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1501)
 	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
 	... 88 common frames omitted
-21:59:22.196 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
+22:12:30.387 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
 org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
 	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
@@ -604,7 +591,7 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot d
 	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1501)
 	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
 	... 88 common frames omitted
-21:59:22.606 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
+22:12:30.636 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
 org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
 	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
 	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)

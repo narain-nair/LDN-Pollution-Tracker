@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.009s</div>
+<div class="counter">0.023s</div>
 <p>duration</p>
 </div>
 </td>
@@ -80,8 +80,8 @@
 	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
 	at java.base/java.util.ImmutableCollections$MapN.&lt;init&gt;(ImmutableCollections.java:1193)
 	at java.base/java.util.Map.of(Map.java:1385)
-	at com.pollution.project.testController.DummyLocationController.getLocationData(DummyLocationController.java:61)
-	at com.pollution.project.testController.LocationControllerTest.testGetLocationData_NoAQData(LocationControllerTest.java:99)
+	at com.pollution.project.testController.DummyLocationController.getLocationData(DummyLocationController.java:59)
+	at com.pollution.project.testController.LocationControllerTest.testGetLocationData_NoAQData(LocationControllerTest.java:91)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -99,7 +99,7 @@
 	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
 	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
 	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:531)
-	at app//com.pollution.project.testController.LocationControllerTest.testGetLocationStats_NotFound(LocationControllerTest.java:149)
+	at app//com.pollution.project.testController.LocationControllerTest.testGetLocationStats_NotFound(LocationControllerTest.java:141)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -119,7 +119,7 @@
 </thead>
 <tr>
 <td class="success">testAddLocation_EmptyName()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -129,7 +129,7 @@
 </tr>
 <tr>
 <td class="success">testAddLocation_InvalidLongitude()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -139,12 +139,12 @@
 </tr>
 <tr>
 <td class="success">testAddLocation_Valid()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testDeleteAllLocations()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -159,17 +159,17 @@
 </tr>
 <tr>
 <td class="failures">testGetLocationData_NoAQData()</td>
-<td class="failures">0.001s</td>
+<td class="failures">0.002s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="success">testGetLocationData_NotFound()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetLocationData_Valid()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -179,32 +179,32 @@
 </tr>
 <tr>
 <td class="success">testGetLocationStats_WithSnapshots()</td>
-<td class="success">0.002s</td>
+<td class="success">0.004s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetLocation_NoSnapshots()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetSiteByCoords_NoData()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetSiteByCoords_Valid()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshLocation_NoAQData()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshLocation_NotFound()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -217,18 +217,18 @@
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2025-09-11T21:59:25.311+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
-2025-09-11T21:59:25.312+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to refresh non-existent location with id 999
-2025-09-11T21:59:25.313+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 999 not found
-2025-09-11T21:59:25.313+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
-2025-09-11T21:59:25.315+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for coordinates (51.5, 0.1)
-2025-09-11T21:59:25.315+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to delete non-existent location with id 999
-2025-09-11T21:59:25.319+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
-2025-09-11T21:59:25.320+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
-2025-09-11T21:59:25.321+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
-2025-09-11T21:59:25.322+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 1 not found
-2025-09-11T21:59:25.322+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 2 not found
-2025-09-11T21:59:25.323+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
+<pre>22:12:30.870 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to add location with null or empty name
+22:12:30.872 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to refresh non-existent location with id 999
+22:12:30.874 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Location with id 999 not found
+22:12:30.875 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to add location with invalid latitude or longitude
+22:12:30.878 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- No air quality data found for coordinates (51.5, 0.1)
+22:12:30.880 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to delete non-existent location with id 999
+22:12:30.887 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to add location with null or empty name
+22:12:30.889 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- No air quality data found for location id 1
+22:12:30.890 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- No air quality data found for location id 1
+22:12:30.891 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Location with id 1 not found
+22:12:30.892 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Location with id 2 not found
+22:12:30.894 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to add location with invalid latitude or longitude
 </pre>
 </span>
 </div>
@@ -240,7 +240,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 8.14.3</a> at 11 Sept 2025, 21:59:25</p>
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 11 Sept 2025, 22:12:32</p>
 </div>
 </div>
 </body>
