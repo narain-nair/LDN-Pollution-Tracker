@@ -72,11 +72,16 @@ public class DummyLocationController {
     }
 
     public ResponseEntity<?> getLocationStats(Long id) {
+        if (id == null || !locationStorage.containsKey(id)) {
+            logger.warn("Attempted to get stats for non-existent location with id {}", id);
+            return ResponseEntity.status(404).body("Location not found");
+        }
+        
         List<AirQualitySnapshot> snaps = snapshotStorage.getOrDefault(id, List.of());
 
         if (snaps.isEmpty()) {
             logger.warn("No snapshots found for location id {}", id);
-            return ResponseEntity.status(404).body("No snapshots found for this location");
+            return ResponseEntity.noContent().build(); // 204
         }
     
         Map<String, Object> response = Map.of(

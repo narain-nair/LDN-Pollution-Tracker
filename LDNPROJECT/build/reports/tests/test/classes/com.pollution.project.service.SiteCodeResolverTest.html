@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.574s</div>
+<div class="counter">0.594s</div>
 <p>duration</p>
 </div>
 </td>
@@ -249,12 +249,12 @@ Example of correct stubbing:
 </thead>
 <tr>
 <td class="success">getSiteTrie_ShouldReturnNonNullTrie()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">testAssignSiteCode_BothFail()</td>
-<td class="failures">0.010s</td>
+<td class="failures">0.006s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
@@ -264,12 +264,12 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="failures">testAssignSiteCode_InputMatchesSite()</td>
-<td class="failures">0.002s</td>
+<td class="failures">0.001s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="success">testCalculateSiteCode_EmptySitesArray()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -294,7 +294,7 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testGetIndex_SpeciesNotFound()</td>
-<td class="success">0.489s</td>
+<td class="success">0.518s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -319,7 +319,7 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="failures">testGetSiteTrie_SubsequentCallsReturnSameInstance()</td>
-<td class="failures">0.005s</td>
+<td class="failures">0.003s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
@@ -344,7 +344,7 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_NotFound()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -354,7 +354,7 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SpecialCharacters()</td>
-<td class="success">0.001s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -374,12 +374,12 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_TrimInput()</td>
-<td class="success">0.002s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">testPopulateLocationData_InvalidIndex()</td>
-<td class="failures">0.003s</td>
+<td class="failures">0.002s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
@@ -394,27 +394,27 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="failures">testRefreshLocationData_NoAirQualityData()</td>
-<td class="failures">0.002s</td>
+<td class="failures">0.001s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testRefreshLocationData_SnapshotSaved()</td>
-<td class="failures">0.003s</td>
+<td class="failures">0.002s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="success">testRefreshSiteTrie_ApiThrowsException()</td>
-<td class="success">0.005s</td>
+<td class="success">0.004s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshSiteTrie_ReplacesOldTrie()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshSiteTrie_SuccessfulUpdate()</td>
-<td class="success">0.020s</td>
+<td class="success">0.021s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -422,14 +422,14 @@ Example of correct stubbing:
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2025-09-11T23:55:52.249+01:00  INFO 26906 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
-2025-09-11T23:55:52.249+01:00  INFO 26906 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site A': SA1
-2025-09-11T23:55:52.249+01:00  INFO 26906 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site B': SB2
-2025-09-11T23:55:52.301+01:00  INFO 26906 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Retrieved Trie: com.pollution.dto.Trie@56511eda
-2025-09-11T23:55:52.301+01:00  INFO 26906 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site One': S1
-2025-09-11T23:55:52.301+01:00  INFO 26906 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site Two': S2
-2025-09-11T23:55:52.303+01:00  INFO 26906 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
-2025-09-11T23:55:52.305+01:00 ERROR 26906 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error refreshing site trie: {}
+<pre>2025-09-12T00:07:51.888+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
+2025-09-12T00:07:51.889+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site A': SA1
+2025-09-12T00:07:51.889+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site B': SB2
+2025-09-12T00:07:51.927+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Retrieved Trie: com.pollution.dto.Trie@3a33d655
+2025-09-12T00:07:51.927+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site One': S1
+2025-09-12T00:07:51.927+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site Two': S2
+2025-09-12T00:07:51.929+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
+2025-09-12T00:07:51.932+01:00 ERROR 27615 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error refreshing site trie: {}
 
 org.springframework.web.client.RestClientException: API down
 	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401) ~[spring-web-6.1.13.jar:6.1.13]
@@ -521,7 +521,7 @@ org.springframework.web.client.RestClientException: API down
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 
-2025-09-11T23:55:52.323+01:00  INFO 26906 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Inserted 'Bexley West' with code 'BQ8' into trie.
+2025-09-12T00:07:51.952+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Inserted 'Bexley West' with code 'BQ8' into trie.
 </pre>
 </span>
 </div>
@@ -543,7 +543,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 8.14.3</a> at 11 Sept 2025, 23:55:52</p>
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 12 Sept 2025, 00:07:52</p>
 </div>
 </div>
 </body>
