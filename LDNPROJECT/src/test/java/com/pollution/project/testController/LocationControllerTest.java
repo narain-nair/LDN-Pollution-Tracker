@@ -38,4 +38,17 @@ public class LocationControllerTest {
 
         controller = new DummyLocationController(siteCodeResolver, locationRepo, snapshotRepo);
     }
+
+    @Test
+    void testAddLocation_Valid() {
+        Location loc = new Location("Test Location", 51.5, 0.1);
+        ResponseEntity<?> response = controller.addLocation(loc);
+
+        assertEquals(201, response.getStatusCodeValue());
+        Map<String, Object> body = (Map<String, Object>) response.getBody();
+        Location saved = (Location) body.get("location");
+        assertNotNull(saved.getId());
+        assertEquals("DUMMY", saved.getSiteCode());
+        assertNotNull(saved.getAirQualityData());
+    }
 }
