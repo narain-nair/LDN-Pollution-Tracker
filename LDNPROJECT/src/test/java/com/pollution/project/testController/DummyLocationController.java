@@ -57,4 +57,19 @@ public class DummyLocationController {
         locationStorage.remove(id);
         return ResponseEntity.ok("Location deleted successfully.");
     }
+
+    public ResponseEntity<?> getLocationStats(Long id) {
+        List<AirQualitySnapshot> snaps = snapshotStorage.getOrDefault(id, List.of());
+    
+        Map<String, Object> response = Map.of(
+            "locationId", id,
+            "averagePm25", snaps.stream().mapToDouble(AirQualitySnapshot::getPm25).average().orElse(0.0),
+            "averagePm10", snaps.stream().mapToDouble(AirQualitySnapshot::getPm10).average().orElse(0.0),
+            "averageNo2", snaps.stream().mapToDouble(AirQualitySnapshot::getNo2).average().orElse(0.0),
+            "averageSo2", snaps.stream().mapToDouble(AirQualitySnapshot::getSo2).average().orElse(0.0),
+            "averageO3", snaps.stream().mapToDouble(AirQualitySnapshot::getO3).average().orElse(0.0),
+            "averageCo", snaps.stream().mapToDouble(AirQualitySnapshot::getCo).average().orElse(0.0)
+        );
+        return ResponseEntity.ok(response);
+    }
 }
