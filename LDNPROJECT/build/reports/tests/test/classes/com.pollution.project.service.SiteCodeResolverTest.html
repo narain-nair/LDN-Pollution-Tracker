@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">45.613s</div>
+<div class="counter">3.465s</div>
 <p>duration</p>
 </div>
 </td>
@@ -146,32 +146,32 @@ Also, this error might show up because:
 <h3 class="failures">testCalculateSiteCode_EmptySitesArray()</h3>
 <span class="code">
 <pre>org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
-	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:125)
-	at app//org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:757)
-	at app//org.springframework.web.client.RestTemplate.execute(RestTemplate.java:677)
-	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:304)
+	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
+	at app//org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
+	at app//org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:404)
 	at app//com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:79)
 	at app//com.pollution.project.service.SiteCodeResolverTest.testCalculateSiteCode_EmptySitesArray(SiteCodeResolverTest.java:313)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 Caused by: org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `com.pollution.dto.MonitoringSite[]` from Object value (token `JsonToken.START_OBJECT`)
-	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:408)
-	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:356)
-	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:103)
+	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:406)
+	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:354)
+	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:104)
 	... 8 more
 Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize value of type `com.pollution.dto.MonitoringSite[]` from Object value (token `JsonToken.START_OBJECT`)
  at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1]
-	at app//com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:72)
-	at app//com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1821)
-	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1595)
-	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1542)
-	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.handleNonArray(ObjectArrayDeserializer.java:358)
-	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.deserialize(ObjectArrayDeserializer.java:197)
+	at app//com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:59)
+	at app//com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1767)
+	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1541)
+	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1488)
+	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.handleNonArray(ObjectArrayDeserializer.java:347)
+	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.deserialize(ObjectArrayDeserializer.java:198)
 	at app//com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
-	at app//com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2130)
-	at app//com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1500)
-	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:397)
+	at app//com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2125)
+	at app//com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1501)
+	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
 	... 10 more
 </pre>
 </span>
@@ -181,32 +181,32 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot d
 <h3 class="failures">testCalculateSiteCode_InvalidCoordinatesSkipped()</h3>
 <span class="code">
 <pre>org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
-	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:125)
-	at app//org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:757)
-	at app//org.springframework.web.client.RestTemplate.execute(RestTemplate.java:677)
-	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:304)
+	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
+	at app//org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
+	at app//org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:404)
 	at app//com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:79)
 	at app//com.pollution.project.service.SiteCodeResolverTest.testCalculateSiteCode_InvalidCoordinatesSkipped(SiteCodeResolverTest.java:288)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 Caused by: org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `com.pollution.dto.MonitoringSite[]` from Object value (token `JsonToken.START_OBJECT`)
-	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:408)
-	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:356)
-	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:103)
+	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:406)
+	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:354)
+	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:104)
 	... 8 more
 Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize value of type `com.pollution.dto.MonitoringSite[]` from Object value (token `JsonToken.START_OBJECT`)
  at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1]
-	at app//com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:72)
-	at app//com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1821)
-	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1595)
-	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1542)
-	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.handleNonArray(ObjectArrayDeserializer.java:358)
-	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.deserialize(ObjectArrayDeserializer.java:197)
+	at app//com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:59)
+	at app//com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1767)
+	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1541)
+	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1488)
+	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.handleNonArray(ObjectArrayDeserializer.java:347)
+	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.deserialize(ObjectArrayDeserializer.java:198)
 	at app//com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
-	at app//com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2130)
-	at app//com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1500)
-	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:397)
+	at app//com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2125)
+	at app//com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1501)
+	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
 	... 10 more
 </pre>
 </span>
@@ -216,32 +216,32 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot d
 <h3 class="failures">testCalculateSiteCode_NearestSiteReturned()</h3>
 <span class="code">
 <pre>org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
-	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:125)
-	at app//org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:757)
-	at app//org.springframework.web.client.RestTemplate.execute(RestTemplate.java:677)
-	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:304)
+	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
+	at app//org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
+	at app//org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:404)
 	at app//com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:79)
 	at app//com.pollution.project.service.SiteCodeResolverTest.testCalculateSiteCode_NearestSiteReturned(SiteCodeResolverTest.java:271)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 Caused by: org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `com.pollution.dto.MonitoringSite[]` from Object value (token `JsonToken.START_OBJECT`)
-	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:408)
-	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:356)
-	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:103)
+	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:406)
+	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:354)
+	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:104)
 	... 8 more
 Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize value of type `com.pollution.dto.MonitoringSite[]` from Object value (token `JsonToken.START_OBJECT`)
  at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1]
-	at app//com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:72)
-	at app//com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1821)
-	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1595)
-	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1542)
-	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.handleNonArray(ObjectArrayDeserializer.java:358)
-	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.deserialize(ObjectArrayDeserializer.java:197)
+	at app//com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:59)
+	at app//com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1767)
+	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1541)
+	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1488)
+	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.handleNonArray(ObjectArrayDeserializer.java:347)
+	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.deserialize(ObjectArrayDeserializer.java:198)
 	at app//com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
-	at app//com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2130)
-	at app//com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1500)
-	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:397)
+	at app//com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2125)
+	at app//com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1501)
+	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
 	... 10 more
 </pre>
 </span>
@@ -251,32 +251,32 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot d
 <h3 class="failures">testCalculateSiteCode_NoSitesReturned()</h3>
 <span class="code">
 <pre>org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
-	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:125)
-	at app//org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:757)
-	at app//org.springframework.web.client.RestTemplate.execute(RestTemplate.java:677)
-	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:304)
+	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
+	at app//org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
+	at app//org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:404)
 	at app//com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:79)
 	at app//com.pollution.project.service.SiteCodeResolverTest.testCalculateSiteCode_NoSitesReturned(SiteCodeResolverTest.java:300)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 Caused by: org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `com.pollution.dto.MonitoringSite[]` from Object value (token `JsonToken.START_OBJECT`)
-	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:408)
-	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:356)
-	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:103)
+	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:406)
+	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:354)
+	at app//org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:104)
 	... 8 more
 Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize value of type `com.pollution.dto.MonitoringSite[]` from Object value (token `JsonToken.START_OBJECT`)
  at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1]
-	at app//com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:72)
-	at app//com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1821)
-	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1595)
-	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1542)
-	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.handleNonArray(ObjectArrayDeserializer.java:358)
-	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.deserialize(ObjectArrayDeserializer.java:197)
+	at app//com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:59)
+	at app//com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1767)
+	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1541)
+	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1488)
+	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.handleNonArray(ObjectArrayDeserializer.java:347)
+	at app//com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.deserialize(ObjectArrayDeserializer.java:198)
 	at app//com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
-	at app//com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2130)
-	at app//com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1500)
-	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:397)
+	at app//com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2125)
+	at app//com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1501)
+	at app//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
 	... 10 more
 </pre>
 </span>
@@ -308,10 +308,10 @@ restTemplate.getForObject(
     &lt;any string&gt;,
     class [Lcom.pollution.dto.MonitoringSite;
 );
--&gt; at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:301)
+-&gt; at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401)
 Actually, there were zero interactions with this mock.
 
-	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:301)
+	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401)
 	at app//com.pollution.project.service.SiteCodeResolverTest.testGetSiteTrie_SubsequentCallsReturnSameInstance(SiteCodeResolverTest.java:200)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -377,7 +377,7 @@ Actually, there were zero interactions with this mock.
 <a name="testLookupSiteCode_SuggestionWithoutSiteCode()"></a>
 <h3 class="failures">testLookupSiteCode_SuggestionWithoutSiteCode()</h3>
 <span class="code">
-<pre>org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: java.lang.String@5b02a984&lt;null&gt;
+<pre>org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: java.lang.String@773c2214&lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
 	at app//org.junit.jupiter.api.AssertNull.failNotNull(AssertNull.java:50)
@@ -493,10 +493,10 @@ restTemplate.getForObject(
     &lt;any string&gt;,
     class [Lcom.pollution.dto.MonitoringSite;
 );
--&gt; at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:301)
+-&gt; at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401)
 Actually, there were zero interactions with this mock.
 
-	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:301)
+	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401)
 	at app//com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_ApiThrowsException(SiteCodeResolverTest.java:237)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -558,62 +558,62 @@ Actually, there were zero interactions with this mock.
 </tr>
 <tr>
 <td class="failures">testAssignSiteCode_BothFail()</td>
-<td class="failures">0.009s</td>
+<td class="failures">0.007s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testAssignSiteCode_FallbackToCalculate()</td>
-<td class="failures">0.003s</td>
+<td class="failures">0.004s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testAssignSiteCode_InputMatchesSite()</td>
-<td class="failures">0.003s</td>
+<td class="failures">0.002s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testCalculateSiteCode_EmptySitesArray()</td>
-<td class="failures">1.167s</td>
+<td class="failures">0.176s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testCalculateSiteCode_InvalidCoordinatesSkipped()</td>
-<td class="failures">0.566s</td>
+<td class="failures">0.202s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testCalculateSiteCode_NearestSiteReturned()</td>
-<td class="failures">1.123s</td>
+<td class="failures">0.202s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testCalculateSiteCode_NoSitesReturned()</td>
-<td class="failures">1.075s</td>
+<td class="failures">0.211s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="success">testGetIndex_InvalidIndexValue()</td>
-<td class="success">0.003s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testGetIndex_SpeciesNotFound()</td>
-<td class="success">0.930s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testGetIndex_ValidSpecies()</td>
-<td class="success">0.002s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testGetSiteCode_Found()</td>
 <td class="success">0.006s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">testGetSiteCode_NotFound()</td>
+<td class="success">testGetIndex_SpeciesNotFound()</td>
+<td class="success">0.904s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetIndex_ValidSpecies()</td>
+<td class="success">0.009s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetSiteCode_Found()</td>
 <td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetSiteCode_NotFound()</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -623,27 +623,27 @@ Actually, there were zero interactions with this mock.
 </tr>
 <tr>
 <td class="failures">testGetSiteTrie_SubsequentCallsReturnSameInstance()</td>
-<td class="failures">0.011s</td>
+<td class="failures">0.005s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_CaseInsensitive()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_EmptyInput()</td>
-<td class="success">0.004s</td>
+<td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">testLookupSiteCode_ExactMatch()</td>
-<td class="failures">0.004s</td>
+<td class="failures">0.002s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testLookupSiteCode_MultipleSuggestions()</td>
-<td class="failures">0.003s</td>
+<td class="failures">0.002s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
@@ -653,17 +653,17 @@ Actually, there were zero interactions with this mock.
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_NullInput()</td>
-<td class="success">0.005s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SpecialCharacters()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SubstringNotPrefix()</td>
-<td class="success">0.002s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -673,17 +673,17 @@ Actually, there were zero interactions with this mock.
 </tr>
 <tr>
 <td class="failures">testLookupSiteCode_SuggestionWithoutSiteCode()</td>
-<td class="failures">0.005s</td>
+<td class="failures">0.003s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testLookupSiteCode_TrimInput()</td>
-<td class="failures">0.007s</td>
+<td class="failures">0.015s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testPopulateLocationData_InvalidIndex()</td>
-<td class="failures">0.008s</td>
+<td class="failures">0.003s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
@@ -698,27 +698,27 @@ Actually, there were zero interactions with this mock.
 </tr>
 <tr>
 <td class="failures">testRefreshLocationData_NoAirQualityData()</td>
-<td class="failures">0.005s</td>
-<td class="failures">failed</td>
-</tr>
-<tr>
-<td class="failures">testRefreshLocationData_SnapshotSaved()</td>
 <td class="failures">0.004s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
+<td class="failures">testRefreshLocationData_SnapshotSaved()</td>
+<td class="failures">0.002s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
 <td class="failures">testRefreshSiteTrie_ApiThrowsException()</td>
-<td class="failures">2.976s</td>
+<td class="failures">0.402s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testRefreshSiteTrie_ReplacesOldTrie()</td>
-<td class="failures">1.076s</td>
+<td class="failures">0.300s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testRefreshSiteTrie_SuccessfulUpdate()</td>
-<td class="failures">36.594s</td>
+<td class="failures">0.972s</td>
 <td class="failures">failed</td>
 </tr>
 </table>
@@ -726,80 +726,74 @@ Actually, there were zero interactions with this mock.
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>21:52:31.891 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
+<pre>21:59:21.245 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
 org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
-	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:125)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:757)
-	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:677)
-	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:304)
+	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:404)
 	at com.pollution.project.service.SiteCodeResolver.refreshSiteTrie(SiteCodeResolver.java:63)
 	at com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_SuccessfulUpdate(SiteCodeResolverTest.java:213)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:787)
-	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:478)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
 	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:161)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:152)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:91)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:112)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:94)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:93)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:87)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$4(TestMethodTestDescriptor.java:221)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:217)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:159)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
 	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
 	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:230)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:204)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:172)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:101)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:64)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:150)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:63)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:109)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:91)
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
-	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$1(InterceptingLauncher.java:39)
-	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
-	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:38)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
 	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
 	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:124)
 	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:99)
@@ -822,97 +816,91 @@ org.springframework.web.client.RestClientException: Error while extracting respo
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 Caused by: org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `com.pollution.dto.MonitoringSite[]` from Object value (token `JsonToken.START_OBJECT`)
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:408)
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:356)
-	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:103)
-	... 92 common frames omitted
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:406)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:354)
+	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:104)
+	... 86 common frames omitted
 Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize value of type `com.pollution.dto.MonitoringSite[]` from Object value (token `JsonToken.START_OBJECT`)
  at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1]
-	at com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:72)
-	at com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1821)
-	at com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1595)
-	at com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1542)
-	at com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.handleNonArray(ObjectArrayDeserializer.java:358)
-	at com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.deserialize(ObjectArrayDeserializer.java:197)
+	at com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:59)
+	at com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1767)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1541)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1488)
+	at com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.handleNonArray(ObjectArrayDeserializer.java:347)
+	at com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.deserialize(ObjectArrayDeserializer.java:198)
 	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
-	at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2130)
-	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1500)
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:397)
-	... 94 common frames omitted
-21:52:35.861 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
+	at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2125)
+	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1501)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
+	... 88 common frames omitted
+21:59:22.196 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
 org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
-	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:125)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:757)
-	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:677)
-	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:304)
+	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:404)
 	at com.pollution.project.service.SiteCodeResolver.refreshSiteTrie(SiteCodeResolver.java:63)
 	at com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_ReplacesOldTrie(SiteCodeResolverTest.java:254)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:787)
-	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:478)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
 	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:161)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:152)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:91)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:112)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:94)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:93)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:87)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$4(TestMethodTestDescriptor.java:221)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:217)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:159)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
 	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
 	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:230)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:204)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:172)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:101)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:64)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:150)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:63)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:109)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:91)
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
-	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$1(InterceptingLauncher.java:39)
-	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
-	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:38)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
 	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
 	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:124)
 	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:99)
@@ -935,101 +923,95 @@ org.springframework.web.client.RestClientException: Error while extracting respo
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 Caused by: org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `com.pollution.dto.MonitoringSite[]` from Object value (token `JsonToken.START_OBJECT`)
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:408)
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:356)
-	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:103)
-	... 92 common frames omitted
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:406)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:354)
+	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:104)
+	... 86 common frames omitted
 Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize value of type `com.pollution.dto.MonitoringSite[]` from Object value (token `JsonToken.START_OBJECT`)
  at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1]
-	at com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:72)
-	at com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1821)
-	at com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1595)
-	at com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1542)
-	at com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.handleNonArray(ObjectArrayDeserializer.java:358)
-	at com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.deserialize(ObjectArrayDeserializer.java:197)
+	at com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:59)
+	at com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1767)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1541)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1488)
+	at com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.handleNonArray(ObjectArrayDeserializer.java:347)
+	at com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.deserialize(ObjectArrayDeserializer.java:198)
 	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
-	at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2130)
-	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1500)
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:397)
-	... 94 common frames omitted
-21:52:38.829 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
+	at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2125)
+	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1501)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
+	... 88 common frames omitted
+21:59:22.606 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
 org.springframework.web.client.RestClientException: Error while extracting response for type [class [Lcom.pollution.dto.MonitoringSite;] and content type [application/json;charset=utf-8]
-	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:125)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:757)
-	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:677)
-	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:304)
+	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:119)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:892)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:404)
 	at com.pollution.project.service.SiteCodeResolver.refreshSiteTrie(SiteCodeResolver.java:63)
 	at com.pollution.project.service.SiteCodeResolverTest.lambda$testRefreshSiteTrie_ApiThrowsException$0(SiteCodeResolverTest.java:230)
 	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:49)
 	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:36)
-	at org.junit.jupiter.api.Assertions.assertDoesNotThrow(Assertions.java:3199)
+	at org.junit.jupiter.api.Assertions.assertDoesNotThrow(Assertions.java:3168)
 	at com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_ApiThrowsException(SiteCodeResolverTest.java:230)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:787)
-	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:478)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
 	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:161)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:152)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:91)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:112)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:94)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:93)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:87)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$4(TestMethodTestDescriptor.java:221)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:217)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:159)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
 	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
 	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:230)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:204)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:172)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:101)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:64)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:150)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:63)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:109)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:91)
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
-	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$1(InterceptingLauncher.java:39)
-	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
-	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:38)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
 	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
 	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:124)
 	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:99)
@@ -1052,31 +1034,30 @@ org.springframework.web.client.RestClientException: Error while extracting respo
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 Caused by: org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `com.pollution.dto.MonitoringSite[]` from Object value (token `JsonToken.START_OBJECT`)
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:408)
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:356)
-	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:103)
-	... 96 common frames omitted
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:406)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:354)
+	at org.springframework.web.client.HttpMessageConverterExtractor.extractData(HttpMessageConverterExtractor.java:104)
+	... 90 common frames omitted
 Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize value of type `com.pollution.dto.MonitoringSite[]` from Object value (token `JsonToken.START_OBJECT`)
  at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1]
-	at com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:72)
-	at com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1821)
-	at com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1595)
-	at com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1542)
-	at com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.handleNonArray(ObjectArrayDeserializer.java:358)
-	at com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.deserialize(ObjectArrayDeserializer.java:197)
+	at com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:59)
+	at com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1767)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1541)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleUnexpectedToken(DeserializationContext.java:1488)
+	at com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.handleNonArray(ObjectArrayDeserializer.java:347)
+	at com.fasterxml.jackson.databind.deser.std.ObjectArrayDeserializer.deserialize(ObjectArrayDeserializer.java:198)
 	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
-	at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2130)
-	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1500)
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:397)
-	... 98 common frames omitted
+	at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2125)
+	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1501)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
+	... 92 common frames omitted
 </pre>
 </span>
 </div>
 <div class="tab">
 <h2>Standard error</h2>
 <span class="code">
-<pre>Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
-WARNING: A Java agent has been loaded dynamically (/Users/narainusesamacbook/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.17.7/fbf3d6d649ed37fc9e9c59480a05be0a26e3c2da/byte-buddy-agent-1.17.7.jar)
+<pre>WARNING: A Java agent has been loaded dynamically (/Users/narainusesamacbook/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.19/154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1/byte-buddy-agent-1.14.19.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
 WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
@@ -1091,7 +1072,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 8.14.3</a> at 10 Sept 2025, 21:52:45</p>
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 11 Sept 2025, 21:59:25</p>
 </div>
 </div>
 </body>

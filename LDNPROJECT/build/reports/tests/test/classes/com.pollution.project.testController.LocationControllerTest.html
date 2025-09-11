@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - LocationControllerTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>LocationControllerTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.pollution.project.testController.html">com.pollution.project.testController</a> &gt; LocationControllerTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">19</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">2</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.009s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox failures" id="successRate">
+<div class="percent">89%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a href="#">Failed tests</a>
+</li>
+<li>
+<a href="#">Tests</a>
+</li>
+<li>
+<a href="#">Standard output</a>
+</li>
+</ul>
+<div class="tab">
+<h2>Failed tests</h2>
+<div class="test">
+<a name="testGetLocationData_NoAQData()"></a>
+<h3 class="failures">testGetLocationData_NoAQData()</h3>
+<span class="code">
+<pre>java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.ImmutableCollections$MapN.&lt;init&gt;(ImmutableCollections.java:1193)
+	at java.base/java.util.Map.of(Map.java:1385)
+	at com.pollution.project.testController.DummyLocationController.getLocationData(DummyLocationController.java:61)
+	at com.pollution.project.testController.LocationControllerTest.testGetLocationData_NoAQData(LocationControllerTest.java:99)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</pre>
+</span>
+</div>
+<div class="test">
+<a name="testGetLocationStats_NotFound()"></a>
+<h3 class="failures">testGetLocationStats_NotFound()</h3>
+<span class="code">
+<pre>org.opentest4j.AssertionFailedError: expected: &lt;404&gt; but was: &lt;200&gt;
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
+	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:531)
+	at app//com.pollution.project.testController.LocationControllerTest.testGetLocationStats_NotFound(LocationControllerTest.java:149)
+	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
+</pre>
+</span>
+</div>
+</div>
+<div class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">testAddLocation_EmptyName()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testAddLocation_InvalidCoordinates()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testAddLocation_InvalidLongitude()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testAddLocation_NullName()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testAddLocation_Valid()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testDeleteAllLocations()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testDeleteLocation_NotFound()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testDeleteLocation_Valid()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="failures">testGetLocationData_NoAQData()</td>
+<td class="failures">0.001s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="success">testGetLocationData_NotFound()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetLocationData_Valid()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="failures">testGetLocationStats_NotFound()</td>
+<td class="failures">0.001s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="success">testGetLocationStats_WithSnapshots()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetLocation_NoSnapshots()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetSiteByCoords_NoData()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetSiteByCoords_Valid()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testRefreshLocation_NoAQData()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testRefreshLocation_NotFound()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testRefreshLocation_Valid()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2025-09-11T21:59:25.311+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
+2025-09-11T21:59:25.312+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to refresh non-existent location with id 999
+2025-09-11T21:59:25.313+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 999 not found
+2025-09-11T21:59:25.313+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
+2025-09-11T21:59:25.315+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for coordinates (51.5, 0.1)
+2025-09-11T21:59:25.315+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to delete non-existent location with id 999
+2025-09-11T21:59:25.319+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
+2025-09-11T21:59:25.320+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
+2025-09-11T21:59:25.321+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
+2025-09-11T21:59:25.322+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 1 not found
+2025-09-11T21:59:25.322+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 2 not found
+2025-09-11T21:59:25.323+01:00  WARN 20565 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 11 Sept 2025, 21:59:25</p>
+</div>
+</div>
+</body>
+</html>
