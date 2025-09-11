@@ -72,4 +72,29 @@ public class LocationControllerTest {
         ResponseEntity<?> response = controller.addLocation(loc);
         assertEquals(400, response.getStatusCode().value());
     }
+
+    @Test
+    void testGetLocationData_Valid() {
+        Location loc = new Location("Test Location", 51.5, 0.1);
+        controller.addLocation(loc);
+
+        ResponseEntity<?> response = controller.getLocationData(loc.getId());
+        assertEquals(200, response.getStatusCode().value());
+    }
+
+    @Test
+    void testGetLocationData_NotFound() {
+        ResponseEntity<?> response = controller.getLocationData(999L);
+        assertEquals(404, response.getStatusCode().value());
+    }
+
+    @Test
+    void testGetLocationData_NoAQData() {
+        siteCodeResolver.setReturnNullSiteCode(true);
+        Location loc = new Location("Test", 51.5, 0.1);
+        controller.addLocation(loc);
+    
+        ResponseEntity<?> response = controller.getLocationData(loc.getId());
+        assertEquals(404, response.getStatusCode().value());
+    }
 }
