@@ -1,10 +1,7 @@
 package com.pollution.project.testController;
 
-import com.pollution.project.entity.AirQualityData;
 import com.pollution.project.entity.AirQualitySnapshot;
 import com.pollution.project.entity.Location;
-import com.pollution.dto.LocationRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.pollution.project.testRepository.DummyLocationRepository;
@@ -12,7 +9,6 @@ import com.pollution.project.testRepository.DummySiteCodeResolver;
 import com.pollution.project.testRepository.DummySnapshotRepository;
 
 import java.util.*;
-import java.time.LocalDateTime;
 
 public class DummyLocationController {
     private final Map<Long, Location> locationStorage = new HashMap<>();
@@ -28,7 +24,19 @@ public class DummyLocationController {
         this.snapshotRepository = snapshotRepository;
     }
 
+    private void log(String message) {
+        System.out.println("[DummyLocationController] " + message);
+    }
+
     public ResponseEntity<?> addLocation(Location location) {
+        if (location.getName() == null || location.getName().isEmpty()) {
+            return ResponseEntity.status(400).body("Location name cannot be null or empty");
+        }
+        if (location.getLatitude() < -90 || location.getLatitude() > 90 ||
+            location.getLongitude() < -180 || location.getLongitude() > 180) {
+            return ResponseEntity.status(400).body("Invalid latitude or longitude");
+        }    
+
         if (location.getId() == null) location.setId(counter++);
         siteCodeResolver.populateLocationData(location, location.getName());
         locationStorage.put(location.getId(), location);
