@@ -76,4 +76,24 @@ public class DummyLocationController {
     public void addSnapshot(Long locationId, AirQualitySnapshot snapshot) {
         snapshotStorage.computeIfAbsent(locationId, k -> new ArrayList<>()).add(snapshot);
     }
+
+    public ResponseEntity<?> getSiteByCoords(double lat, double lng) {
+        Location tempLoc = new Location("temp", lat, lng);
+        siteCodeResolver.populateLocationData(tempLoc, null);
+    
+        if (tempLoc.getAirQualityData() == null)
+            return ResponseEntity.status(404).body("No data found for the given coordinates");
+    
+        return ResponseEntity.ok(Map.of("siteCode", tempLoc.getSiteCode(), "airQualityData", tempLoc.getAirQualityData()));
+    }
+
+    public ResponseEntity<?> refreshLocation(Long id) {
+        Location loc = locationStorage.get(id);
+        if (loc == null) return ResponseEntity.status(404).body("Location not found");
+    
+        siteCodeResolver.populateLocationData(loc, null);
+        locationStorage.put(id, loc); // refresh in-memory
+    
+        return ResponseEntity.ok(Map.of("message", "Location data refreshed successfully.", "location", loc));
+    }
 }
