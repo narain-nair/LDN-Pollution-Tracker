@@ -1,10 +1,10 @@
-package com.pollution.project.controller;
-
-import com.pollution.model.AirQualityData;
-import com.pollution.model.Location;
-import com.pollution.service.SiteCodeResolver;
+package com.pollution.project.repository;
 
 import java.time.LocalDateTime;
+
+import com.pollution.project.entity.AirQualityData;
+import com.pollution.project.entity.Location;
+import com.pollution.project.service.SiteCodeResolver;
 
 class DummySiteCodeResolver extends SiteCodeResolver {
 

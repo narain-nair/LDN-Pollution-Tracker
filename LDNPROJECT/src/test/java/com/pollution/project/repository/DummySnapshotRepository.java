@@ -1,14 +1,12 @@
-package com.pollution.project.controller;
+package com.pollution.project.repository;
 
-import com.pollution.model.AirQualitySnapshot;
-import com.pollution.repository.AirQualitySnapshotRepository;
+import com.pollution.project.entity.AirQualitySnapshot;
 
 import java.util.*;
 
-class DummySnapshotRepository implements AirQualitySnapshotRepository {
+class DummySnapshotRepository {
     private Map<Long, List<AirQualitySnapshot>> snapshots = new HashMap<>();
 
-    @Override
     public List<AirQualitySnapshot> findByLocationId(Long id) {
         return snapshots.getOrDefault(id, Collections.emptyList());
     }
