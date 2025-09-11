@@ -1,12 +1,7 @@
 package com.pollution.project.testController;
 
-import com.pollution.project.entity.AirQualityData;
 import com.pollution.project.entity.AirQualitySnapshot;
 import com.pollution.project.entity.Location;
-import com.pollution.project.repository.AirQualitySnapshotRepository;
-import com.pollution.project.repository.LocationRepository;
-import com.pollution.project.service.SiteCodeResolver;
-
 import com.pollution.project.testRepository.DummyLocationRepository;
 import com.pollution.project.testRepository.DummySiteCodeResolver;
 import com.pollution.project.testRepository.DummySnapshotRepository;
@@ -74,6 +69,13 @@ public class LocationControllerTest {
     }
 
     @Test
+    void testAddLocation_InvalidLongitude() {
+        Location loc = new Location("Test", 50.0, 200.0); // longitude > 180
+        ResponseEntity<?> response = controller.addLocation(loc);
+        assertEquals(400, response.getStatusCode().value());
+    }
+
+    @Test
     void testGetLocationData_Valid() {
         Location loc = new Location("Test Location", 51.5, 0.1);
         controller.addLocation(loc);
@@ -120,11 +122,12 @@ public class LocationControllerTest {
 
         ResponseEntity<?> response = controller.getLocationStats(loc.getId());
         assertEquals(200, response.getStatusCode().value());
-        Map<String, Object> body = (Map<String, Object>) response.getBody();
-        List<AirQualitySnapshot> snapshots = (List<AirQualitySnapshot>) body.get("snapshots");
-        assertTrue(snapshots.isEmpty());
+        Map<String,Object> stats = (Map<String,Object>) response.getBody();
+        assertEquals(0.0, stats.get("averagePm25"));
+        assertEquals(0.0, stats.get("averagePm10"));
     }
 
+    @SuppressWarnings("null")
     @Test
     void testGetLocationStats_WithSnapshots() {
         Location loc = new Location("Test", 51.5, 0.1);
@@ -138,5 +141,68 @@ public class LocationControllerTest {
         Map<String,Object> stats = (Map<String,Object>) response.getBody();
         assertEquals(5.0, stats.get("averagePm25"));
         assertEquals(10.0, stats.get("averagePm10"));
+    }
+
+    @Test
+    void testGetLocationStats_NotFound() {
+        ResponseEntity<?> response = controller.getLocationStats(999L);
+        assertEquals(404, response.getStatusCode().value());
+    }
+
+    @SuppressWarnings("null")
+    @Test
+    void testGetSiteByCoords_Valid() {
+        ResponseEntity<?> response = controller.getSiteByCoords(51.5, 0.1);
+        assertEquals(200, response.getStatusCode().value());
+        Map<String, Object> body = (Map<String, Object>) response.getBody();
+        assertEquals("DUMMY", body.get("siteCode"));
+        assertNotNull(body.get("airQualityData"));
+    }
+
+    @Test
+    void testGetSiteByCoords_NoData() {
+        siteCodeResolver.setReturnNullSiteCode(true);
+        ResponseEntity<?> response = controller.getSiteByCoords(51.5, 0.1);
+        assertEquals(404, response.getStatusCode().value());
+    }
+
+    @Test
+    void testRefreshLocation_Valid() {
+        Location loc = new Location("Test", 51.5, 0.1);
+        controller.addLocation(loc);
+
+        ResponseEntity<?> response = controller.refreshLocation(loc.getId());
+        assertEquals(200, response.getStatusCode().value());
+    }
+
+    @Test
+    void testRefreshLocation_NotFound() {
+        ResponseEntity<?> response = controller.refreshLocation(999L);
+        assertEquals(404, response.getStatusCode().value());
+    }
+
+    @Test
+    void testRefreshLocation_NoAQData() {
+        siteCodeResolver.setReturnNullSiteCode(true);
+        Location loc = new Location("Test", 51.5, 0.1);
+        controller.addLocation(loc);
+
+        ResponseEntity<?> response = controller.refreshLocation(loc.getId());
+        assertEquals(404, response.getStatusCode().value());
+    }
+
+    @Test
+    void testDeleteAllLocations() {
+        Location loc1 = new Location("Loc1", 51.5, 0.1);
+        Location loc2 = new Location("Loc2", 52.5, 0.2);
+        controller.addLocation(loc1);
+        controller.addLocation(loc2);
+
+        controller.deleteAllLocations();
+
+        ResponseEntity<?> response1 = controller.getLocationData(loc1.getId());
+        ResponseEntity<?> response2 = controller.getLocationData(loc2.getId());
+        assertEquals(404, response1.getStatusCode().value());
+        assertEquals(404, response2.getStatusCode().value());
     }
 }
