@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -26,14 +27,21 @@ import com.pollution.project.repository.AirQualitySnapshotRepository;
 
 @Service    
 public class SiteCodeResolver {
-    private final RestTemplate restTemplate = new RestTemplate();
     private final Object lock = new Object();
     private final String apiUrl = "https://api.erg.ic.ac.uk/AirQuality/Information/MonitoringSites/GroupName=London/Json";
     private static final Logger logger = LoggerFactory.getLogger(SiteCodeResolver.class);
     private final AirQualitySnapshotRepository snapshotRepository;
     private Trie siteTrie;
+    private final RestTemplate restTemplate;
+    
+    protected SiteCodeResolver() {
+        this.snapshotRepository = null;
+        this.restTemplate = null;
+    }
 
-    public SiteCodeResolver(AirQualitySnapshotRepository snapshotRepository) {
+    @Autowired
+    public SiteCodeResolver(RestTemplate restTemplate, AirQualitySnapshotRepository snapshotRepository) {
+        this.restTemplate = restTemplate;
         this.snapshotRepository = snapshotRepository;
     }
 
@@ -64,7 +72,7 @@ public class SiteCodeResolver {
             if (sites != null) {
                 Trie newTrie = new Trie();
                 for (MonitoringSite site : sites) {
-                    newTrie.insert(site.getSiteName(), site.getSiteCode());
+                    newTrie.insert(site.getSiteName().trim(), site.getSiteCode());
                 }
                 
                 setSiteTrie(newTrie);

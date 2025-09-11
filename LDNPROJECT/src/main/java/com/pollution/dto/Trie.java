@@ -17,6 +17,8 @@ public class Trie {
     }
 
     public String searchExact(String siteName) {
+        siteName = siteName.trim();
+
         TrieNode current = root;
         for (char ch : siteName.toLowerCase().toCharArray()) {
             current = current.children.get(ch);

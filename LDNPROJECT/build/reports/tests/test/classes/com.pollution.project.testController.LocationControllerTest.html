@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.023s</div>
+<div class="counter">0.022s</div>
 <p>duration</p>
 </div>
 </td>
@@ -129,7 +129,7 @@
 </tr>
 <tr>
 <td class="success">testAddLocation_InvalidLongitude()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -144,12 +144,12 @@
 </tr>
 <tr>
 <td class="success">testDeleteAllLocations()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testDeleteLocation_NotFound()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -159,12 +159,12 @@
 </tr>
 <tr>
 <td class="failures">testGetLocationData_NoAQData()</td>
-<td class="failures">0.002s</td>
+<td class="failures">0.001s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="success">testGetLocationData_NotFound()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -179,7 +179,7 @@
 </tr>
 <tr>
 <td class="success">testGetLocationStats_WithSnapshots()</td>
-<td class="success">0.004s</td>
+<td class="success">0.006s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -204,12 +204,12 @@
 </tr>
 <tr>
 <td class="success">testRefreshLocation_NotFound()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshLocation_Valid()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -217,18 +217,18 @@
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>22:12:30.870 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to add location with null or empty name
-22:12:30.872 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to refresh non-existent location with id 999
-22:12:30.874 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Location with id 999 not found
-22:12:30.875 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to add location with invalid latitude or longitude
-22:12:30.878 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- No air quality data found for coordinates (51.5, 0.1)
-22:12:30.880 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to delete non-existent location with id 999
-22:12:30.887 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to add location with null or empty name
-22:12:30.889 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- No air quality data found for location id 1
-22:12:30.890 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- No air quality data found for location id 1
-22:12:30.891 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Location with id 1 not found
-22:12:30.892 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Location with id 2 not found
-22:12:30.894 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to add location with invalid latitude or longitude
+<pre>22:25:13.539 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to add location with null or empty name
+22:25:13.541 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to refresh non-existent location with id 999
+22:25:13.542 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Location with id 999 not found
+22:25:13.543 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to add location with invalid latitude or longitude
+22:25:13.546 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- No air quality data found for coordinates (51.5, 0.1)
+22:25:13.548 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to delete non-existent location with id 999
+22:25:13.557 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to add location with null or empty name
+22:25:13.558 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- No air quality data found for location id 1
+22:25:13.559 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- No air quality data found for location id 1
+22:25:13.561 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Location with id 1 not found
+22:25:13.561 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Location with id 2 not found
+22:25:13.564 [Test worker] WARN com.pollution.project.testController.DummyLocationController -- Attempted to add location with invalid latitude or longitude
 </pre>
 </span>
 </div>
@@ -240,7 +240,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 8.14.3</a> at 11 Sept 2025, 22:12:32</p>
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 11 Sept 2025, 22:25:15</p>
 </div>
 </div>
 </body>

@@ -26,6 +26,8 @@ import static org.mockito.MockitoAnnotations.openMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.pollution.dto.HourlyIndexResponse;
 import com.pollution.dto.MonitoringSite;
@@ -49,6 +51,8 @@ class SiteCodeResolverTest {
 
     private MonitoringSite site1;
     private MonitoringSite site2;
+
+    private static final Logger logger = LoggerFactory.getLogger(SiteCodeResolverTest.class);
     
     @BeforeEach
     void setup() {
@@ -205,20 +209,21 @@ class SiteCodeResolverTest {
         // Arrange
         MonitoringSite siteA = new MonitoringSite("Site A", "SA1");
         MonitoringSite siteB = new MonitoringSite("Site B", "SB2");
-
         MonitoringSite[] newSites = {siteA, siteB};
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(newSites);
-
+    
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class)))
+            .thenReturn(newSites);
+    
         // Act
         siteCodeResolver.refreshSiteTrie();
-
+    
         // Assert
         Trie trie = siteCodeResolver.getSiteTrie();
         assertEquals("SA1", trie.searchExact("Site A"));
         assertEquals("SB2", trie.searchExact("Site B"));
-
-        // API should have been called once
-        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
+    
+        verify(restTemplate, times(1))
+            .getForObject(anyString(), eq(MonitoringSite[].class));
     }
 
     @Test

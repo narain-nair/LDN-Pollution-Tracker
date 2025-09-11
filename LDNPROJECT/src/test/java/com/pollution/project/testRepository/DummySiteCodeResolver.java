@@ -10,7 +10,7 @@ public class DummySiteCodeResolver extends SiteCodeResolver {
     private boolean returnNullSiteCode = false;
 
     public DummySiteCodeResolver() {
-        super(null);
+        super();
     }
 
     public void setReturnNullSiteCode(boolean flag) {
