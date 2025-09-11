@@ -101,6 +101,8 @@ class SiteCodeResolverTest {
     void testLookupSiteCode_ExactMatch() {
         Trie trie = new Trie();
         trie.insert("Barking and Dagenham - North Street", "BG3");
+        siteCodeResolver.setSiteTrie(trie);
+        
         assertEquals("BG3", siteCodeResolver.lookupSiteCode("Barking and Dagenham - North Street"));
     }
 
