@@ -1,4 +1,4 @@
-package com.pollution.project.repository;
+package com.pollution.project.testRepository;
 
 import java.time.LocalDateTime;
 
@@ -6,7 +6,7 @@ import com.pollution.project.entity.AirQualityData;
 import com.pollution.project.entity.Location;
 import com.pollution.project.service.SiteCodeResolver;
 
-class DummySiteCodeResolver extends SiteCodeResolver {
+public class DummySiteCodeResolver extends SiteCodeResolver {
 
     public DummySiteCodeResolver() {
         super(null);

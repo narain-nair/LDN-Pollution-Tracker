@@ -1,11 +1,13 @@
-package com.pollution.project.repository;
+package com.pollution.project.testRepository;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 import com.pollution.project.entity.Location;
-import com.pollution.project.repository.LocationRepository;
 
-import java.util.*;
-
-class DummyLocationRepository {
+public class DummyLocationRepository {
     private Map<Long, Location> storage = new HashMap<>();
     private long counter = 1;
 
