@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.pollution.project.service.SiteCodeResolverTest" tests="34" skipped="0" failures="11" errors="0" timestamp="2025-09-11T22:23:11.221Z" hostname="Narains-Laptop.local" time="0.675">
+<testsuite name="com.pollution.project.service.SiteCodeResolverTest" tests="34" skipped="0" failures="11" errors="0" timestamp="2025-09-11T22:26:35.837Z" hostname="Narains-Laptop.local" time="0.582">
   <properties/>
-  <testcase name="testGetIndex_SpeciesNotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.534"/>
-  <testcase name="testLookupSiteCode_TrimInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.005"/>
+  <testcase name="testGetIndex_SpeciesNotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.5"/>
+  <testcase name="testLookupSiteCode_TrimInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003"/>
   <testcase name="testGetIndex_ValidSpecies()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
-  <testcase name="testRefreshSiteTrie_SuccessfulUpdate()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.03"/>
-  <testcase name="testGetIndex_InvalidIndexValue()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.007"/>
-  <testcase name="testLookupSiteCode_SubstringNotPrefix()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003"/>
-  <testcase name="testAssignSiteCode_BothFail()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.012">
+  <testcase name="testRefreshSiteTrie_SuccessfulUpdate()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.019"/>
+  <testcase name="testGetIndex_InvalidIndexValue()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
+  <testcase name="testLookupSiteCode_SubstringNotPrefix()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
+  <testcase name="testAssignSiteCode_BothFail()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.006">
     <failure message="org.mockito.exceptions.misusing.MissingMethodInvocationException: &#10;when() requires an argument which has to be 'a method call on a mock'.&#10;For example:&#10;    when(mock.getArticles()).thenReturn(articles);&#10;&#10;Also, this error might show up because:&#10;1. you stub either of: final/private/native/equals()/hashCode() methods.&#10;   Those methods *cannot* be stubbed/verified.&#10;   Mocking methods declared on non-public parent classes is not supported.&#10;2. inside when() you don't call method on mock but on some other object.&#10;" type="org.mockito.exceptions.misusing.MissingMethodInvocationException">org.mockito.exceptions.misusing.MissingMethodInvocationException: 
 when() requires an argument which has to be 'a method call on a mock'.
 For example:
@@ -25,7 +25,7 @@ Also, this error might show up because:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testRefreshLocationData_SnapshotSaved()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.005">
+  <testcase name="testRefreshLocationData_SnapshotSaved()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
     <failure message="org.mockito.exceptions.misusing.NotAMockException: &#10;Argument passed to when() is not a mock!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();" type="org.mockito.exceptions.misusing.NotAMockException">org.mockito.exceptions.misusing.NotAMockException: 
 Argument passed to when() is not a mock!
 Example of correct stubbing:
@@ -37,7 +37,7 @@ Example of correct stubbing:
 </failure>
   </testcase>
   <testcase name="testCalculateSiteCode_NoSitesReturned()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
-  <testcase name="testLookupSiteCode_SuggestionWithoutSiteCode()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
+  <testcase name="testLookupSiteCode_SuggestionWithoutSiteCode()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
   <testcase name="testGetSiteTrie_SubsequentCallsReturnSameInstance()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
     <failure message="Wanted but not invoked:&#10;restTemplate.getForObject(&#10;    &lt;any string&gt;,&#10;    class [Lcom.pollution.dto.MonitoringSite;&#10;);&#10;-&gt; at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401)&#10;Actually, there were zero interactions with this mock.&#10;" type="org.mockito.exceptions.verification.WantedButNotInvoked">Wanted but not invoked:
 restTemplate.getForObject(
@@ -72,12 +72,12 @@ Also, this error might show up because:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testCalculateSiteCode_EmptySitesArray()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
+  <testcase name="testCalculateSiteCode_EmptySitesArray()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
   <testcase name="testLookupSiteCode_NullInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
   <testcase name="testLookupSiteCode_ExactMatch()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testLookupSiteCode_MultipleSuggestions()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.004"/>
+  <testcase name="testLookupSiteCode_MultipleSuggestions()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
   <testcase name="testCalculateSiteCode_InvalidCoordinatesSkipped()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
-  <testcase name="testRefreshLocationData_NoAirQualityData()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001">
+  <testcase name="testRefreshLocationData_NoAirQualityData()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
     <failure message="org.mockito.exceptions.misusing.NotAMockException: &#10;Argument passed to when() is not a mock!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();" type="org.mockito.exceptions.misusing.NotAMockException">org.mockito.exceptions.misusing.NotAMockException: 
 Argument passed to when() is not a mock!
 Example of correct stubbing:
@@ -88,9 +88,9 @@ Example of correct stubbing:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testLookupSiteCode_NotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
+  <testcase name="testLookupSiteCode_NotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
   <testcase name="testLookupSiteCode_CaseInsensitive()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testGetSiteTrie_FirstCallPopulatesTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.011">
+  <testcase name="testGetSiteTrie_FirstCallPopulatesTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: expected: &lt;S1&gt; but was: &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;S1&gt; but was: &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -104,11 +104,11 @@ Example of correct stubbing:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testRefreshSiteTrie_ReplacesOldTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003"/>
-  <testcase name="testRefreshSiteTrie_ApiThrowsException()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.007"/>
+  <testcase name="testRefreshSiteTrie_ReplacesOldTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
+  <testcase name="testRefreshSiteTrie_ApiThrowsException()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.004"/>
   <testcase name="testGetSiteCode_Found()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testGetSiteCode_NotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testPopulateLocationData_InvalidIndex()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
+  <testcase name="testGetSiteCode_NotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.0"/>
+  <testcase name="testPopulateLocationData_InvalidIndex()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
     <failure message="org.mockito.exceptions.misusing.NotAMockException: &#10;Argument passed to when() is not a mock!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();" type="org.mockito.exceptions.misusing.NotAMockException">org.mockito.exceptions.misusing.NotAMockException: 
 Argument passed to when() is not a mock!
 Example of correct stubbing:
@@ -162,7 +162,7 @@ Also, this error might show up because:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <testcase name="testLookupSiteCode_SpecialCharacters()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
+  <testcase name="testLookupSiteCode_SpecialCharacters()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.0"/>
   <testcase name="testLookupSiteCode_SuggestionUsed()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: expected: &lt;BQ8&gt; but was: &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;BQ8&gt; but was: &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
@@ -177,11 +177,11 @@ Also, this error might show up because:
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <system-out><![CDATA[2025-09-11T23:23:11.791+01:00  INFO 24871 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
-2025-09-11T23:23:11.793+01:00  INFO 24871 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site A': SA1
-2025-09-11T23:23:11.794+01:00  INFO 24871 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site B': SB2
-2025-09-11T23:23:11.874+01:00  INFO 24871 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
-2025-09-11T23:23:11.878+01:00 ERROR 24871 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error refreshing site trie: {}
+  <system-out><![CDATA[2025-09-11T23:26:36.361+01:00  INFO 25135 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
+2025-09-11T23:26:36.362+01:00  INFO 25135 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site A': SA1
+2025-09-11T23:26:36.362+01:00  INFO 25135 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site B': SB2
+2025-09-11T23:26:36.400+01:00  INFO 25135 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
+2025-09-11T23:26:36.402+01:00 ERROR 25135 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error refreshing site trie: {}
 
 org.springframework.web.client.RestClientException: API down
 	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401) ~[spring-web-6.1.13.jar:6.1.13]

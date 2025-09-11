@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.654s</div>
+<div class="counter">0.573s</div>
 <p>duration</p>
 </div>
 </td>
@@ -290,7 +290,7 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="failures">testAssignSiteCode_BothFail()</td>
-<td class="failures">0.012s</td>
+<td class="failures">0.006s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
@@ -305,7 +305,7 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testCalculateSiteCode_EmptySitesArray()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -325,12 +325,12 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testGetIndex_InvalidIndexValue()</td>
-<td class="success">0.007s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetIndex_SpeciesNotFound()</td>
-<td class="success">0.534s</td>
+<td class="success">0.500s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -345,12 +345,12 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testGetSiteCode_NotFound()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">testGetSiteTrie_FirstCallPopulatesTrie()</td>
-<td class="failures">0.011s</td>
+<td class="failures">0.002s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
@@ -375,12 +375,12 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_MultipleSuggestions()</td>
-<td class="success">0.004s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_NotFound()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -390,12 +390,12 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SpecialCharacters()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SubstringNotPrefix()</td>
-<td class="success">0.003s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -405,17 +405,17 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SuggestionWithoutSiteCode()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_TrimInput()</td>
-<td class="success">0.005s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">testPopulateLocationData_InvalidIndex()</td>
-<td class="failures">0.003s</td>
+<td class="failures">0.002s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
@@ -430,27 +430,27 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="failures">testRefreshLocationData_NoAirQualityData()</td>
-<td class="failures">0.001s</td>
+<td class="failures">0.002s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testRefreshLocationData_SnapshotSaved()</td>
-<td class="failures">0.005s</td>
+<td class="failures">0.002s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="success">testRefreshSiteTrie_ApiThrowsException()</td>
-<td class="success">0.007s</td>
+<td class="success">0.004s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshSiteTrie_ReplacesOldTrie()</td>
-<td class="success">0.003s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshSiteTrie_SuccessfulUpdate()</td>
-<td class="success">0.030s</td>
+<td class="success">0.019s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -458,11 +458,11 @@ Example of correct stubbing:
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2025-09-11T23:23:11.791+01:00  INFO 24871 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
-2025-09-11T23:23:11.793+01:00  INFO 24871 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site A': SA1
-2025-09-11T23:23:11.794+01:00  INFO 24871 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site B': SB2
-2025-09-11T23:23:11.874+01:00  INFO 24871 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
-2025-09-11T23:23:11.878+01:00 ERROR 24871 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error refreshing site trie: {}
+<pre>2025-09-11T23:26:36.361+01:00  INFO 25135 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
+2025-09-11T23:26:36.362+01:00  INFO 25135 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site A': SA1
+2025-09-11T23:26:36.362+01:00  INFO 25135 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site B': SB2
+2025-09-11T23:26:36.400+01:00  INFO 25135 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
+2025-09-11T23:26:36.402+01:00 ERROR 25135 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error refreshing site trie: {}
 
 org.springframework.web.client.RestClientException: API down
 	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401) ~[spring-web-6.1.13.jar:6.1.13]
@@ -575,7 +575,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 8.14.3</a> at 11 Sept 2025, 23:23:11</p>
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 11 Sept 2025, 23:26:36</p>
 </div>
 </div>
 </body>
