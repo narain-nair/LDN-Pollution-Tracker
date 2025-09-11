@@ -97,4 +97,46 @@ public class LocationControllerTest {
         ResponseEntity<?> response = controller.getLocationData(loc.getId());
         assertEquals(404, response.getStatusCode().value());
     }
+
+    @Test
+    void testDeleteLocation_Valid() {
+        Location loc = new Location("Test", 51.5, 0.1);
+        controller.addLocation(loc);
+
+        ResponseEntity<?> response = controller.deleteLocation(loc.getId());
+        assertEquals(200, response.getStatusCode().value());
+    }
+
+    @Test  
+    void testDeleteLocation_NotFound() {
+        ResponseEntity<?> response = controller.deleteLocation(999L);
+        assertEquals(404, response.getStatusCode().value());
+    }
+
+    @Test  
+    void testGetLocation_NoSnapshots() {
+        Location loc = new Location("Test", 51.5, 0.1);
+        controller.addLocation(loc);
+
+        ResponseEntity<?> response = controller.getLocationStats(loc.getId());
+        assertEquals(200, response.getStatusCode().value());
+        Map<String, Object> body = (Map<String, Object>) response.getBody();
+        List<AirQualitySnapshot> snapshots = (List<AirQualitySnapshot>) body.get("snapshots");
+        assertTrue(snapshots.isEmpty());
+    }
+
+    @Test
+    void testGetLocationStats_WithSnapshots() {
+        Location loc = new Location("Test", 51.5, 0.1);
+        controller.addLocation(loc);
+    
+        AirQualitySnapshot s1 = new AirQualitySnapshot();
+        s1.setPm25(5.0); s1.setPm10(10.0); s1.setNo2(15.0); s1.setSo2(20.0); s1.setO3(25.0); s1.setCo(30.0);
+        controller.addSnapshot(loc.getId(), s1);
+    
+        ResponseEntity<?> response = controller.getLocationStats(loc.getId());
+        Map<String,Object> stats = (Map<String,Object>) response.getBody();
+        assertEquals(5.0, stats.get("averagePm25"));
+        assertEquals(10.0, stats.get("averagePm10"));
+    }
 }
