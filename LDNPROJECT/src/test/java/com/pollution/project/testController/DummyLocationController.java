@@ -72,4 +72,8 @@ public class DummyLocationController {
         );
         return ResponseEntity.ok(response);
     }
+
+    public void addSnapshot(Long locationId, AirQualitySnapshot snapshot) {
+        snapshotStorage.computeIfAbsent(locationId, k -> new ArrayList<>()).add(snapshot);
+    }
 }
