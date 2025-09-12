@@ -2,6 +2,7 @@ package com.pollution.project.service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Comparator;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.pollution.dto.HourlyIndexResponse;
+import com.pollution.dto.HourlyIndexResponse.HourlyAirQualityIndex;
 import com.pollution.dto.HourlyIndexResponse.Site;
 import com.pollution.dto.HourlyIndexResponse.Species;
 import com.pollution.dto.MonitoringSite;
@@ -160,48 +162,69 @@ public class SiteCodeResolver {
     }
 
     public void populateLocationData(Location location, String userInput) {
+        logger.info("Starting populateLocationData for userInput: {}, location before assignSiteCode: {}", userInput, location);
+
+        // Assign site code first
         assignSiteCode(location, userInput);
-        if (location.getSiteCode() == null) return;
+        logger.info("After assignSiteCode, location: {}", location);
+
+        if (location.getSiteCode() == null) {
+            logger.warn("Site code is null after assignSiteCode, returning early");
+            return;
+        }
 
         String url = "https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode="
                     + location.getSiteCode()
                     + "/Json";
 
         try {
+            logger.info("Fetching air quality data from URL: {}", url);
             HourlyIndexResponse response = restTemplate.getForObject(url, HourlyIndexResponse.class);
-    
-            if (response != null
-                && response.getHourlyAirQualityIndex() != null 
-                && response.getHourlyAirQualityIndex().getLocalAuthority() != null 
-                && response.getHourlyAirQualityIndex().getLocalAuthority().getSite() != null) {
-                Site site = response.getHourlyAirQualityIndex()
-                                    .getLocalAuthority()
-                                    .getSite();
-    
-                List<Species> speciesList = site.getSpecies();
-                LocalDateTime bulletinTime = LocalDateTime.parse(
-                    site.getBulletinDate(),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-                );
-    
-                AirQualityData airData = new AirQualityData(
+
+            if (response == null) {
+                logger.warn("Received null response from API for siteCode {}", location.getSiteCode());
+                location.setAirQualityData(new AirQualityData(null, null, null, null, null, null, null));
+                return;
+            }
+
+            HourlyAirQualityIndex hqi = response.getHourlyAirQualityIndex();
+            if (hqi == null || hqi.getLocalAuthority() == null || hqi.getLocalAuthority().getSite() == null) {
+                logger.warn("Incomplete response: missing Hqi/LocalAuthority/Site for siteCode {}", location.getSiteCode());
+                location.setAirQualityData(new AirQualityData(null, null, null, null, null, null, null));
+                return;
+            }
+
+            Site site = hqi.getLocalAuthority().getSite();
+            logger.info("Fetched site data: {}", site);
+
+            List<Species> speciesList = site.getSpecies();
+            logger.info("Species list: {}", speciesList);
+
+            LocalDateTime bulletinTime = null;
+            try {
+                bulletinTime = LocalDateTime.parse(site.getBulletinDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            } catch (DateTimeParseException e) {
+                logger.warn("Failed to parse bulletin date '{}' for siteCode {}: {}", site.getBulletinDate(), location.getSiteCode(), e.getMessage());
+            }
+
+            // Always instantiate AirQualityData
+            AirQualityData airData = new AirQualityData(
                     getIndex(speciesList, "PM25"),
                     getIndex(speciesList, "PM10"),
                     getIndex(speciesList, "NO2"),
                     getIndex(speciesList, "SO2"),
                     getIndex(speciesList, "O3"),
                     getIndex(speciesList, "CO"),
-                    bulletinTime 
-                );
-    
-                location.setAirQualityData(airData);
-                location.setName(site.getSiteName());
-                location.setSiteCode(site.getSiteCode());
-                logger.info("Populated air quality data for site code {}", location.getSiteCode());
-            } else {
-                location.setAirQualityData(null);
-                logger.warn("No air quality data returned for site code {}", location.getSiteCode());
-            }
+                    bulletinTime
+            );
+
+            location.setAirQualityData(airData);
+            location.setName(site.getSiteName());
+            location.setSiteCode(site.getSiteCode());
+
+            logger.info("Populated AirQualityData: {}", airData);
+            logger.info("Location after population: {}", location);
+
         } catch (HttpClientErrorException e) {
             logger.error("Client error ({}): {} for URL {}", e.getStatusCode(), e.getMessage(), url);
         } catch (HttpServerErrorException e) {

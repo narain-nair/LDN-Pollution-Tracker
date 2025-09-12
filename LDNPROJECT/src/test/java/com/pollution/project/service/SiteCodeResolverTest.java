@@ -17,7 +17,11 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -382,6 +386,7 @@ class SiteCodeResolverTest {
     void testPopulateLocationData_ValidResponse() {
         // Dummy location (latitude/longitude arbitrary)
         Location location = new Location("Dummy Location", 51.000, 0.000);
+        location.setSiteCode("DUMMY1");
 
         // Build species list
         HourlyIndexResponse.Species pm25 = new HourlyIndexResponse.Species("PM25", "PM25", "5", "Moderate", "Automated");
@@ -401,9 +406,6 @@ class SiteCodeResolverTest {
 
         // Mock API call
         when(restTemplate.getForObject(anyString(), eq(HourlyIndexResponse.class))).thenReturn(response);
-
-        // Mock assignSiteCode (skip actual lookup logic)
-        doNothing().when(siteCodeResolver).assignSiteCode(location, "Dummy Location");
 
         // Act
         siteCodeResolver.populateLocationData(location, "Dummy Location");
@@ -430,25 +432,33 @@ class SiteCodeResolverTest {
 
     @Test
     void testPopulateLocationData_InvalidIndex() {
+        // Arrange
         Location location = new Location("Dummy Location", 51.000, 0.000);
+        location.setId(1L);  // non-null id
 
         // Species with invalid index
         HourlyIndexResponse.Species pm25 = new HourlyIndexResponse.Species("PM25", "PM25", "N/A", "Moderate", "Automated");
-
-        HourlyIndexResponse.Site site = new HourlyIndexResponse.Site("51.000", "0.000", "DUMMY1", "Dummy Location", "2025-09-10 12:00:00",List.of(pm25));
-
+        HourlyIndexResponse.Site site = new HourlyIndexResponse.Site("51.000", "0.000", "DUMMY1", "Dummy Location", 
+                                                                    "2025-09-10 12:00:00", List.of(pm25));
         HourlyIndexResponse.LocalAuthority la = new HourlyIndexResponse.LocalAuthority("Dummy Authority", "99", "51.000", "0.000", site);
-
         HourlyIndexResponse.HourlyAirQualityIndex hqi = new HourlyIndexResponse.HourlyAirQualityIndex("60", la);
-
         HourlyIndexResponse response = new HourlyIndexResponse(hqi);
 
-        when(restTemplate.getForObject(anyString(), eq(HourlyIndexResponse.class))).thenReturn(response);
+        lenient().when(restTemplate.getForObject(anyString(), eq(HourlyIndexResponse.class))).thenReturn(response);
 
-        doNothing().when(siteCodeResolver).assignSiteCode(location, "Dummy Location");
+        // Spy the resolver so we can stub assignSiteCode
+        SiteCodeResolver spyResolver = Mockito.spy(siteCodeResolver);
+        doAnswer(invocation -> {Location loc = invocation.getArgument(0); loc.setSiteCode("DUMMY1"); // ensure non-null site code
+            return null;
+        }).when(spyResolver).assignSiteCode(any(Location.class), anyString());
 
         // Act
-        siteCodeResolver.populateLocationData(location, "Dummy Location");
+        spyResolver.populateLocationData(location, "Dummy Location");
+
+        // Logging for debugging
+        logger.info("Mocked Response: {}", response);
+        logger.info("Species List: {}", response.getHourlyAirQualityIndex().getLocalAuthority().getSite().getSpecies());
+        logger.info("Air quality data: {}", location.getAirQualityData());
 
         // Assert
         assertNotNull(location.getAirQualityData());
@@ -470,11 +480,13 @@ class SiteCodeResolverTest {
     @Test
     void testRefreshLocationData_NoAirQualityData() {
         Location location = new Location(51.5, 0.1);
-
-        doNothing().when(siteCodeResolver).populateLocationData(eq(location), anyString());
-
+    
+        // Mock RestTemplate to return no data, so populateLocationData sets no AirQualityData
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(new MonitoringSite[0]); // empty array
+    
         siteCodeResolver.refreshLocationData(location);
-
+    
+        // Verify snapshotRepository.save is never called
         verify(snapshotRepository, never()).save(any());
     }
 
