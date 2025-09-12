@@ -29,7 +29,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">9</div>
+<div class="counter">5</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.594s</div>
+<div class="counter">0.567s</div>
 <p>duration</p>
 </div>
 </td>
@@ -51,7 +51,7 @@
 </td>
 <td>
 <div class="infoBox failures" id="successRate">
-<div class="percent">73%</div>
+<div class="percent">85%</div>
 <p>successful</p>
 </div>
 </td>
@@ -76,50 +76,6 @@
 <div class="tab">
 <h2>Failed tests</h2>
 <div class="test">
-<a name="testAssignSiteCode_BothFail()"></a>
-<h3 class="failures">testAssignSiteCode_BothFail()</h3>
-<span class="code">
-<pre>org.mockito.exceptions.misusing.MissingMethodInvocationException: 
-when() requires an argument which has to be 'a method call on a mock'.
-For example:
-    when(mock.getArticles()).thenReturn(articles);
-
-Also, this error might show up because:
-1. you stub either of: final/private/native/equals()/hashCode() methods.
-   Those methods *cannot* be stubbed/verified.
-   Mocking methods declared on non-public parent classes is not supported.
-2. inside when() you don't call method on mock but on some other object.
-
-	at app//com.pollution.project.service.SiteCodeResolverTest.testAssignSiteCode_BothFail(SiteCodeResolverTest.java:364)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testAssignSiteCode_FallbackToCalculate()"></a>
-<h3 class="failures">testAssignSiteCode_FallbackToCalculate()</h3>
-<span class="code">
-<pre>org.mockito.exceptions.misusing.MissingMethodInvocationException: 
-when() requires an argument which has to be 'a method call on a mock'.
-For example:
-    when(mock.getArticles()).thenReturn(articles);
-
-Also, this error might show up because:
-1. you stub either of: final/private/native/equals()/hashCode() methods.
-   Those methods *cannot* be stubbed/verified.
-   Mocking methods declared on non-public parent classes is not supported.
-2. inside when() you don't call method on mock but on some other object.
-
-	at app//com.pollution.project.service.SiteCodeResolverTest.testAssignSiteCode_FallbackToCalculate(SiteCodeResolverTest.java:353)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-<div class="test">
 <a name="testAssignSiteCode_InputMatchesSite()"></a>
 <h3 class="failures">testAssignSiteCode_InputMatchesSite()</h3>
 <span class="code">
@@ -134,27 +90,7 @@ Also, this error might show up because:
    Mocking methods declared on non-public parent classes is not supported.
 2. inside when() you don't call method on mock but on some other object.
 
-	at app//com.pollution.project.service.SiteCodeResolverTest.testAssignSiteCode_InputMatchesSite(SiteCodeResolverTest.java:343)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testGetSiteTrie_SubsequentCallsReturnSameInstance()"></a>
-<h3 class="failures">testGetSiteTrie_SubsequentCallsReturnSameInstance()</h3>
-<span class="code">
-<pre>Wanted but not invoked:
-restTemplate.getForObject(
-    &lt;any string&gt;,
-    class [Lcom.pollution.dto.MonitoringSite;
-);
--&gt; at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401)
-Actually, there were zero interactions with this mock.
-
-	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401)
-	at app//com.pollution.project.service.SiteCodeResolverTest.testGetSiteTrie_SubsequentCallsReturnSameInstance(SiteCodeResolverTest.java:218)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testAssignSiteCode_InputMatchesSite(SiteCodeResolverTest.java:348)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -169,7 +105,7 @@ Actually, there were zero interactions with this mock.
 Argument passed to when() is not a mock!
 Example of correct stubbing:
     doThrow(new RuntimeException()).when(mock).someMethod();
-	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_InvalidIndex(SiteCodeResolverTest.java:439)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_InvalidIndex(SiteCodeResolverTest.java:449)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -184,7 +120,7 @@ Example of correct stubbing:
 Argument passed to when() is not a mock!
 Example of correct stubbing:
     doThrow(new RuntimeException()).when(mock).someMethod();
-	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_ReturnNull(SiteCodeResolverTest.java:414)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_ReturnNull(SiteCodeResolverTest.java:424)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -199,7 +135,7 @@ Example of correct stubbing:
 Argument passed to when() is not a mock!
 Example of correct stubbing:
     doThrow(new RuntimeException()).when(mock).someMethod();
-	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_ValidResponse(SiteCodeResolverTest.java:397)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_ValidResponse(SiteCodeResolverTest.java:407)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -214,22 +150,7 @@ Example of correct stubbing:
 Argument passed to when() is not a mock!
 Example of correct stubbing:
     doThrow(new RuntimeException()).when(mock).someMethod();
-	at app//com.pollution.project.service.SiteCodeResolverTest.testRefreshLocationData_NoAirQualityData(SiteCodeResolverTest.java:468)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testRefreshLocationData_SnapshotSaved()"></a>
-<h3 class="failures">testRefreshLocationData_SnapshotSaved()</h3>
-<span class="code">
-<pre>org.mockito.exceptions.misusing.NotAMockException: 
-Argument passed to when() is not a mock!
-Example of correct stubbing:
-    doThrow(new RuntimeException()).when(mock).someMethod();
-	at app//com.pollution.project.service.SiteCodeResolverTest.testRefreshLocationData_SnapshotSaved(SiteCodeResolverTest.java:457)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testRefreshLocationData_NoAirQualityData(SiteCodeResolverTest.java:475)
 	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
@@ -253,14 +174,14 @@ Example of correct stubbing:
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testAssignSiteCode_BothFail()</td>
-<td class="failures">0.006s</td>
-<td class="failures">failed</td>
+<td class="success">testAssignSiteCode_BothFail()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testAssignSiteCode_FallbackToCalculate()</td>
-<td class="failures">0.002s</td>
-<td class="failures">failed</td>
+<td class="success">testAssignSiteCode_FallbackToCalculate()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">testAssignSiteCode_InputMatchesSite()</td>
@@ -274,17 +195,17 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testCalculateSiteCode_InvalidCoordinatesSkipped()</td>
-<td class="success">0.002s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testCalculateSiteCode_NearestSiteReturned()</td>
 <td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">testCalculateSiteCode_NoSitesReturned()</td>
+<td class="success">testCalculateSiteCode_NearestSiteReturned()</td>
 <td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testCalculateSiteCode_NoSitesReturned()</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -294,7 +215,7 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testGetIndex_SpeciesNotFound()</td>
-<td class="success">0.518s</td>
+<td class="success">0.494s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -304,7 +225,7 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testGetSiteCode_Found()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -314,17 +235,17 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testGetSiteTrie_FirstCallPopulatesTrie()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetSiteTrie_SubsequentCallsReturnSameInstance()</td>
 <td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testGetSiteTrie_SubsequentCallsReturnSameInstance()</td>
-<td class="failures">0.003s</td>
-<td class="failures">failed</td>
-</tr>
-<tr>
 <td class="success">testLookupSiteCode_CaseInsensitive()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -344,7 +265,7 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_NotFound()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -354,17 +275,17 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SpecialCharacters()</td>
-<td class="success">0.003s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SubstringNotPrefix()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SuggestionUsed()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -374,17 +295,17 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_TrimInput()</td>
-<td class="success">0.003s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">testPopulateLocationData_InvalidIndex()</td>
-<td class="failures">0.002s</td>
+<td class="failures">0.004s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">testPopulateLocationData_ReturnNull()</td>
-<td class="failures">0.001s</td>
+<td class="failures">0.003s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
@@ -394,17 +315,17 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="failures">testRefreshLocationData_NoAirQualityData()</td>
-<td class="failures">0.001s</td>
+<td class="failures">0.005s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
-<td class="failures">testRefreshLocationData_SnapshotSaved()</td>
-<td class="failures">0.002s</td>
-<td class="failures">failed</td>
+<td class="success">testRefreshLocationData_SnapshotSaved()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshSiteTrie_ApiThrowsException()</td>
-<td class="success">0.004s</td>
+<td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -414,7 +335,7 @@ Example of correct stubbing:
 </tr>
 <tr>
 <td class="success">testRefreshSiteTrie_SuccessfulUpdate()</td>
-<td class="success">0.021s</td>
+<td class="success">0.020s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -422,23 +343,23 @@ Example of correct stubbing:
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2025-09-12T00:07:51.888+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
-2025-09-12T00:07:51.889+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site A': SA1
-2025-09-12T00:07:51.889+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site B': SB2
-2025-09-12T00:07:51.927+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Retrieved Trie: com.pollution.dto.Trie@3a33d655
-2025-09-12T00:07:51.927+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site One': S1
-2025-09-12T00:07:51.927+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site Two': S2
-2025-09-12T00:07:51.929+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
-2025-09-12T00:07:51.932+01:00 ERROR 27615 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error refreshing site trie: {}
+<pre>2025-09-12T10:49:52.603+01:00  INFO 48932 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
+2025-09-12T10:49:52.603+01:00  INFO 48932 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site A': SA1
+2025-09-12T10:49:52.603+01:00  INFO 48932 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site B': SB2
+2025-09-12T10:49:52.639+01:00  INFO 48932 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Retrieved Trie: com.pollution.dto.Trie@6f45a2fd
+2025-09-12T10:49:52.639+01:00  INFO 48932 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site One': S1
+2025-09-12T10:49:52.639+01:00  INFO 48932 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site Two': S2
+2025-09-12T10:49:52.641+01:00  INFO 48932 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
+2025-09-12T10:49:52.643+01:00 ERROR 48932 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error refreshing site trie: {}
 
 org.springframework.web.client.RestClientException: API down
 	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401) ~[spring-web-6.1.13.jar:6.1.13]
 	at com.pollution.project.service.SiteCodeResolver.refreshSiteTrie(SiteCodeResolver.java:72) ~[main/:na]
-	at com.pollution.project.service.SiteCodeResolverTest.lambda$testRefreshSiteTrie_ApiThrowsException$0(SiteCodeResolverTest.java:251) ~[test/:na]
+	at com.pollution.project.service.SiteCodeResolverTest.lambda$testRefreshSiteTrie_ApiThrowsException$0(SiteCodeResolverTest.java:256) ~[test/:na]
 	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:49) ~[junit-jupiter-api-5.10.3.jar:5.10.3]
 	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:36) ~[junit-jupiter-api-5.10.3.jar:5.10.3]
 	at org.junit.jupiter.api.Assertions.assertDoesNotThrow(Assertions.java:3168) ~[junit-jupiter-api-5.10.3.jar:5.10.3]
-	at com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_ApiThrowsException(SiteCodeResolverTest.java:251) ~[test/:na]
+	at com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_ApiThrowsException(SiteCodeResolverTest.java:256) ~[test/:na]
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728) ~[junit-platform-commons-1.10.3.jar:1.10.3]
@@ -521,7 +442,7 @@ org.springframework.web.client.RestClientException: API down
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 
-2025-09-12T00:07:51.952+01:00  INFO 27615 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Inserted 'Bexley West' with code 'BQ8' into trie.
+2025-09-12T10:49:52.668+01:00  INFO 48932 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Inserted 'Bexley West' with code 'BQ8' into trie.
 </pre>
 </span>
 </div>
@@ -543,7 +464,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 8.14.3</a> at 12 Sept 2025, 00:07:52</p>
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 12 Sept 2025, 10:49:52</p>
 </div>
 </div>
 </body>

@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.014s</div>
+<div class="counter">0.012s</div>
 <p>duration</p>
 </div>
 </td>
@@ -106,7 +106,7 @@
 </tr>
 <tr>
 <td class="success">testAddLocation_InvalidCoordinates()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -116,12 +116,12 @@
 </tr>
 <tr>
 <td class="success">testAddLocation_NullName()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testAddLocation_Valid()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -131,7 +131,7 @@
 </tr>
 <tr>
 <td class="success">testDeleteLocation_NotFound()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -146,12 +146,12 @@
 </tr>
 <tr>
 <td class="success">testGetLocationData_NotFound()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetLocationData_Valid()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -161,7 +161,7 @@
 </tr>
 <tr>
 <td class="success">testGetLocationStats_WithSnapshots()</td>
-<td class="success">0.003s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -176,7 +176,7 @@
 </tr>
 <tr>
 <td class="success">testGetSiteByCoords_Valid()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -199,20 +199,20 @@
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2025-09-12T00:07:51.954+01:00  WARN 27615 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
-2025-09-12T00:07:51.958+01:00  WARN 27615 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to refresh non-existent location with id 999
-2025-09-12T00:07:51.959+01:00  WARN 27615 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 999 not found
-2025-09-12T00:07:51.959+01:00  WARN 27615 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
-2025-09-12T00:07:51.961+01:00  WARN 27615 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for coordinates (51.5, 0.1)
-2025-09-12T00:07:51.961+01:00  WARN 27615 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to delete non-existent location with id 999
-2025-09-12T00:07:51.966+01:00  WARN 27615 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
-2025-09-12T00:07:51.967+01:00  WARN 27615 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
-2025-09-12T00:07:51.968+01:00  WARN 27615 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
-2025-09-12T00:07:51.969+01:00  WARN 27615 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 1 not found
-2025-09-12T00:07:51.969+01:00  WARN 27615 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 2 not found
-2025-09-12T00:07:51.969+01:00  WARN 27615 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No snapshots found for location id 1
-2025-09-12T00:07:51.970+01:00  WARN 27615 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to get stats for non-existent location with id 999
-2025-09-12T00:07:51.970+01:00  WARN 27615 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
+<pre>2025-09-12T10:49:52.672+01:00  WARN 48932 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
+2025-09-12T10:49:52.676+01:00  WARN 48932 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to refresh non-existent location with id 999
+2025-09-12T10:49:52.676+01:00  WARN 48932 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 999 not found
+2025-09-12T10:49:52.677+01:00  WARN 48932 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
+2025-09-12T10:49:52.678+01:00  WARN 48932 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for coordinates (51.5, 0.1)
+2025-09-12T10:49:52.679+01:00  WARN 48932 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to delete non-existent location with id 999
+2025-09-12T10:49:52.683+01:00  WARN 48932 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
+2025-09-12T10:49:52.683+01:00  WARN 48932 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
+2025-09-12T10:49:52.684+01:00  WARN 48932 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
+2025-09-12T10:49:52.684+01:00  WARN 48932 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 1 not found
+2025-09-12T10:49:52.685+01:00  WARN 48932 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 2 not found
+2025-09-12T10:49:52.685+01:00  WARN 48932 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No snapshots found for location id 1
+2025-09-12T10:49:52.685+01:00  WARN 48932 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to get stats for non-existent location with id 999
+2025-09-12T10:49:52.686+01:00  WARN 48932 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
 </pre>
 </span>
 </div>
@@ -224,7 +224,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 8.14.3</a> at 12 Sept 2025, 00:07:52</p>
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 12 Sept 2025, 10:49:52</p>
 </div>
 </div>
 </body>

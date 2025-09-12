@@ -24,6 +24,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.slf4j.Logger;
@@ -45,7 +46,7 @@ class SiteCodeResolverTest {
 
     @Mock
     private RestTemplate restTemplate;
-
+    
     @InjectMocks
     private SiteCodeResolver siteCodeResolver;
 
@@ -210,11 +211,15 @@ class SiteCodeResolverTest {
         MonitoringSite[] sites = {site1};
         when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(sites);
 
+        // reset cached trie if needed
+        ReflectionTestUtils.setField(siteCodeResolver, "siteTrie", null);
+
         Trie firstCall = siteCodeResolver.getSiteTrie();
         Trie secondCall = siteCodeResolver.getSiteTrie();
 
         assertSame(firstCall, secondCall);
 
+        // should now be invoked once
         verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
     }
 
@@ -350,19 +355,23 @@ class SiteCodeResolverTest {
     @Test
     void testAssignSiteCode_FallbackToCalculate() {
         Location location = new Location(51.5, 0.1);
-        when(siteCodeResolver.lookupSiteCode("Unknown Site")).thenReturn(null);
-        when(siteCodeResolver.calculateSiteCode(51.5, 0.1)).thenReturn("S2");
-
+    
+        // stub RestTemplate to return empty for lookup
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(new MonitoringSite[]{ new MonitoringSite("S2", "51.5", "0.1") });
+    
+        // Call real method
         siteCodeResolver.assignSiteCode(location, "Unknown Site");
-
+    
+        // Assert the calculated fallback code was set
         assertEquals("S2", location.getSiteCode());
     }
 
     @Test
     void testAssignSiteCode_BothFail() {
         Location location = new Location(51.5, 0.1);
-        when(siteCodeResolver.lookupSiteCode("Unknown Site")).thenReturn(null);
-        when(siteCodeResolver.calculateSiteCode(51.5, 0.1)).thenReturn(null);
+
+        // stub restTemplate so lookupSiteCode and calculateSiteCode fail gracefully
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(null);
 
         siteCodeResolver.assignSiteCode(location, "Unknown Site");
 
@@ -454,10 +463,7 @@ class SiteCodeResolverTest {
         AirQualityData airData = new AirQualityData(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, LocalDateTime.now());
         location.setAirQualityData(airData);
 
-        doNothing().when(siteCodeResolver).populateLocationData(eq(location), anyString());
-
         siteCodeResolver.refreshLocationData(location);
-
         verify(snapshotRepository, times(1)).save(any(AirQualitySnapshot.class));
     }
 
