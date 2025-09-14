@@ -7,7 +7,7 @@ function App() {
   const[locations, setLocations] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/locations")
+    axios.get("http://localhost:8080/locations/all")
       .then(res => setLocations(res.data))
       .catch(err => console.error(err));
   }, []);

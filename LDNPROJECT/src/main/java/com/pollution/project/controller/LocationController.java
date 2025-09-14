@@ -44,7 +44,17 @@ public class LocationController{
     @GetMapping("/all")
     public ResponseEntity<?> getAllLocations() {
         List<Location> locations = locationRepository.findAll();
+
+        for (Location loc : locations) {
+            siteCodeResolver.populateLocationData(loc, loc.getName());
+        }
+
         return ResponseEntity.ok(locations);
+    }
+
+    @GetMapping("/ping")
+    public ResponseEntity<String> ping() {
+        return ResponseEntity.ok("pong");
     }
 
     @GetMapping("/{id}")
