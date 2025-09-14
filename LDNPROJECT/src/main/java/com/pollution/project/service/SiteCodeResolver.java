@@ -1,5 +1,6 @@
 package com.pollution.project.service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -9,6 +10,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -17,6 +19,9 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pollution.dto.HourlyIndexResponse;
 import com.pollution.dto.HourlyIndexResponse.HourlyAirQualityIndex;
 import com.pollution.dto.HourlyIndexResponse.Site;
@@ -49,16 +54,59 @@ public class SiteCodeResolver {
         this.snapshotRepository = snapshotRepository;
     }
 
+    public MonitoringSiteResponse fetchMonitoringSites() {
+        try {
+            // Step 1: Always get raw JSON as String
+            String rawJson = restTemplate.getForObject(apiUrl, String.class);
+            logger.info("Raw monitoring sites JSON snippet: {}",
+                rawJson != null && rawJson.length() > 500 
+                    ? rawJson.substring(0, 500) + "..." 
+                    : rawJson
+            );
+
+            // Step 2: Parse manually with Jackson
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(rawJson, MonitoringSiteResponse.class);
+
+        } catch (IOException e) {
+            logger.error("Failed to parse MonitoringSites JSON: {}", e.getMessage());
+            return null;
+        }
+    }
+
     // !! Thread-safe lazy initialization of the Trie to prevent multiple tries being created.
     public synchronized Trie getSiteTrie() {
         if (siteTrie == null) {
             siteTrie = new Trie();
-            MonitoringSiteResponse response = restTemplate.getForObject(apiUrl, MonitoringSiteResponse.class);
-            MonitoringSite[] sites = response != null ? response.getMonitoringSites() : new MonitoringSite[0];            
-            if (sites != null) {
-                for (MonitoringSite site : sites) {
-                    siteTrie.insert(site.getSiteName(), site.getSiteCode());
+            try {
+                ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
+                String rawJson = response.getBody();
+
+                logger.info("Raw API response for monitoring sites: {}", 
+                    rawJson != null 
+                        ? rawJson.substring(0, Math.min(500, rawJson.length())) + "..." 
+                        : "null"
+                );
+
+                String cleanJson = rawJson != null ? rawJson.replaceAll("[^\\u0000-\\u007F]", "") : null;
+                ObjectMapper mapper = new ObjectMapper();
+
+                MonitoringSiteResponse siteResponse = mapper.readValue(cleanJson, MonitoringSiteResponse.class);
+
+                MonitoringSite[] sites = siteResponse != null ? siteResponse.getMonitoringSites() : new MonitoringSite[0];
+                if (sites != null) {
+                    for (MonitoringSite site : sites) {
+                        siteTrie.insert(site.getSiteName().trim(), site.getSiteCode());
+                    }
+                    logger.info("Loaded {} monitoring sites into trie.", sites.length);
+                } else {
+                    logger.warn("No monitoring sites found in API response.");
                 }
+
+            } catch(IOException e) {
+                logger.error("Error parsing API response: {}", e.getMessage());
+            } catch(RestClientException e) {
+                logger.error("Error fetching monitoring sites: {}", e.getMessage());
             }
         }
         return siteTrie;
@@ -71,10 +119,23 @@ public class SiteCodeResolver {
     }
 
     @Scheduled(cron = "0 0 0 * * ?", zone = "GMT") // Every day at midnight
-    public void refreshSiteTrie() {
+    public void refreshSiteTrie() throws JsonMappingException, JsonProcessingException {
         try {
-            MonitoringSiteResponse response = restTemplate.getForObject(apiUrl, MonitoringSiteResponse.class);
-            MonitoringSite[] sites = response != null ? response.getMonitoringSites() : new MonitoringSite[0];
+            
+            ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
+            String rawJson = response.getBody();
+            
+            logger.info("Raw API response for monitoring sites: {}", 
+                rawJson != null 
+                    ? rawJson.substring(0, Math.min(500, rawJson.length())) + "..." 
+                    : "null"
+            );
+
+            String cleanJson = rawJson != null ? rawJson.replaceAll("[^\\x00-\\x7F]", "") : null;
+            ObjectMapper mapper = new ObjectMapper();
+
+            MonitoringSiteResponse siteResponse = mapper.readValue(cleanJson, MonitoringSiteResponse.class);
+            MonitoringSite[] sites = response != null ? siteResponse.getMonitoringSites() : new MonitoringSite[0];
             if (sites != null) {
                 Trie newTrie = new Trie();
                 for (MonitoringSite site : sites) {
@@ -83,6 +144,8 @@ public class SiteCodeResolver {
                 
                 setSiteTrie(newTrie);
                 logger.info("Site trie refreshed successfully, with {} sites.", sites.length);
+            } else {
+                logger.warn("No monitoring sites found in API response during trie refresh.");
             }
         } catch (RestClientException e) {
             logger.error("Error refreshing site trie: {}", e);
@@ -90,31 +153,49 @@ public class SiteCodeResolver {
     }
 
     public String calculateSiteCode(double lat, double lng) {
-        MonitoringSiteResponse response = restTemplate.getForObject(apiUrl, MonitoringSiteResponse.class);
-        MonitoringSite[] sites = response != null ? response.getMonitoringSites() : new MonitoringSite[0];
-        
-        if (sites == null || sites.length == 0) return null;
-        logger.info("calculateSiteCode: got {} sites from API", sites.length);
+        String code = null;
+        try {
+            ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
+            String rawJson = responseEntity.getBody();
+            
+            logger.info("Raw API response for monitoring sites: {}", 
+                rawJson != null 
+                    ? rawJson.substring(0, Math.min(500, rawJson.length())) + "..." 
+                    : "null"
+            );
 
-        MonitoringSite nearest = null;
-        double minDistance = Double.MAX_VALUE;
+            String cleanJson = rawJson != null ? rawJson.replaceAll("[^\\x00-\\x7F]", "") : null;
+            ObjectMapper mapper = new ObjectMapper();
+            MonitoringSiteResponse response = mapper.readValue(cleanJson, MonitoringSiteResponse.class);
 
-        for (MonitoringSite site : sites) {
-            try {
-                double siteLat = Double.parseDouble(site.getLatitude());
-                double siteLng = Double.parseDouble(site.getLongitude());
-                double distance = GeoUtils.haversine(lat, lng, siteLat, siteLng);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    nearest = site;
+            MonitoringSite[] sites = response != null ? response.getMonitoringSites() : new MonitoringSite[0];
+            
+            if (sites == null || sites.length == 0) return null;
+            logger.info("calculateSiteCode: got {} sites from API", sites.length);
+
+            MonitoringSite nearest = null;
+            double minDistance = Double.MAX_VALUE;
+
+            for (MonitoringSite site : sites) {
+                try {
+                    double siteLat = Double.parseDouble(site.getLatitude());
+                    double siteLng = Double.parseDouble(site.getLongitude());
+                    double distance = GeoUtils.haversine(lat, lng, siteLat, siteLng);
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        nearest = site;
+                    }
+                } catch (NumberFormatException e) {
+                    logger.warn("Skipping site {} due to invalid coords", site.getSiteCode());
                 }
-            } catch (NumberFormatException e) {
-                logger.warn("Skipping site {} due to invalid coords", site.getSiteCode());
             }
-        }
 
-        String code = nearest != null ? nearest.getSiteCode() : null;
-        logger.info("calculateSiteCode: nearest site code = {}", code);
+            code = nearest != null ? nearest.getSiteCode() : null;
+            logger.info("calculateSiteCode: nearest site code = {}", code);
+        } catch (RestClientException | IOException e) {
+            logger.error("Error calculating site code: {}", e.getMessage());
+            return null;
+        }
         return code;
     }
 
@@ -169,7 +250,7 @@ public class SiteCodeResolver {
         return null;
     }
 
-    public void populateLocationData(Location location, String userInput) {
+    public void populateLocationData(Location location, String userInput) throws JsonMappingException, JsonProcessingException {
         logger.info("Starting populateLocationData for userInput: {}, location before assignSiteCode: {}", userInput, location);
 
         // Assign site code first
@@ -187,10 +268,16 @@ public class SiteCodeResolver {
 
         try {
             logger.info("Fetching air quality data from URL: {}", url);
-            String rawJson = restTemplate.getForObject(url, String.class);
-            logger.info("Raw API response for siteCode {}: {}", location.getSiteCode(), rawJson);
-            HourlyIndexResponse response = restTemplate.getForObject(url, HourlyIndexResponse.class);
+            ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
+            String rawJson = responseEntity.getBody();
 
+            String cleanJson = rawJson != null ? rawJson.replaceAll("[^\\x00-\\x7F]", "") : null;
+
+            logger.info("Raw API response for siteCode {}: {}", location.getSiteCode(), cleanJson);
+            ObjectMapper mapper = new ObjectMapper();
+            HourlyIndexResponse response = mapper.readValue(cleanJson, HourlyIndexResponse.class);
+
+            
             if (response == null) {
                 logger.warn("Received null response from API for siteCode {}", location.getSiteCode());
                 location.setAirQualityData(new AirQualityData(null, null, null, null, null, null, null));
@@ -246,7 +333,7 @@ public class SiteCodeResolver {
         }
     }
 
-    public void refreshLocationData(Location location) {
+    public void refreshLocationData(Location location) throws JsonMappingException, JsonProcessingException {
         populateLocationData(location, location.getName());
 
         if (location.getAirQualityData() != null) {

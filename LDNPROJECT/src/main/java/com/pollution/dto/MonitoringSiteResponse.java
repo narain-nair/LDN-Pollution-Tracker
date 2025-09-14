@@ -5,8 +5,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MonitoringSiteResponse {
+    @JsonProperty("Sites")
+    private SiteWrapper sitesWrapper;
+
+    public MonitoringSite[] getMonitoringSites() {
+        return sitesWrapper != null ? sitesWrapper.getMonitoringSites() : new MonitoringSite[0];
+    }
+}
+
+class SiteWrapper {
     @JsonProperty("MonitoringSite")
-    private MonitoringSite[] monitoringSites; // array of sites
+    private MonitoringSite[] monitoringSites;
 
     public MonitoringSite[] getMonitoringSites() {
         return monitoringSites;

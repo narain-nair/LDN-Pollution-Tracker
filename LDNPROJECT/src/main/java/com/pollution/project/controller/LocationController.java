@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.pollution.dto.LocationRequest;
 import com.pollution.project.entity.AirQualitySnapshot;
 import com.pollution.project.entity.Location;
@@ -47,7 +49,17 @@ public class LocationController{
         List<Location> locations = locationRepository.findAll();
 
         for (Location loc : locations) {
-            siteCodeResolver.populateLocationData(loc, loc.getName());
+            try {
+                siteCodeResolver.populateLocationData(loc, loc.getName());
+            } catch (JsonMappingException e) {
+                // TODO Auto-generated catch block
+                logger.error("Error populating location data for location ID {}: {}", loc.getId(), e.getMessage());
+                e.printStackTrace();
+            } catch (JsonProcessingException e) {
+                // TODO Auto-generated catch block
+                logger.error("Error populating location data for location ID {}: {}", loc.getId(), e.getMessage());
+                e.printStackTrace();
+            }
         }
 
         return ResponseEntity.ok(locations);
@@ -68,7 +80,17 @@ public class LocationController{
         }
 
         var location = locationOpt.get();
-        siteCodeResolver.populateLocationData(location, location.getName());
+        try {
+            siteCodeResolver.populateLocationData(location, location.getName());
+        } catch (JsonMappingException e) {
+            // TODO Auto-generated catch block
+            logger.error("Error populating location data for location ID {}: {}", id, e.getMessage());
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            logger.error("Error populating location data for location ID {}: {}", id, e.getMessage());
+            e.printStackTrace();
+        }
 
         if (location.getAirQualityData() == null) {
             Map<String, Object> faultyRes = new HashMap<>();
@@ -89,7 +111,17 @@ public class LocationController{
     @GetMapping
     public ResponseEntity<?> getSiteByCoords(@RequestParam double lat, @RequestParam double lng) {
         Location tempLoc = new Location("temp", lat, lng);
-        siteCodeResolver.populateLocationData(tempLoc, null);
+        try {
+            siteCodeResolver.populateLocationData(tempLoc, null);
+        } catch (JsonMappingException e) {
+            // TODO Auto-generated catch block
+            logger.error("Error populating location data for coordinates ({}, {}): {}", lat, lng, e.getMessage());
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            logger.error("Error populating location data for coordinates ({}, {}): {}", lat, lng, e.getMessage());
+            e.printStackTrace();
+        }
 
         if (tempLoc.getAirQualityData() == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No data found for the given coordinates");
@@ -107,7 +139,17 @@ public class LocationController{
         logger.info("POST /locations called with lat={} lng={} siteName={}", request.getLat(), request.getLng(), request.getSiteName());
         Location location = new Location(request.getSiteName(), request.getLat(), request.getLng());
 
-        siteCodeResolver.populateLocationData(location, request.getSiteName());
+        try {
+            siteCodeResolver.populateLocationData(location, request.getSiteName());
+        } catch (JsonMappingException e) {
+            // TODO Auto-generated catch block
+            logger.error("Error populating location data for new location: {}", e.getMessage());
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            logger.error("Error populating location data for new location: {}", e.getMessage());
+            e.printStackTrace();
+        }
         if (location.getSiteCode() == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Could not determine site code for the given location");
         }
@@ -131,7 +173,15 @@ public class LocationController{
         }
 
         var location = locationOpt.get();
-        siteCodeResolver.populateLocationData(location, null);
+        try {
+            siteCodeResolver.populateLocationData(location, null);
+        } catch (JsonMappingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         locationRepository.save(location);
 
