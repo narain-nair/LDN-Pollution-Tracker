@@ -17,6 +17,9 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pollution.dto.HourlyIndexResponse;
 import com.pollution.dto.HourlyIndexResponse.HourlyAirQualityIndex;
 import com.pollution.dto.HourlyIndexResponse.Site;
@@ -177,62 +180,19 @@ public class SiteCodeResolver {
                     + location.getSiteCode()
                     + "/Json";
 
+        String rawJson = restTemplate.getForObject(url, String.class);
+        logger.info("Raw API response for siteCode {}: {}", location.getSiteCode(), rawJson);
+
+        HourlyIndexResponse response = null;
         try {
-            logger.info("Fetching air quality data from URL: {}", url);
-            HourlyIndexResponse response = restTemplate.getForObject(url, HourlyIndexResponse.class);
-
-            if (response == null) {
-                logger.warn("Received null response from API for siteCode {}", location.getSiteCode());
-                location.setAirQualityData(new AirQualityData(null, null, null, null, null, null, null));
-                return;
-            }
-
-            HourlyAirQualityIndex hqi = response.getHourlyAirQualityIndex();
-            if (hqi == null || hqi.getLocalAuthority() == null || hqi.getLocalAuthority().getSite() == null) {
-                logger.warn("Incomplete response: missing Hqi/LocalAuthority/Site for siteCode {}", location.getSiteCode());
-                location.setAirQualityData(new AirQualityData(null, null, null, null, null, null, null));
-                return;
-            }
-
-            Site site = hqi.getLocalAuthority().getSite();
-            logger.info("Fetched site data: {}", site);
-
-            List<Species> speciesList = site.getSpecies();
-            logger.info("Species list: {}", speciesList);
-
-            LocalDateTime bulletinTime = null;
-            try {
-                bulletinTime = LocalDateTime.parse(site.getBulletinDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-            } catch (DateTimeParseException e) {
-                logger.warn("Failed to parse bulletin date '{}' for siteCode {}: {}", site.getBulletinDate(), location.getSiteCode(), e.getMessage());
-            }
-
-            // Always instantiate AirQualityData
-            AirQualityData airData = new AirQualityData(
-                    getIndex(speciesList, "PM25"),
-                    getIndex(speciesList, "PM10"),
-                    getIndex(speciesList, "NO2"),
-                    getIndex(speciesList, "SO2"),
-                    getIndex(speciesList, "O3"),
-                    getIndex(speciesList, "CO"),
-                    bulletinTime
-            );
-
-            location.setAirQualityData(airData);
-            location.setName(site.getSiteName());
-            location.setSiteCode(site.getSiteCode());
-
-            logger.info("Populated AirQualityData: {}", airData);
-            logger.info("Location after population: {}", location);
-
-        } catch (HttpClientErrorException e) {
-            logger.error("Client error ({}): {} for URL {}", e.getStatusCode(), e.getMessage(), url);
-        } catch (HttpServerErrorException e) {
-            logger.error("Server error ({}): {} for URL {}", e.getStatusCode(), e.getMessage(), url);
-        } catch (ResourceAccessException e) {
-            logger.error("Network error: {} for URL {}", e.getMessage(), url);
-        } catch (RestClientException e) {
-            logger.error("Unexpected RestTemplate error: {} for URL {}", e.getMessage(), url);
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            response = mapper.readValue(rawJson, HourlyIndexResponse.class);
+            logger.info("Mapped response successfully for siteCode {}: {}", location.getSiteCode(), response);
+        } catch (JsonProcessingException e) {
+            logger.error("Failed to deserialize API response for siteCode {}: {}", location.getSiteCode(), e.getMessage(), e);
+            location.setAirQualityData(new AirQualityData(null, null, null, null, null, null, null));
+            return;
         }
     }
 
