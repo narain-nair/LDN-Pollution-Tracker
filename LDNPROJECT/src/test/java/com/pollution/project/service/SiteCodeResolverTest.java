@@ -205,13 +205,25 @@ class SiteCodeResolverTest {
     @Test
     void testGetSiteTrie_FirstCallPopulatesTrie() {
         // Arrange
-        MonitoringSiteResponse response = new MonitoringSiteResponse();
-        response.setMonitoringSites(new MonitoringSite[]{site1, site2});
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
+        String mockJson = """
+        {
+            "Sites": {
+                "Site": [
+                    {"@SiteName":"Site One","@SiteCode":"S1"},
+                    {"@SiteName":"Site Two","@SiteCode":"S2"}
+                ]
+            }
+        }
+        """;
+    
+        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);
+        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
     
         // Act
         siteCodeResolver.setSiteTrie(null); // Reset to force re-fetch
         Trie retrievedTrie = siteCodeResolver.getSiteTrie();
+    
+        // Logging (optional)
         logger.info("Retrieved Trie: {}", retrievedTrie);
         logger.info("Result for 'Site One': {}", retrievedTrie.searchExact("Site One"));
         logger.info("Result for 'Site Two': {}", retrievedTrie.searchExact("Site Two"));
@@ -219,15 +231,28 @@ class SiteCodeResolverTest {
         // Assert
         assertEquals("S1", retrievedTrie.searchExact("Site One"));
         assertEquals("S2", retrievedTrie.searchExact("Site Two"));
-        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSiteResponse.class));
+    
+        // Verify
+        verify(restTemplate, times(1)).getForEntity(anyString(), eq(String.class));
     }
-
+    
     @Test
     void testGetSiteTrie_SubsequentCallsReturnSameInstance() {
-        MonitoringSiteResponse response = new MonitoringSiteResponse();
-        response.setMonitoringSites(new MonitoringSite[]{site1, site2});
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
-
+        // Arrange
+        String mockJson = """
+        {
+            "Sites": {
+                "Site": [
+                    {"@SiteName":"Site One","@SiteCode":"S1"},
+                    {"@SiteName":"Site Two","@SiteCode":"S2"}
+                ]
+            }
+        }
+        """;
+        
+        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);
+        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
+        
         // reset cached trie if needed
         ReflectionTestUtils.setField(siteCodeResolver, "siteTrie", null);
 
@@ -237,7 +262,7 @@ class SiteCodeResolverTest {
         assertSame(firstCall, secondCall);
 
         // should now be invoked once
-        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSiteResponse.class));
+        verify(restTemplate, times(1)).getForEntity(anyString(), eq(MonitoringSiteResponse.class));
     }
 
     @Test
@@ -260,6 +285,7 @@ class SiteCodeResolverTest {
 
         MonitoringSiteResponse response = new MonitoringSiteResponse();
         response.setMonitoringSites(newSites);
+        logger.info("MonitoringSiteResponse to be returned by mock: {}", response);
 
         String mockJson = """
         {
@@ -272,8 +298,6 @@ class SiteCodeResolverTest {
             }
         }
         """;
-
-        logger.info("MonitoringSiteResponse to be returned by mock: {}", response);
         
         ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);
         when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
@@ -286,24 +310,29 @@ class SiteCodeResolverTest {
         Trie trie = siteCodeResolver.getSiteTrie();
         assertEquals("SA1", trie.searchExact("Site A"));
         assertEquals("SB2", trie.searchExact("Site B"));
-    
-        verify(restTemplate, times(1)).getForObject(anyString(), eq(String.class));
+
+        verify(restTemplate, times(1)).getForEntity(anyString(), eq(String.class));
     }
 
     @Test
     void testRefreshSiteTrie_ApiThrowsException() {
-        // Arrange
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenThrow(new RestClientException("API down"));
-
+        // Arrange: make the API throw
+        when(restTemplate.getForEntity(anyString(), eq(String.class)))
+            .thenThrow(new RestClientException("API down"));
+    
+        // Optional: ensure trie is null before test
+        siteCodeResolver.setSiteTrie(null);
+    
         // Act → should NOT throw
         assertDoesNotThrow(() -> siteCodeResolver.refreshSiteTrie());
-
-        // Assert → trie should remain null (or unchanged if previously set)
+    
+        // Assert → trie should remain null or empty
         Trie trie = siteCodeResolver.getSiteTrie();
+        assertNotNull(trie); // getSiteTrie() will lazily initialize, even if API fails
         assertTrue(trie.getSuggestions("Anything").isEmpty());
-
+    
         // Verify API call attempted once
-        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSiteResponse.class));
+        verify(restTemplate, times(1)).getForEntity(anyString(), eq(String.class));
     }
 
     @Test
@@ -312,60 +341,76 @@ class SiteCodeResolverTest {
         Trie initialTrie = new Trie();
         initialTrie.insert("Old Site", "OLD1");
         siteCodeResolver.setSiteTrie(initialTrie);
-
-        // Mock API with new data
-        MonitoringSite siteC = new MonitoringSite("Fresh Site", "FS1");
-        MonitoringSiteResponse response = new MonitoringSiteResponse();
-        response.setMonitoringSites(new MonitoringSite[]{siteC});
-
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
-
+    
+        // Mock API with new JSON data
+        String mockJson = """
+        {
+            "Sites": {
+                "Site": [
+                    {"@SiteName":"Fresh Site","@SiteCode":"FS1"}
+                ]
+            }
+        }
+        """;
+        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);
+        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
+    
         // Act
         try {
             siteCodeResolver.refreshSiteTrie();
         } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
             logger.info("JsonProcessingException caught: {}", e.getMessage());
             e.printStackTrace();
         }
-
+    
         // Assert
         Trie refreshedTrie = siteCodeResolver.getSiteTrie();
         assertEquals("FS1", refreshedTrie.searchExact("Fresh Site"));
         assertNull(refreshedTrie.searchExact("Old Site")); // Old site should be gone
     }
-
+    
     @Test
     void testCalculateSiteCode_NearestSiteReturned() {
-        // Arrange
-        MonitoringSite siteA = new MonitoringSite("A", "51.500", "0.100");
-        MonitoringSite siteB = new MonitoringSite("B", "52.000", "0.200");
-
-        MonitoringSiteResponse response = new MonitoringSiteResponse();
-        response.setMonitoringSites(new MonitoringSite[]{siteA, siteB});
-
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
-
+        // Arrange: JSON string for sites
+        String mockJson = """
+        {
+            "Sites": {
+                "Site": [
+                    {"@SiteName":"A","@Latitude":"51.500","@Longitude":"0.100","@SiteCode":"A"},
+                    {"@SiteName":"B","@Latitude":"52.000","@Longitude":"0.200","@SiteCode":"B"}
+                ]
+            }
+        }
+        """;
+    
+        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);
+        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
+    
         // Act
         String nearestCode = siteCodeResolver.calculateSiteCode(51.505, 0.101); // closer to site A
-
+    
         // Assert
         assertEquals("A", nearestCode);
     }
-
+    
     @Test
     void testCalculateSiteCode_InvalidCoordinatesSkipped() {
         // Arrange
-        MonitoringSite siteA = new MonitoringSite("A", "not-a-number", "0.100");
-        MonitoringSite siteB = new MonitoringSite("B", "51.500", "0.100");
-    
-        MonitoringSite[] sites = { siteA, siteB };
-        MonitoringSiteResponse response = new MonitoringSiteResponse();
-        response.setMonitoringSites(sites);
-    
-        // Stub RestTemplate to return the wrapper instead of raw array
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
-    
+        String mockJson = """
+        {
+            "Sites": {
+                "Site": [
+                    {"@SiteName":"A","@SiteCode":"A","@Latitude":"not-a-number","@Longitude":"0.100"},
+                    {"@SiteName":"B","@SiteCode":"B","@Latitude":"51.500","@Longitude":"0.100"}
+                ]
+            }
+        }
+        """;
+
+        // stub restTemplate to return the wrapper instead of the raw array
+        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);    
+        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
+
         // Act
         String nearestCode = siteCodeResolver.calculateSiteCode(51.505, 0.101);
     
@@ -378,10 +423,18 @@ class SiteCodeResolverTest {
         // Arrange
         MonitoringSiteResponse emptyResponse = new MonitoringSiteResponse();
         emptyResponse.setMonitoringSites(null); 
-        logger.info("Empty response monitoring sites: {}", emptyResponse.getMonitoringSites());
-
+        
+        String mockJson = """
+        {
+            "Sites": {
+                "Site": null
+            }
+        }
+        """;
+        
         // stub restTemplate to return the wrapper instead of the raw array
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(emptyResponse);
+        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);    
+        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
         logger.info("Stubbed restTemplate to return empty response");
 
         // Act
@@ -395,9 +448,17 @@ class SiteCodeResolverTest {
     @Test
     void testCalculateSiteCode_EmptySitesArray() {
         // Arrange
-        MonitoringSiteResponse response = new MonitoringSiteResponse();
-        response.setMonitoringSites(new MonitoringSite[0]);
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
+        String mockJson = """
+        {
+            "Sites": {
+                "Site": []
+            }
+        }
+        """;
+
+        // stub restTemplate to return the wrapper instead of the raw array
+        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);    
+        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
 
         // Act
         String nearestCode = siteCodeResolver.calculateSiteCode(51.505, 0.101);
@@ -435,10 +496,20 @@ class SiteCodeResolverTest {
         fallbackSite.setLatitude("51.5");
         fallbackSite.setLongitude("0.1");
         fallbackResponse.setMonitoringSites(new MonitoringSite[]{ fallbackSite });
- 
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class)))
-            .thenReturn(fallbackResponse);
 
+        String mockJson = """
+        {
+            "Sites": {
+                "Site": [
+                    {"@SiteCode":"S2","@Latitude":"51.5","@Longitude":"0.1"}
+                ]
+            }
+        }
+        """;
+
+        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);    
+        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
+ 
         // Optional: spy to verify calculateSiteCode was called
         SiteCodeResolver spyResolver = spy(siteCodeResolver);
         doCallRealMethod().when(spyResolver).calculateSiteCode(anyDouble(), anyDouble());
@@ -453,13 +524,23 @@ class SiteCodeResolverTest {
     @Test
     void testAssignSiteCode_BothFail() {
         Location location = new Location(51.5, 0.1);
+        logger.info("Testing assignSiteCode with location: {}", location);
     
         // create a wrapper with null or empty array
         MonitoringSiteResponse emptyResponse = new MonitoringSiteResponse();
         emptyResponse.setMonitoringSites(new MonitoringSite[0]);
-    
+
+        String mockJson = """
+        {
+            "Sites": {
+                "Site": []
+            }
+        }
+        """;
+
         // stub restTemplate to return the wrapper instead of the raw array
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(emptyResponse);
+        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);    
+        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
     
         siteCodeResolver.assignSiteCode(location, "Unknown Site");
     
@@ -467,48 +548,50 @@ class SiteCodeResolverTest {
     }
 
     @Test
-    void testPopulateLocationData_ValidResponse() {
-        // Dummy location (latitude/longitude arbitrary)
+    void testPopulateLocationData_ValidResponse() throws JsonProcessingException {
         Location location = new Location("Dummy Location", 51.0, 0.0);
         location.setId(1L);
         location.setSiteCode("DUMMY1");  // skip lookup/calculate
-
-        // Build species list
-        HourlyIndexResponse.Species pm25 = new HourlyIndexResponse.Species("PM25", "PM25", "5", "Moderate", "Automated");
-        HourlyIndexResponse.Species no2 = new HourlyIndexResponse.Species("NO2", "NO2", "3", "Low", "Automated");
-
-        // Build Site
-        HourlyIndexResponse.Site site = new HourlyIndexResponse.Site("51.000", "0.000", "DUMMY1", "Dummy Location", "2025-09-10 12:00:00", List.of(pm25, no2));
-
-        // Build LocalAuthority
-        HourlyIndexResponse.LocalAuthority la = new HourlyIndexResponse.LocalAuthority("Dummy Authority", "99", "51.000", "0.000", site);
-
-        // Build HourlyAirQualityIndex
-        HourlyIndexResponse.HourlyAirQualityIndex hqi = new HourlyIndexResponse.HourlyAirQualityIndex("60", la);
-
-        // Build Response
-        HourlyIndexResponse response = new HourlyIndexResponse(hqi);
-
-        // Mock API call
-        lenient().when(restTemplate.getForObject(anyString(), eq(HourlyIndexResponse.class))).thenReturn(response);
-
-        // Act
+    
+        // JSON representing valid PM25/NO2 indices
+        String mockJson = """
+        {
+            "HourlyAirQualityIndex": {
+                "LocalAuthority": {
+                    "LocalAuthorityName": "Dummy Authority",
+                    "LocalAuthorityCode": "99",
+                    "Latitude": "51.000",
+                    "Longitude": "0.000",
+                    "Site": {
+                        "@Latitude": "51.000",
+                        "@Longitude": "0.000",
+                        "@SiteCode": "DUMMY1",
+                        "@SiteName": "Dummy Location",
+                        "@BulletinDate": "2025-09-10 12:00:00",
+                        "Species": [
+                            {"@Code":"PM25","@Name":"PM25","@Index":"5","@Band":"Moderate","@Method":"Automated"},
+                            {"@Code":"NO2","@Name":"NO2","@Index":"3","@Band":"Low","@Method":"Automated"}
+                        ]
+                    }
+                }
+            }
+        }
+        """;
+    
+        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);
+        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
+    
+        // Spy resolver to stub assignSiteCode
         SiteCodeResolver spyResolver = Mockito.spy(siteCodeResolver);
-        doAnswer(invocation -> {Location loc = invocation.getArgument(0); loc.setSiteCode("DUMMY1"); // ensure non-null site code
+        doAnswer(invocation -> {
+            Location loc = invocation.getArgument(0);
+            loc.setSiteCode("DUMMY1");
             return null;
         }).when(spyResolver).assignSiteCode(any(Location.class), anyString());
-        try {
-            spyResolver.populateLocationData(location, "Dummy Location");
-        } catch (JsonMappingException e) {
-            // TODO Auto-generated catch block
-            logger.info("JsonMappingException caught: {}", e.getMessage());
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            logger.info("JsonProcessingException caught: {}", e.getMessage());
-            e.printStackTrace();
-        }
-
+    
+        // Act
+        spyResolver.populateLocationData(location, "Dummy Location");
+    
         // Assert
         assertNotNull(location.getAirQualityData());
         assertEquals(5.0, location.getAirQualityData().getPm25());
@@ -540,44 +623,48 @@ class SiteCodeResolverTest {
     }
 
     @Test
-    void testPopulateLocationData_InvalidIndex() {
+    void testPopulateLocationData_InvalidIndex() throws JsonProcessingException {
         // Arrange
         Location location = new Location("Dummy Location", 51.000, 0.000);
         location.setId(1L);  // non-null id
 
-        // Species with invalid index
-        HourlyIndexResponse.Species pm25 = new HourlyIndexResponse.Species("PM25", "PM25", "N/A", "Moderate", "Automated");
-        HourlyIndexResponse.Site site = new HourlyIndexResponse.Site("51.000", "0.000", "DUMMY1", "Dummy Location", 
-                                                                    "2025-09-10 12:00:00", List.of(pm25));
-        HourlyIndexResponse.LocalAuthority la = new HourlyIndexResponse.LocalAuthority("Dummy Authority", "99", "51.000", "0.000", site);
-        HourlyIndexResponse.HourlyAirQualityIndex hqi = new HourlyIndexResponse.HourlyAirQualityIndex("60", la);
-        HourlyIndexResponse response = new HourlyIndexResponse(hqi);
+        // JSON representing invalid PM25 index
+        String mockJson = """
+        {
+            "HourlyAirQualityIndex": {
+                "LocalAuthority": {
+                    "LocalAuthorityName": "Dummy Authority",
+                    "LocalAuthorityCode": "99",
+                    "Latitude": "51.000",
+                    "Longitude": "0.000",
+                    "Site": {
+                        "@Latitude": "51.000",
+                        "@Longitude": "0.000",
+                        "@SiteCode": "DUMMY1",
+                        "@SiteName": "Dummy Location",
+                        "@BulletinDate": "2025-09-10 12:00:00",
+                        "Species": [
+                            {"@Code":"PM25","@Name":"PM25","@Index":"N/A","@Band":"Moderate","@Method":"Automated"}
+                        ]
+                    }
+                }
+            }
+        }
+        """;
 
-        lenient().when(restTemplate.getForObject(anyString(), eq(HourlyIndexResponse.class))).thenReturn(response);
+        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);
+        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
 
-        // Spy the resolver so we can stub assignSiteCode
+        // Spy the resolver to stub assignSiteCode so we have a non-null siteCode
         SiteCodeResolver spyResolver = Mockito.spy(siteCodeResolver);
-        doAnswer(invocation -> {Location loc = invocation.getArgument(0); loc.setSiteCode("DUMMY1"); // ensure non-null site code
+        doAnswer(invocation -> {
+            Location loc = invocation.getArgument(0);
+            loc.setSiteCode("DUMMY1"); // ensure non-null site code
             return null;
         }).when(spyResolver).assignSiteCode(any(Location.class), anyString());
 
         // Act
-        try {
-            spyResolver.populateLocationData(location, "Dummy Location");
-        } catch (JsonMappingException e) {
-            // TODO Auto-generated catch block
-            logger.info("JsonMappingException caught: {}", e.getMessage());
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            logger.info("JsonProcessingException caught: {}", e.getMessage());
-            e.printStackTrace();
-        }
-
-        // Logging for debugging
-        logger.info("Mocked Response: {}", response);
-        logger.info("Species List: {}", response.getHourlyAirQualityIndex().getLocalAuthority().getSite().getSpecies());
-        logger.info("Air quality data: {}", location.getAirQualityData());
+        spyResolver.populateLocationData(location, "Dummy Location");
 
         // Assert
         assertNotNull(location.getAirQualityData());
@@ -587,45 +674,51 @@ class SiteCodeResolverTest {
     }
 
     @Test
-    void testRefreshLocationData_SnapshotSaved() {
+    void testRefreshLocationData_SnapshotSaved() throws JsonProcessingException {
+        // Arrange
         Location location = new Location(51.5, 0.1);
-        AirQualityData airData = new AirQualityData(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, LocalDateTime.now());
-        location.setAirQualityData(airData);
-
-        try {
-            siteCodeResolver.refreshLocationData(location);
-        } catch (JsonMappingException e) {
-            // TODO Auto-generated catch block
-            logger.info("JsonMappingException caught: {}", e.getMessage());
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            logger.info("JsonProcessingException caught: {}", e.getMessage());
-            e.printStackTrace();
+        
+        String mockJson = """
+        {
+            "Sites": {
+                "Site": [
+                    {"@SiteName":"Site A","@SiteCode":"SA1"}
+                ]
+            }
         }
+        """;
+    
+        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);
+        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
+    
+        // Act
+        siteCodeResolver.refreshLocationData(location);
+    
+        // Assert
         verify(snapshotRepository, times(1)).save(any(AirQualitySnapshot.class));
     }
-
     @Test
-    void testRefreshLocationData_NoAirQualityData() {
+    void testRefreshLocationData_NoAirQualityData() throws JsonProcessingException {
         Location location = new Location(51.5, 0.1);
     
-        // Mock RestTemplate to return no data, so populateLocationData sets no AirQualityData
-        MonitoringSiteResponse emptyResponse = new MonitoringSiteResponse();
-        emptyResponse.setMonitoringSites(new MonitoringSite[0]); // empty array
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(emptyResponse);
-    
-        try {
-            siteCodeResolver.refreshLocationData(location);
-        } catch (JsonMappingException e) {
-            // TODO Auto-generated catch block
-            logger.info("JsonMappingException caught: {}", e.getMessage());
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            logger.info("JsonProcessingException caught: {}", e.getMessage());
-            e.printStackTrace();
+        // Mock RestTemplate to return a JSON with empty sites array
+        String mockJson = """
+        {
+            "Sites": {
+                "Site": []
+            }
         }
+        """;
+    
+        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);
+        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
+    
+        // Act
+        siteCodeResolver.refreshLocationData(location);
+    
+        // Assert
+        // AirQualityData should remain null since there was no site info
+        assertNull(location.getAirQualityData());
     
         // Verify snapshotRepository.save is never called
         verify(snapshotRepository, never()).save(any());
