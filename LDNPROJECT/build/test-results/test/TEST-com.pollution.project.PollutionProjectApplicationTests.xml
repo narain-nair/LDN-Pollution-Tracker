@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.pollution.project.PollutionProjectApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-09-14T16:40:37.360Z" hostname="Narains-Laptop.local" time="0.311">
+<testsuite name="com.pollution.project.PollutionProjectApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-09-14T16:47:30.581Z" hostname="Narains-Laptop.local" time="0.276">
   <properties/>
-  <testcase name="contextLoads()" classname="com.pollution.project.PollutionProjectApplicationTests" time="0.311"/>
-  <system-out><![CDATA[17:40:35.413 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.pollution.project.PollutionProjectApplicationTests]: PollutionProjectApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-17:40:35.452 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.pollution.project.PollutionProjectApplication for test class com.pollution.project.PollutionProjectApplicationTests
+  <testcase name="contextLoads()" classname="com.pollution.project.PollutionProjectApplicationTests" time="0.276"/>
+  <system-out><![CDATA[17:47:28.656 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.pollution.project.PollutionProjectApplicationTests]: PollutionProjectApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:47:28.693 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.pollution.project.PollutionProjectApplication for test class com.pollution.project.PollutionProjectApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -14,25 +14,25 @@
 
  :: Spring Boot ::                (v3.3.4)
 
-2025-09-14T17:40:35.589+01:00  INFO 27456 --- [Pollution project] [    Test worker] c.p.p.PollutionProjectApplicationTests   : Starting PollutionProjectApplicationTests using Java 21.0.5 with PID 27456 (started by narainusesamacbook in /Users/narainusesamacbook/Desktop/LDNPROJECT/LDN-Pollution-Tracker-1/LDNPROJECT)
-2025-09-14T17:40:35.590+01:00  INFO 27456 --- [Pollution project] [    Test worker] c.p.p.PollutionProjectApplicationTests   : No active profile set, falling back to 1 default profile: "default"
-2025-09-14T17:40:35.820+01:00  INFO 27456 --- [Pollution project] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-09-14T17:40:35.844+01:00  INFO 27456 --- [Pollution project] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21 ms. Found 3 JPA repository interfaces.
-2025-09-14T17:40:36.020+01:00  INFO 27456 --- [Pollution project] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-09-14T17:40:36.038+01:00  INFO 27456 --- [Pollution project] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2025-09-14T17:40:36.048+01:00  INFO 27456 --- [Pollution project] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-09-14T17:40:36.154+01:00  INFO 27456 --- [Pollution project] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-09-14T17:40:36.165+01:00  INFO 27456 --- [Pollution project] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-09-14T17:40:36.222+01:00  INFO 27456 --- [Pollution project] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@686b1e2d
-2025-09-14T17:40:36.223+01:00  INFO 27456 --- [Pollution project] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-09-14T17:40:36.247+01:00  WARN 27456 --- [Pollution project] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-14T17:40:36.648+01:00  INFO 27456 --- [Pollution project] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-09-14T17:40:36.726+01:00  INFO 27456 --- [Pollution project] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-09-14T17:40:36.884+01:00  INFO 27456 --- [Pollution project] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-14T17:47:28.826+01:00  INFO 27783 --- [Pollution project] [    Test worker] c.p.p.PollutionProjectApplicationTests   : Starting PollutionProjectApplicationTests using Java 21.0.5 with PID 27783 (started by narainusesamacbook in /Users/narainusesamacbook/Desktop/LDNPROJECT/LDN-Pollution-Tracker-1/LDNPROJECT)
+2025-09-14T17:47:28.827+01:00  INFO 27783 --- [Pollution project] [    Test worker] c.p.p.PollutionProjectApplicationTests   : No active profile set, falling back to 1 default profile: "default"
+2025-09-14T17:47:29.048+01:00  INFO 27783 --- [Pollution project] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-14T17:47:29.069+01:00  INFO 27783 --- [Pollution project] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18 ms. Found 3 JPA repository interfaces.
+2025-09-14T17:47:29.253+01:00  INFO 27783 --- [Pollution project] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-14T17:47:29.272+01:00  INFO 27783 --- [Pollution project] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2025-09-14T17:47:29.282+01:00  INFO 27783 --- [Pollution project] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-14T17:47:29.389+01:00  INFO 27783 --- [Pollution project] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-14T17:47:29.399+01:00  INFO 27783 --- [Pollution project] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-14T17:47:29.452+01:00  INFO 27783 --- [Pollution project] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@965bcbc
+2025-09-14T17:47:29.452+01:00  INFO 27783 --- [Pollution project] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-14T17:47:29.482+01:00  WARN 27783 --- [Pollution project] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-14T17:47:29.862+01:00  INFO 27783 --- [Pollution project] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-14T17:47:29.975+01:00  INFO 27783 --- [Pollution project] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-14T17:47:30.125+01:00  INFO 27783 --- [Pollution project] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
 LocationController initialized!
-2025-09-14T17:40:37.094+01:00  WARN 27456 --- [Pollution project] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-14T17:40:37.109+01:00  INFO 27456 --- [Pollution project] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name pollutionUserDetailsService
-2025-09-14T17:40:37.351+01:00  INFO 27456 --- [Pollution project] [    Test worker] c.p.p.PollutionProjectApplicationTests   : Started PollutionProjectApplicationTests in 1.846 seconds (process running for 2.328)
+2025-09-14T17:47:30.321+01:00  WARN 27783 --- [Pollution project] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-14T17:47:30.334+01:00  INFO 27783 --- [Pollution project] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name pollutionUserDetailsService
+2025-09-14T17:47:30.575+01:00  INFO 27783 --- [Pollution project] [    Test worker] c.p.p.PollutionProjectApplicationTests   : Started PollutionProjectApplicationTests in 1.833 seconds (process running for 2.353)
 ]]></system-out>
   <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/Users/narainusesamacbook/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.19/154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1/byte-buddy-agent-1.14.19.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
