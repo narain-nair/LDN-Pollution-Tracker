@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.pollution.project.testController.LocationControllerTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2025-09-14T18:32:29.783Z" hostname="Narains-Laptop.local" time="0.017">
+<testsuite name="com.pollution.project.testController.LocationControllerTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2025-09-14T22:00:30.475Z" hostname="Narains-Laptop.local" time="0.015">
   <properties/>
-  <testcase name="testAddLocation_EmptyName()" classname="com.pollution.project.testController.LocationControllerTest" time="0.002"/>
+  <testcase name="testAddLocation_EmptyName()" classname="com.pollution.project.testController.LocationControllerTest" time="0.003"/>
   <testcase name="testRefreshLocation_NotFound()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
   <testcase name="testGetLocationData_NotFound()" classname="com.pollution.project.testController.LocationControllerTest" time="0.001"/>
-  <testcase name="testAddLocation_InvalidCoordinates()" classname="com.pollution.project.testController.LocationControllerTest" time="0.001"/>
-  <testcase name="testGetLocationData_Valid()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
-  <testcase name="testGetSiteByCoords_Valid()" classname="com.pollution.project.testController.LocationControllerTest" time="0.001"/>
+  <testcase name="testAddLocation_InvalidCoordinates()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
+  <testcase name="testGetLocationData_Valid()" classname="com.pollution.project.testController.LocationControllerTest" time="0.001"/>
+  <testcase name="testGetSiteByCoords_Valid()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
   <testcase name="testGetSiteByCoords_NoData()" classname="com.pollution.project.testController.LocationControllerTest" time="0.001"/>
-  <testcase name="testDeleteLocation_NotFound()" classname="com.pollution.project.testController.LocationControllerTest" time="0.001"/>
+  <testcase name="testDeleteLocation_NotFound()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
   <testcase name="testRefreshLocation_Valid()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
-  <testcase name="testGetLocationStats_WithSnapshots()" classname="com.pollution.project.testController.LocationControllerTest" time="0.004"/>
-  <testcase name="testAddLocation_NullName()" classname="com.pollution.project.testController.LocationControllerTest" time="0.001"/>
+  <testcase name="testGetLocationStats_WithSnapshots()" classname="com.pollution.project.testController.LocationControllerTest" time="0.001"/>
+  <testcase name="testAddLocation_NullName()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
   <testcase name="testAddLocation_Valid()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
-  <testcase name="testRefreshLocation_NoAQData()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
-  <testcase name="testGetLocationData_NoAQData()" classname="com.pollution.project.testController.LocationControllerTest" time="0.001"/>
-  <testcase name="testDeleteAllLocations()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
-  <testcase name="testGetLocation_NoSnapshots()" classname="com.pollution.project.testController.LocationControllerTest" time="0.001"/>
-  <testcase name="testGetLocationStats_NotFound()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
+  <testcase name="testRefreshLocation_NoAQData()" classname="com.pollution.project.testController.LocationControllerTest" time="0.004"/>
+  <testcase name="testGetLocationData_NoAQData()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
+  <testcase name="testDeleteAllLocations()" classname="com.pollution.project.testController.LocationControllerTest" time="0.001"/>
+  <testcase name="testGetLocation_NoSnapshots()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
+  <testcase name="testGetLocationStats_NotFound()" classname="com.pollution.project.testController.LocationControllerTest" time="0.001"/>
   <testcase name="testAddLocation_InvalidLongitude()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
   <testcase name="testDeleteLocation_Valid()" classname="com.pollution.project.testController.LocationControllerTest" time="0.0"/>
-  <system-out><![CDATA[2025-09-14T19:32:29.784+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
-2025-09-14T19:32:29.786+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to refresh non-existent location with id 999
-2025-09-14T19:32:29.787+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 999 not found
-2025-09-14T19:32:29.788+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
-2025-09-14T19:32:29.791+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for coordinates (51.5, 0.1)
-2025-09-14T19:32:29.792+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to delete non-existent location with id 999
-2025-09-14T19:32:29.797+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
-2025-09-14T19:32:29.798+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
-2025-09-14T19:32:29.799+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
-2025-09-14T19:32:29.799+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 1 not found
-2025-09-14T19:32:29.799+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 2 not found
-2025-09-14T19:32:29.800+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No snapshots found for location id 1
-2025-09-14T19:32:29.800+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to get stats for non-existent location with id 999
-2025-09-14T19:32:29.800+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
+  <system-out><![CDATA[2025-09-14T23:00:30.476+01:00  WARN 38927 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
+2025-09-14T23:00:30.479+01:00  WARN 38927 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to refresh non-existent location with id 999
+2025-09-14T23:00:30.479+01:00  WARN 38927 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 999 not found
+2025-09-14T23:00:30.480+01:00  WARN 38927 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
+2025-09-14T23:00:30.481+01:00  WARN 38927 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for coordinates (51.5, 0.1)
+2025-09-14T23:00:30.481+01:00  WARN 38927 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to delete non-existent location with id 999
+2025-09-14T23:00:30.484+01:00  WARN 38927 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
+2025-09-14T23:00:30.488+01:00  WARN 38927 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
+2025-09-14T23:00:30.489+01:00  WARN 38927 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
+2025-09-14T23:00:30.489+01:00  WARN 38927 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 1 not found
+2025-09-14T23:00:30.489+01:00  WARN 38927 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 2 not found
+2025-09-14T23:00:30.490+01:00  WARN 38927 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No snapshots found for location id 1
+2025-09-14T23:00:30.490+01:00  WARN 38927 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to get stats for non-existent location with id 999
+2025-09-14T23:00:30.490+01:00  WARN 38927 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

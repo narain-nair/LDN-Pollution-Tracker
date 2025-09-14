@@ -88,7 +88,7 @@ public class SiteCodeResolver {
                         : "null"
                 );
 
-                String cleanJson = rawJson != null ? rawJson.replaceAll("[^\\u0000-\\u007F]", "") : null;
+                String cleanJson = rawJson != null ? rawJson.replaceAll("\\\\'", "'") : null;
                 ObjectMapper mapper = new ObjectMapper();
 
                 MonitoringSiteResponse siteResponse = mapper.readValue(cleanJson, MonitoringSiteResponse.class);
@@ -96,7 +96,11 @@ public class SiteCodeResolver {
                 MonitoringSite[] sites = siteResponse != null ? siteResponse.getMonitoringSites() : new MonitoringSite[0];
                 if (sites != null) {
                     for (MonitoringSite site : sites) {
-                        siteTrie.insert(site.getSiteName().trim(), site.getSiteCode());
+                        if (site.getSiteName() != null) {
+                            siteTrie.insert(site.getSiteName().trim(), site.getSiteCode());
+                        } else {
+                            logger.warn("Skipping site with null name, code={}", site.getSiteCode());
+                        }
                     }
                     logger.info("Loaded {} monitoring sites into trie.", sites.length);
                 } else {
@@ -131,7 +135,7 @@ public class SiteCodeResolver {
                     : "null"
             );
 
-            String cleanJson = rawJson != null ? rawJson.replaceAll("[^\\x00-\\x7F]", "") : null;
+            String cleanJson = rawJson != null ? rawJson.replaceAll("\\\\'", "'") : null;
             ObjectMapper mapper = new ObjectMapper();
 
             MonitoringSiteResponse siteResponse = mapper.readValue(cleanJson, MonitoringSiteResponse.class);
@@ -139,7 +143,11 @@ public class SiteCodeResolver {
             if (sites != null) {
                 Trie newTrie = new Trie();
                 for (MonitoringSite site : sites) {
-                    newTrie.insert(site.getSiteName().trim(), site.getSiteCode());
+                    if (site.getSiteName() != null) {
+                        newTrie.insert(site.getSiteName().trim(), site.getSiteCode());
+                    } else {
+                        logger.warn("Skipping site with null name, code={}", site.getSiteCode());
+                    }
                 }
                 
                 setSiteTrie(newTrie);
@@ -164,7 +172,7 @@ public class SiteCodeResolver {
                     : "null"
             );
 
-            String cleanJson = rawJson != null ? rawJson.replaceAll("[^\\x00-\\x7F]", "") : null;
+            String cleanJson = rawJson != null ? rawJson.replaceAll("\\\\'", "'") : null;
             ObjectMapper mapper = new ObjectMapper();
             MonitoringSiteResponse response = mapper.readValue(cleanJson, MonitoringSiteResponse.class);
 
@@ -177,6 +185,10 @@ public class SiteCodeResolver {
             double minDistance = Double.MAX_VALUE;
 
             for (MonitoringSite site : sites) {
+                if (site.getSiteName() == null) {
+                    logger.warn("Skipping site {} due to missing data", site.getSiteCode());
+                    continue;
+                }
                 try {
                     double siteLat = Double.parseDouble(site.getLatitude());
                     double siteLng = Double.parseDouble(site.getLongitude());
@@ -271,7 +283,7 @@ public class SiteCodeResolver {
             ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
             String rawJson = responseEntity.getBody();
 
-            String cleanJson = rawJson != null ? rawJson.replaceAll("[^\\x00-\\x7F]", "") : null;
+            String cleanJson = rawJson != null ? rawJson.replaceAll("\\\\'", "'") : null;
 
             logger.info("Raw API response for siteCode {}: {}", location.getSiteCode(), cleanJson);
             ObjectMapper mapper = new ObjectMapper();

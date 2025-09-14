@@ -28,7 +28,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">15</div>
 <p>failures</p>
 </div>
 </td>
@@ -40,7 +40,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.344s</div>
+<div class="counter">0.772s</div>
 <p>duration</p>
 </div>
 </td>
@@ -49,8 +49,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">55%</div>
 <p>successful</p>
 </div>
 </td>
@@ -60,9 +60,77 @@
 <div class="tab-container">
 <ul class="tabLinks">
 <li>
+<a href="#">Failed tests</a>
+</li>
+<li>
 <a href="#">Classes</a>
 </li>
 </ul>
+<div class="tab">
+<h2>Failed tests</h2>
+<ul class="linkList">
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testAssignSiteCode_BothFail()">testAssignSiteCode_BothFail()</a>
+</li>
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testAssignSiteCode_FallbackToCalculate()">testAssignSiteCode_FallbackToCalculate()</a>
+</li>
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testCalculateSiteCode_EmptySitesArray()">testCalculateSiteCode_EmptySitesArray()</a>
+</li>
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testCalculateSiteCode_InvalidCoordinatesSkipped()">testCalculateSiteCode_InvalidCoordinatesSkipped()</a>
+</li>
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testCalculateSiteCode_NearestSiteReturned()">testCalculateSiteCode_NearestSiteReturned()</a>
+</li>
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testCalculateSiteCode_NoSitesReturned()">testCalculateSiteCode_NoSitesReturned()</a>
+</li>
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testGetSiteTrie_FirstCallPopulatesTrie()">testGetSiteTrie_FirstCallPopulatesTrie()</a>
+</li>
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testGetSiteTrie_SubsequentCallsReturnSameInstance()">testGetSiteTrie_SubsequentCallsReturnSameInstance()</a>
+</li>
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testPopulateLocationData_InvalidIndex()">testPopulateLocationData_InvalidIndex()</a>
+</li>
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testPopulateLocationData_ValidResponse()">testPopulateLocationData_ValidResponse()</a>
+</li>
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testRefreshLocationData_NoAirQualityData()">testRefreshLocationData_NoAirQualityData()</a>
+</li>
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testRefreshLocationData_SnapshotSaved()">testRefreshLocationData_SnapshotSaved()</a>
+</li>
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testRefreshSiteTrie_ApiThrowsException()">testRefreshSiteTrie_ApiThrowsException()</a>
+</li>
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testRefreshSiteTrie_ReplacesOldTrie()">testRefreshSiteTrie_ReplacesOldTrie()</a>
+</li>
+<li>
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>.
+<a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html#testRefreshSiteTrie_SuccessfulUpdate()">testRefreshSiteTrie_SuccessfulUpdate()</a>
+</li>
+</ul>
+</div>
 <div class="tab">
 <h2>Classes</h2>
 <table>
@@ -77,14 +145,14 @@
 </tr>
 </thead>
 <tr>
-<td class="success">
+<td class="failures">
 <a href="../classes/com.pollution.project.service.SiteCodeResolverTest.html">SiteCodeResolverTest</a>
 </td>
 <td>34</td>
+<td>15</td>
 <td>0</td>
-<td>0</td>
-<td>0.344s</td>
-<td class="success">100%</td>
+<td>0.772s</td>
+<td class="failures">55%</td>
 </tr>
 </table>
 </div>
@@ -96,7 +164,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 8.14.3</a> at 14 Sept 2025, 19:32:29</p>
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 14 Sept 2025, 23:00:30</p>
 </div>
 </div>
 </body>

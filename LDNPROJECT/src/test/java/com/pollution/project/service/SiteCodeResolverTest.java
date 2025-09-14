@@ -34,12 +34,16 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.pollution.dto.HourlyIndexResponse;
 import com.pollution.dto.MonitoringSite;
 import com.pollution.dto.MonitoringSiteResponse;
@@ -237,30 +241,53 @@ class SiteCodeResolverTest {
     }
 
     @Test
-    void testRefreshSiteTrie_SuccessfulUpdate() {
+    void testRefreshSiteTrie_SuccessfulUpdate() throws JsonProcessingException {
         // Arrange
-        MonitoringSite siteA = new MonitoringSite("Site A", "SA1");
-        MonitoringSite siteB = new MonitoringSite("Site B", "SB2");
-        MonitoringSite[] newSites = {siteA, siteB};
+        MonitoringSite siteA = new MonitoringSite();
+        siteA.setSiteName("Site A");
+        siteA.setSiteCode("SA1");
+
+        logger.info("Created MonitoringSite: {}", siteA);
     
+        MonitoringSite siteB = new MonitoringSite();
+        siteB.setSiteName("Site B");
+        siteB.setSiteCode("SB2");
+        
+        logger.info("Created MonitoringSite: {}", siteB);
+
+        MonitoringSite[] newSites = {siteA, siteB};
+        logger.info("New MonitoringSites array: {}", Arrays.toString(newSites));
+
         MonitoringSiteResponse response = new MonitoringSiteResponse();
         response.setMonitoringSites(newSites);
 
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
-    
+        String mockJson = """
+        {
+            "Sites": {
+                "Site": 
+                [
+                    {"@SiteName":"Site A","@SiteCode":"SA1"},
+                    {"@SiteName":"Site B","@SiteCode":"SB2"}
+                ]
+            }
+        }
+        """;
+
+        logger.info("MonitoringSiteResponse to be returned by mock: {}", response);
+        
+        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);
+        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
         // Act
         siteCodeResolver.refreshSiteTrie();
+
+        logger.info("Site trie after refresh: {}", siteCodeResolver.getSiteTrie().toString());
     
         // Assert
         Trie trie = siteCodeResolver.getSiteTrie();
-
-        logger.info("Trie searchExact for 'Site A': {}", trie.searchExact("Site A"));
-        logger.info("Trie searchExact for 'Site B': {}", trie.searchExact("Site B"));
-        
         assertEquals("SA1", trie.searchExact("Site A"));
         assertEquals("SB2", trie.searchExact("Site B"));
     
-        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSiteResponse.class));
+        verify(restTemplate, times(1)).getForObject(anyString(), eq(String.class));
     }
 
     @Test
@@ -294,7 +321,13 @@ class SiteCodeResolverTest {
         when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
 
         // Act
-        siteCodeResolver.refreshSiteTrie();
+        try {
+            siteCodeResolver.refreshSiteTrie();
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            logger.info("JsonProcessingException caught: {}", e.getMessage());
+            e.printStackTrace();
+        }
 
         // Assert
         Trie refreshedTrie = siteCodeResolver.getSiteTrie();
@@ -464,7 +497,17 @@ class SiteCodeResolverTest {
         doAnswer(invocation -> {Location loc = invocation.getArgument(0); loc.setSiteCode("DUMMY1"); // ensure non-null site code
             return null;
         }).when(spyResolver).assignSiteCode(any(Location.class), anyString());
-        spyResolver.populateLocationData(location, "Dummy Location");
+        try {
+            spyResolver.populateLocationData(location, "Dummy Location");
+        } catch (JsonMappingException e) {
+            // TODO Auto-generated catch block
+            logger.info("JsonMappingException caught: {}", e.getMessage());
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            logger.info("JsonProcessingException caught: {}", e.getMessage());
+            e.printStackTrace();
+        }
 
         // Assert
         assertNotNull(location.getAirQualityData());
@@ -485,7 +528,13 @@ class SiteCodeResolverTest {
         doAnswer(invocation -> {Location loc = invocation.getArgument(0); loc.setSiteCode(null); // ensure null site code
             return null;
         }).when(spyResolver).assignSiteCode(any(Location.class), anyString());
-        spyResolver.populateLocationData(location, "Dummy Location");
+        try {
+            spyResolver.populateLocationData(location, "Dummy Location");
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            logger.info("JsonProcessingException caught: {}", e.getMessage());
+            e.printStackTrace();
+        }
 
         assertNull(location.getAirQualityData());
     }
@@ -513,7 +562,17 @@ class SiteCodeResolverTest {
         }).when(spyResolver).assignSiteCode(any(Location.class), anyString());
 
         // Act
-        spyResolver.populateLocationData(location, "Dummy Location");
+        try {
+            spyResolver.populateLocationData(location, "Dummy Location");
+        } catch (JsonMappingException e) {
+            // TODO Auto-generated catch block
+            logger.info("JsonMappingException caught: {}", e.getMessage());
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            logger.info("JsonProcessingException caught: {}", e.getMessage());
+            e.printStackTrace();
+        }
 
         // Logging for debugging
         logger.info("Mocked Response: {}", response);
@@ -533,7 +592,17 @@ class SiteCodeResolverTest {
         AirQualityData airData = new AirQualityData(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, LocalDateTime.now());
         location.setAirQualityData(airData);
 
-        siteCodeResolver.refreshLocationData(location);
+        try {
+            siteCodeResolver.refreshLocationData(location);
+        } catch (JsonMappingException e) {
+            // TODO Auto-generated catch block
+            logger.info("JsonMappingException caught: {}", e.getMessage());
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            logger.info("JsonProcessingException caught: {}", e.getMessage());
+            e.printStackTrace();
+        }
         verify(snapshotRepository, times(1)).save(any(AirQualitySnapshot.class));
     }
 
@@ -546,7 +615,17 @@ class SiteCodeResolverTest {
         emptyResponse.setMonitoringSites(new MonitoringSite[0]); // empty array
         when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(emptyResponse);
     
-        siteCodeResolver.refreshLocationData(location);
+        try {
+            siteCodeResolver.refreshLocationData(location);
+        } catch (JsonMappingException e) {
+            // TODO Auto-generated catch block
+            logger.info("JsonMappingException caught: {}", e.getMessage());
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            logger.info("JsonProcessingException caught: {}", e.getMessage());
+            e.printStackTrace();
+        }
     
         // Verify snapshotRepository.save is never called
         verify(snapshotRepository, never()).save(any());

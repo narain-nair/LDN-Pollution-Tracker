@@ -1,178 +1,203 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.pollution.project.service.SiteCodeResolverTest" tests="34" skipped="0" failures="0" errors="0" timestamp="2025-09-14T18:32:29.425Z" hostname="Narains-Laptop.local" time="0.357">
+<testsuite name="com.pollution.project.service.SiteCodeResolverTest" tests="34" skipped="0" failures="15" errors="0" timestamp="2025-09-14T22:00:27.139Z" hostname="Narains-Laptop.local" time="0.791">
   <properties/>
-  <testcase name="testGetIndex_SpeciesNotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.238"/>
-  <testcase name="testLookupSiteCode_TrimInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.004"/>
+  <testcase name="testGetIndex_SpeciesNotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.657"/>
+  <testcase name="testLookupSiteCode_TrimInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003"/>
   <testcase name="testGetIndex_ValidSpecies()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
-  <testcase name="testRefreshSiteTrie_SuccessfulUpdate()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.022"/>
-  <testcase name="testGetIndex_InvalidIndexValue()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testLookupSiteCode_SubstringNotPrefix()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testAssignSiteCode_BothFail()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testRefreshLocationData_SnapshotSaved()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.004"/>
-  <testcase name="testCalculateSiteCode_NoSitesReturned()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
-  <testcase name="testLookupSiteCode_SuggestionWithoutSiteCode()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testGetSiteTrie_SubsequentCallsReturnSameInstance()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
-  <testcase name="testAssignSiteCode_FallbackToCalculate()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.027"/>
-  <testcase name="testCalculateSiteCode_EmptySitesArray()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
+  <testcase name="testRefreshSiteTrie_SuccessfulUpdate()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.026">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;response&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;response&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.refreshSiteTrie(SiteCodeResolver.java:130)
+	at com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_SuccessfulUpdate(SiteCodeResolverTest.java:268)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <testcase name="testGetIndex_InvalidIndexValue()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
+  <testcase name="testLookupSiteCode_SubstringNotPrefix()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
+  <testcase name="testAssignSiteCode_BothFail()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:167)
+	at com.pollution.project.service.SiteCodeResolver.assignSiteCode(SiteCodeResolver.java:247)
+	at com.pollution.project.service.SiteCodeResolverTest.testAssignSiteCode_BothFail(SiteCodeResolverTest.java:451)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <testcase name="testRefreshLocationData_SnapshotSaved()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.006">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:167)
+	at com.pollution.project.service.SiteCodeResolver.assignSiteCode(SiteCodeResolver.java:247)
+	at com.pollution.project.service.SiteCodeResolver.populateLocationData(SiteCodeResolver.java:269)
+	at com.pollution.project.service.SiteCodeResolver.refreshLocationData(SiteCodeResolver.java:349)
+	at com.pollution.project.service.SiteCodeResolverTest.testRefreshLocationData_SnapshotSaved(SiteCodeResolverTest.java:583)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <testcase name="testCalculateSiteCode_NoSitesReturned()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:167)
+	at com.pollution.project.service.SiteCodeResolverTest.testCalculateSiteCode_NoSitesReturned(SiteCodeResolverTest.java:375)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <testcase name="testLookupSiteCode_SuggestionWithoutSiteCode()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003"/>
+  <testcase name="testGetSiteTrie_SubsequentCallsReturnSameInstance()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.01">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;response&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;response&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.getSiteTrie(SiteCodeResolver.java:83)
+	at com.pollution.project.service.SiteCodeResolverTest.testGetSiteTrie_SubsequentCallsReturnSameInstance(SiteCodeResolverTest.java:232)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <testcase name="testAssignSiteCode_FallbackToCalculate()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.026">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:167)
+	at com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:164)
+	at com.pollution.project.service.SiteCodeResolver.assignSiteCode(SiteCodeResolver.java:247)
+	at com.pollution.project.service.SiteCodeResolver.assignSiteCode(SiteCodeResolver.java:245)
+	at com.pollution.project.service.SiteCodeResolverTest.testAssignSiteCode_FallbackToCalculate(SiteCodeResolverTest.java:433)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <testcase name="testCalculateSiteCode_EmptySitesArray()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:167)
+	at com.pollution.project.service.SiteCodeResolverTest.testCalculateSiteCode_EmptySitesArray(SiteCodeResolverTest.java:390)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
   <testcase name="testLookupSiteCode_NullInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
   <testcase name="testLookupSiteCode_ExactMatch()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
   <testcase name="testLookupSiteCode_MultipleSuggestions()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testCalculateSiteCode_InvalidCoordinatesSkipped()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testRefreshLocationData_NoAirQualityData()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
+  <testcase name="testCalculateSiteCode_InvalidCoordinatesSkipped()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:167)
+	at com.pollution.project.service.SiteCodeResolverTest.testCalculateSiteCode_InvalidCoordinatesSkipped(SiteCodeResolverTest.java:357)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <testcase name="testRefreshLocationData_NoAirQualityData()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:167)
+	at com.pollution.project.service.SiteCodeResolver.assignSiteCode(SiteCodeResolver.java:247)
+	at com.pollution.project.service.SiteCodeResolver.populateLocationData(SiteCodeResolver.java:269)
+	at com.pollution.project.service.SiteCodeResolver.refreshLocationData(SiteCodeResolver.java:349)
+	at com.pollution.project.service.SiteCodeResolverTest.testRefreshLocationData_NoAirQualityData(SiteCodeResolverTest.java:606)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
   <testcase name="testLookupSiteCode_NotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
   <testcase name="testLookupSiteCode_CaseInsensitive()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testGetSiteTrie_FirstCallPopulatesTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
-  <testcase name="testRefreshSiteTrie_ReplacesOldTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testRefreshSiteTrie_ApiThrowsException()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.008"/>
+  <testcase name="testGetSiteTrie_FirstCallPopulatesTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;response&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;response&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.getSiteTrie(SiteCodeResolver.java:83)
+	at com.pollution.project.service.SiteCodeResolverTest.testGetSiteTrie_FirstCallPopulatesTrie(SiteCodeResolverTest.java:212)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <testcase name="testRefreshSiteTrie_ReplacesOldTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;response&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;response&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.refreshSiteTrie(SiteCodeResolver.java:130)
+	at com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_ReplacesOldTrie(SiteCodeResolverTest.java:312)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <testcase name="testRefreshSiteTrie_ApiThrowsException()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
+    <failure message="org.opentest4j.AssertionFailedError: Unexpected exception thrown: java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;response&quot; is null" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Unexpected exception thrown: java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;response&quot; is null
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at app//org.junit.jupiter.api.AssertDoesNotThrow.createAssertionFailedError(AssertDoesNotThrow.java:84)
+	at app//org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:53)
+	at app//org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:36)
+	at app//org.junit.jupiter.api.Assertions.assertDoesNotThrow(Assertions.java:3168)
+	at app//com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_ApiThrowsException(SiteCodeResolverTest.java:286)
+	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;response&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.refreshSiteTrie(SiteCodeResolver.java:130)
+	at com.pollution.project.service.SiteCodeResolverTest.lambda$testRefreshSiteTrie_ApiThrowsException$0(SiteCodeResolverTest.java:286)
+	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:49)
+	... 6 more
+</failure>
+  </testcase>
   <testcase name="testGetSiteCode_Found()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testGetSiteCode_NotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testPopulateLocationData_InvalidIndex()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.007"/>
+  <testcase name="testGetSiteCode_NotFound()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.0"/>
+  <testcase name="testPopulateLocationData_InvalidIndex()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.populateLocationData(SiteCodeResolver.java:284)
+	at com.pollution.project.service.SiteCodeResolver.populateLocationData(SiteCodeResolver.java:266)
+	at com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_InvalidIndex(SiteCodeResolverTest.java:553)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
   <testcase name="getSiteTrie_ShouldReturnNonNullTrie()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testPopulateLocationData_ValidResponse()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.003"/>
-  <testcase name="testCalculateSiteCode_NearestSiteReturned()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testLookupSiteCode_EmptyInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.0"/>
-  <testcase name="testPopulateLocationData_ReturnNull()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002"/>
+  <testcase name="testPopulateLocationData_ValidResponse()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.002">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.populateLocationData(SiteCodeResolver.java:284)
+	at com.pollution.project.service.SiteCodeResolver.populateLocationData(SiteCodeResolver.java:266)
+	at com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_ValidResponse(SiteCodeResolverTest.java:488)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <testcase name="testCalculateSiteCode_NearestSiteReturned()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.springframework.http.ResponseEntity.getBody()&quot; because &quot;responseEntity&quot; is null
+	at com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:167)
+	at com.pollution.project.service.SiteCodeResolverTest.testCalculateSiteCode_NearestSiteReturned(SiteCodeResolverTest.java:337)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <testcase name="testLookupSiteCode_EmptyInput()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
+  <testcase name="testPopulateLocationData_ReturnNull()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
   <testcase name="testAssignSiteCode_InputMatchesSite()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <testcase name="testLookupSiteCode_SpecialCharacters()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
+  <testcase name="testLookupSiteCode_SpecialCharacters()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.0"/>
   <testcase name="testLookupSiteCode_SuggestionUsed()" classname="com.pollution.project.service.SiteCodeResolverTest" time="0.001"/>
-  <system-out><![CDATA[2025-09-14T19:32:29.690+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
-2025-09-14T19:32:29.690+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site A': SA1
-2025-09-14T19:32:29.690+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site B': SB2
-2025-09-14T19:32:29.701+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=AirQualityData{pm25=1.0, pm10=2.0, no2=3.0, so2=4.0, o3=5.0, co=6.0, timestamp=2025-09-14T19:32:29.701209}}
-2025-09-14T19:32:29.703+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=AirQualityData{pm25=1.0, pm10=2.0, no2=3.0, so2=4.0, o3=5.0, co=6.0, timestamp=2025-09-14T19:32:29.701209}}
-2025-09-14T19:32:29.703+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site code is null after assignSiteCode, returning early
-2025-09-14T19:32:29.705+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Empty response monitoring sites: {}
-2025-09-14T19:32:29.706+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Stubbed restTemplate to return empty response
-2025-09-14T19:32:29.706+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Nearest code calculated: null
-2025-09-14T19:32:29.737+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: got 1 sites from API
-2025-09-14T19:32:29.737+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: nearest site code = S2
-2025-09-14T19:32:29.745+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: got 2 sites from API
-2025-09-14T19:32:29.745+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Skipping site A due to invalid coords
-2025-09-14T19:32:29.745+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: nearest site code = B
-2025-09-14T19:32:29.747+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
-2025-09-14T19:32:29.747+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
-2025-09-14T19:32:29.747+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site code is null after assignSiteCode, returning early
-2025-09-14T19:32:29.751+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Retrieved Trie: com.pollution.dto.Trie@3df3e1e9
-2025-09-14T19:32:29.751+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site One': S1
-2025-09-14T19:32:29.752+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site Two': S2
-2025-09-14T19:32:29.753+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
-2025-09-14T19:32:29.756+01:00 ERROR 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error refreshing site trie: {}
-
-org.springframework.web.client.RestClientException: API down
-	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401) ~[spring-web-6.1.13.jar:6.1.13]
-	at com.pollution.project.service.SiteCodeResolver.refreshSiteTrie(SiteCodeResolver.java:76) ~[main/:na]
-	at com.pollution.project.service.SiteCodeResolverTest.lambda$testRefreshSiteTrie_ApiThrowsException$0(SiteCodeResolverTest.java:272) ~[test/:na]
-	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:49) ~[junit-jupiter-api-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:36) ~[junit-jupiter-api-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.api.Assertions.assertDoesNotThrow(Assertions.java:3168) ~[junit-jupiter-api-5.10.3.jar:5.10.3]
-	at com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_ApiThrowsException(SiteCodeResolverTest.java:272) ~[test/:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728) ~[junit-platform-commons-1.10.3.jar:1.10.3]
-	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69) ~[junit-jupiter-engine-5.10.3.jar:5.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.10.3.jar:1.10.3]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198) ~[junit-platform-launcher-1.10.3.jar:1.10.3]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169) ~[junit-platform-launcher-1.10.3.jar:1.10.3]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93) ~[junit-platform-launcher-1.10.3.jar:1.10.3]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58) ~[junit-platform-launcher-1.10.3.jar:1.10.3]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141) ~[junit-platform-launcher-1.10.3.jar:1.10.3]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57) ~[junit-platform-launcher-1.10.3.jar:1.10.3]
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103) ~[junit-platform-launcher-1.10.3.jar:1.10.3]
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85) ~[junit-platform-launcher-1.10.3.jar:1.10.3]
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47) ~[junit-platform-launcher-1.10.3.jar:1.10.3]
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:124) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:99) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:94) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63) ~[na:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92) ~[na:na]
-	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63) ~[na:na]
-	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:122) ~[na:na]
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:72) ~[na:na]
-	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-
-2025-09-14T19:32:29.769+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-14T19:32:29.769+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-14T19:32:29.769+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
-2025-09-14T19:32:29.769+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for siteCode DUMMY1: null
-2025-09-14T19:32:29.769+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetched site data: com.pollution.dto.HourlyIndexResponse$Site@2654f4aa
-2025-09-14T19:32:29.769+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Species list: [com.pollution.dto.HourlyIndexResponse$Species@680ebfb2]
-2025-09-14T19:32:29.771+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Populated AirQualityData: AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
-2025-09-14T19:32:29.771+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Location after population: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}}
-2025-09-14T19:32:29.771+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Mocked Response: com.pollution.dto.HourlyIndexResponse@11f4d2b8
-2025-09-14T19:32:29.771+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Species List: [com.pollution.dto.HourlyIndexResponse$Species@680ebfb2]
-2025-09-14T19:32:29.771+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Air quality data: AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
-2025-09-14T19:32:29.774+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-14T19:32:29.775+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-14T19:32:29.775+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
-2025-09-14T19:32:29.775+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for siteCode DUMMY1: null
-2025-09-14T19:32:29.775+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetched site data: com.pollution.dto.HourlyIndexResponse$Site@efac87a
-2025-09-14T19:32:29.775+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Species list: [com.pollution.dto.HourlyIndexResponse$Species@27035f4f, com.pollution.dto.HourlyIndexResponse$Species@60d1b2a7]
-2025-09-14T19:32:29.776+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Populated AirQualityData: AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
-2025-09-14T19:32:29.776+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Location after population: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}}
-2025-09-14T19:32:29.777+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: got 2 sites from API
-2025-09-14T19:32:29.777+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: nearest site code = A
-2025-09-14T19:32:29.779+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-14T19:32:29.780+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-14T19:32:29.780+01:00  WARN 32825 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site code is null after assignSiteCode, returning early
-2025-09-14T19:32:29.782+01:00  INFO 32825 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Inserted 'Bexley West' with code 'BQ8' into trie.
+  <system-out><![CDATA[23:00:27.808 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Created MonitoringSite: com.pollution.dto.MonitoringSite@75de6341
+23:00:27.811 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Created MonitoringSite: com.pollution.dto.MonitoringSite@439b15f2
+23:00:27.811 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- New MonitoringSites array: [com.pollution.dto.MonitoringSite@75de6341, com.pollution.dto.MonitoringSite@439b15f2]
+23:00:27.811 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- MonitoringSiteResponse to be returned by mock: com.pollution.dto.MonitoringSiteResponse@3c83468e
+23:00:27.843 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=AirQualityData{pm25=1.0, pm10=2.0, no2=3.0, so2=4.0, o3=5.0, co=6.0, timestamp=2025-09-14T23:00:27.843870}}
+23:00:27.849 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Empty response monitoring sites: {}
+23:00:27.849 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Stubbed restTemplate to return empty response
+23:00:27.901 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
+23:00:27.917 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+23:00:27.917 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+23:00:27.917 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
+23:00:27.921 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+23:00:27.921 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+23:00:27.921 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
+23:00:27.926 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+23:00:27.926 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- After assignSiteCode, location: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+23:00:27.926 [Test worker] WARN com.pollution.project.service.SiteCodeResolver -- Site code is null after assignSiteCode, returning early
+23:00:27.930 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Inserted 'Bexley West' with code 'BQ8' into trie.
 ]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/Users/narainusesamacbook/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.19/154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1/byte-buddy-agent-1.14.19.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
 </testsuite>

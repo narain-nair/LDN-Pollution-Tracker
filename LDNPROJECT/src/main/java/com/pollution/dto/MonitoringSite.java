@@ -14,7 +14,7 @@ public class MonitoringSite {
     @JsonProperty("@Longitude")
     private String longitude;
 
-    @JsonProperty("SiteName")
+    @JsonProperty("@SiteName")
     private String siteName;
 
     public MonitoringSite() {}
