@@ -402,7 +402,7 @@ class SiteCodeResolverTest {
         fallbackSite.setLatitude("51.5");
         fallbackSite.setLongitude("0.1");
         fallbackResponse.setMonitoringSites(new MonitoringSite[]{ fallbackSite });
-
+ 
         when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class)))
             .thenReturn(fallbackResponse);
 
