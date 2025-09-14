@@ -1,6 +1,7 @@
 package com.pollution.project.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -38,6 +39,12 @@ public class LocationController{
         this.siteCodeResolver = siteCodeResolver;
         this.locationRepository = locationRepository;
         this.snapshotRepository = snapshotRepository;
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllLocations() {
+        List<Location> locations = locationRepository.findAll();
+        return ResponseEntity.ok(locations);
     }
 
     @GetMapping("/{id}")
