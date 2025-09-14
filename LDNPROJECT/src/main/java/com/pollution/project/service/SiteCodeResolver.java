@@ -23,6 +23,7 @@ import com.pollution.dto.HourlyIndexResponse.Site;
 import com.pollution.dto.HourlyIndexResponse.Species;
 import com.pollution.dto.MonitoringSite;
 import com.pollution.dto.Trie;
+import com.pollution.dto.MonitoringSiteResponse;
 import com.pollution.project.entity.AirQualityData;
 import com.pollution.project.entity.AirQualitySnapshot;
 import com.pollution.project.entity.Location; 
@@ -52,7 +53,8 @@ public class SiteCodeResolver {
     public synchronized Trie getSiteTrie() {
         if (siteTrie == null) {
             siteTrie = new Trie();
-            MonitoringSite[] sites = restTemplate.getForObject(apiUrl, MonitoringSite[].class);
+            MonitoringSiteResponse response = restTemplate.getForObject(apiUrl, MonitoringSiteResponse.class);
+            MonitoringSite[] sites = response != null ? response.getMonitoringSites() : new MonitoringSite[0];            
             if (sites != null) {
                 for (MonitoringSite site : sites) {
                     siteTrie.insert(site.getSiteName(), site.getSiteCode());
@@ -71,7 +73,8 @@ public class SiteCodeResolver {
     @Scheduled(cron = "0 0 0 * * ?", zone = "GMT") // Every day at midnight
     public void refreshSiteTrie() {
         try {
-            MonitoringSite[] sites = restTemplate.getForObject(apiUrl, MonitoringSite[].class);
+            MonitoringSiteResponse response = restTemplate.getForObject(apiUrl, MonitoringSiteResponse.class);
+            MonitoringSite[] sites = response != null ? response.getMonitoringSites() : new MonitoringSite[0];
             if (sites != null) {
                 Trie newTrie = new Trie();
                 for (MonitoringSite site : sites) {
@@ -87,7 +90,8 @@ public class SiteCodeResolver {
     }
 
     public String calculateSiteCode(double lat, double lng) {
-        MonitoringSite[] sites = restTemplate.getForObject(apiUrl, MonitoringSite[].class);
+        MonitoringSiteResponse response = restTemplate.getForObject(apiUrl, MonitoringSiteResponse.class);
+        MonitoringSite[] sites = response != null ? response.getMonitoringSites() : new MonitoringSite[0];
         if (sites == null || sites.length == 0) return null;
 
         MonitoringSite nearest = null;
