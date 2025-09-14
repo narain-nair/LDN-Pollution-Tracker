@@ -29,7 +29,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">3</div>
+<div class="counter">0</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.593s</div>
+<div class="counter">0.304s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox failures" id="successRate">
-<div class="percent">91%</div>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,92 +61,12 @@
 <div class="tab-container">
 <ul class="tabLinks">
 <li>
-<a href="#">Failed tests</a>
-</li>
-<li>
 <a href="#">Tests</a>
 </li>
 <li>
 <a href="#">Standard output</a>
 </li>
-<li>
-<a href="#">Standard error</a>
-</li>
 </ul>
-<div class="tab">
-<h2>Failed tests</h2>
-<div class="test">
-<a name="testAssignSiteCode_InputMatchesSite()"></a>
-<h3 class="failures">testAssignSiteCode_InputMatchesSite()</h3>
-<span class="code">
-<pre>org.mockito.exceptions.misusing.MissingMethodInvocationException: 
-when() requires an argument which has to be 'a method call on a mock'.
-For example:
-    when(mock.getArticles()).thenReturn(articles);
-
-Also, this error might show up because:
-1. you stub either of: final/private/native/equals()/hashCode() methods.
-   Those methods *cannot* be stubbed/verified.
-   Mocking methods declared on non-public parent classes is not supported.
-2. inside when() you don't call method on mock but on some other object.
-
-	at app//com.pollution.project.service.SiteCodeResolverTest.testAssignSiteCode_InputMatchesSite(SiteCodeResolverTest.java:352)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testPopulateLocationData_ReturnNull()"></a>
-<h3 class="failures">testPopulateLocationData_ReturnNull()</h3>
-<span class="code">
-<pre>org.mockito.exceptions.misusing.NotAMockException: 
-Argument passed to when() is not a mock!
-Example of correct stubbing:
-    doThrow(new RuntimeException()).when(mock).someMethod();
-	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_ReturnNull(SiteCodeResolverTest.java:425)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testPopulateLocationData_ValidResponse()"></a>
-<h3 class="failures">testPopulateLocationData_ValidResponse()</h3>
-<span class="code">
-<pre>org.mockito.exceptions.misusing.PotentialStubbingProblem: 
-Strict stubbing argument mismatch. Please check:
- - this invocation of 'getForObject' method:
-    restTemplate.getForObject(
-    &quot;https://api.erg.ic.ac.uk/AirQuality/Information/MonitoringSites/GroupName=London/Json&quot;,
-    class [Lcom.pollution.dto.MonitoringSite;
-);
-    -&gt; at com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:90)
- - has following stubbing(s) with different arguments:
-    1. restTemplate.getForObject(&quot;&quot;, null);
-      -&gt; at com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_ValidResponse(SiteCodeResolverTest.java:408)
-Typically, stubbing argument mismatch indicates user mistake when writing tests.
-Mockito fails early so that you can debug potential problem easily.
-However, there are legit scenarios when this exception generates false negative signal:
-  - stubbing the same method multiple times using 'given().will()' or 'when().then()' API
-    Please use 'will().given()' or 'doReturn().when()' API for stubbing.
-  - stubbed method is intentionally invoked with different arguments by code under test
-    Please use default or 'silent' JUnit Rule (equivalent of Strictness.LENIENT).
-For more information see javadoc for PotentialStubbingProblem class.
-	at app//org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401)
-	at app//com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:90)
-	at app//com.pollution.project.service.SiteCodeResolver.assignSiteCode(SiteCodeResolver.java:146)
-	at app//com.pollution.project.service.SiteCodeResolver.populateLocationData(SiteCodeResolver.java:168)
-	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_ValidResponse(SiteCodeResolverTest.java:411)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-</div>
 <div class="tab">
 <h2>Tests</h2>
 <table>
@@ -159,12 +79,12 @@ For more information see javadoc for PotentialStubbingProblem class.
 </thead>
 <tr>
 <td class="success">getSiteTrie_ShouldReturnNonNullTrie()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testAssignSiteCode_BothFail()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -173,13 +93,13 @@ For more information see javadoc for PotentialStubbingProblem class.
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testAssignSiteCode_InputMatchesSite()</td>
-<td class="failures">0.001s</td>
-<td class="failures">failed</td>
+<td class="success">testAssignSiteCode_InputMatchesSite()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testCalculateSiteCode_EmptySitesArray()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -204,12 +124,12 @@ For more information see javadoc for PotentialStubbingProblem class.
 </tr>
 <tr>
 <td class="success">testGetIndex_SpeciesNotFound()</td>
-<td class="success">0.494s</td>
+<td class="success">0.201s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetIndex_ValidSpecies()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -224,7 +144,7 @@ For more information see javadoc for PotentialStubbingProblem class.
 </tr>
 <tr>
 <td class="success">testGetSiteTrie_FirstCallPopulatesTrie()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -249,7 +169,7 @@ For more information see javadoc for PotentialStubbingProblem class.
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_MultipleSuggestions()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -259,12 +179,12 @@ For more information see javadoc for PotentialStubbingProblem class.
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_NullInput()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SpecialCharacters()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -279,37 +199,37 @@ For more information see javadoc for PotentialStubbingProblem class.
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SuggestionWithoutSiteCode()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_TrimInput()</td>
-<td class="success">0.003s</td>
+<td class="success">0.004s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testPopulateLocationData_InvalidIndex()</td>
-<td class="success">0.027s</td>
+<td class="success">0.029s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testPopulateLocationData_ReturnNull()</td>
-<td class="failures">0.001s</td>
-<td class="failures">failed</td>
-</tr>
-<tr>
-<td class="failures">testPopulateLocationData_ValidResponse()</td>
-<td class="failures">0.006s</td>
-<td class="failures">failed</td>
-</tr>
-<tr>
-<td class="success">testRefreshLocationData_NoAirQualityData()</td>
+<td class="success">testPopulateLocationData_ReturnNull()</td>
 <td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
+<td class="success">testPopulateLocationData_ValidResponse()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testRefreshLocationData_NoAirQualityData()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">testRefreshLocationData_SnapshotSaved()</td>
-<td class="success">0.005s</td>
+<td class="success">0.004s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -324,7 +244,7 @@ For more information see javadoc for PotentialStubbingProblem class.
 </tr>
 <tr>
 <td class="success">testRefreshSiteTrie_SuccessfulUpdate()</td>
-<td class="success">0.020s</td>
+<td class="success">0.025s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -332,29 +252,29 @@ For more information see javadoc for PotentialStubbingProblem class.
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2025-09-12T11:30:15.774+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
-2025-09-12T11:30:15.774+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site A': SA1
-2025-09-12T11:30:15.774+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site B': SB2
-2025-09-12T11:30:15.784+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=AirQualityData{pm25=1.0, pm10=2.0, no2=3.0, so2=4.0, o3=5.0, co=6.0, timestamp=2025-09-12T11:30:15.784353}}
-2025-09-12T11:30:15.787+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=AirQualityData{pm25=1.0, pm10=2.0, no2=3.0, so2=4.0, o3=5.0, co=6.0, timestamp=2025-09-12T11:30:15.784353}}
-2025-09-12T11:30:15.787+01:00  WARN 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site code is null after assignSiteCode, returning early
-2025-09-12T11:30:15.804+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
-2025-09-12T11:30:15.804+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
-2025-09-12T11:30:15.804+01:00  WARN 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site code is null after assignSiteCode, returning early
-2025-09-12T11:30:15.808+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Retrieved Trie: com.pollution.dto.Trie@5687e92d
-2025-09-12T11:30:15.808+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site One': S1
-2025-09-12T11:30:15.808+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site Two': S2
-2025-09-12T11:30:15.810+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
-2025-09-12T11:30:15.812+01:00 ERROR 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error refreshing site trie: {}
+<pre>2025-09-12T11:57:55.369+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
+2025-09-12T11:57:55.369+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site A': SA1
+2025-09-12T11:57:55.369+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Trie searchExact for 'Site B': SB2
+2025-09-12T11:57:55.380+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=AirQualityData{pm25=1.0, pm10=2.0, no2=3.0, so2=4.0, o3=5.0, co=6.0, timestamp=2025-09-12T11:57:55.380259}}
+2025-09-12T11:57:55.383+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=AirQualityData{pm25=1.0, pm10=2.0, no2=3.0, so2=4.0, o3=5.0, co=6.0, timestamp=2025-09-12T11:57:55.380259}}
+2025-09-12T11:57:55.383+01:00  WARN 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site code is null after assignSiteCode, returning early
+2025-09-12T11:57:55.402+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
+2025-09-12T11:57:55.402+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
+2025-09-12T11:57:55.402+01:00  WARN 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site code is null after assignSiteCode, returning early
+2025-09-12T11:57:55.406+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Retrieved Trie: com.pollution.dto.Trie@2e7de98a
+2025-09-12T11:57:55.406+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site One': S1
+2025-09-12T11:57:55.406+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site Two': S2
+2025-09-12T11:57:55.408+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
+2025-09-12T11:57:55.410+01:00 ERROR 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error refreshing site trie: {}
 
 org.springframework.web.client.RestClientException: API down
 	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:401) ~[spring-web-6.1.13.jar:6.1.13]
 	at com.pollution.project.service.SiteCodeResolver.refreshSiteTrie(SiteCodeResolver.java:74) ~[main/:na]
-	at com.pollution.project.service.SiteCodeResolverTest.lambda$testRefreshSiteTrie_ApiThrowsException$0(SiteCodeResolverTest.java:260) ~[test/:na]
+	at com.pollution.project.service.SiteCodeResolverTest.lambda$testRefreshSiteTrie_ApiThrowsException$0(SiteCodeResolverTest.java:261) ~[test/:na]
 	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:49) ~[junit-jupiter-api-5.10.3.jar:5.10.3]
 	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:36) ~[junit-jupiter-api-5.10.3.jar:5.10.3]
 	at org.junit.jupiter.api.Assertions.assertDoesNotThrow(Assertions.java:3168) ~[junit-jupiter-api-5.10.3.jar:5.10.3]
-	at com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_ApiThrowsException(SiteCodeResolverTest.java:260) ~[test/:na]
+	at com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_ApiThrowsException(SiteCodeResolverTest.java:261) ~[test/:na]
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728) ~[junit-platform-commons-1.10.3.jar:1.10.3]
@@ -437,28 +357,27 @@ org.springframework.web.client.RestClientException: API down
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 
-2025-09-12T11:30:15.844+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-12T11:30:15.844+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-12T11:30:15.844+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
-2025-09-12T11:30:15.844+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetched site data: com.pollution.dto.HourlyIndexResponse$Site@67887bf2
-2025-09-12T11:30:15.844+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Species list: [com.pollution.dto.HourlyIndexResponse$Species@3ce2c454]
-2025-09-12T11:30:15.846+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Populated AirQualityData: AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
-2025-09-12T11:30:15.846+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Location after population: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}}
-2025-09-12T11:30:15.846+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Mocked Response: com.pollution.dto.HourlyIndexResponse@1c74251b
-2025-09-12T11:30:15.846+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Species List: [com.pollution.dto.HourlyIndexResponse$Species@3ce2c454]
-2025-09-12T11:30:15.846+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Air quality data: AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
-2025-09-12T11:30:15.849+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-12T11:30:15.861+01:00  INFO 51321 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Inserted 'Bexley West' with code 'BQ8' into trie.
-</pre>
-</span>
-</div>
-<div class="tab">
-<h2>Standard error</h2>
-<span class="code">
-<pre>WARNING: A Java agent has been loaded dynamically (/Users/narainusesamacbook/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.19/154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1/byte-buddy-agent-1.14.19.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
+2025-09-12T11:57:55.441+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+2025-09-12T11:57:55.442+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+2025-09-12T11:57:55.442+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
+2025-09-12T11:57:55.442+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetched site data: com.pollution.dto.HourlyIndexResponse$Site@2ac42ce6
+2025-09-12T11:57:55.442+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Species list: [com.pollution.dto.HourlyIndexResponse$Species@4fa78886]
+2025-09-12T11:57:55.444+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Populated AirQualityData: AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
+2025-09-12T11:57:55.445+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Location after population: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}}
+2025-09-12T11:57:55.445+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Mocked Response: com.pollution.dto.HourlyIndexResponse@550244cb
+2025-09-12T11:57:55.445+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Species List: [com.pollution.dto.HourlyIndexResponse$Species@4fa78886]
+2025-09-12T11:57:55.445+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Air quality data: AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
+2025-09-12T11:57:55.448+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+2025-09-12T11:57:55.448+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+2025-09-12T11:57:55.448+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
+2025-09-12T11:57:55.448+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetched site data: com.pollution.dto.HourlyIndexResponse$Site@5985102f
+2025-09-12T11:57:55.448+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Species list: [com.pollution.dto.HourlyIndexResponse$Species@3695e28a, com.pollution.dto.HourlyIndexResponse$Species@7a5151d7]
+2025-09-12T11:57:55.448+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Populated AirQualityData: AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
+2025-09-12T11:57:55.449+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Location after population: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}}
+2025-09-12T11:57:55.452+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+2025-09-12T11:57:55.452+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+2025-09-12T11:57:55.452+01:00  WARN 52989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site code is null after assignSiteCode, returning early
+2025-09-12T11:57:55.455+01:00  INFO 52989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Inserted 'Bexley West' with code 'BQ8' into trie.
 </pre>
 </span>
 </div>
@@ -470,7 +389,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 8.14.3</a> at 12 Sept 2025, 11:30:15</p>
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 12 Sept 2025, 11:57:55</p>
 </div>
 </div>
 </body>

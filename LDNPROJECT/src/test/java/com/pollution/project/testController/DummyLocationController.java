@@ -55,11 +55,17 @@ public class DummyLocationController {
         siteCodeResolver.populateLocationData(loc, loc.getName());
     
         if (loc.getAirQualityData() == null) {
+            Map<String, Object> faultyRes = new HashMap<>();
+            faultyRes.put("error", "No air quality data found for this location");
             logger.warn("No air quality data found for location id {}", id);
-            return ResponseEntity.status(404).body(Map.of("error", "No air quality data found", "siteCode", loc.getSiteCode()));
+            return ResponseEntity.status(404).body(faultyRes);
         }
-    
-        return ResponseEntity.ok(Map.of("location", loc, "airQualityData", loc.getAirQualityData(), "message", "Location data retrieved successfully."));
+        
+        Map<String, Object> body = new HashMap<>();
+        body.put("location", loc);
+        body.put("airQualityData", loc.getAirQualityData()); // can be null safely
+        body.put("message", "Location data retrieved successfully.");
+        return ResponseEntity.ok(body);
     }
 
     public ResponseEntity<?> deleteLocation(Long id) {
@@ -123,12 +129,17 @@ public class DummyLocationController {
     
         if (loc.getAirQualityData() == null) {
             logger.warn("No air quality data found for location id {}", id);
-            return ResponseEntity.status(404).body(Map.of("error", "No air quality data found for this location"));
+            Map<String, Object> body = new HashMap<>();
+            body.put("error", "No air quality data found for this location");
+            return ResponseEntity.status(404).body(body);
         }
     
         locationStorage.put(id, loc); // refresh in-memory
     
-        return ResponseEntity.ok(Map.of("message", "Location data refreshed successfully.", "location", loc));
+        Map<String, Object> body = new HashMap<>();
+        body.put("message", "Location data refreshed successfully.");
+        body.put("location", loc);
+        return ResponseEntity.ok(body);
     }
 
     public void deleteAllLocations() {

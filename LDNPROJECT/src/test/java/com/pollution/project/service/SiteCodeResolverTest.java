@@ -21,6 +21,7 @@ import org.mockito.Mockito;
 
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -349,10 +350,17 @@ class SiteCodeResolverTest {
     @Test
     void testAssignSiteCode_InputMatchesSite() {
         Location location = new Location(51.5, 0.1);
-        when(siteCodeResolver.lookupSiteCode("Known Site")).thenReturn("S1");
 
-        siteCodeResolver.assignSiteCode(location, "Known Site");
+        // Spy the resolver
+        SiteCodeResolver spyResolver = Mockito.spy(siteCodeResolver);
 
+        // Stub lookupSiteCode properly for a spy
+        doReturn("S1").when(spyResolver).lookupSiteCode("Known Site");
+
+        // Act
+        spyResolver.assignSiteCode(location, "Known Site");
+
+        // Assert
         assertEquals("S1", location.getSiteCode());
     }
 
@@ -385,8 +393,9 @@ class SiteCodeResolverTest {
     @Test
     void testPopulateLocationData_ValidResponse() {
         // Dummy location (latitude/longitude arbitrary)
-        Location location = new Location("Dummy Location", 51.000, 0.000);
-        location.setSiteCode("DUMMY1");
+        Location location = new Location("Dummy Location", 51.0, 0.0);
+        location.setId(1L);
+        location.setSiteCode("DUMMY1");  // skip lookup/calculate
 
         // Build species list
         HourlyIndexResponse.Species pm25 = new HourlyIndexResponse.Species("PM25", "PM25", "5", "Moderate", "Automated");
@@ -405,10 +414,14 @@ class SiteCodeResolverTest {
         HourlyIndexResponse response = new HourlyIndexResponse(hqi);
 
         // Mock API call
-        when(restTemplate.getForObject(anyString(), eq(HourlyIndexResponse.class))).thenReturn(response);
+        lenient().when(restTemplate.getForObject(anyString(), eq(HourlyIndexResponse.class))).thenReturn(response);
 
         // Act
-        siteCodeResolver.populateLocationData(location, "Dummy Location");
+        SiteCodeResolver spyResolver = Mockito.spy(siteCodeResolver);
+        doAnswer(invocation -> {Location loc = invocation.getArgument(0); loc.setSiteCode("DUMMY1"); // ensure non-null site code
+            return null;
+        }).when(spyResolver).assignSiteCode(any(Location.class), anyString());
+        spyResolver.populateLocationData(location, "Dummy Location");
 
         // Assert
         assertNotNull(location.getAirQualityData());
@@ -422,11 +435,15 @@ class SiteCodeResolverTest {
     void testPopulateLocationData_ReturnNull() {
         Location location = new Location("Dummy Location", 51.000, 0.000);
         location.setSiteCode(null);
-        doNothing().when(siteCodeResolver).assignSiteCode(location, "X");
 
-        when(restTemplate.getForObject(anyString(), eq(HourlyIndexResponse.class))).thenReturn(null);
+        lenient().when(restTemplate.getForObject(anyString(), eq(HourlyIndexResponse.class))).thenReturn(null);
+        
+        SiteCodeResolver spyResolver = Mockito.spy(siteCodeResolver);
+        doAnswer(invocation -> {Location loc = invocation.getArgument(0); loc.setSiteCode(null); // ensure null site code
+            return null;
+        }).when(spyResolver).assignSiteCode(any(Location.class), anyString());
+        spyResolver.populateLocationData(location, "Dummy Location");
 
-        siteCodeResolver.populateLocationData(location, "X");
         assertNull(location.getAirQualityData());
     }
 
