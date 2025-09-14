@@ -27,6 +27,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable()) // Disables CSRF protection for simplicity
             .authorizeHttpRequests((authz) -> authz
                 .requestMatchers("/auth/**").permitAll() // All /auth/** endpoints are public
+                .requestMatchers("/locations/**", "/test/**").permitAll()
                 .anyRequest().authenticated() // All other endpoints require authentication
             )
             .userDetailsService(userDetailsService) // Loads users from the custom user details service

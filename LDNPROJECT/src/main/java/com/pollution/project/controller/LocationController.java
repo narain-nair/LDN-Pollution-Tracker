@@ -36,6 +36,7 @@ public class LocationController{
     private static final Logger logger = LoggerFactory.getLogger(LocationController.class);
 
     public LocationController (SiteCodeResolver siteCodeResolver, LocationRepository locationRepository, AirQualitySnapshotRepository snapshotRepository) {
+        System.out.println("LocationController initialized!");
         this.siteCodeResolver = siteCodeResolver;
         this.locationRepository = locationRepository;
         this.snapshotRepository = snapshotRepository;
