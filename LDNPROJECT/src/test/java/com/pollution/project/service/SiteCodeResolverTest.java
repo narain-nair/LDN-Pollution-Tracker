@@ -1,7 +1,9 @@
 package com.pollution.project.service;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import org.mockito.InjectMocks;
@@ -20,10 +23,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -37,6 +42,7 @@ import org.slf4j.LoggerFactory;
 
 import com.pollution.dto.HourlyIndexResponse;
 import com.pollution.dto.MonitoringSite;
+import com.pollution.dto.MonitoringSiteResponse;
 import com.pollution.dto.Trie;
 import com.pollution.project.entity.AirQualityData;
 import com.pollution.project.entity.AirQualitySnapshot;
@@ -195,8 +201,9 @@ class SiteCodeResolverTest {
     @Test
     void testGetSiteTrie_FirstCallPopulatesTrie() {
         // Arrange
-        MonitoringSite[] sites = {site1, site2};
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(sites);
+        MonitoringSiteResponse response = new MonitoringSiteResponse();
+        response.setMonitoringSites(new MonitoringSite[]{site1, site2});
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
     
         // Act
         siteCodeResolver.setSiteTrie(null); // Reset to force re-fetch
@@ -208,13 +215,14 @@ class SiteCodeResolverTest {
         // Assert
         assertEquals("S1", retrievedTrie.searchExact("Site One"));
         assertEquals("S2", retrievedTrie.searchExact("Site Two"));
-        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
+        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSiteResponse.class));
     }
 
     @Test
     void testGetSiteTrie_SubsequentCallsReturnSameInstance() {
-        MonitoringSite[] sites = {site1};
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(sites);
+        MonitoringSiteResponse response = new MonitoringSiteResponse();
+        response.setMonitoringSites(new MonitoringSite[]{site1, site2});
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
 
         // reset cached trie if needed
         ReflectionTestUtils.setField(siteCodeResolver, "siteTrie", null);
@@ -225,7 +233,7 @@ class SiteCodeResolverTest {
         assertSame(firstCall, secondCall);
 
         // should now be invoked once
-        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
+        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSiteResponse.class));
     }
 
     @Test
@@ -235,7 +243,10 @@ class SiteCodeResolverTest {
         MonitoringSite siteB = new MonitoringSite("Site B", "SB2");
         MonitoringSite[] newSites = {siteA, siteB};
     
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(newSites);
+        MonitoringSiteResponse response = new MonitoringSiteResponse();
+        response.setMonitoringSites(newSites);
+
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
     
         // Act
         siteCodeResolver.refreshSiteTrie();
@@ -249,13 +260,13 @@ class SiteCodeResolverTest {
         assertEquals("SA1", trie.searchExact("Site A"));
         assertEquals("SB2", trie.searchExact("Site B"));
     
-        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
+        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSiteResponse.class));
     }
 
     @Test
     void testRefreshSiteTrie_ApiThrowsException() {
         // Arrange
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenThrow(new RestClientException("API down"));
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenThrow(new RestClientException("API down"));
 
         // Act → should NOT throw
         assertDoesNotThrow(() -> siteCodeResolver.refreshSiteTrie());
@@ -265,7 +276,7 @@ class SiteCodeResolverTest {
         assertTrue(trie.getSuggestions("Anything").isEmpty());
 
         // Verify API call attempted once
-        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSite[].class));
+        verify(restTemplate, times(1)).getForObject(anyString(), eq(MonitoringSiteResponse.class));
     }
 
     @Test
@@ -277,9 +288,10 @@ class SiteCodeResolverTest {
 
         // Mock API with new data
         MonitoringSite siteC = new MonitoringSite("Fresh Site", "FS1");
-        MonitoringSite[] refreshedSites = {siteC};
+        MonitoringSiteResponse response = new MonitoringSiteResponse();
+        response.setMonitoringSites(new MonitoringSite[]{siteC});
 
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(refreshedSites);
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
 
         // Act
         siteCodeResolver.refreshSiteTrie();
@@ -296,7 +308,10 @@ class SiteCodeResolverTest {
         MonitoringSite siteA = new MonitoringSite("A", "51.500", "0.100");
         MonitoringSite siteB = new MonitoringSite("B", "52.000", "0.200");
 
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(new MonitoringSite[]{siteA, siteB});
+        MonitoringSiteResponse response = new MonitoringSiteResponse();
+        response.setMonitoringSites(new MonitoringSite[]{siteA, siteB});
+
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
 
         // Act
         String nearestCode = siteCodeResolver.calculateSiteCode(51.505, 0.101); // closer to site A
@@ -310,25 +325,35 @@ class SiteCodeResolverTest {
         // Arrange
         MonitoringSite siteA = new MonitoringSite("A", "not-a-number", "0.100");
         MonitoringSite siteB = new MonitoringSite("B", "51.500", "0.100");
-
-        MonitoringSite[] sites = {siteA, siteB};
-
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(sites);
-
+    
+        MonitoringSite[] sites = { siteA, siteB };
+        MonitoringSiteResponse response = new MonitoringSiteResponse();
+        response.setMonitoringSites(sites);
+    
+        // Stub RestTemplate to return the wrapper instead of raw array
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
+    
         // Act
         String nearestCode = siteCodeResolver.calculateSiteCode(51.505, 0.101);
-
+    
         // Assert
-        assertEquals("B", nearestCode); // site A skipped
+        assertEquals("B", nearestCode); // site A skipped due to invalid latitude
     }
 
     @Test
     void testCalculateSiteCode_NoSitesReturned() {
         // Arrange
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(null);
+        MonitoringSiteResponse emptyResponse = new MonitoringSiteResponse();
+        emptyResponse.setMonitoringSites(null); 
+        logger.info("Empty response monitoring sites: {}", emptyResponse.getMonitoringSites());
+
+        // stub restTemplate to return the wrapper instead of the raw array
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(emptyResponse);
+        logger.info("Stubbed restTemplate to return empty response");
 
         // Act
         String nearestCode = siteCodeResolver.calculateSiteCode(51.505, 0.101);
+        logger.info("Nearest code calculated: {}", nearestCode);
 
         // Assert
         assertNull(nearestCode);
@@ -337,8 +362,9 @@ class SiteCodeResolverTest {
     @Test
     void testCalculateSiteCode_EmptySitesArray() {
         // Arrange
-        MonitoringSite[] emptySites = {};
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(emptySites);
+        MonitoringSiteResponse response = new MonitoringSiteResponse();
+        response.setMonitoringSites(new MonitoringSite[0]);
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(response);
 
         // Act
         String nearestCode = siteCodeResolver.calculateSiteCode(51.505, 0.101);
@@ -367,26 +393,43 @@ class SiteCodeResolverTest {
     @Test
     void testAssignSiteCode_FallbackToCalculate() {
         Location location = new Location(51.5, 0.1);
-    
-        // stub RestTemplate to return empty for lookup
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(new MonitoringSite[]{ new MonitoringSite("S2", "51.5", "0.1") });
-    
-        // Call real method
-        siteCodeResolver.assignSiteCode(location, "Unknown Site");
-    
-        // Assert the calculated fallback code was set
-        assertEquals("S2", location.getSiteCode());
+        Trie emptyTrie = new Trie(); // no matching sites
+        ReflectionTestUtils.setField(siteCodeResolver, "siteTrie", emptyTrie);
+
+        MonitoringSiteResponse fallbackResponse = new MonitoringSiteResponse();
+        MonitoringSite fallbackSite = new MonitoringSite();
+        fallbackSite.setSiteCode("S2");
+        fallbackSite.setLatitude("51.5");
+        fallbackSite.setLongitude("0.1");
+        fallbackResponse.setMonitoringSites(new MonitoringSite[]{ fallbackSite });
+
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class)))
+            .thenReturn(fallbackResponse);
+
+        // Optional: spy to verify calculateSiteCode was called
+        SiteCodeResolver spyResolver = spy(siteCodeResolver);
+        doCallRealMethod().when(spyResolver).calculateSiteCode(anyDouble(), anyDouble());
+
+        spyResolver.assignSiteCode(location, "Unknown Site");
+
+        // Verify fallback was actually called
+        verify(spyResolver).calculateSiteCode(51.5, 0.1);
+        assertEquals("S2", location.getSiteCode(), "Fallback site code should have been assigned");
     }
 
     @Test
     void testAssignSiteCode_BothFail() {
         Location location = new Location(51.5, 0.1);
-
-        // stub restTemplate so lookupSiteCode and calculateSiteCode fail gracefully
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(null);
-
+    
+        // create a wrapper with null or empty array
+        MonitoringSiteResponse emptyResponse = new MonitoringSiteResponse();
+        emptyResponse.setMonitoringSites(new MonitoringSite[0]);
+    
+        // stub restTemplate to return the wrapper instead of the raw array
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(emptyResponse);
+    
         siteCodeResolver.assignSiteCode(location, "Unknown Site");
-
+    
         assertNull(location.getSiteCode());
     }
 
@@ -499,7 +542,9 @@ class SiteCodeResolverTest {
         Location location = new Location(51.5, 0.1);
     
         // Mock RestTemplate to return no data, so populateLocationData sets no AirQualityData
-        when(restTemplate.getForObject(anyString(), eq(MonitoringSite[].class))).thenReturn(new MonitoringSite[0]); // empty array
+        MonitoringSiteResponse emptyResponse = new MonitoringSiteResponse();
+        emptyResponse.setMonitoringSites(new MonitoringSite[0]); // empty array
+        when(restTemplate.getForObject(anyString(), eq(MonitoringSiteResponse.class))).thenReturn(emptyResponse);
     
         siteCodeResolver.refreshLocationData(location);
     

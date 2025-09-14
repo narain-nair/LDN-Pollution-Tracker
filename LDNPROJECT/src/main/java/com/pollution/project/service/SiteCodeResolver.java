@@ -92,7 +92,9 @@ public class SiteCodeResolver {
     public String calculateSiteCode(double lat, double lng) {
         MonitoringSiteResponse response = restTemplate.getForObject(apiUrl, MonitoringSiteResponse.class);
         MonitoringSite[] sites = response != null ? response.getMonitoringSites() : new MonitoringSite[0];
+        
         if (sites == null || sites.length == 0) return null;
+        logger.info("calculateSiteCode: got {} sites from API", sites.length);
 
         MonitoringSite nearest = null;
         double minDistance = Double.MAX_VALUE;
@@ -107,11 +109,13 @@ public class SiteCodeResolver {
                     nearest = site;
                 }
             } catch (NumberFormatException e) {
-                // Skip invalid coordinates
+                logger.warn("Skipping site {} due to invalid coords", site.getSiteCode());
             }
         }
 
-        return nearest != null ? nearest.getSiteCode() : null;
+        String code = nearest != null ? nearest.getSiteCode() : null;
+        logger.info("calculateSiteCode: nearest site code = {}", code);
+        return code;
     }
 
     public String lookupSiteCode(String siteName) {
@@ -146,7 +150,7 @@ public class SiteCodeResolver {
 
     public void assignSiteCode(Location location, String userInput) {
         String siteCode = lookupSiteCode(userInput);
-        if (siteCode == null) {
+        if (siteCode == null || siteCode.isEmpty()) {
             siteCode = calculateSiteCode(location.getLatitude(), location.getLongitude());
         }
         location.setSiteCode(siteCode);

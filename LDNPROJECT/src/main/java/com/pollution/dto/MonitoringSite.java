@@ -47,7 +47,7 @@ public class MonitoringSite {
     }
 
     @SuppressWarnings("unused")
-    private void setLatitude(String latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
@@ -56,7 +56,7 @@ public class MonitoringSite {
     }
     
     @SuppressWarnings("unused")
-    private void setLongitude(String longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
