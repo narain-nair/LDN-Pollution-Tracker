@@ -7,6 +7,7 @@ public class LocationDTO {
     private double lat;
     private double lng;
     private AirQualityData airQualityData;
+    
     public LocationDTO() {}
 
     public LocationDTO(String name, double lat, double lng, AirQualityData airQualityData) {

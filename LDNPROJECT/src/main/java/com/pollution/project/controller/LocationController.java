@@ -100,19 +100,31 @@ public class LocationController {
         }
     }
 
+    @GetMapping("/suggest")
+    public ResponseEntity<List<String>> suggestSiteCodes(@RequestParam String query) {
+        List<String> suggestions = siteCodeResolver.lookupPotentialSiteCodes(query);
+        return ResponseEntity.ok(suggestions);
+    }
+
     @GetMapping("/search")
-    public ResponseEntity<?> searchLocations(@RequestParam String query){
-        Optional<Location> locationOpt = locationRepository.findByName(query);
-
-        List<LocationDTO> response = locationOpt.stream()
-        .map(loc -> new LocationDTO(
-            loc.getName(),
-            loc.getLatitude(),
-            loc.getLongitude(),
-            loc.getAirQualityData() // or selectively filter fields
-        ))
-        .toList();
-
+    public ResponseEntity<List<LocationDTO>> searchLocations(@RequestParam String siteCode) {
+        // Find all locations matching the site code (or modify to a partial match if needed)
+        List<Location> locations = locationRepository.findBySiteCodeContainingIgnoreCase(siteCode);
+    
+        // Map to DTOs
+        List<LocationDTO> response = locations.stream()
+            .map(loc -> new LocationDTO(
+                loc.getName(),
+                loc.getLatitude(),
+                loc.getLongitude(),
+                loc.getAirQualityData()
+            ))
+            .toList();
+    
+        if (response.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+    
         return ResponseEntity.ok(response);
     }
 
