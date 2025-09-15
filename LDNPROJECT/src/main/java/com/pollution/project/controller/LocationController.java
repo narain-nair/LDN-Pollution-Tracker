@@ -3,6 +3,7 @@ package com.pollution.project.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.pollution.dto.LocationRequest;
 import com.pollution.dto.MonitoringSite;
+import com.pollution.dto.SuggestionDTO;
 import com.pollution.dto.HourlyIndexResponse.Site;
 import com.pollution.dto.LocationDTO;
 import com.pollution.project.entity.AirQualitySnapshot;
@@ -101,8 +103,15 @@ public class LocationController {
     }
 
     @GetMapping("/suggest")
-    public ResponseEntity<List<String>> suggestSiteCodes(@RequestParam String query) {
-        List<String> suggestions = siteCodeResolver.lookupPotentialSiteCodes(query);
+    public ResponseEntity<List<SuggestionDTO>> suggestSiteCodes(@RequestParam String query) {
+        List<String> siteCodes = siteCodeResolver.lookupPotentialSiteCodes(query);
+        List<SuggestionDTO> suggestions = siteCodes.stream()
+            .map(code -> {
+                Optional<Location> loc = locationRepository.findBySiteCode(code);
+                return loc.map(l -> new SuggestionDTO(l.getName(), l.getSiteCode())).orElse(null);
+            })
+            .filter(Objects::nonNull)
+            .toList();
         return ResponseEntity.ok(suggestions);
     }
 
