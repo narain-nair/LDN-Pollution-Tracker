@@ -2,9 +2,13 @@ package com.pollution.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class HourlyIndexResponse {
+    @JsonIgnoreProperties(ignoreUnknown = true)
     @JsonProperty("HourlyAirQualityIndex")
     private HourlyAirQualityIndex hourlyAirQualityIndex;
     
@@ -21,7 +25,7 @@ public class HourlyIndexResponse {
     public void setHourlyAirQualityIndex(HourlyAirQualityIndex hourlyAirQualityIndex) {
         this.hourlyAirQualityIndex = hourlyAirQualityIndex;
     }
-
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class HourlyAirQualityIndex {
         @JsonProperty("@TimeToLive")
         private String timeToLive;
@@ -54,6 +58,7 @@ public class HourlyIndexResponse {
         }
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class LocalAuthority {
         @JsonProperty("@LocalAuthorityName")
         private String name;
@@ -123,6 +128,7 @@ public class HourlyIndexResponse {
         }
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Site {
         @JsonProperty("@Latitude")
         private String latitude;
@@ -140,6 +146,7 @@ public class HourlyIndexResponse {
         private String bulletinDate;
 
         @JsonProperty("species")
+        @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
         private List<Species> species;
 
         public Site() {}
@@ -203,6 +210,7 @@ public class HourlyIndexResponse {
         }
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Species {
         @JsonProperty("@SpeciesName")
         private String name;

@@ -71,6 +71,20 @@ public class LocationController {
     
                         locationRepository.save(loc);
                         count++;
+
+                        try {
+                            siteCodeResolver.populateLocationData(loc, loc.getName());
+                            locationRepository.save(loc);
+                        } catch (JsonMappingException e) {
+                            // TODO Auto-generated catch block
+                            logger.error("Error populating location data for location ID {}: {}", loc.getId(), e.getMessage());
+                            e.printStackTrace();
+                        } catch (JsonProcessingException e) {
+                            // TODO Auto-generated catch block
+                            logger.error("Error populating location data for location ID {}: {}", loc.getId(), e.getMessage());
+                            e.printStackTrace();
+                        }
+
                     } catch (NumberFormatException e) {
                         logger.warn("Skipping site {} due to invalid coordinates: {}", site.getSiteName(), e.getMessage());
                     }

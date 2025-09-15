@@ -282,6 +282,12 @@ public class SiteCodeResolver {
             logger.info("Fetching air quality data from URL: {}", url);
             ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
             String rawJson = responseEntity.getBody();
+            
+            if (rawJson == null || rawJson.trim().isEmpty() || rawJson.trim().equalsIgnoreCase("null")) {
+                logger.warn("Received null or empty JSON for siteCode {}. Setting empty AirQualityData.", location.getSiteCode());
+                location.setAirQualityData(new AirQualityData(null, null, null, null, null, null, null));
+                return;
+            }
 
             String cleanJson = rawJson != null ? rawJson.replaceAll("\\\\'", "'") : null;
 
@@ -289,9 +295,10 @@ public class SiteCodeResolver {
             ObjectMapper mapper = new ObjectMapper();
             HourlyIndexResponse response = mapper.readValue(cleanJson, HourlyIndexResponse.class);
 
-            
-            if (response == null) {
-                logger.warn("Received null response from API for siteCode {}", location.getSiteCode());
+            if (response == null || response.getHourlyAirQualityIndex() == null
+            || response.getHourlyAirQualityIndex().getLocalAuthority() == null
+            || response.getHourlyAirQualityIndex().getLocalAuthority().getSite() == null) {
+                logger.warn("Incomplete or null response for siteCode {}. Setting empty AirQualityData.", location.getSiteCode());
                 location.setAirQualityData(new AirQualityData(null, null, null, null, null, null, null));
                 return;
             }
@@ -331,6 +338,15 @@ public class SiteCodeResolver {
             location.setName(site.getSiteName());
             location.setSiteCode(site.getSiteCode());
 
+            logger.info("PM25: {}, PM10: {}, NO2: {}, SO2: {}, O3: {}, CO: {}", 
+                getIndexOrDefault(speciesList, "PM25"),
+                getIndexOrDefault(speciesList, "PM10"),
+                getIndexOrDefault(speciesList, "NO2"),
+                getIndexOrDefault(speciesList, "SO2"),
+                getIndexOrDefault(speciesList, "O3"),
+                getIndexOrDefault(speciesList, "CO")
+            );
+
             logger.info("Populated AirQualityData: {}", airData);
             logger.info("Location after population: {}", location);
 
@@ -343,6 +359,23 @@ public class SiteCodeResolver {
         } catch (RestClientException e) {
             logger.error("Unexpected RestTemplate error: {} for URL {}", e.getMessage(), url);
         }
+    }
+
+    private Double getIndexOrDefault(List<Species> speciesList, String speciesCode) {
+        if (speciesList == null || speciesList.isEmpty()) return null;
+    
+        for (Species species : speciesList) {
+            if (species.getCode().equalsIgnoreCase(speciesCode)) {
+                try {
+                    double index = Double.parseDouble(species.getIndex());
+                    // Treat "0" or "No data" as null
+                    return index > 0 ? index : null;
+                } catch (NumberFormatException e) {
+                    return null;
+                }
+            }
+        }
+        return null;
     }
 
     public void refreshLocationData(Location location) throws JsonMappingException, JsonProcessingException {
