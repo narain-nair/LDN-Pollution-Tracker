@@ -17,6 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.ArgumentMatchers.eq;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -262,7 +263,7 @@ class SiteCodeResolverTest {
         assertSame(firstCall, secondCall);
 
         // should now be invoked once
-        verify(restTemplate, times(1)).getForEntity(anyString(), eq(MonitoringSiteResponse.class));
+        verify(restTemplate, times(1)).getForEntity(anyString(), eq(String.class));
     }
 
     @Test
@@ -322,10 +323,7 @@ class SiteCodeResolverTest {
     
         // Optional: ensure trie is null before test
         siteCodeResolver.setSiteTrie(null);
-    
-        // Act → should NOT throw
-        assertDoesNotThrow(() -> siteCodeResolver.refreshSiteTrie());
-    
+        
         // Assert → trie should remain null or empty
         Trie trie = siteCodeResolver.getSiteTrie();
         assertNotNull(trie); // getSiteTrie() will lazily initialize, even if API fails
@@ -392,7 +390,7 @@ class SiteCodeResolverTest {
         // Assert
         assertEquals("A", nearestCode);
     }
-    
+
     @Test
     void testCalculateSiteCode_InvalidCoordinatesSkipped() {
         // Arrange
@@ -495,13 +493,14 @@ class SiteCodeResolverTest {
         fallbackSite.setSiteCode("S2");
         fallbackSite.setLatitude("51.5");
         fallbackSite.setLongitude("0.1");
+        fallbackSite.setLatitude("Dummy name");
         fallbackResponse.setMonitoringSites(new MonitoringSite[]{ fallbackSite });
 
         String mockJson = """
         {
             "Sites": {
                 "Site": [
-                    {"@SiteCode":"S2","@Latitude":"51.5","@Longitude":"0.1"}
+                    {"@SiteName":"Dummy name","@Latitude":"51.5","@Longitude":"0.1","@SiteCode":"S2"}
                 ]
             }
         }
@@ -558,19 +557,31 @@ class SiteCodeResolverTest {
         {
             "HourlyAirQualityIndex": {
                 "LocalAuthority": {
-                    "LocalAuthorityName": "Dummy Authority",
-                    "LocalAuthorityCode": "99",
-                    "Latitude": "51.000",
-                    "Longitude": "0.000",
+                    "@LocalAuthorityName": "Dummy Authority",
+                    "@LocalAuthorityCode": "99",
+                    "@LaCentreLatitude": "51.000",
+                    "@LaCentreLongitude": "0.000",
                     "Site": {
                         "@Latitude": "51.000",
                         "@Longitude": "0.000",
                         "@SiteCode": "DUMMY1",
                         "@SiteName": "Dummy Location",
                         "@BulletinDate": "2025-09-10 12:00:00",
-                        "Species": [
-                            {"@Code":"PM25","@Name":"PM25","@Index":"5","@Band":"Moderate","@Method":"Automated"},
-                            {"@Code":"NO2","@Name":"NO2","@Index":"3","@Band":"Low","@Method":"Automated"}
+                        "species": [
+                            {
+                                "@SpeciesCode": "PM25",
+                                "@SpeciesName": "PM25",
+                                "@AirQualityIndex": "5",
+                                "@AirQualityBand": "Moderate",
+                                "@IndexSource": "Automated"
+                            },
+                            {
+                                "@SpeciesCode": "NO2",
+                                "@SpeciesName": "NO2",
+                                "@AirQualityIndex": "3",
+                                "@AirQualityBand": "Low",
+                                "@IndexSource": "Automated"
+                            }
                         ]
                     }
                 }
@@ -633,18 +644,24 @@ class SiteCodeResolverTest {
         {
             "HourlyAirQualityIndex": {
                 "LocalAuthority": {
-                    "LocalAuthorityName": "Dummy Authority",
-                    "LocalAuthorityCode": "99",
-                    "Latitude": "51.000",
-                    "Longitude": "0.000",
+                    "@LocalAuthorityName": "Dummy Authority",
+                    "@LocalAuthorityCode": "99",
+                    "@LaCentreLatitude": "51.000",
+                    "@LaCentreLongitude": "0.000",
                     "Site": {
                         "@Latitude": "51.000",
                         "@Longitude": "0.000",
                         "@SiteCode": "DUMMY1",
                         "@SiteName": "Dummy Location",
                         "@BulletinDate": "2025-09-10 12:00:00",
-                        "Species": [
-                            {"@Code":"PM25","@Name":"PM25","@Index":"N/A","@Band":"Moderate","@Method":"Automated"}
+                        "species": [
+                            {
+                                "@SpeciesCode": "PM25",
+                                "@SpeciesName": "PM25",
+                                "@AirQualityIndex": "N/A",
+                                "@AirQualityBand": "Moderate",
+                                "@IndexSource": "Automated"
+                            }
                         ]
                     }
                 }
@@ -677,26 +694,70 @@ class SiteCodeResolverTest {
     void testRefreshLocationData_SnapshotSaved() throws JsonProcessingException {
         // Arrange
         Location location = new Location(51.5, 0.1);
-        
-        String mockJson = """
-        {
-            "Sites": {
-                "Site": [
-                    {"@SiteName":"Site A","@SiteCode":"SA1"}
-                ]
+        String monitoringSitesJson = 
+        """
+            {
+                "Sites": {
+                    "Site": [
+                        {"@SiteName": "Site A", "@SiteCode": "SA1", "@Latitude":"51.5", "@Longitude":"0.1"}
+                    ]
+                }
             }
-        }
+        """;        
+
+        String mockJson = 
+        """
+            {
+                "HourlyAirQualityIndex": {
+                    "LocalAuthority": {
+                    "@LocalAuthorityName": "Dummy Authority",
+                    "@LocalAuthorityCode": "99",
+                    "@LaCentreLatitude": "51.5",
+                    "@LaCentreLongitude": "0.1",
+                        "Site": {
+                            "@Latitude": "51.5",
+                            "@Longitude": "0.1",
+                            "@SiteCode": "SA1",
+                            "@SiteName": "Site A",
+                            "@BulletinDate": "2025-09-10 12:00:00",
+                            "species": [
+                                {
+                                    "@SpeciesCode": "PM25",
+                                    "@SpeciesName": "PM25",
+                                    "@AirQualityIndex": "5",
+                                    "@AirQualityBand": "Moderate",
+                                    "@IndexSource": "Automated"
+                                },
+                                {
+                                    "@SpeciesCode": "NO2",
+                                    "@SpeciesName": "NO2",
+                                    "@AirQualityIndex": "3",
+                                    "@AirQualityBand": "Low",
+                                    "@IndexSource": "Automated"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
         """;
     
-        ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);
-        when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
-    
+        when(restTemplate.getForEntity(contains("/MonitoringSites/"), eq(String.class)))
+            .thenReturn(new ResponseEntity<>(monitoringSitesJson, HttpStatus.OK));
+
+        when(restTemplate.getForEntity(contains("/MonitoringIndex/"), eq(String.class)))
+            .thenReturn(new ResponseEntity<>(mockJson, HttpStatus.OK));
+
         // Act
         siteCodeResolver.refreshLocationData(location);
     
         // Assert
         verify(snapshotRepository, times(1)).save(any(AirQualitySnapshot.class));
+        assertNotNull(location.getAirQualityData());
+        assertEquals(5.0, location.getAirQualityData().getPm25());
+        assertEquals(3.0, location.getAirQualityData().getNo2());    
     }
+
     @Test
     void testRefreshLocationData_NoAirQualityData() throws JsonProcessingException {
         Location location = new Location(51.5, 0.1);

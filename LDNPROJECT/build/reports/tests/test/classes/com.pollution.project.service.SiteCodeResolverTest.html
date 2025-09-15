@@ -29,7 +29,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">6</div>
+<div class="counter">0</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.909s</div>
+<div class="counter">0.797s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox failures" id="successRate">
-<div class="percent">82%</div>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
 <p>successful</p>
 </div>
 </td>
@@ -60,9 +60,6 @@
 </div>
 <div class="tab-container">
 <ul class="tabLinks">
-<li>
-<a href="#">Failed tests</a>
-</li>
 <li>
 <a href="#">Tests</a>
 </li>
@@ -73,160 +70,6 @@
 <a href="#">Standard error</a>
 </li>
 </ul>
-<div class="tab">
-<h2>Failed tests</h2>
-<div class="test">
-<a name="testAssignSiteCode_FallbackToCalculate()"></a>
-<h3 class="failures">testAssignSiteCode_FallbackToCalculate()</h3>
-<span class="code">
-<pre>org.opentest4j.AssertionFailedError: Fallback site code should have been assigned ==&gt; expected: &lt;S2&gt; but was: &lt;null&gt;
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1156)
-	at app//com.pollution.project.service.SiteCodeResolverTest.testAssignSiteCode_FallbackToCalculate(SiteCodeResolverTest.java:521)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testGetSiteTrie_SubsequentCallsReturnSameInstance()"></a>
-<h3 class="failures">testGetSiteTrie_SubsequentCallsReturnSameInstance()</h3>
-<span class="code">
-<pre>Wanted but not invoked:
-restTemplate.getForEntity(
-    &lt;any string&gt;,
-    class com.pollution.dto.MonitoringSiteResponse
-);
--&gt; at org.springframework.web.client.RestTemplate.getForEntity(RestTemplate.java:429)
-
-However, there was exactly 1 interaction with this mock:
-restTemplate.getForEntity(
-    &quot;https://api.erg.ic.ac.uk/AirQuality/Information/MonitoringSites/GroupName=London/Json&quot;,
-    class java.lang.String
-);
--&gt; at com.pollution.project.service.SiteCodeResolver.getSiteTrie(SiteCodeResolver.java:82)
-
-
-	at app//org.springframework.web.client.RestTemplate.getForEntity(RestTemplate.java:429)
-	at app//com.pollution.project.service.SiteCodeResolverTest.testGetSiteTrie_SubsequentCallsReturnSameInstance(SiteCodeResolverTest.java:265)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testPopulateLocationData_InvalidIndex()"></a>
-<h3 class="failures">testPopulateLocationData_InvalidIndex()</h3>
-<span class="code">
-<pre>com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unrecognized field &quot;LocalAuthorityName&quot; (class com.pollution.dto.HourlyIndexResponse$LocalAuthority), not marked as ignorable (5 known properties: &quot;@LocalAuthorityName&quot;, &quot;@LaCentreLatitude&quot;, &quot;@LocalAuthorityCode&quot;, &quot;@LaCentreLongitude&quot;, &quot;Site&quot;])
- at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 4, column: 36] (through reference chain: com.pollution.dto.HourlyIndexResponse[&quot;HourlyAirQualityIndex&quot;]-&gt;com.pollution.dto.HourlyIndexResponse$HourlyAirQualityIndex[&quot;LocalAuthority&quot;]-&gt;com.pollution.dto.HourlyIndexResponse$LocalAuthority[&quot;LocalAuthorityName&quot;])
-	at app//com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException.from(UnrecognizedPropertyException.java:61)
-	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnknownProperty(DeserializationContext.java:1153)
-	at app//com.fasterxml.jackson.databind.deser.std.StdDeserializer.handleUnknownProperty(StdDeserializer.java:2241)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializerBase.handleUnknownProperty(BeanDeserializerBase.java:1793)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializerBase.handleUnknownVanilla(BeanDeserializerBase.java:1771)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:316)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:177)
-	at app//com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:310)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:177)
-	at app//com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:310)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:177)
-	at app//com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
-	at app//com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4905)
-	at app//com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3848)
-	at app//com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3816)
-	at app//com.pollution.project.service.SiteCodeResolver.populateLocationData(SiteCodeResolver.java:290)
-	at app//com.pollution.project.service.SiteCodeResolver.populateLocationData(SiteCodeResolver.java:266)
-	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_InvalidIndex(SiteCodeResolverTest.java:667)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testPopulateLocationData_ValidResponse()"></a>
-<h3 class="failures">testPopulateLocationData_ValidResponse()</h3>
-<span class="code">
-<pre>com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unrecognized field &quot;LocalAuthorityName&quot; (class com.pollution.dto.HourlyIndexResponse$LocalAuthority), not marked as ignorable (5 known properties: &quot;@LocalAuthorityName&quot;, &quot;@LaCentreLatitude&quot;, &quot;@LocalAuthorityCode&quot;, &quot;@LaCentreLongitude&quot;, &quot;Site&quot;])
- at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 4, column: 36] (through reference chain: com.pollution.dto.HourlyIndexResponse[&quot;HourlyAirQualityIndex&quot;]-&gt;com.pollution.dto.HourlyIndexResponse$HourlyAirQualityIndex[&quot;LocalAuthority&quot;]-&gt;com.pollution.dto.HourlyIndexResponse$LocalAuthority[&quot;LocalAuthorityName&quot;])
-	at app//com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException.from(UnrecognizedPropertyException.java:61)
-	at app//com.fasterxml.jackson.databind.DeserializationContext.handleUnknownProperty(DeserializationContext.java:1153)
-	at app//com.fasterxml.jackson.databind.deser.std.StdDeserializer.handleUnknownProperty(StdDeserializer.java:2241)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializerBase.handleUnknownProperty(BeanDeserializerBase.java:1793)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializerBase.handleUnknownVanilla(BeanDeserializerBase.java:1771)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:316)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:177)
-	at app//com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:310)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:177)
-	at app//com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:310)
-	at app//com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:177)
-	at app//com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
-	at app//com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4905)
-	at app//com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3848)
-	at app//com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3816)
-	at app//com.pollution.project.service.SiteCodeResolver.populateLocationData(SiteCodeResolver.java:290)
-	at app//com.pollution.project.service.SiteCodeResolver.populateLocationData(SiteCodeResolver.java:266)
-	at app//com.pollution.project.service.SiteCodeResolverTest.testPopulateLocationData_ValidResponse(SiteCodeResolverTest.java:593)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testRefreshLocationData_SnapshotSaved()"></a>
-<h3 class="failures">testRefreshLocationData_SnapshotSaved()</h3>
-<span class="code">
-<pre>java.lang.NullPointerException: Cannot invoke &quot;String.trim()&quot; because &quot;in&quot; is null
-	at java.base/jdk.internal.math.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:1838)
-	at java.base/jdk.internal.math.FloatingDecimal.parseDouble(FloatingDecimal.java:110)
-	at java.base/java.lang.Double.parseDouble(Double.java:792)
-	at com.pollution.project.service.SiteCodeResolver.calculateSiteCode(SiteCodeResolver.java:193)
-	at com.pollution.project.service.SiteCodeResolver.assignSiteCode(SiteCodeResolver.java:247)
-	at com.pollution.project.service.SiteCodeResolver.populateLocationData(SiteCodeResolver.java:269)
-	at com.pollution.project.service.SiteCodeResolver.refreshLocationData(SiteCodeResolver.java:349)
-	at com.pollution.project.service.SiteCodeResolverTest.testRefreshLocationData_SnapshotSaved(SiteCodeResolverTest.java:695)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testRefreshSiteTrie_ApiThrowsException()"></a>
-<h3 class="failures">testRefreshSiteTrie_ApiThrowsException()</h3>
-<span class="code">
-<pre>org.mockito.exceptions.verification.TooManyActualInvocations: 
-restTemplate.getForEntity(
-    &lt;any string&gt;,
-    class java.lang.String
-);
-Wanted 1 time:
--&gt; at org.springframework.web.client.RestTemplate.getForEntity(RestTemplate.java:429)
-But was 2 times:
--&gt; at com.pollution.project.service.SiteCodeResolver.refreshSiteTrie(SiteCodeResolver.java:129)
--&gt; at com.pollution.project.service.SiteCodeResolver.getSiteTrie(SiteCodeResolver.java:82)
-
-
-	at app//org.springframework.web.client.RestTemplate.getForEntity(RestTemplate.java:429)
-	at app//com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_ApiThrowsException(SiteCodeResolverTest.java:335)
-	at java.base@21.0.5/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.5/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-</div>
 <div class="tab">
 <h2>Tests</h2>
 <table>
@@ -248,9 +91,9 @@ But was 2 times:
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testAssignSiteCode_FallbackToCalculate()</td>
-<td class="failures">0.023s</td>
-<td class="failures">failed</td>
+<td class="success">testAssignSiteCode_FallbackToCalculate()</td>
+<td class="success">0.022s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testAssignSiteCode_InputMatchesSite()</td>
@@ -264,17 +107,17 @@ But was 2 times:
 </tr>
 <tr>
 <td class="success">testCalculateSiteCode_InvalidCoordinatesSkipped()</td>
-<td class="success">0.003s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testCalculateSiteCode_NearestSiteReturned()</td>
-<td class="success">0.003s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testCalculateSiteCode_NoSitesReturned()</td>
-<td class="success">0.003s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -284,7 +127,7 @@ But was 2 times:
 </tr>
 <tr>
 <td class="success">testGetIndex_SpeciesNotFound()</td>
-<td class="success">0.686s</td>
+<td class="success">0.597s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -308,9 +151,9 @@ But was 2 times:
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testGetSiteTrie_SubsequentCallsReturnSameInstance()</td>
-<td class="failures">0.012s</td>
-<td class="failures">failed</td>
+<td class="success">testGetSiteTrie_SubsequentCallsReturnSameInstance()</td>
+<td class="success">0.007s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_CaseInsensitive()</td>
@@ -349,12 +192,12 @@ But was 2 times:
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SubstringNotPrefix()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SuggestionUsed()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -368,19 +211,19 @@ But was 2 times:
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testPopulateLocationData_InvalidIndex()</td>
-<td class="failures">0.014s</td>
-<td class="failures">failed</td>
-</tr>
-<tr>
-<td class="success">testPopulateLocationData_ReturnNull()</td>
-<td class="success">0.002s</td>
+<td class="success">testPopulateLocationData_InvalidIndex()</td>
+<td class="success">0.004s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testPopulateLocationData_ValidResponse()</td>
-<td class="failures">0.004s</td>
-<td class="failures">failed</td>
+<td class="success">testPopulateLocationData_ReturnNull()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testPopulateLocationData_ValidResponse()</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshLocationData_NoAirQualityData()</td>
@@ -388,23 +231,23 @@ But was 2 times:
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testRefreshLocationData_SnapshotSaved()</td>
-<td class="failures">0.008s</td>
-<td class="failures">failed</td>
+<td class="success">testRefreshLocationData_SnapshotSaved()</td>
+<td class="success">0.013s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testRefreshSiteTrie_ApiThrowsException()</td>
-<td class="failures">0.005s</td>
-<td class="failures">failed</td>
+<td class="success">testRefreshSiteTrie_ApiThrowsException()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshSiteTrie_ReplacesOldTrie()</td>
-<td class="success">0.003s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshSiteTrie_SuccessfulUpdate()</td>
-<td class="success">0.112s</td>
+<td class="success">0.109s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -412,11 +255,11 @@ But was 2 times:
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>23:56:40.146 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Created MonitoringSite: com.pollution.dto.MonitoringSite@68f0f72c
-23:56:40.149 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Created MonitoringSite: com.pollution.dto.MonitoringSite@74fab04a
-23:56:40.149 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- New MonitoringSites array: [com.pollution.dto.MonitoringSite@68f0f72c, com.pollution.dto.MonitoringSite@74fab04a]
-23:56:40.149 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- MonitoringSiteResponse to be returned by mock: com.pollution.dto.MonitoringSiteResponse@3d7fb838
-23:56:40.169 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
+<pre>00:42:15.548 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Created MonitoringSite: com.pollution.dto.MonitoringSite@74170687
+00:42:15.551 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Created MonitoringSite: com.pollution.dto.MonitoringSite@3aa41da1
+00:42:15.551 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- New MonitoringSites array: [com.pollution.dto.MonitoringSite@74170687, com.pollution.dto.MonitoringSite@3aa41da1]
+00:42:15.551 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- MonitoringSiteResponse to be returned by mock: com.pollution.dto.MonitoringSiteResponse@272ce069
+00:42:15.570 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;:
         [
@@ -426,34 +269,75 @@ But was 2 times:
     }
 }
 ...
-23:56:40.254 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Site trie refreshed successfully, with 2 sites.
-23:56:40.254 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Site trie after refresh: com.pollution.dto.Trie@2e32fc22
-23:56:40.262 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Testing assignSiteCode with location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
-23:56:40.265 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
+00:42:15.652 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Site trie refreshed successfully, with 2 sites.
+00:42:15.653 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Site trie after refresh: com.pollution.dto.Trie@33379242
+00:42:15.661 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Testing assignSiteCode with location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
+00:42:15.663 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: []
     }
 }
 ...
-23:56:40.268 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
-23:56:40.268 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
-    &quot;Sites&quot;: {
-        &quot;Site&quot;: [
-            {&quot;@SiteName&quot;:&quot;Site A&quot;,&quot;@SiteCode&quot;:&quot;SA1&quot;}
-        ]
+00:42:15.667 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
+00:42:15.667 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites:     {
+        &quot;Sites&quot;: {
+            &quot;Site&quot;: [
+                {&quot;@SiteName&quot;: &quot;Site A&quot;, &quot;@SiteCode&quot;: &quot;SA1&quot;, &quot;@Latitude&quot;:&quot;51.5&quot;, &quot;@Longitude&quot;:&quot;0.1&quot;}
+            ]
+        }
+    }
+...
+00:42:15.668 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: got 1 sites from API
+00:42:15.669 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: nearest site code = SA1
+00:42:15.669 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- After assignSiteCode, location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
+00:42:15.669 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=SA1/Json
+00:42:15.669 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for siteCode SA1: {
+    &quot;HourlyAirQualityIndex&quot;: {
+        &quot;LocalAuthority&quot;: {
+        &quot;@LocalAuthorityName&quot;: &quot;Dummy Authority&quot;,
+        &quot;@LocalAuthorityCode&quot;: &quot;99&quot;,
+        &quot;@LaCentreLatitude&quot;: &quot;51.5&quot;,
+        &quot;@LaCentreLongitude&quot;: &quot;0.1&quot;,
+            &quot;Site&quot;: {
+                &quot;@Latitude&quot;: &quot;51.5&quot;,
+                &quot;@Longitude&quot;: &quot;0.1&quot;,
+                &quot;@SiteCode&quot;: &quot;SA1&quot;,
+                &quot;@SiteName&quot;: &quot;Site A&quot;,
+                &quot;@BulletinDate&quot;: &quot;2025-09-10 12:00:00&quot;,
+                &quot;species&quot;: [
+                    {
+                        &quot;@SpeciesCode&quot;: &quot;PM25&quot;,
+                        &quot;@SpeciesName&quot;: &quot;PM25&quot;,
+                        &quot;@AirQualityIndex&quot;: &quot;5&quot;,
+                        &quot;@AirQualityBand&quot;: &quot;Moderate&quot;,
+                        &quot;@IndexSource&quot;: &quot;Automated&quot;
+                    },
+                    {
+                        &quot;@SpeciesCode&quot;: &quot;NO2&quot;,
+                        &quot;@SpeciesName&quot;: &quot;NO2&quot;,
+                        &quot;@AirQualityIndex&quot;: &quot;3&quot;,
+                        &quot;@AirQualityBand&quot;: &quot;Low&quot;,
+                        &quot;@IndexSource&quot;: &quot;Automated&quot;
+                    }
+                ]
+            }
+        }
     }
 }
-...
-23:56:40.269 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: got 1 sites from API
-23:56:40.276 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Stubbed restTemplate to return empty response
-23:56:40.276 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
+
+00:42:15.674 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Fetched site data: com.pollution.dto.HourlyIndexResponse$Site@2954f6ab
+00:42:15.674 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Species list: [com.pollution.dto.HourlyIndexResponse$Species@58fbd02e, com.pollution.dto.HourlyIndexResponse$Species@163042ea]
+00:42:15.676 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Populated AirQualityData: AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
+00:42:15.677 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Location after population: Location{id=null, name='Site A', latitude=51.5, longitude=0.1, airQualityData=AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}}
+00:42:15.679 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Stubbed restTemplate to return empty response
+00:42:15.680 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: null
     }
 }
 ...
-23:56:40.277 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Nearest code calculated: null
-23:56:40.287 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
+00:42:15.681 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Nearest code calculated: null
+00:42:15.690 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: [
             {&quot;@SiteName&quot;:&quot;Site One&quot;,&quot;@SiteCode&quot;:&quot;S1&quot;},
@@ -462,25 +346,24 @@ But was 2 times:
     }
 }
 ...
-23:56:40.288 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Loaded 2 monitoring sites into trie.
-23:56:40.314 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
+00:42:15.691 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Loaded 2 monitoring sites into trie.
+00:42:15.712 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: [
-            {&quot;@SiteCode&quot;:&quot;S2&quot;,&quot;@Latitude&quot;:&quot;51.5&quot;,&quot;@Longitude&quot;:&quot;0.1&quot;}
+            {&quot;@SiteName&quot;:&quot;Dummy name&quot;,&quot;@Latitude&quot;:&quot;51.5&quot;,&quot;@Longitude&quot;:&quot;0.1&quot;,&quot;@SiteCode&quot;:&quot;S2&quot;}
         ]
     }
 }
 ...
-23:56:40.315 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: got 1 sites from API
-23:56:40.315 [Test worker] WARN com.pollution.project.service.SiteCodeResolver -- Skipping site S2 due to missing data
-23:56:40.315 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: nearest site code = null
-23:56:40.318 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
+00:42:15.713 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: got 1 sites from API
+00:42:15.713 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: nearest site code = S2
+00:42:15.715 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: []
     }
 }
 ...
-23:56:40.324 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
+00:42:15.721 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: [
             {&quot;@SiteName&quot;:&quot;A&quot;,&quot;@SiteCode&quot;:&quot;A&quot;,&quot;@Latitude&quot;:&quot;not-a-number&quot;,&quot;@Longitude&quot;:&quot;0.100&quot;},
@@ -489,19 +372,19 @@ But was 2 times:
     }
 }
 ...
-23:56:40.326 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: got 2 sites from API
-23:56:40.326 [Test worker] WARN com.pollution.project.service.SiteCodeResolver -- Skipping site A due to invalid coords
-23:56:40.326 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: nearest site code = B
-23:56:40.328 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
-23:56:40.328 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
+00:42:15.722 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: got 2 sites from API
+00:42:15.722 [Test worker] WARN com.pollution.project.service.SiteCodeResolver -- Skipping site A due to invalid coords
+00:42:15.722 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: nearest site code = B
+00:42:15.723 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
+00:42:15.724 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: []
     }
 }
 ...
-23:56:40.329 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- After assignSiteCode, location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
-23:56:40.329 [Test worker] WARN com.pollution.project.service.SiteCodeResolver -- Site code is null after assignSiteCode, returning early
-23:56:40.333 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
+00:42:15.724 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- After assignSiteCode, location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
+00:42:15.724 [Test worker] WARN com.pollution.project.service.SiteCodeResolver -- Site code is null after assignSiteCode, returning early
+00:42:15.728 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: [
             {&quot;@SiteName&quot;:&quot;Site One&quot;,&quot;@SiteCode&quot;:&quot;S1&quot;},
@@ -510,11 +393,11 @@ But was 2 times:
     }
 }
 ...
-23:56:40.334 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Loaded 2 monitoring sites into trie.
-23:56:40.334 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Retrieved Trie: com.pollution.dto.Trie@5b39a3e6
-23:56:40.334 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Result for 'Site One': S1
-23:56:40.334 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Result for 'Site Two': S2
-23:56:40.336 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
+00:42:15.729 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Loaded 2 monitoring sites into trie.
+00:42:15.729 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Retrieved Trie: com.pollution.dto.Trie@235b4cb8
+00:42:15.729 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Result for 'Site One': S1
+00:42:15.729 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Result for 'Site Two': S2
+00:42:15.730 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: [
             {&quot;@SiteName&quot;:&quot;Fresh Site&quot;,&quot;@SiteCode&quot;:&quot;FS1&quot;}
@@ -522,148 +405,84 @@ But was 2 times:
     }
 }
 ...
-23:56:40.337 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Site trie refreshed successfully, with 1 sites.
-23:56:40.339 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error refreshing site trie: {}
-org.springframework.web.client.RestClientException: API down
-	at org.springframework.web.client.RestTemplate.getForEntity(RestTemplate.java:429)
-	at com.pollution.project.service.SiteCodeResolver.refreshSiteTrie(SiteCodeResolver.java:129)
-	at com.pollution.project.service.SiteCodeResolverTest.lambda$testRefreshSiteTrie_ApiThrowsException$0(SiteCodeResolverTest.java:327)
-	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:49)
-	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:36)
-	at org.junit.jupiter.api.Assertions.assertDoesNotThrow(Assertions.java:3168)
-	at com.pollution.project.service.SiteCodeResolverTest.testRefreshSiteTrie_ApiThrowsException(SiteCodeResolverTest.java:327)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
-	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:124)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:99)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:94)
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
-	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
-	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:122)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:72)
-	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
-	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
-23:56:40.340 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error fetching monitoring sites: API down
-23:56:40.346 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-23:56:40.346 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-23:56:40.346 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
-23:56:40.346 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for siteCode DUMMY1: {
+00:42:15.731 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Site trie refreshed successfully, with 1 sites.
+00:42:15.733 [Test worker] ERROR com.pollution.project.service.SiteCodeResolver -- Error fetching monitoring sites: API down
+00:42:15.737 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+00:42:15.737 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+00:42:15.737 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
+00:42:15.737 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for siteCode DUMMY1: {
     &quot;HourlyAirQualityIndex&quot;: {
         &quot;LocalAuthority&quot;: {
-            &quot;LocalAuthorityName&quot;: &quot;Dummy Authority&quot;,
-            &quot;LocalAuthorityCode&quot;: &quot;99&quot;,
-            &quot;Latitude&quot;: &quot;51.000&quot;,
-            &quot;Longitude&quot;: &quot;0.000&quot;,
+            &quot;@LocalAuthorityName&quot;: &quot;Dummy Authority&quot;,
+            &quot;@LocalAuthorityCode&quot;: &quot;99&quot;,
+            &quot;@LaCentreLatitude&quot;: &quot;51.000&quot;,
+            &quot;@LaCentreLongitude&quot;: &quot;0.000&quot;,
             &quot;Site&quot;: {
                 &quot;@Latitude&quot;: &quot;51.000&quot;,
                 &quot;@Longitude&quot;: &quot;0.000&quot;,
                 &quot;@SiteCode&quot;: &quot;DUMMY1&quot;,
                 &quot;@SiteName&quot;: &quot;Dummy Location&quot;,
                 &quot;@BulletinDate&quot;: &quot;2025-09-10 12:00:00&quot;,
-                &quot;Species&quot;: [
-                    {&quot;@Code&quot;:&quot;PM25&quot;,&quot;@Name&quot;:&quot;PM25&quot;,&quot;@Index&quot;:&quot;N/A&quot;,&quot;@Band&quot;:&quot;Moderate&quot;,&quot;@Method&quot;:&quot;Automated&quot;}
+                &quot;species&quot;: [
+                    {
+                        &quot;@SpeciesCode&quot;: &quot;PM25&quot;,
+                        &quot;@SpeciesName&quot;: &quot;PM25&quot;,
+                        &quot;@AirQualityIndex&quot;: &quot;N/A&quot;,
+                        &quot;@AirQualityBand&quot;: &quot;Moderate&quot;,
+                        &quot;@IndexSource&quot;: &quot;Automated&quot;
+                    }
                 ]
             }
         }
     }
 }
 
-23:56:40.361 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-23:56:40.361 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-23:56:40.361 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
-23:56:40.361 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for siteCode DUMMY1: {
+00:42:15.739 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Fetched site data: com.pollution.dto.HourlyIndexResponse$Site@41ef1ea2
+00:42:15.739 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Species list: [com.pollution.dto.HourlyIndexResponse$Species@5dfe23e8]
+00:42:15.740 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Populated AirQualityData: AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
+00:42:15.740 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Location after population: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}}
+00:42:15.742 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+00:42:15.743 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+00:42:15.743 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
+00:42:15.743 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for siteCode DUMMY1: {
     &quot;HourlyAirQualityIndex&quot;: {
         &quot;LocalAuthority&quot;: {
-            &quot;LocalAuthorityName&quot;: &quot;Dummy Authority&quot;,
-            &quot;LocalAuthorityCode&quot;: &quot;99&quot;,
-            &quot;Latitude&quot;: &quot;51.000&quot;,
-            &quot;Longitude&quot;: &quot;0.000&quot;,
+            &quot;@LocalAuthorityName&quot;: &quot;Dummy Authority&quot;,
+            &quot;@LocalAuthorityCode&quot;: &quot;99&quot;,
+            &quot;@LaCentreLatitude&quot;: &quot;51.000&quot;,
+            &quot;@LaCentreLongitude&quot;: &quot;0.000&quot;,
             &quot;Site&quot;: {
                 &quot;@Latitude&quot;: &quot;51.000&quot;,
                 &quot;@Longitude&quot;: &quot;0.000&quot;,
                 &quot;@SiteCode&quot;: &quot;DUMMY1&quot;,
                 &quot;@SiteName&quot;: &quot;Dummy Location&quot;,
                 &quot;@BulletinDate&quot;: &quot;2025-09-10 12:00:00&quot;,
-                &quot;Species&quot;: [
-                    {&quot;@Code&quot;:&quot;PM25&quot;,&quot;@Name&quot;:&quot;PM25&quot;,&quot;@Index&quot;:&quot;5&quot;,&quot;@Band&quot;:&quot;Moderate&quot;,&quot;@Method&quot;:&quot;Automated&quot;},
-                    {&quot;@Code&quot;:&quot;NO2&quot;,&quot;@Name&quot;:&quot;NO2&quot;,&quot;@Index&quot;:&quot;3&quot;,&quot;@Band&quot;:&quot;Low&quot;,&quot;@Method&quot;:&quot;Automated&quot;}
+                &quot;species&quot;: [
+                    {
+                        &quot;@SpeciesCode&quot;: &quot;PM25&quot;,
+                        &quot;@SpeciesName&quot;: &quot;PM25&quot;,
+                        &quot;@AirQualityIndex&quot;: &quot;5&quot;,
+                        &quot;@AirQualityBand&quot;: &quot;Moderate&quot;,
+                        &quot;@IndexSource&quot;: &quot;Automated&quot;
+                    },
+                    {
+                        &quot;@SpeciesCode&quot;: &quot;NO2&quot;,
+                        &quot;@SpeciesName&quot;: &quot;NO2&quot;,
+                        &quot;@AirQualityIndex&quot;: &quot;3&quot;,
+                        &quot;@AirQualityBand&quot;: &quot;Low&quot;,
+                        &quot;@IndexSource&quot;: &quot;Automated&quot;
+                    }
                 ]
             }
         }
     }
 }
 
-23:56:40.366 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
+00:42:15.744 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Fetched site data: com.pollution.dto.HourlyIndexResponse$Site@3a401749
+00:42:15.744 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Species list: [com.pollution.dto.HourlyIndexResponse$Species@7793ad58, com.pollution.dto.HourlyIndexResponse$Species@27e2287c]
+00:42:15.745 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Populated AirQualityData: AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
+00:42:15.745 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Location after population: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}}
+00:42:15.746 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: [
             {&quot;@SiteName&quot;:&quot;A&quot;,&quot;@Latitude&quot;:&quot;51.500&quot;,&quot;@Longitude&quot;:&quot;0.100&quot;,&quot;@SiteCode&quot;:&quot;A&quot;},
@@ -672,12 +491,12 @@ org.springframework.web.client.RestClientException: API down
     }
 }
 ...
-23:56:40.367 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: got 2 sites from API
-23:56:40.367 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: nearest site code = A
-23:56:40.370 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-23:56:40.371 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- After assignSiteCode, location: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-23:56:40.371 [Test worker] WARN com.pollution.project.service.SiteCodeResolver -- Site code is null after assignSiteCode, returning early
-23:56:40.374 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Inserted 'Bexley West' with code 'BQ8' into trie.
+00:42:15.747 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: got 2 sites from API
+00:42:15.747 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- calculateSiteCode: nearest site code = A
+00:42:15.750 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+00:42:15.750 [Test worker] INFO com.pollution.project.service.SiteCodeResolver -- After assignSiteCode, location: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+00:42:15.750 [Test worker] WARN com.pollution.project.service.SiteCodeResolver -- Site code is null after assignSiteCode, returning early
+00:42:15.753 [Test worker] INFO com.pollution.project.service.SiteCodeResolverTest -- Inserted 'Bexley West' with code 'BQ8' into trie.
 </pre>
 </span>
 </div>
@@ -699,7 +518,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 8.14.3</a> at 14 Sept 2025, 23:56:42</p>
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 15 Sept 2025, 00:42:17</p>
 </div>
 </div>
 </body>
