@@ -30,7 +30,8 @@ public class Location {
     @Column(nullable = false)
     private Double longitude;
 
-    private String sitecode;
+    @Column(name = "sitecode", nullable = false, unique = true)
+    private String siteCode;
 
     @ManyToMany
     @JoinTable(
@@ -93,12 +94,12 @@ public class Location {
         return longitude;
     }
 
-    public void setSiteCode(String sitecode) {
-        this.sitecode = sitecode;
+    public void setSiteCode(String siteCode) {
+        this.siteCode = siteCode;
     }
 
     public String getSiteCode() {
-        return sitecode;
+        return siteCode;
     }
 
     public void setLongitude(Double longitude) {

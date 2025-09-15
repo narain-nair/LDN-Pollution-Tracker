@@ -54,20 +54,25 @@ public class LocationController {
             int count = 0;
     
             for (MonitoringSite site : sites) {
-                // Skip if name or site code is missing
                 if (site.getSiteName() == null || site.getSiteCode() == null) continue;
-    
-                List<Location> existing = locationRepository.findAllByName(site.getSiteName());
-                if (existing.isEmpty())  {
+                
+                String siteCode = site.getSiteCode().trim().toLowerCase();
+                boolean exists = locationRepository.existsBySiteCode(siteCode); 
+                if (!exists) {
                     try {
+                        double lat = Double.parseDouble(site.getLatitude());
+                        double lng = Double.parseDouble(site.getLongitude());
+    
                         Location loc = new Location();
-                        // Use populateLocationData to fill coordinates, siteCode, AirQualityData
                         loc.setName(site.getSiteName());
-                        siteCodeResolver.populateLocationData(loc, site.getSiteName());
+                        loc.setLatitude(lat);
+                        loc.setLongitude(lng);
+                        loc.setSiteCode(site.getSiteCode());
+    
                         locationRepository.save(loc);
                         count++;
-                    } catch (NumberFormatException | JsonProcessingException e) {
-                        logger.warn("Skipping site {} due to bad coordinates or JSON: {}", site.getSiteName(), e.getMessage());
+                    } catch (NumberFormatException e) {
+                        logger.warn("Skipping site {} due to invalid coordinates: {}", site.getSiteName(), e.getMessage());
                     }
                 }
             }
