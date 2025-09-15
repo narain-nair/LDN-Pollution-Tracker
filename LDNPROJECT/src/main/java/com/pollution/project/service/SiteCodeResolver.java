@@ -241,6 +241,33 @@ public class SiteCodeResolver {
         return null;
     }
 
+    public List<String> lookupPotentialSiteCodes(String input) {
+        if (input == null || input.isEmpty()) return List.of();
+    
+        // Normalize input
+        input = input.toLowerCase().trim();
+        if (input.isEmpty()) return List.of();
+    
+        Trie trie = getSiteTrie();
+    
+        // Get suggestions from Trie
+        List<String> suggestions = trie.getSuggestions(input);
+    
+        // Extract site codes from suggestions
+        return suggestions.stream()
+            .map(s -> {
+                int colonIndex = s.indexOf(":");
+                int endIndex = s.indexOf(")", colonIndex);
+                if (colonIndex != -1 && endIndex != -1) {
+                    String code = s.substring(colonIndex + 2, endIndex).trim();
+                    return "null".equalsIgnoreCase(code) ? null : code;
+                }
+                return null;
+            })
+            .filter(c -> c != null) // Remove nulls
+            .toList();
+    }
+
     public void assignSiteCode(Location location, String userInput) {
         String siteCode = lookupSiteCode(userInput);
         if (siteCode == null || siteCode.isEmpty()) {
