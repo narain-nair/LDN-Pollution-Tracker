@@ -18,6 +18,7 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
 
     List<Location> findAllByUsers_Id(Long userId);
     List<Location> findAllByOrderByNameAsc();
+    List<Location> findAllByName(String name);
 
     @Query("SELECT l.airQualityData FROM Location l WHERE l.id = :id")
     AirQualityData findAirQualityDataByLocationId(@Param("id") Long id);

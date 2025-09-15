@@ -57,8 +57,8 @@ public class LocationController {
                 // Skip if name or site code is missing
                 if (site.getSiteName() == null || site.getSiteCode() == null) continue;
     
-                boolean exists = locationRepository.findByName(site.getSiteName()) != null;
-                if (!exists) {
+                List<Location> existing = locationRepository.findAllByName(site.getSiteName());
+                if (existing.isEmpty())  {
                     try {
                         Location loc = new Location();
                         // Use populateLocationData to fill coordinates, siteCode, AirQualityData
