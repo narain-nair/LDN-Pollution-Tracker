@@ -3,6 +3,7 @@ package com.pollution.project.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.pollution.dto.LocationRequest;
 import com.pollution.dto.MonitoringSite;
 import com.pollution.dto.HourlyIndexResponse.Site;
+import com.pollution.dto.LocationDTO;
 import com.pollution.project.entity.AirQualitySnapshot;
 import com.pollution.project.entity.Location;
 import com.pollution.project.repository.AirQualitySnapshotRepository;
@@ -96,6 +98,22 @@ public class LocationController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to seed locations: " + e.getMessage());
         }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> searchLocations(@RequestParam String query){
+        Optional<Location> locationOpt = locationRepository.findByName(query);
+
+        List<LocationDTO> response = locationOpt.stream()
+        .map(loc -> new LocationDTO(
+            loc.getName(),
+            loc.getLatitude(),
+            loc.getLongitude(),
+            loc.getAirQualityData() // or selectively filter fields
+        ))
+        .toList();
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/all")
