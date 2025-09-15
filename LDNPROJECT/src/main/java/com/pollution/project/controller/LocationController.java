@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.pollution.dto.LocationRequest;
+import com.pollution.dto.MonitoringSite;
+import com.pollution.dto.HourlyIndexResponse.Site;
 import com.pollution.project.entity.AirQualitySnapshot;
 import com.pollution.project.entity.Location;
 import com.pollution.project.repository.AirQualitySnapshotRepository;
@@ -31,7 +34,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/locations")
-public class LocationController{
+public class LocationController {
     private final SiteCodeResolver siteCodeResolver;
     private final LocationRepository locationRepository;
     private final AirQualitySnapshotRepository snapshotRepository;
@@ -42,6 +45,38 @@ public class LocationController{
         this.siteCodeResolver = siteCodeResolver;
         this.locationRepository = locationRepository;
         this.snapshotRepository = snapshotRepository;
+    }
+
+    @PostMapping("/seed")
+    public ResponseEntity<?> seedLocations() {
+        try {
+            MonitoringSite[] sites = siteCodeResolver.fetchMonitoringSites().getMonitoringSites();
+            int count = 0;
+    
+            for (MonitoringSite site : sites) {
+                // Skip if name or site code is missing
+                if (site.getSiteName() == null || site.getSiteCode() == null) continue;
+    
+                boolean exists = locationRepository.findByName(site.getSiteName()) != null;
+                if (!exists) {
+                    try {
+                        Location loc = new Location();
+                        // Use populateLocationData to fill coordinates, siteCode, AirQualityData
+                        loc.setName(site.getSiteName());
+                        siteCodeResolver.populateLocationData(loc, site.getSiteName());
+                        locationRepository.save(loc);
+                        count++;
+                    } catch (NumberFormatException | JsonProcessingException e) {
+                        logger.warn("Skipping site {} due to bad coordinates or JSON: {}", site.getSiteName(), e.getMessage());
+                    }
+                }
+            }
+    
+            return ResponseEntity.ok("Seeded " + count + " locations successfully.");
+    
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to seed locations: " + e.getMessage());
+        }
     }
 
     @GetMapping("/all")

@@ -18,4 +18,5 @@ public class PollutionProjectApplication {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
+	
 }
