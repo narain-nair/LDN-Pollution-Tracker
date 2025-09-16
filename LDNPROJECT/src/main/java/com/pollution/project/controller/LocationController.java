@@ -104,21 +104,22 @@ public class LocationController {
 
     @GetMapping("/suggest")
     public ResponseEntity<List<SuggestionDTO>> suggestSiteCodes(@RequestParam String query) {
-        List<String> siteCodes = siteCodeResolver.lookupPotentialSiteCodes(query);
-        List<SuggestionDTO> suggestions = siteCodes.stream()
-            .map(code -> {
-                Optional<Location> loc = locationRepository.findBySiteCode(code);
-                return loc.map(l -> new SuggestionDTO(l.getName(), l.getSiteCode())).orElse(null);
-            })
-            .filter(Objects::nonNull)
+        query = query.toLowerCase().trim();
+        List<Location> matches = locationRepository.findAllByNameContainingIgnoreCase(query);
+    
+        List<SuggestionDTO> suggestions = matches.stream()
+            .map(loc -> new SuggestionDTO(loc.getName(), loc.getSiteCode()))
+            .distinct() // remove duplicates
             .toList();
+
+    
         return ResponseEntity.ok(suggestions);
     }
 
     @GetMapping("/search")
     public ResponseEntity<List<LocationDTO>> searchLocations(@RequestParam String siteCode) {
         // Find all locations matching the site code (or modify to a partial match if needed)
-        List<Location> locations = locationRepository.findBySiteCodeContainingIgnoreCase(siteCode);
+        List<Location> locations = locationRepository.findAllBySiteCode(siteCode);
     
         // Map to DTOs
         List<LocationDTO> response = locations.stream()

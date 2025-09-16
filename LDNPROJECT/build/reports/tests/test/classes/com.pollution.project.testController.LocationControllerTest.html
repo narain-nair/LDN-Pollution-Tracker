@@ -79,12 +79,12 @@
 </thead>
 <tr>
 <td class="success">testAddLocation_EmptyName()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testAddLocation_InvalidCoordinates()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -104,7 +104,7 @@
 </tr>
 <tr>
 <td class="success">testDeleteAllLocations()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -144,7 +144,7 @@
 </tr>
 <tr>
 <td class="success">testGetLocation_NoSnapshots()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -154,7 +154,7 @@
 </tr>
 <tr>
 <td class="success">testGetSiteByCoords_Valid()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -164,7 +164,7 @@
 </tr>
 <tr>
 <td class="success">testRefreshLocation_NotFound()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -177,20 +177,20 @@
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2025-09-15T23:34:22.628+01:00  WARN 74230 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
-2025-09-15T23:34:22.629+01:00  WARN 74230 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to refresh non-existent location with id 999
-2025-09-15T23:34:22.629+01:00  WARN 74230 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 999 not found
-2025-09-15T23:34:22.629+01:00  WARN 74230 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
-2025-09-15T23:34:22.630+01:00  WARN 74230 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for coordinates (51.5, 0.1)
-2025-09-15T23:34:22.630+01:00  WARN 74230 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to delete non-existent location with id 999
-2025-09-15T23:34:22.633+01:00  WARN 74230 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
-2025-09-15T23:34:22.633+01:00  WARN 74230 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
-2025-09-15T23:34:22.634+01:00  WARN 74230 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
-2025-09-15T23:34:22.634+01:00  WARN 74230 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 1 not found
-2025-09-15T23:34:22.634+01:00  WARN 74230 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 2 not found
-2025-09-15T23:34:22.634+01:00  WARN 74230 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No snapshots found for location id 1
-2025-09-15T23:34:22.634+01:00  WARN 74230 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to get stats for non-existent location with id 999
-2025-09-15T23:34:22.635+01:00  WARN 74230 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
+<pre>2025-09-16T01:30:47.109+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
+2025-09-16T01:30:47.110+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to refresh non-existent location with id 999
+2025-09-16T01:30:47.110+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 999 not found
+2025-09-16T01:30:47.111+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
+2025-09-16T01:30:47.111+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for coordinates (51.5, 0.1)
+2025-09-16T01:30:47.112+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to delete non-existent location with id 999
+2025-09-16T01:30:47.114+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with null or empty name
+2025-09-16T01:30:47.114+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
+2025-09-16T01:30:47.115+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No air quality data found for location id 1
+2025-09-16T01:30:47.115+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 1 not found
+2025-09-16T01:30:47.115+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Location with id 2 not found
+2025-09-16T01:30:47.115+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : No snapshots found for location id 1
+2025-09-16T01:30:47.116+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to get stats for non-existent location with id 999
+2025-09-16T01:30:47.116+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.p.t.DummyLocationController          : Attempted to add location with invalid latitude or longitude
 </pre>
 </span>
 </div>
@@ -202,7 +202,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 8.14.3</a> at 15 Sept 2025, 23:34:22</p>
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 16 Sept 2025, 01:30:47</p>
 </div>
 </div>
 </body>

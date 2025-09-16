@@ -20,11 +20,12 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
     boolean existsBySiteCode(String siteCode);
 
     List<Location> findAllBySiteCode(String siteCode);
-    List<Location> findBySiteCodeContainingIgnoreCase(String siteCode);
 
     List<Location> findAllByUsers_Id(Long userId);
     List<Location> findAllByOrderByNameAsc();
+
     List<Location> findAllByName(String name);
+    List<Location> findAllByNameContainingIgnoreCase(String namePart);
 
     @Query("SELECT l.airQualityData FROM Location l WHERE l.id = :id")
     AirQualityData findAirQualityDataByLocationId(@Param("id") Long id);

@@ -56,10 +56,10 @@ function App() {
           {suggestions.map((s, i) => (
             <li
               key={i}
-              onClick={() => handleSelectSuggestion(s)}
+              onClick={() => handleSelectSuggestion(s.siteCode)}
               style={{ padding: "5px", cursor: "pointer", backgroundColor: "#f9f9f9" }}
             >
-              {s}
+              {s.name} ({s.siteCode})
             </li>
           ))}
         </ul>
