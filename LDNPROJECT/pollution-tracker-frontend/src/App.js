@@ -15,7 +15,8 @@ function App() {
     setQuery(val);
 
     if (val.length >= 2) { // fetch suggestions after 2 chars
-      const res = await fetch(`/locations/suggest?query=${encodeURIComponent(val)}`);
+      // Add full backend URL instead of relative
+      const res = await fetch(`http://localhost:8080/locations/suggest?query=${encodeURIComponent(val)}`);
       const data = await res.json();
       setSuggestions(data);
     } else {
@@ -29,7 +30,7 @@ function App() {
     setSuggestions([]);
     setQuery(siteCode);
 
-    const res = await fetch(`/locations/search?siteCode=${encodeURIComponent(siteCode)}`);
+    const res = await fetch(`http://localhost:8080/locations/search?siteCode=${encodeURIComponent(siteCode)}`);
     if (res.ok) {
       const data = await res.json();
       setLocations(data);
