@@ -1,4 +1,4 @@
-export default functionexport default function SearchBar({ query, setQuery, suggestions, setSuggestions, onSelect }) {
+export default function SearchBar({ query, setQuery, suggestions, setSuggestions, onSelect }) {
     const handleChange = async (e) => {
         const val = e.target.value;
         setQuery(val);
