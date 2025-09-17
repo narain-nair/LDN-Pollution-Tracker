@@ -1,9 +1,4 @@
 export default function SearchBar({ query, setQuery, suggestions, setSuggestions, onSelect }) {
-    const hasAirQualityData = (aqData) => {
-        if (!aqData) return false; // null or undefined
-        return Object.values(aqData).some(value => value != null);
-    };
-    
     const handleChange = async (e) => {
       const val = e.target.value;
       setQuery(val);
@@ -11,17 +6,7 @@ export default function SearchBar({ query, setQuery, suggestions, setSuggestions
       if (val.length >= 2) {
         const res = await fetch(`http://localhost:8080/locations/suggest?query=${encodeURIComponent(val)}`);
         const data = await res.json();
-
-        console.log("Raw suggestions from backend:", data);
-
-        const filteredSuggestions = data.filter(
-            (loc) =>
-              loc.airQualityData && 
-              Object.values(loc.airQualityData).some((value) => value != null)
-        );
-
-        console.log("Filtered suggestions:", filteredSuggestions);
-        setSuggestions(filteredSuggestions.length > 0 ? filteredSuggestions : data);
+        setSuggestions(data); // don’t filter here — only suggest names
       } else {
         setSuggestions([]);
       }
@@ -62,7 +47,7 @@ export default function SearchBar({ query, setQuery, suggestions, setSuggestions
             {suggestions.map((s, i) => (
               <li
                 key={i}
-                onClick={() => onSelect(s.siteCode)}
+                onClick={() => onSelect(s.siteCode)} // pass control back to App.js
                 style={{
                   padding: "8px",
                   cursor: "pointer",
@@ -78,4 +63,4 @@ export default function SearchBar({ query, setQuery, suggestions, setSuggestions
         )}
       </div>
     );
-  }
+}
