@@ -1,9 +1,9 @@
+import { pollutantInfo } from "./utils/PollutantInfo";
 import React, { useState } from "react";
-import { pollutantInfo } from "../utils/pollutantInfo";
 
 export default function PollutantTabs({}) {
     const [openTab, setOpenTab] = useState(null);
-    
+
     return (
         <div className="mt-6">
           {Object.keys(pollutantInfo).map((key) => {
@@ -29,5 +29,5 @@ export default function PollutantTabs({}) {
             );
           })}
         </div>
-      );
+    );
 }
