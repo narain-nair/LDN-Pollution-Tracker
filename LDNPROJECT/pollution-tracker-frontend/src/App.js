@@ -19,16 +19,30 @@ function App() {
   const [selectedLocation, setSelectedLocation] = useState(null);
 
   // Search handler
+  const hasAirQualityData = (aqData) => {
+    if (!aqData) return false;
+    return Object.values(aqData).some((v) => v != null);
+  };
+  
   const handleSelectSuggestion = async (siteCode) => {
     setSelectedSiteCode(siteCode);
     setSuggestions([]);
     setQuery(siteCode);
-
+  
     try {
-      const res = await fetch(`http://localhost:8080/locations/search?siteCode=${encodeURIComponent(siteCode)}`);
+      const res = await fetch(
+        `http://localhost:8080/locations/search?siteCode=${encodeURIComponent(siteCode)}`
+      );
       if (!res.ok) throw new Error("Failed to fetch location");
       const data = await res.json();
-      setSelectedLocation(data[0]); // single site
+  
+      const site = data[0];
+      if (site && hasAirQualityData(site.airQualityData)) {
+        setSelectedLocation(site);
+      } else {
+        console.warn("Site has no usable air quality data:", site);
+        setSelectedLocation(null);
+      }
     } catch (err) {
       console.error(err);
       setSelectedLocation(null);

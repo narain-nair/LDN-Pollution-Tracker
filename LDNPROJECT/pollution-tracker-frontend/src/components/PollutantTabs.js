@@ -1,33 +1,47 @@
-import { pollutantInfo } from "./utils/PollutantInfo";
 import React, { useState } from "react";
+import { pollutantInfo } from "./utils/PollutantInfo";
 
-export default function PollutantTabs({}) {
-    const [openTab, setOpenTab] = useState(null);
+export default function PollutantTabs() {
+  const [activeTab, setActiveTab] = useState(Object.keys(pollutantInfo)[0]); // default first tab
 
-    return (
-        <div className="mt-6">
-          {Object.keys(pollutantInfo).map((key) => {
-            const pollutant = pollutantInfo[key];
-            const isOpen = openTab === key;
-    
-            return (
-              <div key={key} className="border rounded mb-2">
-                <button
-                  className="w-full text-left p-3 font-semibold bg-gray-100 hover:bg-gray-200"
-                  onClick={() => setOpenTab(isOpen ? null : key)}
-                >
-                  {pollutant.name}
-                </button>
-                {isOpen && (
-                  <div className="p-3 bg-white">
-                    <p><strong>Description:</strong> {pollutant.description}</p>
-                    <p><strong>Harmful Effects:</strong> {pollutant.harmful}</p>
-                    <p><strong>Source:</strong> {pollutant.source}</p>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-    );
+  return (
+    <div className="mt-6">
+      {/* Tab headers */}
+      <div style={{ display: "flex", borderBottom: "2px solid #ddd" }}>
+        {Object.keys(pollutantInfo).map((key) => {
+          const pollutant = pollutantInfo[key];
+          return (
+            <button
+              key={key}
+              onClick={() => setActiveTab(key)}
+              style={{
+                flex: 1,
+                padding: "10px",
+                border: "none",
+                borderBottom: activeTab === key ? "3px solid #007bff" : "3px solid transparent",
+                background: "none",
+                fontWeight: activeTab === key ? "bold" : "normal",
+                cursor: "pointer",
+              }}
+            >
+              {pollutant.name}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Active tab content */}
+      <div style={{ padding: "15px", background: "#fff", border: "1px solid #ddd" }}>
+        <p>
+          <strong>Description:</strong> {pollutantInfo[activeTab].description}
+        </p>
+        <p>
+          <strong>Harmful Effects:</strong> {pollutantInfo[activeTab].harmful}
+        </p>
+        <p>
+          <strong>Source:</strong> {pollutantInfo[activeTab].source}
+        </p>
+      </div>
+    </div>
+  );
 }

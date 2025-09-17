@@ -79,7 +79,18 @@ export default function Heatmap({ locations }) {
             >
               <Popup>
                 {loc.name}<br />
+
+                Pollution Indices:<br />
                 PM2.5: {pm25}
+                <br />
+                O3: {o3}
+                <br />
+                NO2: {no2}
+                <br />
+                SO2: {so2}
+                <br />
+                CO: {co}
+                <br />
               </Popup>
             </CircleMarker>
           );
