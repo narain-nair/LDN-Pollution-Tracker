@@ -1,4 +1,9 @@
 export default function SearchBar({ query, setQuery, suggestions, setSuggestions, onSelect }) {
+    const hasAirQualityData = (aqData) => {
+        if (!aqData) return false; // null or undefined
+        return Object.values(aqData).some(value => value != null);
+    };
+    
     const handleChange = async (e) => {
       const val = e.target.value;
       setQuery(val);
@@ -6,7 +11,10 @@ export default function SearchBar({ query, setQuery, suggestions, setSuggestions
       if (val.length >= 2) {
         const res = await fetch(`http://localhost:8080/locations/suggest?query=${encodeURIComponent(val)}`);
         const data = await res.json();
-        setSuggestions(data);
+
+        const filteredSuggestions = data.filter(loc => hasAirQualityData(loc.airQualityData));
+
+        setSuggestions(filteredSuggestions);
       } else {
         setSuggestions([]);
       }
