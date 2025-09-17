@@ -6,6 +6,8 @@ import axios from "axios";
 import SearchBar from './components/SearchBar';
 import LocationStats from "./components/LocationStats";
 import PollutantChart from "./components/PollutionChart";
+import Navbar from "./components/layout/NavBar";
+import PageContainer from "./components/layout/PageContainer";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -28,7 +30,7 @@ function App() {
     }
   };
 
-  
+
   return (
     <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
       <h1>Search Locations</h1>
