@@ -12,9 +12,16 @@ export default function SearchBar({ query, setQuery, suggestions, setSuggestions
         const res = await fetch(`http://localhost:8080/locations/suggest?query=${encodeURIComponent(val)}`);
         const data = await res.json();
 
-        const filteredSuggestions = data.filter(loc => hasAirQualityData(loc.airQualityData));
+        console.log("Raw suggestions from backend:", data);
 
-        setSuggestions(filteredSuggestions);
+        const filteredSuggestions = data.filter(
+            (loc) =>
+              loc.airQualityData && 
+              Object.values(loc.airQualityData).some((value) => value != null)
+        );
+
+        console.log("Filtered suggestions:", filteredSuggestions);
+        setSuggestions(filteredSuggestions.length > 0 ? filteredSuggestions : data);
       } else {
         setSuggestions([]);
       }
