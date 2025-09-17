@@ -279,6 +279,9 @@ public class SiteCodeResolver {
     Double getIndex(List<Species> speciesList, String speciesName) {
         for (Species species : speciesList) {
             if (species.getCode().equalsIgnoreCase(speciesName)) {
+                if ("No data".equalsIgnoreCase(species.getBand())) {
+                    return null; // treat as missing
+                }
                 try {
                     return Double.valueOf(species.getIndex());
                 } catch (NumberFormatException e) {
