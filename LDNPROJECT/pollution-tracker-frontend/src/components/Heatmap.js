@@ -9,16 +9,27 @@ export default function Heatmap({ locations }) {
     console.log("Heatmap: total locations received:", locations.length);
   
     // Step 2: Filter out invalid coordinates, convert to numbers, and remove NaN
+
+    locations.forEach((loc, i) => {
+        console.log(`Location ${i}:`, loc, "lat type:", typeof loc.lat, "lng type:", typeof loc.lng);
+    });
+
+    const hasAirQualityData = (aqData) => {
+        if (!aqData) return false; // null or undefined
+        // Check if at least one pollutant is not null
+        return Object.values(aqData).some(value => value != null);
+      };
+
     const validLocations = locations
-      .filter(loc => loc.lat != null && loc.lng != null)
-      .map(loc => ({
-        ...loc,
-        lat: parseFloat(loc.lat),
-        lng: parseFloat(loc.lng),
-      }))
-      .filter(loc => !isNaN(loc.lat) && !isNaN(loc.lng));
-  
-    // Step 3: Log valid locations to confirm they are numeric
+        .filter(loc => loc.latitude != null && loc.longitude != null)
+        .filter(loc => hasAirQualityData(loc.airQualityData))
+        .map(loc => ({
+            ...loc,
+            lat: parseFloat(loc.latitude),  // convert to number
+            lng: parseFloat(loc.longitude),
+        }))
+        .filter(loc => !isNaN(loc.lat) && !isNaN(loc.lng));
+
     console.log("Heatmap: valid locations after parsing:", validLocations);
   
     return (
@@ -34,13 +45,21 @@ export default function Heatmap({ locations }) {
   
         {validLocations.map((loc, i) => {
           const pm25 = loc.airQualityData?.pm25 ?? 0;
-  
+          const o3 = loc.airQualityData?.o3 ?? 0;
+          const no2 = loc.airQualityData?.no2 ?? 0;
+          const so2 = loc.airQualityData?.so2 ?? 0;
+          const co = loc.airQualityData?.co ?? 0;
+
           // Step 4: Log each marker before rendering
           console.log(`Rendering marker ${i}:`, {
             name: loc.name,
             lat: loc.lat,
             lng: loc.lng,
             pm25,
+            o3,
+            no2,
+            so2,
+            co
           });
   
           const color =
