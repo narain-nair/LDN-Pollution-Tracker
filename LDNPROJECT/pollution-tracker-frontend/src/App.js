@@ -15,48 +15,45 @@ function App() {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [selectedSiteCode, setSelectedSiteCode] = useState(null);
-  const [locations, setLocations] = useState([]);
-  console.log("App.js locations state:", locations);
+  const [allLocations, setAllLocations] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
-  // When user clicks a suggestion
+  // Search handler
   const handleSelectSuggestion = async (siteCode) => {
     setSelectedSiteCode(siteCode);
     setSuggestions([]);
     setQuery(siteCode);
 
-    const res = await fetch(`http://localhost:8080/locations/search?siteCode=${encodeURIComponent(siteCode)}`);
-    if (res.ok) {
+    try {
+      const res = await fetch(`http://localhost:8080/locations/search?siteCode=${encodeURIComponent(siteCode)}`);
+      if (!res.ok) throw new Error("Failed to fetch location");
       const data = await res.json();
-      setLocations(data);
-    } else {
-      setLocations([]);
+      setSelectedLocation(data[0]); // single site
+    } catch (err) {
+      console.error(err);
+      setSelectedLocation(null);
     }
   };
 
+  // Fetch all locations for prepopulated map
   useEffect(() => {
     const fetchAllLocations = async () => {
       try {
         const response = await axios.get('http://localhost:8080/locations/all');
-        if (!response.ok) throw new Error("Failed to fetch locations");
-        const data = await response.json();
-        setLocations(data);
+        setAllLocations(response.data);
+        console.log("All locations fetched:", response.data);
       } catch (error) {
-        console.error("Error fetching all locations:", error);
+        console.error(error);
       }
-    }; 
+    };
     fetchAllLocations();
   }, []);
 
-
   return (
     <div className="App">
-      {/* Fixed top navbar */}
       <Navbar />
-  
-      {/* Page content below navbar */}
       <PageContainer>
         <h1 style={{ marginBottom: "10px" }}>Search Locations</h1>
-  
         <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
           <SearchBar
             query={query}
@@ -66,16 +63,18 @@ function App() {
             onSelect={handleSelectSuggestion}
           />
         </div>
-  
-        {/* Show charts and info only if a location is selected */}
-        {locations.length > 0 && (
+
+        {/* Heatmap always shows all locations */}
+
+        {/* Charts / stats for selected site only */}
+        {selectedLocation && (
           <>
-            <LocationStats locations={locations} />
-            <PollutantChart locations={locations} />
-            <Heatmap locations={locations} />
-            <PollutantTabs />
+            <LocationStats locations={[selectedLocation]} />
+            <PollutantChart locations={[selectedLocation]} />
+            <PollutantTabs location={selectedLocation} />
           </>
         )}
+        {allLocations.length > 0 && <Heatmap locations={allLocations} />}
       </PageContainer>
     </div>
   );
