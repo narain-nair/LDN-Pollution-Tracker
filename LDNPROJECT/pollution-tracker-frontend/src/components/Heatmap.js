@@ -15,10 +15,11 @@ export default function Heatmap({ locations }) {
     });
 
     const hasAirQualityData = (aqData) => {
-        if (!aqData) return false; // null or undefined
-        // Check if at least one pollutant is not null
+        if (!aqData) return false;
+      
+        // Exclude sites where all pollutants are null/undefined
         return Object.values(aqData).some(value => value != null);
-      };
+    };
 
     const validLocations = locations
         .filter(loc => loc.latitude != null && loc.longitude != null)
@@ -49,6 +50,7 @@ export default function Heatmap({ locations }) {
           const no2 = loc.airQualityData?.no2 ?? 0;
           const so2 = loc.airQualityData?.so2 ?? 0;
           const co = loc.airQualityData?.co ?? 0;
+          const pm10 = loc.airQualityData?.pm10 ?? 0;
 
           // Step 4: Log each marker before rendering
           console.log(`Rendering marker ${i}:`, {
@@ -56,6 +58,7 @@ export default function Heatmap({ locations }) {
             lat: loc.lat,
             lng: loc.lng,
             pm25,
+            pm10,
             o3,
             no2,
             so2,
@@ -82,6 +85,8 @@ export default function Heatmap({ locations }) {
 
                 Pollution Indices:<br />
                 PM2.5: {pm25}
+                <br />
+                PM10 : {pm10}
                 <br />
                 O3: {o3}
                 <br />

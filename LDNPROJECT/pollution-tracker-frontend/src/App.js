@@ -81,6 +81,7 @@ function App() {
         {/* Heatmap always shows all locations */}
 
         {/* Charts / stats for selected site only */}
+        {allLocations.length > 0 && <Heatmap locations={allLocations} />}
         {selectedLocation && (
           <>
             <LocationStats locations={[selectedLocation]} />
@@ -88,7 +89,6 @@ function App() {
             <PollutantTabs location={selectedLocation} />
           </>
         )}
-        {allLocations.length > 0 && <Heatmap locations={allLocations} />}
       </PageContainer>
     </div>
   );
