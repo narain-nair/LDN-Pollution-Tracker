@@ -33,6 +33,20 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    const fetchAllLocations = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/locations/all');
+        if (!response.ok) throw new Error("Failed to fetch locations");
+        const data = await response.json();
+        setLocations(data);
+      } catch (error) {
+        console.error("Error fetching all locations:", error);
+      }
+    }; 
+    fetchAllLocations();
+  }, []);
+
 
   return (
     <div className="App">
