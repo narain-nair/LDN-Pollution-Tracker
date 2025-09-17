@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.155s</div>
+<div class="counter">0.162s</div>
 <p>duration</p>
 </div>
 </td>
@@ -119,12 +119,12 @@
 </tr>
 <tr>
 <td class="success">testGetIndex_InvalidIndexValue()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetIndex_SpeciesNotFound()</td>
-<td class="success">0.072s</td>
+<td class="success">0.068s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -134,12 +134,12 @@
 </tr>
 <tr>
 <td class="success">testGetSiteCode_Found()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetSiteCode_NotFound()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -149,7 +149,7 @@
 </tr>
 <tr>
 <td class="success">testGetSiteTrie_SubsequentCallsReturnSameInstance()</td>
-<td class="success">0.003s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -159,7 +159,7 @@
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_EmptyInput()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -174,17 +174,17 @@
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_NotFound()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_NullInput()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_SpecialCharacters()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -204,7 +204,7 @@
 </tr>
 <tr>
 <td class="success">testLookupSiteCode_TrimInput()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -224,27 +224,27 @@
 </tr>
 <tr>
 <td class="success">testRefreshLocationData_NoAirQualityData()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshLocationData_SnapshotSaved()</td>
-<td class="success">0.008s</td>
+<td class="success">0.009s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshSiteTrie_ApiThrowsException()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshSiteTrie_ReplacesOldTrie()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testRefreshSiteTrie_SuccessfulUpdate()</td>
-<td class="success">0.032s</td>
+<td class="success">0.038s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -252,11 +252,11 @@
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2025-09-16T01:30:47.024+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Created MonitoringSite: com.pollution.dto.MonitoringSite@27959c4e
-2025-09-16T01:30:47.024+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Created MonitoringSite: com.pollution.dto.MonitoringSite@1c023dcb
-2025-09-16T01:30:47.024+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : New MonitoringSites array: [com.pollution.dto.MonitoringSite@27959c4e, com.pollution.dto.MonitoringSite@1c023dcb]
-2025-09-16T01:30:47.025+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : MonitoringSiteResponse to be returned by mock: com.pollution.dto.MonitoringSiteResponse@67aedd28
-2025-09-16T01:30:47.037+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
+<pre>2025-09-17T18:11:10.311+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Created MonitoringSite: com.pollution.dto.MonitoringSite@130901fd
+2025-09-17T18:11:10.311+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Created MonitoringSite: com.pollution.dto.MonitoringSite@659f5f32
+2025-09-17T18:11:10.311+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : New MonitoringSites array: [com.pollution.dto.MonitoringSite@130901fd, com.pollution.dto.MonitoringSite@659f5f32]
+2025-09-17T18:11:10.312+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : MonitoringSiteResponse to be returned by mock: com.pollution.dto.MonitoringSiteResponse@3e0575a2
+2025-09-17T18:11:10.327+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;:
         [
@@ -266,17 +266,17 @@
     }
 }
 ...
-2025-09-16T01:30:47.053+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
-2025-09-16T01:30:47.054+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Site trie after refresh: com.pollution.dto.Trie@4e885b9
-2025-09-16T01:30:47.059+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Testing assignSiteCode with location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
-2025-09-16T01:30:47.060+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
+2025-09-17T18:11:10.346+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 2 sites.
+2025-09-17T18:11:10.347+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Site trie after refresh: com.pollution.dto.Trie@54da9644
+2025-09-17T18:11:10.353+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Testing assignSiteCode with location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
+2025-09-17T18:11:10.354+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: []
     }
 }
 ...
-2025-09-16T01:30:47.063+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
-2025-09-16T01:30:47.063+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites:     {
+2025-09-17T18:11:10.356+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
+2025-09-17T18:11:10.356+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites:     {
         &quot;Sites&quot;: {
             &quot;Site&quot;: [
                 {&quot;@SiteName&quot;: &quot;Site A&quot;, &quot;@SiteCode&quot;: &quot;SA1&quot;, &quot;@Latitude&quot;:&quot;51.5&quot;, &quot;@Longitude&quot;:&quot;0.1&quot;}
@@ -284,11 +284,11 @@
         }
     }
 ...
-2025-09-16T01:30:47.064+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: got 1 sites from API
-2025-09-16T01:30:47.064+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: nearest site code = SA1
-2025-09-16T01:30:47.064+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
-2025-09-16T01:30:47.064+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=SA1/Json
-2025-09-16T01:30:47.064+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for siteCode SA1:     {
+2025-09-17T18:11:10.357+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: got 1 sites from API
+2025-09-17T18:11:10.358+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: nearest site code = SA1
+2025-09-17T18:11:10.358+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
+2025-09-17T18:11:10.358+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=SA1/Json
+2025-09-17T18:11:10.358+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for siteCode SA1:     {
         &quot;HourlyAirQualityIndex&quot;: {
             &quot;LocalAuthority&quot;: {
             &quot;@LocalAuthorityName&quot;: &quot;Dummy Authority&quot;,
@@ -322,21 +322,21 @@
         }
     }
 
-2025-09-16T01:30:47.067+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetched site data: com.pollution.dto.HourlyIndexResponse$Site@44c141ce
-2025-09-16T01:30:47.067+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Species list: [com.pollution.dto.HourlyIndexResponse$Species@67dc8aa8, com.pollution.dto.HourlyIndexResponse$Species@642aa8ea]
-2025-09-16T01:30:47.068+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : PM25: 5.0, PM10: null, NO2: 3.0, SO2: null, O3: null, CO: null
-2025-09-16T01:30:47.068+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Populated AirQualityData: AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
-2025-09-16T01:30:47.069+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Location after population: Location{id=null, name='Site A', latitude=51.5, longitude=0.1, airQualityData=AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}}
-2025-09-16T01:30:47.071+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Stubbed restTemplate to return empty response
-2025-09-16T01:30:47.071+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
+2025-09-17T18:11:10.361+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetched site data: com.pollution.dto.HourlyIndexResponse$Site@1e0be005
+2025-09-17T18:11:10.361+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Species list: [com.pollution.dto.HourlyIndexResponse$Species@1fd226da, com.pollution.dto.HourlyIndexResponse$Species@36cd58e7]
+2025-09-17T18:11:10.362+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : PM25: 5.0, PM10: null, NO2: 3.0, SO2: null, O3: null, CO: null
+2025-09-17T18:11:10.362+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Populated AirQualityData: AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
+2025-09-17T18:11:10.363+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Location after population: Location{id=null, name='Site A', latitude=51.5, longitude=0.1, airQualityData=AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}}
+2025-09-17T18:11:10.365+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Stubbed restTemplate to return empty response
+2025-09-17T18:11:10.365+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: null
     }
 }
 ...
-2025-09-16T01:30:47.072+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Nearest code calculated: null
-2025-09-16T01:30:47.074+01:00 DEBUG 78989 --- [Pollution project] [    Test worker] o.s.test.util.ReflectionTestUtils        : Setting field 'siteTrie' of type [null] on target object [com.pollution.project.service.SiteCodeResolver@580694ce] or target class [class com.pollution.project.service.SiteCodeResolver] to value [null]
-2025-09-16T01:30:47.074+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
+2025-09-17T18:11:10.366+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Nearest code calculated: null
+2025-09-17T18:11:10.369+01:00 DEBUG 58690 --- [Pollution project] [    Test worker] o.s.test.util.ReflectionTestUtils        : Setting field 'siteTrie' of type [null] on target object [com.pollution.project.service.SiteCodeResolver@5a77e0e4] or target class [class com.pollution.project.service.SiteCodeResolver] to value [null]
+2025-09-17T18:11:10.369+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: [
             {&quot;@SiteName&quot;:&quot;Site One&quot;,&quot;@SiteCode&quot;:&quot;S1&quot;},
@@ -345,9 +345,9 @@
     }
 }
 ...
-2025-09-16T01:30:47.075+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Loaded 2 monitoring sites into trie.
-2025-09-16T01:30:47.076+01:00 DEBUG 78989 --- [Pollution project] [    Test worker] o.s.test.util.ReflectionTestUtils        : Setting field 'siteTrie' of type [null] on target object [com.pollution.project.service.SiteCodeResolver@3b93d874] or target class [class com.pollution.project.service.SiteCodeResolver] to value [com.pollution.dto.Trie@72b88762]
-2025-09-16T01:30:47.079+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
+2025-09-17T18:11:10.370+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Loaded 2 monitoring sites into trie.
+2025-09-17T18:11:10.371+01:00 DEBUG 58690 --- [Pollution project] [    Test worker] o.s.test.util.ReflectionTestUtils        : Setting field 'siteTrie' of type [null] on target object [com.pollution.project.service.SiteCodeResolver@1bb5dce0] or target class [class com.pollution.project.service.SiteCodeResolver] to value [com.pollution.dto.Trie@7d39c9c]
+2025-09-17T18:11:10.373+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: [
             {&quot;@SiteName&quot;:&quot;Dummy name&quot;,&quot;@Latitude&quot;:&quot;51.5&quot;,&quot;@Longitude&quot;:&quot;0.1&quot;,&quot;@SiteCode&quot;:&quot;S2&quot;}
@@ -355,15 +355,15 @@
     }
 }
 ...
-2025-09-16T01:30:47.079+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: got 1 sites from API
-2025-09-16T01:30:47.079+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: nearest site code = S2
-2025-09-16T01:30:47.080+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
+2025-09-17T18:11:10.374+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: got 1 sites from API
+2025-09-17T18:11:10.374+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: nearest site code = S2
+2025-09-17T18:11:10.376+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: []
     }
 }
 ...
-2025-09-16T01:30:47.084+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
+2025-09-17T18:11:10.380+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: [
             {&quot;@SiteName&quot;:&quot;A&quot;,&quot;@SiteCode&quot;:&quot;A&quot;,&quot;@Latitude&quot;:&quot;not-a-number&quot;,&quot;@Longitude&quot;:&quot;0.100&quot;},
@@ -372,19 +372,19 @@
     }
 }
 ...
-2025-09-16T01:30:47.085+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: got 2 sites from API
-2025-09-16T01:30:47.085+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Skipping site A due to invalid coords
-2025-09-16T01:30:47.085+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: nearest site code = B
-2025-09-16T01:30:47.086+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
-2025-09-16T01:30:47.086+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
+2025-09-17T18:11:10.381+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: got 2 sites from API
+2025-09-17T18:11:10.381+01:00  WARN 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Skipping site A due to invalid coords
+2025-09-17T18:11:10.381+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: nearest site code = B
+2025-09-17T18:11:10.382+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: null, location before assignSiteCode: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
+2025-09-17T18:11:10.383+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: []
     }
 }
 ...
-2025-09-16T01:30:47.087+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
-2025-09-16T01:30:47.087+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site code is null after assignSiteCode, returning early
-2025-09-16T01:30:47.089+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
+2025-09-17T18:11:10.383+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=null, name='null', latitude=51.5, longitude=0.1, airQualityData=null}
+2025-09-17T18:11:10.383+01:00  WARN 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site code is null after assignSiteCode, returning early
+2025-09-17T18:11:10.386+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: [
             {&quot;@SiteName&quot;:&quot;Site One&quot;,&quot;@SiteCode&quot;:&quot;S1&quot;},
@@ -393,11 +393,11 @@
     }
 }
 ...
-2025-09-16T01:30:47.090+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Loaded 2 monitoring sites into trie.
-2025-09-16T01:30:47.090+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Retrieved Trie: com.pollution.dto.Trie@858bf8c
-2025-09-16T01:30:47.090+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site One': S1
-2025-09-16T01:30:47.090+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site Two': S2
-2025-09-16T01:30:47.091+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
+2025-09-17T18:11:10.387+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Loaded 2 monitoring sites into trie.
+2025-09-17T18:11:10.387+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Retrieved Trie: com.pollution.dto.Trie@205c5cd0
+2025-09-17T18:11:10.387+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site One': S1
+2025-09-17T18:11:10.387+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Result for 'Site Two': S2
+2025-09-17T18:11:10.388+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: [
             {&quot;@SiteName&quot;:&quot;Fresh Site&quot;,&quot;@SiteCode&quot;:&quot;FS1&quot;}
@@ -405,12 +405,12 @@
     }
 }
 ...
-2025-09-16T01:30:47.092+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
-2025-09-16T01:30:47.094+01:00 ERROR 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error fetching monitoring sites: API down
-2025-09-16T01:30:47.096+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-16T01:30:47.097+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-16T01:30:47.097+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
-2025-09-16T01:30:47.097+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for siteCode DUMMY1: {
+2025-09-17T18:11:10.389+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site trie refreshed successfully, with 1 sites.
+2025-09-17T18:11:10.391+01:00 ERROR 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Error fetching monitoring sites: API down
+2025-09-17T18:11:10.394+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+2025-09-17T18:11:10.394+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+2025-09-17T18:11:10.394+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
+2025-09-17T18:11:10.394+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for siteCode DUMMY1: {
     &quot;HourlyAirQualityIndex&quot;: {
         &quot;LocalAuthority&quot;: {
             &quot;@LocalAuthorityName&quot;: &quot;Dummy Authority&quot;,
@@ -437,15 +437,15 @@
     }
 }
 
-2025-09-16T01:30:47.098+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetched site data: com.pollution.dto.HourlyIndexResponse$Site@70796b21
-2025-09-16T01:30:47.098+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Species list: [com.pollution.dto.HourlyIndexResponse$Species@4263fbe8]
-2025-09-16T01:30:47.099+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : PM25: null, PM10: null, NO2: null, SO2: null, O3: null, CO: null
-2025-09-16T01:30:47.099+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Populated AirQualityData: AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
-2025-09-16T01:30:47.099+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Location after population: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}}
-2025-09-16T01:30:47.101+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-16T01:30:47.101+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-16T01:30:47.101+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
-2025-09-16T01:30:47.101+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for siteCode DUMMY1: {
+2025-09-17T18:11:10.396+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetched site data: com.pollution.dto.HourlyIndexResponse$Site@7f3616d2
+2025-09-17T18:11:10.396+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Species list: [com.pollution.dto.HourlyIndexResponse$Species@7e5c04a4]
+2025-09-17T18:11:10.397+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : PM25: null, PM10: null, NO2: null, SO2: null, O3: null, CO: null
+2025-09-17T18:11:10.397+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Populated AirQualityData: AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
+2025-09-17T18:11:10.397+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Location after population: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=AirQualityData{pm25=null, pm10=null, no2=null, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}}
+2025-09-17T18:11:10.399+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+2025-09-17T18:11:10.399+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+2025-09-17T18:11:10.399+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetching air quality data from URL: https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/SiteCode=DUMMY1/Json
+2025-09-17T18:11:10.400+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for siteCode DUMMY1: {
     &quot;HourlyAirQualityIndex&quot;: {
         &quot;LocalAuthority&quot;: {
             &quot;@LocalAuthorityName&quot;: &quot;Dummy Authority&quot;,
@@ -479,12 +479,12 @@
     }
 }
 
-2025-09-16T01:30:47.102+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetched site data: com.pollution.dto.HourlyIndexResponse$Site@a700311
-2025-09-16T01:30:47.102+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Species list: [com.pollution.dto.HourlyIndexResponse$Species@3c832820, com.pollution.dto.HourlyIndexResponse$Species@32e9c8]
-2025-09-16T01:30:47.103+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : PM25: 5.0, PM10: null, NO2: 3.0, SO2: null, O3: null, CO: null
-2025-09-16T01:30:47.103+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Populated AirQualityData: AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
-2025-09-16T01:30:47.103+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Location after population: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}}
-2025-09-16T01:30:47.103+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
+2025-09-17T18:11:10.401+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Fetched site data: com.pollution.dto.HourlyIndexResponse$Site@139e291e
+2025-09-17T18:11:10.401+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Species list: [com.pollution.dto.HourlyIndexResponse$Species@56b4951a, com.pollution.dto.HourlyIndexResponse$Species@2d58136]
+2025-09-17T18:11:10.401+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : PM25: 5.0, PM10: null, NO2: 3.0, SO2: null, O3: null, CO: null
+2025-09-17T18:11:10.401+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Populated AirQualityData: AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}
+2025-09-17T18:11:10.401+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Location after population: Location{id=1, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=AirQualityData{pm25=5.0, pm10=null, no2=3.0, so2=null, o3=null, co=null, timestamp=2025-09-10T12:00}}
+2025-09-17T18:11:10.403+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Raw API response for monitoring sites: {
     &quot;Sites&quot;: {
         &quot;Site&quot;: [
             {&quot;@SiteName&quot;:&quot;A&quot;,&quot;@Latitude&quot;:&quot;51.500&quot;,&quot;@Longitude&quot;:&quot;0.100&quot;,&quot;@SiteCode&quot;:&quot;A&quot;},
@@ -493,12 +493,12 @@
     }
 }
 ...
-2025-09-16T01:30:47.104+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: got 2 sites from API
-2025-09-16T01:30:47.104+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: nearest site code = A
-2025-09-16T01:30:47.106+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-16T01:30:47.106+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
-2025-09-16T01:30:47.106+01:00  WARN 78989 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site code is null after assignSiteCode, returning early
-2025-09-16T01:30:47.109+01:00  INFO 78989 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Inserted 'Bexley West' with code 'BQ8' into trie.
+2025-09-17T18:11:10.403+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: got 2 sites from API
+2025-09-17T18:11:10.403+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : calculateSiteCode: nearest site code = A
+2025-09-17T18:11:10.405+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Starting populateLocationData for userInput: Dummy Location, location before assignSiteCode: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+2025-09-17T18:11:10.405+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : After assignSiteCode, location: Location{id=null, name='Dummy Location', latitude=51.0, longitude=0.0, airQualityData=null}
+2025-09-17T18:11:10.405+01:00  WARN 58690 --- [Pollution project] [    Test worker] c.p.project.service.SiteCodeResolver     : Site code is null after assignSiteCode, returning early
+2025-09-17T18:11:10.408+01:00  INFO 58690 --- [Pollution project] [    Test worker] c.p.p.service.SiteCodeResolverTest       : Inserted 'Bexley West' with code 'BQ8' into trie.
 </pre>
 </span>
 </div>
@@ -510,7 +510,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 8.14.3</a> at 16 Sept 2025, 01:30:47</p>
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at 17 Sept 2025, 18:11:10</p>
 </div>
 </div>
 </body>
