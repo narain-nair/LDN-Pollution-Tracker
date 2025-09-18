@@ -65,15 +65,25 @@ function App() {
     <div
       className="App"
       style={{
-        backgroundColor: "#f8f9fa", // light gray bg
+        backgroundColor: "#FFF3E0", // soft light-orange
         minHeight: "100vh",
         padding: "20px",
         boxSizing: "border-box",
       }}
     >
-      <Navbar />
+      <Navbar
+        style={{
+          backgroundColor: "#FFB74D", // deeper orange for navbar
+          color: "#fff",
+        }}
+      />
       <PageContainer>
-        <h1 style={{ marginBottom: "20px", color: "#333" }}>
+        <h1
+          style={{
+            marginBottom: "20px",
+            color: "#E65100", // strong accent color
+          }}
+        >
           Search Locations
         </h1>
 
@@ -84,7 +94,7 @@ function App() {
             justifyContent: "center",
             marginBottom: "20px",
             position: "relative",
-            zIndex: 1000, // make sure dropdown shows above map
+            zIndex: 1000, // keep dropdown above map
           }}
         >
           <SearchBar
@@ -105,6 +115,7 @@ function App() {
             overflow: "hidden",
             boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
             marginBottom: "30px",
+            border: "2px solid #FFB74D", // subtle accent border
           }}
         >
           {allLocations.length > 0 && <Heatmap locations={allLocations} />}
@@ -120,6 +131,7 @@ function App() {
               margin: "0 auto",
               maxWidth: "1200px",
               boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+              borderLeft: "5px solid #FFB74D", // accent indicator
             }}
           >
             <LocationStats locations={[selectedLocation]} />
