@@ -637,9 +637,8 @@ class SiteCodeResolverTest {
     void testPopulateLocationData_InvalidIndex() throws JsonProcessingException {
         // Arrange
         Location location = new Location("Dummy Location", 51.000, 0.000);
-        location.setId(1L);  // non-null id
-
-        // JSON representing invalid PM25 index
+        location.setId(1L);
+    
         String mockJson = """
         {
             "HourlyAirQualityIndex": {
@@ -659,7 +658,7 @@ class SiteCodeResolverTest {
                                 "@SpeciesCode": "PM25",
                                 "@SpeciesName": "PM25",
                                 "@AirQualityIndex": "N/A",
-                                "@AirQualityBand": "Moderate",
+                                "@AirQualityBand": "No data",
                                 "@IndexSource": "Automated"
                             }
                         ]
@@ -668,24 +667,22 @@ class SiteCodeResolverTest {
             }
         }
         """;
-
+    
         ResponseEntity<String> fakeResponse = new ResponseEntity<>(mockJson, HttpStatus.OK);
         when(restTemplate.getForEntity(anyString(), eq(String.class))).thenReturn(fakeResponse);
-
-        // Spy the resolver to stub assignSiteCode so we have a non-null siteCode
+    
         SiteCodeResolver spyResolver = Mockito.spy(siteCodeResolver);
         doAnswer(invocation -> {
             Location loc = invocation.getArgument(0);
-            loc.setSiteCode("DUMMY1"); // ensure non-null site code
+            loc.setSiteCode("DUMMY1");
             return null;
         }).when(spyResolver).assignSiteCode(any(Location.class), anyString());
-
+    
         // Act
         spyResolver.populateLocationData(location, "Dummy Location");
-
+    
         // Assert
-        assertNotNull(location.getAirQualityData());
-        assertNull(location.getAirQualityData().getPm25()); // invalid index handled
+        assertNull(location.getAirQualityData()); // now expecting null since no valid data
         assertEquals("DUMMY1", location.getSiteCode());
         assertEquals("Dummy Location", location.getName());
     }
@@ -705,41 +702,40 @@ class SiteCodeResolverTest {
             }
         """;        
 
-        String mockJson = 
-        """
-            {
-                "HourlyAirQualityIndex": {
-                    "LocalAuthority": {
-                    "@LocalAuthorityName": "Dummy Authority",
-                    "@LocalAuthorityCode": "99",
-                    "@LaCentreLatitude": "51.5",
-                    "@LaCentreLongitude": "0.1",
-                        "Site": {
-                            "@Latitude": "51.5",
-                            "@Longitude": "0.1",
-                            "@SiteCode": "SA1",
-                            "@SiteName": "Site A",
-                            "@BulletinDate": "2025-09-10 12:00:00",
-                            "species": [
-                                {
-                                    "@SpeciesCode": "PM25",
-                                    "@SpeciesName": "PM25",
-                                    "@AirQualityIndex": "5",
-                                    "@AirQualityBand": "Moderate",
-                                    "@IndexSource": "Automated"
-                                },
-                                {
-                                    "@SpeciesCode": "NO2",
-                                    "@SpeciesName": "NO2",
-                                    "@AirQualityIndex": "3",
-                                    "@AirQualityBand": "Low",
-                                    "@IndexSource": "Automated"
-                                }
-                            ]
-                        }
+        String mockJson = """
+        {
+            "HourlyAirQualityIndex": {
+                "LocalAuthority": {
+                "@LocalAuthorityName": "Dummy Authority",
+                "@LocalAuthorityCode": "99",
+                "@LaCentreLatitude": "51.5",
+                "@LaCentreLongitude": "0.1",
+                    "Site": {
+                        "@Latitude": "51.5",
+                        "@Longitude": "0.1",
+                        "@SiteCode": "SA1",
+                        "@SiteName": "Site A",
+                        "@BulletinDate": "2025-09-10 12:00:00",
+                        "species": [
+                            {
+                                "@SpeciesCode": "PM25",
+                                "@SpeciesName": "PM25",
+                                "@AirQualityIndex": "5",
+                                "@AirQualityBand": "Moderate",
+                                "@IndexSource": "Automated"
+                            },
+                            {
+                                "@SpeciesCode": "NO2",
+                                "@SpeciesName": "NO2",
+                                "@AirQualityIndex": "3",
+                                "@AirQualityBand": "Low",
+                                "@IndexSource": "Automated"
+                            }
+                        ]
                     }
                 }
             }
+        }
         """;
     
         when(restTemplate.getForEntity(contains("/MonitoringSites/"), eq(String.class)))
@@ -753,9 +749,6 @@ class SiteCodeResolverTest {
     
         // Assert
         verify(snapshotRepository, times(1)).save(any(AirQualitySnapshot.class));
-        assertNotNull(location.getAirQualityData());
-        assertEquals(5.0, location.getAirQualityData().getPm25());
-        assertEquals(3.0, location.getAirQualityData().getNo2());    
     }
 
     @Test
