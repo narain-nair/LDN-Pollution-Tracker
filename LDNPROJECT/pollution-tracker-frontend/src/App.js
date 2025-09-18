@@ -65,36 +65,39 @@ function App() {
     <div
       className="App"
       style={{
-        backgroundColor: "#FFF3E0", // soft light-orange
+        backgroundColor: "#FFF9F0", // very soft orange, almost off-white
         minHeight: "100vh",
         padding: "20px",
         boxSizing: "border-box",
       }}
     >
+      {/* Navbar */}
       <Navbar
         style={{
-          backgroundColor: "#FFB74D", // deeper orange for navbar
+          backgroundColor: "#FFB74D", // strong accent only for navbar
           color: "#fff",
         }}
       />
+  
       <PageContainer>
+        {/* Page title */}
         <h1
           style={{
             marginBottom: "20px",
-            color: "#E65100", // strong accent color
+            color: "#E65100", // strong orange accent for heading
           }}
         >
           Search Locations
         </h1>
-
-        {/* SearchBar container */}
+  
+        {/* SearchBar */}
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             marginBottom: "20px",
             position: "relative",
-            zIndex: 1000, // keep dropdown above map
+            zIndex: 1000, // dropdown stays above map
           }}
         >
           <SearchBar
@@ -105,8 +108,8 @@ function App() {
             onSelect={handleSelectSuggestion}
           />
         </div>
-
-        {/* Map container */}
+  
+        {/* Map / Heatmap container */}
         <div
           style={{
             margin: "0 auto",
@@ -115,17 +118,17 @@ function App() {
             overflow: "hidden",
             boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
             marginBottom: "30px",
-            border: "2px solid #FFB74D", // subtle accent border
+            border: "2px solid #FFB74D", // subtle accent
           }}
         >
           {allLocations.length > 0 && <Heatmap locations={allLocations} />}
         </div>
-
+  
         {/* Selected site info */}
         {selectedLocation && (
           <div
             style={{
-              backgroundColor: "#fff",
+              backgroundColor: "#FFFFFF", // white for readability
               borderRadius: "12px",
               padding: "20px",
               margin: "0 auto",
@@ -135,7 +138,20 @@ function App() {
             }}
           >
             <LocationStats locations={[selectedLocation]} />
-            <PollutantChart locations={[selectedLocation]} />
+  
+            {/* Pollutant chart */}
+            <div
+              style={{
+                backgroundColor: "#FFF3E0", // subtle orange tint for chart card
+                padding: "15px",
+                borderRadius: "10px",
+                marginTop: "20px",
+                boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+              }}
+            >
+              <PollutantChart locations={[selectedLocation]} />
+            </div>
+  
             <PollutantTabs location={selectedLocation} />
           </div>
         )}
