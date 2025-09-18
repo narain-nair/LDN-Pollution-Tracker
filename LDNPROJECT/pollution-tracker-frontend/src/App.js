@@ -18,24 +18,23 @@ function App() {
   const [allLocations, setAllLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
-  // Search handler
   const hasAirQualityData = (aqData) => {
     if (!aqData) return false;
     return Object.values(aqData).some((v) => v != null);
   };
-  
+
   const handleSelectSuggestion = async (siteCode) => {
     setSelectedSiteCode(siteCode);
     setSuggestions([]);
     setQuery(siteCode);
-  
+
     try {
       const res = await fetch(
         `http://localhost:8080/locations/search?siteCode=${encodeURIComponent(siteCode)}`
       );
       if (!res.ok) throw new Error("Failed to fetch location");
       const data = await res.json();
-  
+
       const site = data[0];
       if (site && hasAirQualityData(site.airQualityData)) {
         setSelectedLocation(site);
@@ -49,11 +48,10 @@ function App() {
     }
   };
 
-  // Fetch all locations for prepopulated map
   useEffect(() => {
     const fetchAllLocations = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/locations/all');
+        const response = await axios.get("http://localhost:8080/locations/all");
         setAllLocations(response.data);
         console.log("All locations fetched:", response.data);
       } catch (error) {
@@ -64,11 +62,31 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        backgroundColor: "#f8f9fa", // light gray bg
+        minHeight: "100vh",
+        padding: "20px",
+        boxSizing: "border-box",
+      }}
+    >
       <Navbar />
       <PageContainer>
-        <h1 style={{ marginBottom: "10px" }}>Search Locations</h1>
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
+        <h1 style={{ marginBottom: "20px", color: "#333" }}>
+          Search Locations
+        </h1>
+
+        {/* SearchBar container */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "20px",
+            position: "relative",
+            zIndex: 1000, // make sure dropdown shows above map
+          }}
+        >
           <SearchBar
             query={query}
             setQuery={setQuery}
@@ -78,16 +96,36 @@ function App() {
           />
         </div>
 
-        {/* Heatmap always shows all locations */}
+        {/* Map container */}
+        <div
+          style={{
+            margin: "0 auto",
+            maxWidth: "1200px",
+            borderRadius: "12px",
+            overflow: "hidden",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+            marginBottom: "30px",
+          }}
+        >
+          {allLocations.length > 0 && <Heatmap locations={allLocations} />}
+        </div>
 
-        {/* Charts / stats for selected site only */}
-        {allLocations.length > 0 && <Heatmap locations={allLocations} />}
+        {/* Selected site info */}
         {selectedLocation && (
-          <>
+          <div
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: "12px",
+              padding: "20px",
+              margin: "0 auto",
+              maxWidth: "1200px",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+            }}
+          >
             <LocationStats locations={[selectedLocation]} />
             <PollutantChart locations={[selectedLocation]} />
             <PollutantTabs location={selectedLocation} />
-          </>
+          </div>
         )}
       </PageContainer>
     </div>
