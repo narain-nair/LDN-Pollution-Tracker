@@ -315,7 +315,7 @@ public class SiteCodeResolver {
             
             if (rawJson == null || rawJson.trim().isEmpty() || rawJson.trim().equalsIgnoreCase("null")) {
                 logger.warn("Received null or empty JSON for siteCode {}. Setting empty AirQualityData.", location.getSiteCode());
-                location.setAirQualityData(new AirQualityData(null, null, null, null, null, null, null));
+                location.setAirQualityData(null);
                 return;
             }
 
@@ -329,17 +329,11 @@ public class SiteCodeResolver {
             || response.getHourlyAirQualityIndex().getLocalAuthority() == null
             || response.getHourlyAirQualityIndex().getLocalAuthority().getSite() == null) {
                 logger.warn("Incomplete or null response for siteCode {}. Setting empty AirQualityData.", location.getSiteCode());
-                location.setAirQualityData(new AirQualityData(null, null, null, null, null, null, null));
+                location.setAirQualityData(null);                
                 return;
             }
 
             HourlyAirQualityIndex hqi = response.getHourlyAirQualityIndex();
-            if (hqi == null || hqi.getLocalAuthority() == null || hqi.getLocalAuthority().getSite() == null) {
-                logger.warn("Incomplete response: missing Hqi/LocalAuthority/Site for siteCode {}", location.getSiteCode());
-                location.setAirQualityData(new AirQualityData(null, null, null, null, null, null, null));
-                return;
-            }
-
             Site site = hqi.getLocalAuthority().getSite();
             logger.info("Fetched site data: {}", site);
 
@@ -355,27 +349,40 @@ public class SiteCodeResolver {
 
             // Always instantiate AirQualityData
             AirQualityData airData = new AirQualityData(
-                    getIndex(speciesList, "PM25"),
-                    getIndex(speciesList, "PM10"),
-                    getIndex(speciesList, "NO2"),
-                    getIndex(speciesList, "SO2"),
-                    getIndex(speciesList, "O3"),
-                    getIndex(speciesList, "CO"),
-                    bulletinTime
-            );
-
-            location.setAirQualityData(airData);
-            location.setName(site.getSiteName());
-            location.setSiteCode(site.getSiteCode());
-
-            logger.info("PM25: {}, PM10: {}, NO2: {}, SO2: {}, O3: {}, CO: {}", 
                 getIndexOrDefault(speciesList, "PM25"),
                 getIndexOrDefault(speciesList, "PM10"),
                 getIndexOrDefault(speciesList, "NO2"),
                 getIndexOrDefault(speciesList, "SO2"),
                 getIndexOrDefault(speciesList, "O3"),
-                getIndexOrDefault(speciesList, "CO")
+                getIndexOrDefault(speciesList, "CO"),
+                bulletinTime
             );
+
+            // Check if all values are null
+            boolean hasAnyData =
+                    airData.getPm25() != null ||
+                    airData.getPm10() != null ||
+                    airData.getNo2()  != null ||
+                    airData.getSo2()  != null ||
+                    airData.getO3()   != null ||
+                    airData.getCo()   != null;
+
+            if (hasAnyData) {
+                location.setAirQualityData(airData);
+                location.setName(site.getSiteName());
+                location.setSiteCode(site.getSiteCode());
+            
+                logger.info("PM25: {}, PM10: {}, NO2: {}, SO2: {}, O3: {}, CO: {}", 
+                    airData.getPm25(), airData.getPm10(), airData.getNo2(),
+                    airData.getSo2(), airData.getO3(), airData.getCo()
+                );
+            
+                logger.info("Populated AirQualityData: {}", airData);
+                logger.info("Location after population: {}", location);
+            } else {
+                logger.warn("Skipping site {} ({}) — no valid air quality data", site.getSiteName(), site.getSiteCode());
+                location.setAirQualityData(null); 
+            }
 
             logger.info("Populated AirQualityData: {}", airData);
             logger.info("Location after population: {}", location);
@@ -396,9 +403,15 @@ public class SiteCodeResolver {
     
         for (Species species : speciesList) {
             if (species.getCode().equalsIgnoreCase(speciesCode)) {
+                String band = species.getBand();
+                String indexStr = species.getIndex();
+    
+                if ("No data".equalsIgnoreCase(band)) {
+                    return null;
+                }
+    
                 try {
-                    double index = Double.parseDouble(species.getIndex());
-                    // Treat "0" or "No data" as null
+                    double index = Double.parseDouble(indexStr);
                     return index > 0 ? index : null;
                 } catch (NumberFormatException e) {
                     return null;
