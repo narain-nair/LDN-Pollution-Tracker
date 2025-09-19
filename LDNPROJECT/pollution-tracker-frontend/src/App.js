@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
 import SearchBar from './components/SearchBar';
@@ -39,7 +40,10 @@ function App() {
       if (site && hasAirQualityData(site.airQualityData)) {
         setSelectedLocation(site);
       } else {
-        console.warn("Site has no usable air quality data:", site);
+        toast.error("This site has no usable air quality data.", {
+          autoClose: false,  // won’t disappear automatically
+          closeOnClick: true,
+        });
         setSelectedLocation(null);
       }
     } catch (err) {
@@ -77,7 +81,9 @@ function App() {
           backgroundColor: "#FFB74D", // strong accent only for navbar
           color: "#fff",
         }}
-      />
+      /> 
+
+      <ToastContainer position="top-center" autoClose={3000} />
   
       <PageContainer>
         {/* Page title */}
