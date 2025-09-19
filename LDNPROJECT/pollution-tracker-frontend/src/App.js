@@ -14,6 +14,7 @@ import Heatmap from "./components/Heatmap";
 
 function App() {
   const [query, setQuery] = useState("");
+  const [modalMessage, setModalMessage] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [selectedSiteCode, setSelectedSiteCode] = useState(null);
   const [allLocations, setAllLocations] = useState([]);
@@ -40,14 +41,11 @@ function App() {
       if (site && hasAirQualityData(site.airQualityData)) {
         setSelectedLocation(site);
       } else {
-        toast.error("This site has no usable air quality data.", {
-          autoClose: false,  // won’t disappear automatically
-          closeOnClick: true,
-        });
+        setModalMessage("This site has no usable air quality data.");
         setSelectedLocation(null);
       }
     } catch (err) {
-      console.error(err);
+      setModalMessage("Something went wrong while fetching data.");
       setSelectedLocation(null);
     }
   };
@@ -81,9 +79,57 @@ function App() {
           backgroundColor: "#FFB74D", // strong accent only for navbar
           color: "#fff",
         }}
-      /> 
-
+      />
+  
+      {/* Toasts */}
       <ToastContainer position="top-center" autoClose={3000} />
+  
+      {/* Modal */}
+      {modalMessage && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0,0,0,0.5)", // blur background
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 2000,
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "#fff",
+              padding: "20px",
+              borderRadius: "10px",
+              maxWidth: "400px",
+              textAlign: "center",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+            }}
+          >
+            <h3 style={{ color: "#E65100" }}>Notice</h3>
+            <p>{modalMessage}</p>
+            <button
+              onClick={() => setModalMessage(null)}
+              style={{
+                marginTop: "15px",
+                padding: "8px 16px",
+                backgroundColor: "#FFB74D",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                color: "#fff",
+                fontWeight: "bold",
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
   
       <PageContainer>
         {/* Page title */}
