@@ -80,23 +80,28 @@ export default function Heatmap({ locations }) {
               weight={1}
               fillOpacity={0.8}
             >
-              <Popup>
-                {loc.name}<br />
-
-                Pollution Indices:<br />
-                PM2.5: {pm25}
+            <Popup>
+            <div>
+                <strong>{loc.name}</strong>
                 <br />
-                PM10 : {pm10}
+                <span>Pollution Indices:</span>
                 <br />
-                O3: {o3}
-                <br />
-                NO2: {no2}
-                <br />
-                SO2: {so2}
-                <br />
-                CO: {co}
-                <br />
-              </Popup>
+                {[
+                { label: "PM2.5", value: pm25 },
+                { label: "PM10", value: pm10 },
+                { label: "O3", value: o3 },
+                { label: "NO2", value: no2 },
+                { label: "SO2", value: so2 },
+                { label: "CO", value: co },
+                ]
+                .filter(p => p.value && p.value !== 0) // only keep non-null & non-zero
+                .map((p, i) => (
+                    <div key={i}>
+                    {p.label}: {p.value}
+                    </div>
+                ))}
+            </div>
+            </Popup>
             </CircleMarker>
           );
         })}
