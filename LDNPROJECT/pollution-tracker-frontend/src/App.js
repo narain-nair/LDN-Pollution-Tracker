@@ -7,6 +7,7 @@ import axios from "axios";
 import SearchBar from './components/SearchBar';
 import LocationStats from "./components/LocationStats";
 import PollutantChart from "./components/PollutionChart";
+import PollutantPieChart from "./components/PollutantPieChart";
 import Navbar from "./components/layout/NavBar";
 import PageContainer from "./components/layout/PageContainer";
 import PollutantTabs from "./components/PollutantTabs";
@@ -41,7 +42,7 @@ function App() {
       if (site && hasAirQualityData(site.airQualityData)) {
         setSelectedLocation(site);
       } else {
-        setModalMessage("This site has no usable air quality data.");
+        setModalMessage("This site has no air quality readings.");
         setSelectedLocation(null);
       }
     } catch (err) {
@@ -67,7 +68,7 @@ function App() {
     <div
       className="App"
       style={{
-        backgroundColor: "#FFF9F0", // very soft orange, almost off-white
+        backgroundColor: "#FFF9F0",
         minHeight: "100vh",
         padding: "20px",
         boxSizing: "border-box",
@@ -76,7 +77,7 @@ function App() {
       {/* Navbar */}
       <Navbar
         style={{
-          backgroundColor: "#FFB74D", // strong accent only for navbar
+          backgroundColor: "#FFB74D",
           color: "#fff",
         }}
       />
@@ -93,11 +94,14 @@ function App() {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0,0,0,0.5)", // blur background
+            backgroundColor: "rgba(0,0,0,0.5)",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             zIndex: 2000,
+            opacity: modalMessage ? 1 : 0,
+            pointerEvents: modalMessage ? "auto" : "none",
+            transition: "opacity 0.3s ease-in-out",
           }}
         >
           <div
@@ -108,9 +112,11 @@ function App() {
               maxWidth: "400px",
               textAlign: "center",
               boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+              transform: modalMessage ? "translateY(0)" : "translateY(-20px)",
+              transition: "transform 0.3s ease-in-out",
             }}
           >
-            <h3 style={{ color: "#E65100" }}>Notice</h3>
+            <h3 style={{ color: "#E65100" }}>Sorry, an error has occurred!</h3>
             <p>{modalMessage}</p>
             <button
               onClick={() => setModalMessage(null)}
@@ -136,7 +142,7 @@ function App() {
         <h1
           style={{
             marginBottom: "20px",
-            color: "#E65100", // strong orange accent for heading
+            color: "#E65100",
           }}
         >
           Search Locations
@@ -149,7 +155,7 @@ function App() {
             justifyContent: "center",
             marginBottom: "20px",
             position: "relative",
-            zIndex: 1000, // dropdown stays above map
+            zIndex: 1000,
           }}
         >
           <SearchBar
@@ -170,7 +176,7 @@ function App() {
             overflow: "hidden",
             boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
             marginBottom: "30px",
-            border: "2px solid #FFB74D", // subtle accent
+            border: "2px solid #FFB74D",
           }}
         >
           {allLocations.length > 0 && <Heatmap locations={allLocations} />}
@@ -180,31 +186,55 @@ function App() {
         {selectedLocation && (
           <div
             style={{
-              backgroundColor: "#FFFFFF", // white for readability
+              backgroundColor: "#FFFFFF",
               borderRadius: "12px",
               padding: "20px",
               margin: "0 auto",
               maxWidth: "1200px",
               boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-              borderLeft: "5px solid #FFB74D", // accent indicator
+              borderLeft: "5px solid #FFB74D",
             }}
           >
             <LocationStats locations={[selectedLocation]} />
   
-            {/* Pollutant chart */}
+            {/* Grid layout for Pie and Bar charts */}
             <div
               style={{
-                backgroundColor: "#FFF3E0", // subtle orange tint for chart card
-                padding: "15px",
-                borderRadius: "10px",
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
+                gap: "20px",
                 marginTop: "20px",
-                boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
               }}
             >
-              <PollutantChart locations={[selectedLocation]} />
+              {/* Pie chart */}
+              <div
+                style={{
+                  backgroundColor: "#FFF3E0",
+                  padding: "15px",
+                  borderRadius: "10px",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+                }}
+              >
+                <PollutantPieChart location={selectedLocation} />
+              </div>
+  
+              {/* Bar chart */}
+              <div
+                style={{
+                  backgroundColor: "#FFF3E0",
+                  padding: "15px",
+                  borderRadius: "10px",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+                }}
+              >
+                <PollutantChart locations={[selectedLocation]} />
+              </div>
             </div>
   
-            <PollutantTabs location={selectedLocation} />
+            {/* Tabs below charts */}
+            <div style={{ marginTop: "20px" }}>
+              <PollutantTabs location={selectedLocation} />
+            </div>
           </div>
         )}
       </PageContainer>

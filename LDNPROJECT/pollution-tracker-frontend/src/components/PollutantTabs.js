@@ -33,14 +33,27 @@ export default function PollutantTabs() {
       {/* Active tab content */}
       <div style={{ padding: "15px", background: "#fff", border: "1px solid #ddd" }}>
         <p>
-          <strong>Description:</strong> {pollutantInfo[activeTab].description}
+            <strong>Description:</strong> {pollutantInfo[activeTab].description}
         </p>
         <p>
-          <strong>Harmful Effects:</strong> {pollutantInfo[activeTab].harmful}
+            <strong>Harmful Effects:</strong> {pollutantInfo[activeTab].harmful}
         </p>
         <p>
-          <strong>Source:</strong> {pollutantInfo[activeTab].source}
+            <strong>Prevention measures:</strong> {pollutantInfo[activeTab].tip}
         </p>
+        {pollutantInfo[activeTab].source && (
+            <p>
+            <strong>Source:</strong>{" "}
+            <a
+                href={pollutantInfo[activeTab].source}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#E65100", textDecoration: "underline" }}
+            >
+                {pollutantInfo[activeTab].source}   
+            </a>
+            </p>
+        )}
       </div>
     </div>
   );
